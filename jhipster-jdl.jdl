@@ -1,0 +1,192 @@
+
+application {
+  config {
+    baseName pravnaInformatika
+    applicationType monolith
+    packageName pravna.com.myapp
+    authenticationType jwt
+    databaseType mongodb
+    devDatabaseType h2Disk
+    clientFramework react
+    serverPort 8081
+    languages [sr, en]
+  }
+  entities *
+}
+
+entity Presuda {
+	tekst String
+    datum LocalDate required
+    datumObjave LocalDate
+    datumPritvora LocalDate
+    tip TipPresude required
+    broj Integer required
+    godina Integer required
+    optuznica String
+    datumOptuznice LocalDate
+    pokusaj Boolean
+    krivica Boolean
+    nacin TipUbistva
+}
+
+entity Osoba {
+	ime String required
+}
+
+entity Optuzeni {
+	ime String required
+    jmbg String required unique pattern(/^[0-9]{13}/)
+    imeOca String
+    imeMajke String
+    pol Pol
+    datumRodjenja LocalDate
+    mestoRodjenja String
+    drzavaRodjenja String
+    prebivaliste String
+    bracniStatus BracniStatus
+    brojDece Integer
+    brojMaloletneDece Integer
+    imovinskoStanje ImovinskoStanje
+    obrazovanje TipObrazovanja
+    zaposlenje String
+    mestoZaposlenja String
+}
+
+entity RadnjaPresude {
+	vremeRadnje LocalDate required
+    mestoRadnje String required
+    bitneNapomene String
+    mestoSmrti String
+    vremeSmrti LocalDate
+}
+
+entity Povreda {
+	oruzje String required
+    deoTela String required
+    povrede String required
+}
+
+entity Kazna {
+	tip TipKazne required
+    duzinaPritvora Integer
+    uracunavanjePritvora Boolean
+    kolicinaNovca Integer
+    primalacNovca String
+    nazivImovine String
+}
+
+entity Zakon {
+	naziv String required
+}
+
+entity ClanZakona {
+	broj Integer required
+    glava Integer required
+    naziv String required
+    tekst String
+}
+
+entity Sud {
+	tip TipSuda required
+    naselje String required
+}
+
+relationship OneToMany {
+	Zakon{clanovi(clanovi)} to ClanZakona{zakon required}
+    
+    Optuzeni{presudeOptuzeni(presudeOptuzeni)} to Presuda{optuzeni required}
+    Osoba{presudeSudija(presudeSudija)} to Presuda{sudija required}
+    Osoba{presudeZapisnicar(presudeZapisnicar)} to Presuda{zapisnicar required}
+    Osoba{presudeTuzilac(presudeTuzilac)} to Presuda{tuzilac required}
+    Osoba{presudeBranilac(presudeBranilac)} to Presuda{branilac required}
+    
+    Presuda{kazne(kazne)} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Kazna
+    
+    RadnjaPresude{povrede(povrede)} to Povreda{radnja required}
+}
+
+relationship OneToOne {
+	Presuda{radnja required} to RadnjaPresude{presuda}
+}
+
+relationship ManyToMany {
+	Osoba{presudeVece(presudeVece)} to Presuda{vece(vece)}
+}
+
+enum TipPresude {
+	PRVOSTEPENI_KRIVICNI_PREDMET ("K - Prvostepeni krivični predmet"),
+    SPECIJALNI_KRIVICNI_PREDMET ("K-S - Specijalni krivični predmet"),
+    PREDMET_SUDIJE_ZA_ISTRAGU ("Ki - Predmet sudije za istragu"),
+    SPECIJALNI_ISTRAZNI_PREDMET ("Ki-S - Specijalni istražni predmet"),
+    PRIPREMNI_POSTUPAK_PREMA_MALOLETNICIMA ("Kim - Pripremni postupak prema maloletnicima"),
+    KRIVICNI_POSTUPAK_PREMA_MALOLETNICIMA ("Km - Krivični postupak prema maloletnicima"),
+    PREDMETI_POMILOVANJA ("Kp - Predmeti pomilovanja"),
+    RAZNA_KRIVICNA_STVAR ("Kr - Razna krivična stvar"), 
+    KRIVICNI_SPECIJALNI ("Kr-S - Krivični specijalni"),
+    ISTRAZNA_RADNJA ("Kri - Istražna radnja"),
+    DISCIPLINSKA_ZALBA ("Dž - Disciplinarska žalba"),
+    ZASTITA_ZAKONITOSTI_U_PARNICNOM_POSTUPKU ("Gzz - Zaštita zakonitosti u parničnom postupku"),
+    DRUGOSTEPENSKI_GRADJANSKI_PREDMET ("Gž - Drugostepeni građanski predmet"),
+    PREDMET_IZVRSENJA ("I - Predmet izvršenja"),
+    PREDMET_O_IZVRSENJU_PREKRSAJNIH_SANKCIJA ("IPS - Predmet o izvršenju prekršajnih sankcija i postupaka"),
+    IZVRSENJE_PO_VERODOSTOJNOJ_ISPRAVI ("IV - Izvršenje po verodostojnoj ispravi"),
+    KONTROLNI_ZAHTEV ("IV-Su-2 - Kontrolni zahtev"),
+    IZUZECE ("IV-Su-3 - Izuzeće"),
+    IZVRSENJE_KRIVICNIH_SANKCIJA ("Iks - Izvršenje krivičnih sankcija")
+}
+
+enum TipUbistva {
+	SA_PREDUMISLJANJEM ("Ubistvo sa predumišljajem"),
+    BEZ_PREDUMISLJAJA ("Ubistvo bez predumišljaja"),
+    IZ_NEHATA ("Ubistvo iz nehata"),
+    NAKON_PORODJAJA ("Ubistvo nakon porođaja"),
+    IZ_SAMILOSTI ("Ubistvo iz samilosti")
+}
+
+enum Pol {
+	MUSKI ("Muški"),
+    ZENSKI ("Ženski")
+}
+
+enum BracniStatus {
+	VAN_BRAKA ("Neoženjen/Neudata"),
+    U_BRAKU ("Oženjen/Udata"),
+    PREKINUT_BRAK ("Razveden(a)"),
+    SMRT_U_BRAKU ("Udovac/Udovica")
+}
+
+enum ImovinskoStanje {
+	LOSE ("Loše"),
+    SREDNJE ("Srednje"),
+    DOBRO ("Dobro")
+}
+
+enum TipObrazovanja {
+	NEOBRAZOVAN ("Neobrazovan"),
+    OSNOVNA_SKOLA ("Osnovna škola"),
+    SREDNJA_SKOLA ("Srednja škola"),
+    VISOKA_SKOLA ("Visoka škola"),
+    FAKULTET ("Fakultet")
+}
+
+enum TipKazne {
+	ZATVORSKA_KAZNA ("Zatvorska kazna"),
+    USLOVNA_KAZNA ("Uslovna kazna"),
+    NOVCANA_KAZNA ("Novčana kazna"),
+    ODUZIMANJE_IMOVINE ("Oduzimanje imovine")
+}
+
+enum TipSuda {
+	OSNOVNI ("Osnovni"),
+    VISI ("Viši"),
+    APELACIONI ("Apelacioni"),
+    VRHOVNI ("Vrhovni")
+}
+
+paginate Zakon, ClanZakona, Presuda with infinite-scroll
+paginate Osoba, Optuzeni with pagination
+
+//dto * with mapstruct
+
+service Zakon, ClanZakona, Presuda with serviceImpl
+service Osoba, Optuzeni, RadnjaPresude, Kazna, Povreda, Sud with serviceClass

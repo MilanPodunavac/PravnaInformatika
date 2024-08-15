@@ -1,0 +1,27 @@
+{
+  "pravnaInformatikaApp": {
+    "povreda": {
+      "home": {
+        "title": "Povredas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Povreda",
+        "createOrEditLabel": "Create or edit a Povreda",
+        "notFound": "No Povredas found"
+      },
+      "created": "A new Povreda is created with identifier {{ param }}",
+      "updated": "A Povreda is updated with identifier {{ param }}",
+      "deleted": "A Povreda is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Povreda {{ id }}?"
+      },
+      "detail": {
+        "title": "Povreda"
+      },
+      "id": "ID",
+      "oruzje": "Oruzje",
+      "deoTela": "Deo Tela",
+      "povrede": "Povrede",
+      "radnja": "Radnja"
+    }
+  }
+}

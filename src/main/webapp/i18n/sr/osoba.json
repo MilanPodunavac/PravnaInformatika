@@ -1,0 +1,29 @@
+{
+  "pravnaInformatikaApp": {
+    "osoba": {
+      "home": {
+        "title": "Osobas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Kreiraj novi Osoba",
+        "createOrEditLabel": "Kreirajte ili izmenite Osoba",
+        "notFound": "No Osobas found"
+      },
+      "created": "Kreiran je novi Osoba pod nazivom {{ param }}",
+      "updated": "Osoba pod nazivom {{ param }} je ažuriran",
+      "deleted": "Osoba pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Osoba pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Osoba"
+      },
+      "id": "ID",
+      "ime": "Ime",
+      "presudeSudija": "Presude Sudija",
+      "presudeZapisnicar": "Presude Zapisnicar",
+      "presudeTuzilac": "Presude Tuzilac",
+      "presudeBranilac": "Presude Branilac",
+      "presudeVece": "Presude Vece"
+    }
+  }
+}

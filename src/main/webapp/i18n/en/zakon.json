@@ -1,0 +1,25 @@
+{
+  "pravnaInformatikaApp": {
+    "zakon": {
+      "home": {
+        "title": "Zakons",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Zakon",
+        "createOrEditLabel": "Create or edit a Zakon",
+        "notFound": "No Zakons found"
+      },
+      "created": "A new Zakon is created with identifier {{ param }}",
+      "updated": "A Zakon is updated with identifier {{ param }}",
+      "deleted": "A Zakon is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Zakon {{ id }}?"
+      },
+      "detail": {
+        "title": "Zakon"
+      },
+      "id": "ID",
+      "naziv": "Naziv",
+      "clanovi": "Clanovi"
+    }
+  }
+}

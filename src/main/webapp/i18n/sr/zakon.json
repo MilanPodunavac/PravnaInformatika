@@ -1,0 +1,25 @@
+{
+  "pravnaInformatikaApp": {
+    "zakon": {
+      "home": {
+        "title": "Zakons",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Kreiraj novi Zakon",
+        "createOrEditLabel": "Kreirajte ili izmenite Zakon",
+        "notFound": "No Zakons found"
+      },
+      "created": "Kreiran je novi Zakon pod nazivom {{ param }}",
+      "updated": "Zakon pod nazivom {{ param }} je ažuriran",
+      "deleted": "Zakon pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Zakon pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Zakon"
+      },
+      "id": "ID",
+      "naziv": "Naziv",
+      "clanovi": "Clanovi"
+    }
+  }
+}

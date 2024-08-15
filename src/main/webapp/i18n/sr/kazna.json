@@ -1,0 +1,30 @@
+{
+  "pravnaInformatikaApp": {
+    "kazna": {
+      "home": {
+        "title": "Kaznas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Kreiraj novi Kazna",
+        "createOrEditLabel": "Kreirajte ili izmenite Kazna",
+        "notFound": "No Kaznas found"
+      },
+      "created": "Kreiran je novi Kazna pod nazivom {{ param }}",
+      "updated": "Kazna pod nazivom {{ param }} je ažuriran",
+      "deleted": "Kazna pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Kazna pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Kazna"
+      },
+      "id": "ID",
+      "tip": "Tip",
+      "duzinaPritvora": "Duzina Pritvora",
+      "uracunavanjePritvora": "Uracunavanje Pritvora",
+      "kolicinaNovca": "Kolicina Novca",
+      "primalacNovca": "Primalac Novca",
+      "nazivImovine": "Naziv Imovine",
+      "presuda": "Presuda"
+    }
+  }
+}

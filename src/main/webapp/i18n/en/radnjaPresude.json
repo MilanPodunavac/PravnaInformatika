@@ -1,0 +1,30 @@
+{
+  "pravnaInformatikaApp": {
+    "radnjaPresude": {
+      "home": {
+        "title": "Radnja Presudes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Radnja Presude",
+        "createOrEditLabel": "Create or edit a Radnja Presude",
+        "notFound": "No Radnja Presudes found"
+      },
+      "created": "A new Radnja Presude is created with identifier {{ param }}",
+      "updated": "A Radnja Presude is updated with identifier {{ param }}",
+      "deleted": "A Radnja Presude is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Radnja Presude {{ id }}?"
+      },
+      "detail": {
+        "title": "Radnja Presude"
+      },
+      "id": "ID",
+      "vremeRadnje": "Vreme Radnje",
+      "mestoRadnje": "Mesto Radnje",
+      "bitneNapomene": "Bitne Napomene",
+      "mestoSmrti": "Mesto Smrti",
+      "vremeSmrti": "Vreme Smrti",
+      "povrede": "Povrede",
+      "presuda": "Presuda"
+    }
+  }
+}

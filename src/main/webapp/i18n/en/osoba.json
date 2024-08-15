@@ -1,0 +1,29 @@
+{
+  "pravnaInformatikaApp": {
+    "osoba": {
+      "home": {
+        "title": "Osobas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Osoba",
+        "createOrEditLabel": "Create or edit a Osoba",
+        "notFound": "No Osobas found"
+      },
+      "created": "A new Osoba is created with identifier {{ param }}",
+      "updated": "A Osoba is updated with identifier {{ param }}",
+      "deleted": "A Osoba is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Osoba {{ id }}?"
+      },
+      "detail": {
+        "title": "Osoba"
+      },
+      "id": "ID",
+      "ime": "Ime",
+      "presudeSudija": "Presude Sudija",
+      "presudeZapisnicar": "Presude Zapisnicar",
+      "presudeTuzilac": "Presude Tuzilac",
+      "presudeBranilac": "Presude Branilac",
+      "presudeVece": "Presude Vece"
+    }
+  }
+}

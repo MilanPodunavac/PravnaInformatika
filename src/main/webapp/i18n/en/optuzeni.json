@@ -1,0 +1,40 @@
+{
+  "pravnaInformatikaApp": {
+    "optuzeni": {
+      "home": {
+        "title": "Optuzenis",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Optuzeni",
+        "createOrEditLabel": "Create or edit a Optuzeni",
+        "notFound": "No Optuzenis found"
+      },
+      "created": "A new Optuzeni is created with identifier {{ param }}",
+      "updated": "A Optuzeni is updated with identifier {{ param }}",
+      "deleted": "A Optuzeni is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Optuzeni {{ id }}?"
+      },
+      "detail": {
+        "title": "Optuzeni"
+      },
+      "id": "ID",
+      "ime": "Ime",
+      "jmbg": "Jmbg",
+      "imeOca": "Ime Oca",
+      "imeMajke": "Ime Majke",
+      "pol": "Pol",
+      "datumRodjenja": "Datum Rodjenja",
+      "mestoRodjenja": "Mesto Rodjenja",
+      "drzavaRodjenja": "Drzava Rodjenja",
+      "prebivaliste": "Prebivaliste",
+      "bracniStatus": "Bracni Status",
+      "brojDece": "Broj Dece",
+      "brojMaloletneDece": "Broj Maloletne Dece",
+      "imovinskoStanje": "Imovinsko Stanje",
+      "obrazovanje": "Obrazovanje",
+      "zaposlenje": "Zaposlenje",
+      "mestoZaposlenja": "Mesto Zaposlenja",
+      "presudeOptuzeni": "Presude Optuzeni"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "pravnaInformatikaApp": {
+    "povreda": {
+      "home": {
+        "title": "Povredas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Kreiraj novi Povreda",
+        "createOrEditLabel": "Kreirajte ili izmenite Povreda",
+        "notFound": "No Povredas found"
+      },
+      "created": "Kreiran je novi Povreda pod nazivom {{ param }}",
+      "updated": "Povreda pod nazivom {{ param }} je ažuriran",
+      "deleted": "Povreda pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Povreda pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Povreda"
+      },
+      "id": "ID",
+      "oruzje": "Oruzje",
+      "deoTela": "Deo Tela",
+      "povrede": "Povrede",
+      "radnja": "Radnja"
+    }
+  }
+}

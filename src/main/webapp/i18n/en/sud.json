@@ -1,0 +1,25 @@
+{
+  "pravnaInformatikaApp": {
+    "sud": {
+      "home": {
+        "title": "Suds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sud",
+        "createOrEditLabel": "Create or edit a Sud",
+        "notFound": "No Suds found"
+      },
+      "created": "A new Sud is created with identifier {{ param }}",
+      "updated": "A Sud is updated with identifier {{ param }}",
+      "deleted": "A Sud is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sud {{ id }}?"
+      },
+      "detail": {
+        "title": "Sud"
+      },
+      "id": "ID",
+      "tip": "Tip",
+      "naselje": "Naselje"
+    }
+  }
+}

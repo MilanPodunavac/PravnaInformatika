@@ -1,0 +1,10 @@
+{
+  "pravnaInformatikaApp": {
+    "ImovinskoStanje": {
+      "null": "",
+      "LOSE": "Loše",
+      "SREDNJE": "Srednje",
+      "DOBRO": "Dobro"
+    }
+  }
+}

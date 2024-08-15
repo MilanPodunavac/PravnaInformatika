@@ -1,0 +1,11 @@
+export enum TipUbistva {
+  SA_PREDUMISLJANJEM = 'Ubistvo sa predumišljajem',
+
+  BEZ_PREDUMISLJAJA = 'Ubistvo bez predumišljaja',
+
+  IZ_NEHATA = 'Ubistvo iz nehata',
+
+  NAKON_PORODJAJA = 'Ubistvo nakon porođaja',
+
+  IZ_SAMILOSTI = 'Ubistvo iz samilosti',
+}

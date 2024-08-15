@@ -1,0 +1,43 @@
+{
+  "pravnaInformatikaApp": {
+    "presuda": {
+      "home": {
+        "title": "Presudas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Presuda",
+        "createOrEditLabel": "Create or edit a Presuda",
+        "notFound": "No Presudas found"
+      },
+      "created": "A new Presuda is created with identifier {{ param }}",
+      "updated": "A Presuda is updated with identifier {{ param }}",
+      "deleted": "A Presuda is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Presuda {{ id }}?"
+      },
+      "detail": {
+        "title": "Presuda"
+      },
+      "id": "ID",
+      "tekst": "Tekst",
+      "datum": "Datum",
+      "datumObjave": "Datum Objave",
+      "datumPritvora": "Datum Pritvora",
+      "tip": "Tip",
+      "broj": "Broj",
+      "godina": "Godina",
+      "optuznica": "Optuznica",
+      "datumOptuznice": "Datum Optuznice",
+      "pokusaj": "Pokusaj",
+      "krivica": "Krivica",
+      "nacin": "Nacin",
+      "radnja": "Radnja",
+      "kazne": "Kazne",
+      "optuzeni": "Optuzeni",
+      "sudija": "Sudija",
+      "zapisnicar": "Zapisnicar",
+      "tuzilac": "Tuzilac",
+      "branilac": "Branilac",
+      "vece": "Vece"
+    }
+  }
+}

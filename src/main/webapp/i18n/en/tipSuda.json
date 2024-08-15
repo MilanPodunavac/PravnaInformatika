@@ -1,0 +1,11 @@
+{
+  "pravnaInformatikaApp": {
+    "TipSuda": {
+      "null": "",
+      "OSNOVNI": "Osnovni",
+      "VISI": "Viši",
+      "APELACIONI": "Apelacioni",
+      "VRHOVNI": "Vrhovni"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "applications": ["pravnaInformatika"],
+  "changelogDate": "20240815190409",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "povreda",
+  "fields": [
+    {
+      "fieldName": "oruzje",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "deoTela",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "povrede",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Povreda",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "radnjaPresude",
+      "otherEntityRelationshipName": "povrede",
+      "relationshipName": "radnja",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}

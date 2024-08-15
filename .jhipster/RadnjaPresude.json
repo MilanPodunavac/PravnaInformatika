@@ -1,0 +1,53 @@
+{
+  "applications": ["pravnaInformatika"],
+  "changelogDate": "20240815190309",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "radnja_presude",
+  "fields": [
+    {
+      "fieldName": "vremeRadnje",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "mestoRadnje",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "bitneNapomene",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mestoSmrti",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "vremeSmrti",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "RadnjaPresude",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "povrede",
+      "otherEntityName": "povreda",
+      "otherEntityRelationshipName": "radnja",
+      "relationshipName": "povrede",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "presuda",
+      "otherEntityRelationshipName": "radnja",
+      "ownerSide": false,
+      "relationshipName": "presuda",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

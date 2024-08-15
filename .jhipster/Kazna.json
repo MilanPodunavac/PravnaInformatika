@@ -1,0 +1,49 @@
+{
+  "applications": ["pravnaInformatika"],
+  "changelogDate": "20240815190509",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "kazna",
+  "fields": [
+    {
+      "fieldName": "tip",
+      "fieldType": "TipKazne",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ZATVORSKA_KAZNA (Zatvorska kazna),USLOVNA_KAZNA (Uslovna kazna),NOVCANA_KAZNA (Novčana kazna),ODUZIMANJE_IMOVINE (Oduzimanje imovine)"
+    },
+    {
+      "fieldName": "duzinaPritvora",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "uracunavanjePritvora",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "kolicinaNovca",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "primalacNovca",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nazivImovine",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Kazna",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "presuda",
+      "otherEntityRelationshipName": "kazne",
+      "relationshipName": "presuda",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

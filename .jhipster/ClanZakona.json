@@ -1,0 +1,43 @@
+{
+  "applications": ["pravnaInformatika"],
+  "changelogDate": "20240815190709",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "clan_zakona",
+  "fields": [
+    {
+      "fieldName": "broj",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "glava",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "naziv",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "tekst",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ClanZakona",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "zakon",
+      "otherEntityRelationshipName": "clanovi",
+      "relationshipName": "zakon",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}

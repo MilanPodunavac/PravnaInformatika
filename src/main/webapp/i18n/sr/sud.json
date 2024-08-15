@@ -1,0 +1,25 @@
+{
+  "pravnaInformatikaApp": {
+    "sud": {
+      "home": {
+        "title": "Suds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Kreiraj novi Sud",
+        "createOrEditLabel": "Kreirajte ili izmenite Sud",
+        "notFound": "No Suds found"
+      },
+      "created": "Kreiran je novi Sud pod nazivom {{ param }}",
+      "updated": "Sud pod nazivom {{ param }} je ažuriran",
+      "deleted": "Sud pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Sud pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Sud"
+      },
+      "id": "ID",
+      "tip": "Tip",
+      "naselje": "Naselje"
+    }
+  }
+}

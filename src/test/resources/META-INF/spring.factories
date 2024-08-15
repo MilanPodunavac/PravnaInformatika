@@ -1,0 +1,1 @@
+org.springframework.test.context.ContextCustomizerFactory = pravna.com.myapp.config.TestContainersSpringContextCustomizerFactory

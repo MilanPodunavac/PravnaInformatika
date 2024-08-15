@@ -1,0 +1,30 @@
+{
+  "pravnaInformatikaApp": {
+    "kazna": {
+      "home": {
+        "title": "Kaznas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Kazna",
+        "createOrEditLabel": "Create or edit a Kazna",
+        "notFound": "No Kaznas found"
+      },
+      "created": "A new Kazna is created with identifier {{ param }}",
+      "updated": "A Kazna is updated with identifier {{ param }}",
+      "deleted": "A Kazna is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Kazna {{ id }}?"
+      },
+      "detail": {
+        "title": "Kazna"
+      },
+      "id": "ID",
+      "tip": "Tip",
+      "duzinaPritvora": "Duzina Pritvora",
+      "uracunavanjePritvora": "Uracunavanje Pritvora",
+      "kolicinaNovca": "Kolicina Novca",
+      "primalacNovca": "Primalac Novca",
+      "nazivImovine": "Naziv Imovine",
+      "presuda": "Presuda"
+    }
+  }
+}

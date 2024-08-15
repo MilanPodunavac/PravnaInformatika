@@ -1,0 +1,28 @@
+{
+  "pravnaInformatikaApp": {
+    "clanZakona": {
+      "home": {
+        "title": "Clan Zakonas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Kreiraj novi Clan Zakona",
+        "createOrEditLabel": "Kreirajte ili izmenite Clan Zakona",
+        "notFound": "No Clan Zakonas found"
+      },
+      "created": "Kreiran je novi Clan Zakona pod nazivom {{ param }}",
+      "updated": "Clan Zakona pod nazivom {{ param }} je ažuriran",
+      "deleted": "Clan Zakona pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Clan Zakona pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Clan Zakona"
+      },
+      "id": "ID",
+      "broj": "Broj",
+      "glava": "Glava",
+      "naziv": "Naziv",
+      "tekst": "Tekst",
+      "zakon": "Zakon"
+    }
+  }
+}

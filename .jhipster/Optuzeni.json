@@ -1,0 +1,95 @@
+{
+  "applications": ["pravnaInformatika"],
+  "changelogDate": "20240815190209",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "optuzeni",
+  "fields": [
+    {
+      "fieldName": "ime",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "jmbg",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "pattern"],
+      "fieldValidateRulesPattern": "^[0-9]{13}"
+    },
+    {
+      "fieldName": "imeOca",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imeMajke",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pol",
+      "fieldType": "Pol",
+      "fieldValues": "MUSKI (Muški),ZENSKI (Ženski)"
+    },
+    {
+      "fieldName": "datumRodjenja",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "mestoRodjenja",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "drzavaRodjenja",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prebivaliste",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bracniStatus",
+      "fieldType": "BracniStatus",
+      "fieldValues": "VAN_BRAKA (Neoženjen/Neudata),U_BRAKU (Oženjen/Udata),PREKINUT_BRAK (Razveden(a)),SMRT_U_BRAKU (Udovac/Udovica)"
+    },
+    {
+      "fieldName": "brojDece",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "brojMaloletneDece",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "imovinskoStanje",
+      "fieldType": "ImovinskoStanje",
+      "fieldValues": "LOSE (Loše),SREDNJE (Srednje),DOBRO (Dobro)"
+    },
+    {
+      "fieldName": "obrazovanje",
+      "fieldType": "TipObrazovanja",
+      "fieldValues": "NEOBRAZOVAN (Neobrazovan),OSNOVNA_SKOLA (Osnovna škola),SREDNJA_SKOLA (Srednja škola),VISOKA_SKOLA (Visoka škola),FAKULTET (Fakultet)"
+    },
+    {
+      "fieldName": "zaposlenje",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mestoZaposlenja",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Optuzeni",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "presudeOptuzeni",
+      "otherEntityName": "presuda",
+      "otherEntityRelationshipName": "optuzeni",
+      "relationshipName": "presudeOptuzeni",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}
