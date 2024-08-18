@@ -1,7 +1,7 @@
 {
   "applications": ["pravnaInformatika"],
   "changelogDate": "20240815190609",
-  "dto": "no",
+  "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "zakon",
   "fields": [

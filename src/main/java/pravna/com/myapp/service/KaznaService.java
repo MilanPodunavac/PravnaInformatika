@@ -1,12 +1,16 @@
 package pravna.com.myapp.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.Kazna;
 import pravna.com.myapp.repository.KaznaRepository;
+import pravna.com.myapp.service.dto.KaznaDTO;
+import pravna.com.myapp.service.mapper.KaznaMapper;
 
 /**
  * Service Implementation for managing {@link Kazna}.
@@ -18,66 +22,57 @@ public class KaznaService {
 
     private final KaznaRepository kaznaRepository;
 
-    public KaznaService(KaznaRepository kaznaRepository) {
+    private final KaznaMapper kaznaMapper;
+
+    public KaznaService(KaznaRepository kaznaRepository, KaznaMapper kaznaMapper) {
         this.kaznaRepository = kaznaRepository;
+        this.kaznaMapper = kaznaMapper;
     }
 
     /**
      * Save a kazna.
      *
-     * @param kazna the entity to save.
+     * @param kaznaDTO the entity to save.
      * @return the persisted entity.
      */
-    public Kazna save(Kazna kazna) {
-        log.debug("Request to save Kazna : {}", kazna);
-        return kaznaRepository.save(kazna);
+    public KaznaDTO save(KaznaDTO kaznaDTO) {
+        log.debug("Request to save Kazna : {}", kaznaDTO);
+        Kazna kazna = kaznaMapper.toEntity(kaznaDTO);
+        kazna = kaznaRepository.save(kazna);
+        return kaznaMapper.toDto(kazna);
     }
 
     /**
      * Update a kazna.
      *
-     * @param kazna the entity to save.
+     * @param kaznaDTO the entity to save.
      * @return the persisted entity.
      */
-    public Kazna update(Kazna kazna) {
-        log.debug("Request to update Kazna : {}", kazna);
-        return kaznaRepository.save(kazna);
+    public KaznaDTO update(KaznaDTO kaznaDTO) {
+        log.debug("Request to update Kazna : {}", kaznaDTO);
+        Kazna kazna = kaznaMapper.toEntity(kaznaDTO);
+        kazna = kaznaRepository.save(kazna);
+        return kaznaMapper.toDto(kazna);
     }
 
     /**
      * Partially update a kazna.
      *
-     * @param kazna the entity to update partially.
+     * @param kaznaDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<Kazna> partialUpdate(Kazna kazna) {
-        log.debug("Request to partially update Kazna : {}", kazna);
+    public Optional<KaznaDTO> partialUpdate(KaznaDTO kaznaDTO) {
+        log.debug("Request to partially update Kazna : {}", kaznaDTO);
 
         return kaznaRepository
-            .findById(kazna.getId())
+            .findById(kaznaDTO.getId())
             .map(existingKazna -> {
-                if (kazna.getTip() != null) {
-                    existingKazna.setTip(kazna.getTip());
-                }
-                if (kazna.getDuzinaPritvora() != null) {
-                    existingKazna.setDuzinaPritvora(kazna.getDuzinaPritvora());
-                }
-                if (kazna.getUracunavanjePritvora() != null) {
-                    existingKazna.setUracunavanjePritvora(kazna.getUracunavanjePritvora());
-                }
-                if (kazna.getKolicinaNovca() != null) {
-                    existingKazna.setKolicinaNovca(kazna.getKolicinaNovca());
-                }
-                if (kazna.getPrimalacNovca() != null) {
-                    existingKazna.setPrimalacNovca(kazna.getPrimalacNovca());
-                }
-                if (kazna.getNazivImovine() != null) {
-                    existingKazna.setNazivImovine(kazna.getNazivImovine());
-                }
+                kaznaMapper.partialUpdate(existingKazna, kaznaDTO);
 
                 return existingKazna;
             })
-            .map(kaznaRepository::save);
+            .map(kaznaRepository::save)
+            .map(kaznaMapper::toDto);
     }
 
     /**
@@ -85,9 +80,9 @@ public class KaznaService {
      *
      * @return the list of entities.
      */
-    public List<Kazna> findAll() {
+    public List<KaznaDTO> findAll() {
         log.debug("Request to get all Kaznas");
-        return kaznaRepository.findAll();
+        return kaznaRepository.findAll().stream().map(kaznaMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -96,9 +91,9 @@ public class KaznaService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    public Optional<Kazna> findOne(String id) {
+    public Optional<KaznaDTO> findOne(String id) {
         log.debug("Request to get Kazna : {}", id);
-        return kaznaRepository.findById(id);
+        return kaznaRepository.findById(id).map(kaznaMapper::toDto);
     }
 
     /**

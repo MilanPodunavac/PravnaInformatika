@@ -1,12 +1,16 @@
 package pravna.com.myapp.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.Povreda;
 import pravna.com.myapp.repository.PovredaRepository;
+import pravna.com.myapp.service.dto.PovredaDTO;
+import pravna.com.myapp.service.mapper.PovredaMapper;
 
 /**
  * Service Implementation for managing {@link Povreda}.
@@ -18,57 +22,57 @@ public class PovredaService {
 
     private final PovredaRepository povredaRepository;
 
-    public PovredaService(PovredaRepository povredaRepository) {
+    private final PovredaMapper povredaMapper;
+
+    public PovredaService(PovredaRepository povredaRepository, PovredaMapper povredaMapper) {
         this.povredaRepository = povredaRepository;
+        this.povredaMapper = povredaMapper;
     }
 
     /**
      * Save a povreda.
      *
-     * @param povreda the entity to save.
+     * @param povredaDTO the entity to save.
      * @return the persisted entity.
      */
-    public Povreda save(Povreda povreda) {
-        log.debug("Request to save Povreda : {}", povreda);
-        return povredaRepository.save(povreda);
+    public PovredaDTO save(PovredaDTO povredaDTO) {
+        log.debug("Request to save Povreda : {}", povredaDTO);
+        Povreda povreda = povredaMapper.toEntity(povredaDTO);
+        povreda = povredaRepository.save(povreda);
+        return povredaMapper.toDto(povreda);
     }
 
     /**
      * Update a povreda.
      *
-     * @param povreda the entity to save.
+     * @param povredaDTO the entity to save.
      * @return the persisted entity.
      */
-    public Povreda update(Povreda povreda) {
-        log.debug("Request to update Povreda : {}", povreda);
-        return povredaRepository.save(povreda);
+    public PovredaDTO update(PovredaDTO povredaDTO) {
+        log.debug("Request to update Povreda : {}", povredaDTO);
+        Povreda povreda = povredaMapper.toEntity(povredaDTO);
+        povreda = povredaRepository.save(povreda);
+        return povredaMapper.toDto(povreda);
     }
 
     /**
      * Partially update a povreda.
      *
-     * @param povreda the entity to update partially.
+     * @param povredaDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<Povreda> partialUpdate(Povreda povreda) {
-        log.debug("Request to partially update Povreda : {}", povreda);
+    public Optional<PovredaDTO> partialUpdate(PovredaDTO povredaDTO) {
+        log.debug("Request to partially update Povreda : {}", povredaDTO);
 
         return povredaRepository
-            .findById(povreda.getId())
+            .findById(povredaDTO.getId())
             .map(existingPovreda -> {
-                if (povreda.getOruzje() != null) {
-                    existingPovreda.setOruzje(povreda.getOruzje());
-                }
-                if (povreda.getDeoTela() != null) {
-                    existingPovreda.setDeoTela(povreda.getDeoTela());
-                }
-                if (povreda.getPovrede() != null) {
-                    existingPovreda.setPovrede(povreda.getPovrede());
-                }
+                povredaMapper.partialUpdate(existingPovreda, povredaDTO);
 
                 return existingPovreda;
             })
-            .map(povredaRepository::save);
+            .map(povredaRepository::save)
+            .map(povredaMapper::toDto);
     }
 
     /**
@@ -76,9 +80,9 @@ public class PovredaService {
      *
      * @return the list of entities.
      */
-    public List<Povreda> findAll() {
+    public List<PovredaDTO> findAll() {
         log.debug("Request to get all Povredas");
-        return povredaRepository.findAll();
+        return povredaRepository.findAll().stream().map(povredaMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -87,9 +91,9 @@ public class PovredaService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    public Optional<Povreda> findOne(String id) {
+    public Optional<PovredaDTO> findOne(String id) {
         log.debug("Request to get Povreda : {}", id);
-        return povredaRepository.findById(id);
+        return povredaRepository.findById(id).map(povredaMapper::toDto);
     }
 
     /**

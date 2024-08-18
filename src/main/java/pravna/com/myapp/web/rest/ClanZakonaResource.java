@@ -17,9 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pravna.com.myapp.domain.ClanZakona;
 import pravna.com.myapp.repository.ClanZakonaRepository;
 import pravna.com.myapp.service.ClanZakonaService;
+import pravna.com.myapp.service.dto.ClanZakonaDTO;
 import pravna.com.myapp.web.rest.errors.BadRequestAlertException;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
@@ -51,17 +51,17 @@ public class ClanZakonaResource {
     /**
      * {@code POST  /clan-zakonas} : Create a new clanZakona.
      *
-     * @param clanZakona the clanZakona to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new clanZakona, or with status {@code 400 (Bad Request)} if the clanZakona has already an ID.
+     * @param clanZakonaDTO the clanZakonaDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new clanZakonaDTO, or with status {@code 400 (Bad Request)} if the clanZakona has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/clan-zakonas")
-    public ResponseEntity<ClanZakona> createClanZakona(@Valid @RequestBody ClanZakona clanZakona) throws URISyntaxException {
-        log.debug("REST request to save ClanZakona : {}", clanZakona);
-        if (clanZakona.getId() != null) {
+    public ResponseEntity<ClanZakonaDTO> createClanZakona(@Valid @RequestBody ClanZakonaDTO clanZakonaDTO) throws URISyntaxException {
+        log.debug("REST request to save ClanZakona : {}", clanZakonaDTO);
+        if (clanZakonaDTO.getId() != null) {
             throw new BadRequestAlertException("A new clanZakona cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ClanZakona result = clanZakonaService.save(clanZakona);
+        ClanZakonaDTO result = clanZakonaService.save(clanZakonaDTO);
         return ResponseEntity
             .created(new URI("/api/clan-zakonas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId()))
@@ -71,23 +71,23 @@ public class ClanZakonaResource {
     /**
      * {@code PUT  /clan-zakonas/:id} : Updates an existing clanZakona.
      *
-     * @param id the id of the clanZakona to save.
-     * @param clanZakona the clanZakona to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated clanZakona,
-     * or with status {@code 400 (Bad Request)} if the clanZakona is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the clanZakona couldn't be updated.
+     * @param id the id of the clanZakonaDTO to save.
+     * @param clanZakonaDTO the clanZakonaDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated clanZakonaDTO,
+     * or with status {@code 400 (Bad Request)} if the clanZakonaDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the clanZakonaDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/clan-zakonas/{id}")
-    public ResponseEntity<ClanZakona> updateClanZakona(
+    public ResponseEntity<ClanZakonaDTO> updateClanZakona(
         @PathVariable(value = "id", required = false) final String id,
-        @Valid @RequestBody ClanZakona clanZakona
+        @Valid @RequestBody ClanZakonaDTO clanZakonaDTO
     ) throws URISyntaxException {
-        log.debug("REST request to update ClanZakona : {}, {}", id, clanZakona);
-        if (clanZakona.getId() == null) {
+        log.debug("REST request to update ClanZakona : {}, {}", id, clanZakonaDTO);
+        if (clanZakonaDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, clanZakona.getId())) {
+        if (!Objects.equals(id, clanZakonaDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -95,34 +95,34 @@ public class ClanZakonaResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        ClanZakona result = clanZakonaService.update(clanZakona);
+        ClanZakonaDTO result = clanZakonaService.update(clanZakonaDTO);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, clanZakona.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, clanZakonaDTO.getId()))
             .body(result);
     }
 
     /**
      * {@code PATCH  /clan-zakonas/:id} : Partial updates given fields of an existing clanZakona, field will ignore if it is null
      *
-     * @param id the id of the clanZakona to save.
-     * @param clanZakona the clanZakona to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated clanZakona,
-     * or with status {@code 400 (Bad Request)} if the clanZakona is not valid,
-     * or with status {@code 404 (Not Found)} if the clanZakona is not found,
-     * or with status {@code 500 (Internal Server Error)} if the clanZakona couldn't be updated.
+     * @param id the id of the clanZakonaDTO to save.
+     * @param clanZakonaDTO the clanZakonaDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated clanZakonaDTO,
+     * or with status {@code 400 (Bad Request)} if the clanZakonaDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the clanZakonaDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the clanZakonaDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/clan-zakonas/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<ClanZakona> partialUpdateClanZakona(
+    public ResponseEntity<ClanZakonaDTO> partialUpdateClanZakona(
         @PathVariable(value = "id", required = false) final String id,
-        @NotNull @RequestBody ClanZakona clanZakona
+        @NotNull @RequestBody ClanZakonaDTO clanZakonaDTO
     ) throws URISyntaxException {
-        log.debug("REST request to partial update ClanZakona partially : {}, {}", id, clanZakona);
-        if (clanZakona.getId() == null) {
+        log.debug("REST request to partial update ClanZakona partially : {}, {}", id, clanZakonaDTO);
+        if (clanZakonaDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, clanZakona.getId())) {
+        if (!Objects.equals(id, clanZakonaDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -130,11 +130,11 @@ public class ClanZakonaResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<ClanZakona> result = clanZakonaService.partialUpdate(clanZakona);
+        Optional<ClanZakonaDTO> result = clanZakonaService.partialUpdate(clanZakonaDTO);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, clanZakona.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, clanZakonaDTO.getId())
         );
     }
 
@@ -145,9 +145,9 @@ public class ClanZakonaResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of clanZakonas in body.
      */
     @GetMapping("/clan-zakonas")
-    public ResponseEntity<List<ClanZakona>> getAllClanZakonas(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<ClanZakonaDTO>> getAllClanZakonas(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of ClanZakonas");
-        Page<ClanZakona> page = clanZakonaService.findAll(pageable);
+        Page<ClanZakonaDTO> page = clanZakonaService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -155,20 +155,20 @@ public class ClanZakonaResource {
     /**
      * {@code GET  /clan-zakonas/:id} : get the "id" clanZakona.
      *
-     * @param id the id of the clanZakona to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the clanZakona, or with status {@code 404 (Not Found)}.
+     * @param id the id of the clanZakonaDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the clanZakonaDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/clan-zakonas/{id}")
-    public ResponseEntity<ClanZakona> getClanZakona(@PathVariable String id) {
+    public ResponseEntity<ClanZakonaDTO> getClanZakona(@PathVariable String id) {
         log.debug("REST request to get ClanZakona : {}", id);
-        Optional<ClanZakona> clanZakona = clanZakonaService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(clanZakona);
+        Optional<ClanZakonaDTO> clanZakonaDTO = clanZakonaService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(clanZakonaDTO);
     }
 
     /**
      * {@code DELETE  /clan-zakonas/:id} : delete the "id" clanZakona.
      *
-     * @param id the id of the clanZakona to delete.
+     * @param id the id of the clanZakonaDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/clan-zakonas/{id}")

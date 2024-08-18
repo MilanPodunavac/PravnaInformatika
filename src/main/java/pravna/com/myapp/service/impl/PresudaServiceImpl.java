@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.Presuda;
 import pravna.com.myapp.repository.PresudaRepository;
 import pravna.com.myapp.service.PresudaService;
+import pravna.com.myapp.service.dto.PresudaDTO;
+import pravna.com.myapp.service.mapper.PresudaMapper;
 
 /**
  * Service Implementation for managing {@link Presuda}.
@@ -20,81 +22,54 @@ public class PresudaServiceImpl implements PresudaService {
 
     private final PresudaRepository presudaRepository;
 
-    public PresudaServiceImpl(PresudaRepository presudaRepository) {
+    private final PresudaMapper presudaMapper;
+
+    public PresudaServiceImpl(PresudaRepository presudaRepository, PresudaMapper presudaMapper) {
         this.presudaRepository = presudaRepository;
+        this.presudaMapper = presudaMapper;
     }
 
     @Override
-    public Presuda save(Presuda presuda) {
-        log.debug("Request to save Presuda : {}", presuda);
-        return presudaRepository.save(presuda);
+    public PresudaDTO save(PresudaDTO presudaDTO) {
+        log.debug("Request to save Presuda : {}", presudaDTO);
+        Presuda presuda = presudaMapper.toEntity(presudaDTO);
+        presuda = presudaRepository.save(presuda);
+        return presudaMapper.toDto(presuda);
     }
 
     @Override
-    public Presuda update(Presuda presuda) {
-        log.debug("Request to update Presuda : {}", presuda);
-        return presudaRepository.save(presuda);
+    public PresudaDTO update(PresudaDTO presudaDTO) {
+        log.debug("Request to update Presuda : {}", presudaDTO);
+        Presuda presuda = presudaMapper.toEntity(presudaDTO);
+        presuda = presudaRepository.save(presuda);
+        return presudaMapper.toDto(presuda);
     }
 
     @Override
-    public Optional<Presuda> partialUpdate(Presuda presuda) {
-        log.debug("Request to partially update Presuda : {}", presuda);
+    public Optional<PresudaDTO> partialUpdate(PresudaDTO presudaDTO) {
+        log.debug("Request to partially update Presuda : {}", presudaDTO);
 
         return presudaRepository
-            .findById(presuda.getId())
+            .findById(presudaDTO.getId())
             .map(existingPresuda -> {
-                if (presuda.getTekst() != null) {
-                    existingPresuda.setTekst(presuda.getTekst());
-                }
-                if (presuda.getDatum() != null) {
-                    existingPresuda.setDatum(presuda.getDatum());
-                }
-                if (presuda.getDatumObjave() != null) {
-                    existingPresuda.setDatumObjave(presuda.getDatumObjave());
-                }
-                if (presuda.getDatumPritvora() != null) {
-                    existingPresuda.setDatumPritvora(presuda.getDatumPritvora());
-                }
-                if (presuda.getTip() != null) {
-                    existingPresuda.setTip(presuda.getTip());
-                }
-                if (presuda.getBroj() != null) {
-                    existingPresuda.setBroj(presuda.getBroj());
-                }
-                if (presuda.getGodina() != null) {
-                    existingPresuda.setGodina(presuda.getGodina());
-                }
-                if (presuda.getOptuznica() != null) {
-                    existingPresuda.setOptuznica(presuda.getOptuznica());
-                }
-                if (presuda.getDatumOptuznice() != null) {
-                    existingPresuda.setDatumOptuznice(presuda.getDatumOptuznice());
-                }
-                if (presuda.getPokusaj() != null) {
-                    existingPresuda.setPokusaj(presuda.getPokusaj());
-                }
-                if (presuda.getKrivica() != null) {
-                    existingPresuda.setKrivica(presuda.getKrivica());
-                }
-                if (presuda.getNacin() != null) {
-                    existingPresuda.setNacin(presuda.getNacin());
-                }
+                presudaMapper.partialUpdate(existingPresuda, presudaDTO);
 
                 return existingPresuda;
             })
-            .map(presudaRepository::save);
+            .map(presudaRepository::save)
+            .map(presudaMapper::toDto);
     }
 
     @Override
-    public Page<Presuda> findAll(Pageable pageable) {
+    public Page<PresudaDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Presudas");
-        return presudaRepository.findAll(pageable);
+        return presudaRepository.findAll(pageable).map(presudaMapper::toDto);
     }
 
     @Override
-    public Optional<Presuda> findOne(String id) {
+    public Optional<PresudaDTO> findOne(String id) {
         log.debug("Request to get Presuda : {}", id);
-        return presudaRepository.findById(id);
+        return presudaRepository.findById(id).map(presudaMapper::toDto);
     }
 
     @Override

@@ -8,8 +8,6 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IPresuda } from 'app/shared/model/presuda.model';
-import { getEntities as getPresudas } from 'app/entities/presuda/presuda.reducer';
 import { IOsoba } from 'app/shared/model/osoba.model';
 import { getEntity, updateEntity, createEntity, reset } from './osoba.reducer';
 
@@ -21,7 +19,6 @@ export const OsobaUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const presudas = useAppSelector(state => state.presuda.entities);
   const osobaEntity = useAppSelector(state => state.osoba.entity);
   const loading = useAppSelector(state => state.osoba.loading);
   const updating = useAppSelector(state => state.osoba.updating);
@@ -37,8 +34,6 @@ export const OsobaUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
-
-    dispatch(getPresudas({}));
   }, []);
 
   useEffect(() => {
@@ -51,7 +46,6 @@ export const OsobaUpdate = () => {
     const entity = {
       ...osobaEntity,
       ...values,
-      presudeVeces: mapIdList(values.presudeVeces),
     };
 
     if (isNew) {
@@ -66,7 +60,6 @@ export const OsobaUpdate = () => {
       ? {}
       : {
           ...osobaEntity,
-          presudeVeces: osobaEntity?.presudeVeces?.map(e => e.id.toString()),
         };
 
   return (
@@ -104,23 +97,6 @@ export const OsobaUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField
-                label={translate('pravnaInformatikaApp.osoba.presudeVece')}
-                id="osoba-presudeVece"
-                data-cy="presudeVece"
-                type="select"
-                multiple
-                name="presudeVeces"
-              >
-                <option value="" key="0" />
-                {presudas
-                  ? presudas.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.presudeVece}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/osoba" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

@@ -18,6 +18,8 @@ import pravna.com.myapp.IntegrationTest;
 import pravna.com.myapp.domain.Sud;
 import pravna.com.myapp.domain.enumeration.TipSuda;
 import pravna.com.myapp.repository.SudRepository;
+import pravna.com.myapp.service.dto.SudDTO;
+import pravna.com.myapp.service.mapper.SudMapper;
 
 /**
  * Integration tests for the {@link SudResource} REST controller.
@@ -38,6 +40,9 @@ class SudResourceIT {
 
     @Autowired
     private SudRepository sudRepository;
+
+    @Autowired
+    private SudMapper sudMapper;
 
     @Autowired
     private MockMvc restSudMockMvc;
@@ -76,8 +81,9 @@ class SudResourceIT {
     void createSud() throws Exception {
         int databaseSizeBeforeCreate = sudRepository.findAll().size();
         // Create the Sud
+        SudDTO sudDTO = sudMapper.toDto(sud);
         restSudMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sud)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Sud in the database
@@ -92,12 +98,13 @@ class SudResourceIT {
     void createSudWithExistingId() throws Exception {
         // Create the Sud with an existing ID
         sud.setId("existing_id");
+        SudDTO sudDTO = sudMapper.toDto(sud);
 
         int databaseSizeBeforeCreate = sudRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restSudMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sud)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Sud in the database
@@ -112,9 +119,10 @@ class SudResourceIT {
         sud.setTip(null);
 
         // Create the Sud, which fails.
+        SudDTO sudDTO = sudMapper.toDto(sud);
 
         restSudMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sud)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
             .andExpect(status().isBadRequest());
 
         List<Sud> sudList = sudRepository.findAll();
@@ -128,9 +136,10 @@ class SudResourceIT {
         sud.setNaselje(null);
 
         // Create the Sud, which fails.
+        SudDTO sudDTO = sudMapper.toDto(sud);
 
         restSudMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sud)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
             .andExpect(status().isBadRequest());
 
         List<Sud> sudList = sudRepository.findAll();
@@ -183,12 +192,13 @@ class SudResourceIT {
         // Update the sud
         Sud updatedSud = sudRepository.findById(sud.getId()).get();
         updatedSud.tip(UPDATED_TIP).naselje(UPDATED_NASELJE);
+        SudDTO sudDTO = sudMapper.toDto(updatedSud);
 
         restSudMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedSud.getId())
+                put(ENTITY_API_URL_ID, sudDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedSud))
+                    .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
             .andExpect(status().isOk());
 
@@ -205,10 +215,15 @@ class SudResourceIT {
         int databaseSizeBeforeUpdate = sudRepository.findAll().size();
         sud.setId(UUID.randomUUID().toString());
 
+        // Create the Sud
+        SudDTO sudDTO = sudMapper.toDto(sud);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSudMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, sud.getId()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sud))
+                put(ENTITY_API_URL_ID, sudDTO.getId())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -222,12 +237,15 @@ class SudResourceIT {
         int databaseSizeBeforeUpdate = sudRepository.findAll().size();
         sud.setId(UUID.randomUUID().toString());
 
+        // Create the Sud
+        SudDTO sudDTO = sudMapper.toDto(sud);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSudMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(sud))
+                    .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -241,9 +259,12 @@ class SudResourceIT {
         int databaseSizeBeforeUpdate = sudRepository.findAll().size();
         sud.setId(UUID.randomUUID().toString());
 
+        // Create the Sud
+        SudDTO sudDTO = sudMapper.toDto(sud);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSudMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sud)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Sud in the database
@@ -312,12 +333,15 @@ class SudResourceIT {
         int databaseSizeBeforeUpdate = sudRepository.findAll().size();
         sud.setId(UUID.randomUUID().toString());
 
+        // Create the Sud
+        SudDTO sudDTO = sudMapper.toDto(sud);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSudMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, sud.getId())
+                patch(ENTITY_API_URL_ID, sudDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(sud))
+                    .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -331,12 +355,15 @@ class SudResourceIT {
         int databaseSizeBeforeUpdate = sudRepository.findAll().size();
         sud.setId(UUID.randomUUID().toString());
 
+        // Create the Sud
+        SudDTO sudDTO = sudMapper.toDto(sud);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSudMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(sud))
+                    .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -350,9 +377,12 @@ class SudResourceIT {
         int databaseSizeBeforeUpdate = sudRepository.findAll().size();
         sud.setId(UUID.randomUUID().toString());
 
+        // Create the Sud
+        SudDTO sudDTO = sudMapper.toDto(sud);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSudMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(sud)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(sudDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Sud in the database

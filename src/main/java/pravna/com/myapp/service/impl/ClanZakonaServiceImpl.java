@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.ClanZakona;
 import pravna.com.myapp.repository.ClanZakonaRepository;
 import pravna.com.myapp.service.ClanZakonaService;
+import pravna.com.myapp.service.dto.ClanZakonaDTO;
+import pravna.com.myapp.service.mapper.ClanZakonaMapper;
 
 /**
  * Service Implementation for managing {@link ClanZakona}.
@@ -20,57 +22,54 @@ public class ClanZakonaServiceImpl implements ClanZakonaService {
 
     private final ClanZakonaRepository clanZakonaRepository;
 
-    public ClanZakonaServiceImpl(ClanZakonaRepository clanZakonaRepository) {
+    private final ClanZakonaMapper clanZakonaMapper;
+
+    public ClanZakonaServiceImpl(ClanZakonaRepository clanZakonaRepository, ClanZakonaMapper clanZakonaMapper) {
         this.clanZakonaRepository = clanZakonaRepository;
+        this.clanZakonaMapper = clanZakonaMapper;
     }
 
     @Override
-    public ClanZakona save(ClanZakona clanZakona) {
-        log.debug("Request to save ClanZakona : {}", clanZakona);
-        return clanZakonaRepository.save(clanZakona);
+    public ClanZakonaDTO save(ClanZakonaDTO clanZakonaDTO) {
+        log.debug("Request to save ClanZakona : {}", clanZakonaDTO);
+        ClanZakona clanZakona = clanZakonaMapper.toEntity(clanZakonaDTO);
+        clanZakona = clanZakonaRepository.save(clanZakona);
+        return clanZakonaMapper.toDto(clanZakona);
     }
 
     @Override
-    public ClanZakona update(ClanZakona clanZakona) {
-        log.debug("Request to update ClanZakona : {}", clanZakona);
-        return clanZakonaRepository.save(clanZakona);
+    public ClanZakonaDTO update(ClanZakonaDTO clanZakonaDTO) {
+        log.debug("Request to update ClanZakona : {}", clanZakonaDTO);
+        ClanZakona clanZakona = clanZakonaMapper.toEntity(clanZakonaDTO);
+        clanZakona = clanZakonaRepository.save(clanZakona);
+        return clanZakonaMapper.toDto(clanZakona);
     }
 
     @Override
-    public Optional<ClanZakona> partialUpdate(ClanZakona clanZakona) {
-        log.debug("Request to partially update ClanZakona : {}", clanZakona);
+    public Optional<ClanZakonaDTO> partialUpdate(ClanZakonaDTO clanZakonaDTO) {
+        log.debug("Request to partially update ClanZakona : {}", clanZakonaDTO);
 
         return clanZakonaRepository
-            .findById(clanZakona.getId())
+            .findById(clanZakonaDTO.getId())
             .map(existingClanZakona -> {
-                if (clanZakona.getBroj() != null) {
-                    existingClanZakona.setBroj(clanZakona.getBroj());
-                }
-                if (clanZakona.getGlava() != null) {
-                    existingClanZakona.setGlava(clanZakona.getGlava());
-                }
-                if (clanZakona.getNaziv() != null) {
-                    existingClanZakona.setNaziv(clanZakona.getNaziv());
-                }
-                if (clanZakona.getTekst() != null) {
-                    existingClanZakona.setTekst(clanZakona.getTekst());
-                }
+                clanZakonaMapper.partialUpdate(existingClanZakona, clanZakonaDTO);
 
                 return existingClanZakona;
             })
-            .map(clanZakonaRepository::save);
+            .map(clanZakonaRepository::save)
+            .map(clanZakonaMapper::toDto);
     }
 
     @Override
-    public Page<ClanZakona> findAll(Pageable pageable) {
+    public Page<ClanZakonaDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ClanZakonas");
-        return clanZakonaRepository.findAll(pageable);
+        return clanZakonaRepository.findAll(pageable).map(clanZakonaMapper::toDto);
     }
 
     @Override
-    public Optional<ClanZakona> findOne(String id) {
+    public Optional<ClanZakonaDTO> findOne(String id) {
         log.debug("Request to get ClanZakona : {}", id);
-        return clanZakonaRepository.findById(id);
+        return clanZakonaRepository.findById(id).map(clanZakonaMapper::toDto);
     }
 
     @Override

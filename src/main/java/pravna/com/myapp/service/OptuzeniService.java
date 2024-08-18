@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.Optuzeni;
 import pravna.com.myapp.repository.OptuzeniRepository;
+import pravna.com.myapp.service.dto.OptuzeniDTO;
+import pravna.com.myapp.service.mapper.OptuzeniMapper;
 
 /**
  * Service Implementation for managing {@link Optuzeni}.
@@ -19,96 +21,57 @@ public class OptuzeniService {
 
     private final OptuzeniRepository optuzeniRepository;
 
-    public OptuzeniService(OptuzeniRepository optuzeniRepository) {
+    private final OptuzeniMapper optuzeniMapper;
+
+    public OptuzeniService(OptuzeniRepository optuzeniRepository, OptuzeniMapper optuzeniMapper) {
         this.optuzeniRepository = optuzeniRepository;
+        this.optuzeniMapper = optuzeniMapper;
     }
 
     /**
      * Save a optuzeni.
      *
-     * @param optuzeni the entity to save.
+     * @param optuzeniDTO the entity to save.
      * @return the persisted entity.
      */
-    public Optuzeni save(Optuzeni optuzeni) {
-        log.debug("Request to save Optuzeni : {}", optuzeni);
-        return optuzeniRepository.save(optuzeni);
+    public OptuzeniDTO save(OptuzeniDTO optuzeniDTO) {
+        log.debug("Request to save Optuzeni : {}", optuzeniDTO);
+        Optuzeni optuzeni = optuzeniMapper.toEntity(optuzeniDTO);
+        optuzeni = optuzeniRepository.save(optuzeni);
+        return optuzeniMapper.toDto(optuzeni);
     }
 
     /**
      * Update a optuzeni.
      *
-     * @param optuzeni the entity to save.
+     * @param optuzeniDTO the entity to save.
      * @return the persisted entity.
      */
-    public Optuzeni update(Optuzeni optuzeni) {
-        log.debug("Request to update Optuzeni : {}", optuzeni);
-        return optuzeniRepository.save(optuzeni);
+    public OptuzeniDTO update(OptuzeniDTO optuzeniDTO) {
+        log.debug("Request to update Optuzeni : {}", optuzeniDTO);
+        Optuzeni optuzeni = optuzeniMapper.toEntity(optuzeniDTO);
+        optuzeni = optuzeniRepository.save(optuzeni);
+        return optuzeniMapper.toDto(optuzeni);
     }
 
     /**
      * Partially update a optuzeni.
      *
-     * @param optuzeni the entity to update partially.
+     * @param optuzeniDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<Optuzeni> partialUpdate(Optuzeni optuzeni) {
-        log.debug("Request to partially update Optuzeni : {}", optuzeni);
+    public Optional<OptuzeniDTO> partialUpdate(OptuzeniDTO optuzeniDTO) {
+        log.debug("Request to partially update Optuzeni : {}", optuzeniDTO);
 
         return optuzeniRepository
-            .findById(optuzeni.getId())
+            .findById(optuzeniDTO.getId())
             .map(existingOptuzeni -> {
-                if (optuzeni.getIme() != null) {
-                    existingOptuzeni.setIme(optuzeni.getIme());
-                }
-                if (optuzeni.getJmbg() != null) {
-                    existingOptuzeni.setJmbg(optuzeni.getJmbg());
-                }
-                if (optuzeni.getImeOca() != null) {
-                    existingOptuzeni.setImeOca(optuzeni.getImeOca());
-                }
-                if (optuzeni.getImeMajke() != null) {
-                    existingOptuzeni.setImeMajke(optuzeni.getImeMajke());
-                }
-                if (optuzeni.getPol() != null) {
-                    existingOptuzeni.setPol(optuzeni.getPol());
-                }
-                if (optuzeni.getDatumRodjenja() != null) {
-                    existingOptuzeni.setDatumRodjenja(optuzeni.getDatumRodjenja());
-                }
-                if (optuzeni.getMestoRodjenja() != null) {
-                    existingOptuzeni.setMestoRodjenja(optuzeni.getMestoRodjenja());
-                }
-                if (optuzeni.getDrzavaRodjenja() != null) {
-                    existingOptuzeni.setDrzavaRodjenja(optuzeni.getDrzavaRodjenja());
-                }
-                if (optuzeni.getPrebivaliste() != null) {
-                    existingOptuzeni.setPrebivaliste(optuzeni.getPrebivaliste());
-                }
-                if (optuzeni.getBracniStatus() != null) {
-                    existingOptuzeni.setBracniStatus(optuzeni.getBracniStatus());
-                }
-                if (optuzeni.getBrojDece() != null) {
-                    existingOptuzeni.setBrojDece(optuzeni.getBrojDece());
-                }
-                if (optuzeni.getBrojMaloletneDece() != null) {
-                    existingOptuzeni.setBrojMaloletneDece(optuzeni.getBrojMaloletneDece());
-                }
-                if (optuzeni.getImovinskoStanje() != null) {
-                    existingOptuzeni.setImovinskoStanje(optuzeni.getImovinskoStanje());
-                }
-                if (optuzeni.getObrazovanje() != null) {
-                    existingOptuzeni.setObrazovanje(optuzeni.getObrazovanje());
-                }
-                if (optuzeni.getZaposlenje() != null) {
-                    existingOptuzeni.setZaposlenje(optuzeni.getZaposlenje());
-                }
-                if (optuzeni.getMestoZaposlenja() != null) {
-                    existingOptuzeni.setMestoZaposlenja(optuzeni.getMestoZaposlenja());
-                }
+                optuzeniMapper.partialUpdate(existingOptuzeni, optuzeniDTO);
 
                 return existingOptuzeni;
             })
-            .map(optuzeniRepository::save);
+            .map(optuzeniRepository::save)
+            .map(optuzeniMapper::toDto);
     }
 
     /**
@@ -117,9 +80,9 @@ public class OptuzeniService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    public Page<Optuzeni> findAll(Pageable pageable) {
+    public Page<OptuzeniDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Optuzenis");
-        return optuzeniRepository.findAll(pageable);
+        return optuzeniRepository.findAll(pageable).map(optuzeniMapper::toDto);
     }
 
     /**
@@ -128,9 +91,9 @@ public class OptuzeniService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    public Optional<Optuzeni> findOne(String id) {
+    public Optional<OptuzeniDTO> findOne(String id) {
         log.debug("Request to get Optuzeni : {}", id);
-        return optuzeniRepository.findById(id);
+        return optuzeniRepository.findById(id).map(optuzeniMapper::toDto);
     }
 
     /**

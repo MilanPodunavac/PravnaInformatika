@@ -17,9 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pravna.com.myapp.domain.Optuzeni;
 import pravna.com.myapp.repository.OptuzeniRepository;
 import pravna.com.myapp.service.OptuzeniService;
+import pravna.com.myapp.service.dto.OptuzeniDTO;
 import pravna.com.myapp.web.rest.errors.BadRequestAlertException;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
@@ -51,17 +51,17 @@ public class OptuzeniResource {
     /**
      * {@code POST  /optuzenis} : Create a new optuzeni.
      *
-     * @param optuzeni the optuzeni to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new optuzeni, or with status {@code 400 (Bad Request)} if the optuzeni has already an ID.
+     * @param optuzeniDTO the optuzeniDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new optuzeniDTO, or with status {@code 400 (Bad Request)} if the optuzeni has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/optuzenis")
-    public ResponseEntity<Optuzeni> createOptuzeni(@Valid @RequestBody Optuzeni optuzeni) throws URISyntaxException {
-        log.debug("REST request to save Optuzeni : {}", optuzeni);
-        if (optuzeni.getId() != null) {
+    public ResponseEntity<OptuzeniDTO> createOptuzeni(@Valid @RequestBody OptuzeniDTO optuzeniDTO) throws URISyntaxException {
+        log.debug("REST request to save Optuzeni : {}", optuzeniDTO);
+        if (optuzeniDTO.getId() != null) {
             throw new BadRequestAlertException("A new optuzeni cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Optuzeni result = optuzeniService.save(optuzeni);
+        OptuzeniDTO result = optuzeniService.save(optuzeniDTO);
         return ResponseEntity
             .created(new URI("/api/optuzenis/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId()))
@@ -71,23 +71,23 @@ public class OptuzeniResource {
     /**
      * {@code PUT  /optuzenis/:id} : Updates an existing optuzeni.
      *
-     * @param id the id of the optuzeni to save.
-     * @param optuzeni the optuzeni to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated optuzeni,
-     * or with status {@code 400 (Bad Request)} if the optuzeni is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the optuzeni couldn't be updated.
+     * @param id the id of the optuzeniDTO to save.
+     * @param optuzeniDTO the optuzeniDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated optuzeniDTO,
+     * or with status {@code 400 (Bad Request)} if the optuzeniDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the optuzeniDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/optuzenis/{id}")
-    public ResponseEntity<Optuzeni> updateOptuzeni(
+    public ResponseEntity<OptuzeniDTO> updateOptuzeni(
         @PathVariable(value = "id", required = false) final String id,
-        @Valid @RequestBody Optuzeni optuzeni
+        @Valid @RequestBody OptuzeniDTO optuzeniDTO
     ) throws URISyntaxException {
-        log.debug("REST request to update Optuzeni : {}, {}", id, optuzeni);
-        if (optuzeni.getId() == null) {
+        log.debug("REST request to update Optuzeni : {}, {}", id, optuzeniDTO);
+        if (optuzeniDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, optuzeni.getId())) {
+        if (!Objects.equals(id, optuzeniDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -95,34 +95,34 @@ public class OptuzeniResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optuzeni result = optuzeniService.update(optuzeni);
+        OptuzeniDTO result = optuzeniService.update(optuzeniDTO);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, optuzeni.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, optuzeniDTO.getId()))
             .body(result);
     }
 
     /**
      * {@code PATCH  /optuzenis/:id} : Partial updates given fields of an existing optuzeni, field will ignore if it is null
      *
-     * @param id the id of the optuzeni to save.
-     * @param optuzeni the optuzeni to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated optuzeni,
-     * or with status {@code 400 (Bad Request)} if the optuzeni is not valid,
-     * or with status {@code 404 (Not Found)} if the optuzeni is not found,
-     * or with status {@code 500 (Internal Server Error)} if the optuzeni couldn't be updated.
+     * @param id the id of the optuzeniDTO to save.
+     * @param optuzeniDTO the optuzeniDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated optuzeniDTO,
+     * or with status {@code 400 (Bad Request)} if the optuzeniDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the optuzeniDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the optuzeniDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/optuzenis/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<Optuzeni> partialUpdateOptuzeni(
+    public ResponseEntity<OptuzeniDTO> partialUpdateOptuzeni(
         @PathVariable(value = "id", required = false) final String id,
-        @NotNull @RequestBody Optuzeni optuzeni
+        @NotNull @RequestBody OptuzeniDTO optuzeniDTO
     ) throws URISyntaxException {
-        log.debug("REST request to partial update Optuzeni partially : {}, {}", id, optuzeni);
-        if (optuzeni.getId() == null) {
+        log.debug("REST request to partial update Optuzeni partially : {}, {}", id, optuzeniDTO);
+        if (optuzeniDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, optuzeni.getId())) {
+        if (!Objects.equals(id, optuzeniDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -130,11 +130,11 @@ public class OptuzeniResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Optuzeni> result = optuzeniService.partialUpdate(optuzeni);
+        Optional<OptuzeniDTO> result = optuzeniService.partialUpdate(optuzeniDTO);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, optuzeni.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, optuzeniDTO.getId())
         );
     }
 
@@ -145,9 +145,9 @@ public class OptuzeniResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of optuzenis in body.
      */
     @GetMapping("/optuzenis")
-    public ResponseEntity<List<Optuzeni>> getAllOptuzenis(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<OptuzeniDTO>> getAllOptuzenis(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Optuzenis");
-        Page<Optuzeni> page = optuzeniService.findAll(pageable);
+        Page<OptuzeniDTO> page = optuzeniService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -155,20 +155,20 @@ public class OptuzeniResource {
     /**
      * {@code GET  /optuzenis/:id} : get the "id" optuzeni.
      *
-     * @param id the id of the optuzeni to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the optuzeni, or with status {@code 404 (Not Found)}.
+     * @param id the id of the optuzeniDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the optuzeniDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/optuzenis/{id}")
-    public ResponseEntity<Optuzeni> getOptuzeni(@PathVariable String id) {
+    public ResponseEntity<OptuzeniDTO> getOptuzeni(@PathVariable String id) {
         log.debug("REST request to get Optuzeni : {}", id);
-        Optional<Optuzeni> optuzeni = optuzeniService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(optuzeni);
+        Optional<OptuzeniDTO> optuzeniDTO = optuzeniService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(optuzeniDTO);
     }
 
     /**
      * {@code DELETE  /optuzenis/:id} : delete the "id" optuzeni.
      *
-     * @param id the id of the optuzeni to delete.
+     * @param id the id of the optuzeniDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/optuzenis/{id}")

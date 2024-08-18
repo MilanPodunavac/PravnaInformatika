@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import pravna.com.myapp.IntegrationTest;
 import pravna.com.myapp.domain.Zakon;
 import pravna.com.myapp.repository.ZakonRepository;
+import pravna.com.myapp.service.dto.ZakonDTO;
+import pravna.com.myapp.service.mapper.ZakonMapper;
 
 /**
  * Integration tests for the {@link ZakonResource} REST controller.
@@ -34,6 +36,9 @@ class ZakonResourceIT {
 
     @Autowired
     private ZakonRepository zakonRepository;
+
+    @Autowired
+    private ZakonMapper zakonMapper;
 
     @Autowired
     private MockMvc restZakonMockMvc;
@@ -72,8 +77,9 @@ class ZakonResourceIT {
     void createZakon() throws Exception {
         int databaseSizeBeforeCreate = zakonRepository.findAll().size();
         // Create the Zakon
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
         restZakonMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(zakon)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(zakonDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Zakon in the database
@@ -87,12 +93,13 @@ class ZakonResourceIT {
     void createZakonWithExistingId() throws Exception {
         // Create the Zakon with an existing ID
         zakon.setId("existing_id");
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
 
         int databaseSizeBeforeCreate = zakonRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restZakonMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(zakon)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(zakonDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Zakon in the database
@@ -107,9 +114,10 @@ class ZakonResourceIT {
         zakon.setNaziv(null);
 
         // Create the Zakon, which fails.
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
 
         restZakonMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(zakon)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(zakonDTO)))
             .andExpect(status().isBadRequest());
 
         List<Zakon> zakonList = zakonRepository.findAll();
@@ -160,12 +168,13 @@ class ZakonResourceIT {
         // Update the zakon
         Zakon updatedZakon = zakonRepository.findById(zakon.getId()).get();
         updatedZakon.naziv(UPDATED_NAZIV);
+        ZakonDTO zakonDTO = zakonMapper.toDto(updatedZakon);
 
         restZakonMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedZakon.getId())
+                put(ENTITY_API_URL_ID, zakonDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedZakon))
+                    .content(TestUtil.convertObjectToJsonBytes(zakonDTO))
             )
             .andExpect(status().isOk());
 
@@ -181,12 +190,15 @@ class ZakonResourceIT {
         int databaseSizeBeforeUpdate = zakonRepository.findAll().size();
         zakon.setId(UUID.randomUUID().toString());
 
+        // Create the Zakon
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restZakonMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, zakon.getId())
+                put(ENTITY_API_URL_ID, zakonDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(zakon))
+                    .content(TestUtil.convertObjectToJsonBytes(zakonDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -200,12 +212,15 @@ class ZakonResourceIT {
         int databaseSizeBeforeUpdate = zakonRepository.findAll().size();
         zakon.setId(UUID.randomUUID().toString());
 
+        // Create the Zakon
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restZakonMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(zakon))
+                    .content(TestUtil.convertObjectToJsonBytes(zakonDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -219,9 +234,12 @@ class ZakonResourceIT {
         int databaseSizeBeforeUpdate = zakonRepository.findAll().size();
         zakon.setId(UUID.randomUUID().toString());
 
+        // Create the Zakon
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restZakonMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(zakon)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(zakonDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Zakon in the database
@@ -288,12 +306,15 @@ class ZakonResourceIT {
         int databaseSizeBeforeUpdate = zakonRepository.findAll().size();
         zakon.setId(UUID.randomUUID().toString());
 
+        // Create the Zakon
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restZakonMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, zakon.getId())
+                patch(ENTITY_API_URL_ID, zakonDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(zakon))
+                    .content(TestUtil.convertObjectToJsonBytes(zakonDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -307,12 +328,15 @@ class ZakonResourceIT {
         int databaseSizeBeforeUpdate = zakonRepository.findAll().size();
         zakon.setId(UUID.randomUUID().toString());
 
+        // Create the Zakon
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restZakonMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(zakon))
+                    .content(TestUtil.convertObjectToJsonBytes(zakonDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -326,9 +350,12 @@ class ZakonResourceIT {
         int databaseSizeBeforeUpdate = zakonRepository.findAll().size();
         zakon.setId(UUID.randomUUID().toString());
 
+        // Create the Zakon
+        ZakonDTO zakonDTO = zakonMapper.toDto(zakon);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restZakonMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(zakon)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(zakonDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Zakon in the database

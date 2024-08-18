@@ -1,7 +1,7 @@
 {
   "applications": ["pravnaInformatika"],
   "changelogDate": "20240815190709",
-  "dto": "no",
+  "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "clan_zakona",
   "fields": [

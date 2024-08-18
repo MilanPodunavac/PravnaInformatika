@@ -3,35 +3,35 @@ package pravna.com.myapp.service;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import pravna.com.myapp.domain.Presuda;
+import pravna.com.myapp.service.dto.PresudaDTO;
 
 /**
- * Service Interface for managing {@link Presuda}.
+ * Service Interface for managing {@link pravna.com.myapp.domain.Presuda}.
  */
 public interface PresudaService {
     /**
      * Save a presuda.
      *
-     * @param presuda the entity to save.
+     * @param presudaDTO the entity to save.
      * @return the persisted entity.
      */
-    Presuda save(Presuda presuda);
+    PresudaDTO save(PresudaDTO presudaDTO);
 
     /**
      * Updates a presuda.
      *
-     * @param presuda the entity to update.
+     * @param presudaDTO the entity to update.
      * @return the persisted entity.
      */
-    Presuda update(Presuda presuda);
+    PresudaDTO update(PresudaDTO presudaDTO);
 
     /**
      * Partially updates a presuda.
      *
-     * @param presuda the entity to update partially.
+     * @param presudaDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<Presuda> partialUpdate(Presuda presuda);
+    Optional<PresudaDTO> partialUpdate(PresudaDTO presudaDTO);
 
     /**
      * Get all the presudas.
@@ -39,7 +39,7 @@ public interface PresudaService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<Presuda> findAll(Pageable pageable);
+    Page<PresudaDTO> findAll(Pageable pageable);
 
     /**
      * Get the "id" presuda.
@@ -47,7 +47,7 @@ public interface PresudaService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Presuda> findOne(String id);
+    Optional<PresudaDTO> findOne(String id);
 
     /**
      * Delete the "id" presuda.

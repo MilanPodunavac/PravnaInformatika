@@ -81,43 +81,23 @@ public class Presuda implements Serializable {
 
     @DBRef
     @Field("sudija")
-    @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeVeces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs" }, allowSetters = true)
     private Osoba sudija;
 
     @DBRef
     @Field("zapisnicar")
-    @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeVeces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs" }, allowSetters = true)
     private Osoba zapisnicar;
 
     @DBRef
     @Field("tuzilac")
-    @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeVeces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs" }, allowSetters = true)
     private Osoba tuzilac;
 
     @DBRef
     @Field("branilac")
-    @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeVeces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs" }, allowSetters = true)
     private Osoba branilac;
-
-    @DBRef
-    @Field("veces")
-    @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeVeces" },
-        allowSetters = true
-    )
-    private Set<Osoba> veces = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -396,37 +376,6 @@ public class Presuda implements Serializable {
 
     public Presuda branilac(Osoba osoba) {
         this.setBranilac(osoba);
-        return this;
-    }
-
-    public Set<Osoba> getVeces() {
-        return this.veces;
-    }
-
-    public void setVeces(Set<Osoba> osobas) {
-        if (this.veces != null) {
-            this.veces.forEach(i -> i.removePresudeVece(this));
-        }
-        if (osobas != null) {
-            osobas.forEach(i -> i.addPresudeVece(this));
-        }
-        this.veces = osobas;
-    }
-
-    public Presuda veces(Set<Osoba> osobas) {
-        this.setVeces(osobas);
-        return this;
-    }
-
-    public Presuda addVece(Osoba osoba) {
-        this.veces.add(osoba);
-        osoba.getPresudeVeces().add(this);
-        return this;
-    }
-
-    public Presuda removeVece(Osoba osoba) {
-        this.veces.remove(osoba);
-        osoba.getPresudeVeces().remove(this);
         return this;
     }
 

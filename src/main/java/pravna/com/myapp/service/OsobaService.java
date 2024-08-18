@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.Osoba;
 import pravna.com.myapp.repository.OsobaRepository;
+import pravna.com.myapp.service.dto.OsobaDTO;
+import pravna.com.myapp.service.mapper.OsobaMapper;
 
 /**
  * Service Implementation for managing {@link Osoba}.
@@ -19,51 +21,57 @@ public class OsobaService {
 
     private final OsobaRepository osobaRepository;
 
-    public OsobaService(OsobaRepository osobaRepository) {
+    private final OsobaMapper osobaMapper;
+
+    public OsobaService(OsobaRepository osobaRepository, OsobaMapper osobaMapper) {
         this.osobaRepository = osobaRepository;
+        this.osobaMapper = osobaMapper;
     }
 
     /**
      * Save a osoba.
      *
-     * @param osoba the entity to save.
+     * @param osobaDTO the entity to save.
      * @return the persisted entity.
      */
-    public Osoba save(Osoba osoba) {
-        log.debug("Request to save Osoba : {}", osoba);
-        return osobaRepository.save(osoba);
+    public OsobaDTO save(OsobaDTO osobaDTO) {
+        log.debug("Request to save Osoba : {}", osobaDTO);
+        Osoba osoba = osobaMapper.toEntity(osobaDTO);
+        osoba = osobaRepository.save(osoba);
+        return osobaMapper.toDto(osoba);
     }
 
     /**
      * Update a osoba.
      *
-     * @param osoba the entity to save.
+     * @param osobaDTO the entity to save.
      * @return the persisted entity.
      */
-    public Osoba update(Osoba osoba) {
-        log.debug("Request to update Osoba : {}", osoba);
-        return osobaRepository.save(osoba);
+    public OsobaDTO update(OsobaDTO osobaDTO) {
+        log.debug("Request to update Osoba : {}", osobaDTO);
+        Osoba osoba = osobaMapper.toEntity(osobaDTO);
+        osoba = osobaRepository.save(osoba);
+        return osobaMapper.toDto(osoba);
     }
 
     /**
      * Partially update a osoba.
      *
-     * @param osoba the entity to update partially.
+     * @param osobaDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<Osoba> partialUpdate(Osoba osoba) {
-        log.debug("Request to partially update Osoba : {}", osoba);
+    public Optional<OsobaDTO> partialUpdate(OsobaDTO osobaDTO) {
+        log.debug("Request to partially update Osoba : {}", osobaDTO);
 
         return osobaRepository
-            .findById(osoba.getId())
+            .findById(osobaDTO.getId())
             .map(existingOsoba -> {
-                if (osoba.getIme() != null) {
-                    existingOsoba.setIme(osoba.getIme());
-                }
+                osobaMapper.partialUpdate(existingOsoba, osobaDTO);
 
                 return existingOsoba;
             })
-            .map(osobaRepository::save);
+            .map(osobaRepository::save)
+            .map(osobaMapper::toDto);
     }
 
     /**
@@ -72,18 +80,9 @@ public class OsobaService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    public Page<Osoba> findAll(Pageable pageable) {
+    public Page<OsobaDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Osobas");
-        return osobaRepository.findAll(pageable);
-    }
-
-    /**
-     * Get all the osobas with eager load of many-to-many relationships.
-     *
-     * @return the list of entities.
-     */
-    public Page<Osoba> findAllWithEagerRelationships(Pageable pageable) {
-        return osobaRepository.findAllWithEagerRelationships(pageable);
+        return osobaRepository.findAll(pageable).map(osobaMapper::toDto);
     }
 
     /**
@@ -92,9 +91,9 @@ public class OsobaService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    public Optional<Osoba> findOne(String id) {
+    public Optional<OsobaDTO> findOne(String id) {
         log.debug("Request to get Osoba : {}", id);
-        return osobaRepository.findOneWithEagerRelationships(id);
+        return osobaRepository.findById(id).map(osobaMapper::toDto);
     }
 
     /**

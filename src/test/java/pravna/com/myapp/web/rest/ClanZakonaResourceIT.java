@@ -18,6 +18,8 @@ import pravna.com.myapp.IntegrationTest;
 import pravna.com.myapp.domain.ClanZakona;
 import pravna.com.myapp.domain.Zakon;
 import pravna.com.myapp.repository.ClanZakonaRepository;
+import pravna.com.myapp.service.dto.ClanZakonaDTO;
+import pravna.com.myapp.service.mapper.ClanZakonaMapper;
 
 /**
  * Integration tests for the {@link ClanZakonaResource} REST controller.
@@ -44,6 +46,9 @@ class ClanZakonaResourceIT {
 
     @Autowired
     private ClanZakonaRepository clanZakonaRepository;
+
+    @Autowired
+    private ClanZakonaMapper clanZakonaMapper;
 
     @Autowired
     private MockMvc restClanZakonaMockMvc;
@@ -92,8 +97,9 @@ class ClanZakonaResourceIT {
     void createClanZakona() throws Exception {
         int databaseSizeBeforeCreate = clanZakonaRepository.findAll().size();
         // Create the ClanZakona
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
         restClanZakonaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakona)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO)))
             .andExpect(status().isCreated());
 
         // Validate the ClanZakona in the database
@@ -110,12 +116,13 @@ class ClanZakonaResourceIT {
     void createClanZakonaWithExistingId() throws Exception {
         // Create the ClanZakona with an existing ID
         clanZakona.setId("existing_id");
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
 
         int databaseSizeBeforeCreate = clanZakonaRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restClanZakonaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakona)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ClanZakona in the database
@@ -130,9 +137,10 @@ class ClanZakonaResourceIT {
         clanZakona.setBroj(null);
 
         // Create the ClanZakona, which fails.
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
 
         restClanZakonaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakona)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO)))
             .andExpect(status().isBadRequest());
 
         List<ClanZakona> clanZakonaList = clanZakonaRepository.findAll();
@@ -146,9 +154,10 @@ class ClanZakonaResourceIT {
         clanZakona.setGlava(null);
 
         // Create the ClanZakona, which fails.
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
 
         restClanZakonaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakona)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO)))
             .andExpect(status().isBadRequest());
 
         List<ClanZakona> clanZakonaList = clanZakonaRepository.findAll();
@@ -162,9 +171,10 @@ class ClanZakonaResourceIT {
         clanZakona.setNaziv(null);
 
         // Create the ClanZakona, which fails.
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
 
         restClanZakonaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakona)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO)))
             .andExpect(status().isBadRequest());
 
         List<ClanZakona> clanZakonaList = clanZakonaRepository.findAll();
@@ -221,12 +231,13 @@ class ClanZakonaResourceIT {
         // Update the clanZakona
         ClanZakona updatedClanZakona = clanZakonaRepository.findById(clanZakona.getId()).get();
         updatedClanZakona.broj(UPDATED_BROJ).glava(UPDATED_GLAVA).naziv(UPDATED_NAZIV).tekst(UPDATED_TEKST);
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(updatedClanZakona);
 
         restClanZakonaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedClanZakona.getId())
+                put(ENTITY_API_URL_ID, clanZakonaDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedClanZakona))
+                    .content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO))
             )
             .andExpect(status().isOk());
 
@@ -245,12 +256,15 @@ class ClanZakonaResourceIT {
         int databaseSizeBeforeUpdate = clanZakonaRepository.findAll().size();
         clanZakona.setId(UUID.randomUUID().toString());
 
+        // Create the ClanZakona
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restClanZakonaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, clanZakona.getId())
+                put(ENTITY_API_URL_ID, clanZakonaDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(clanZakona))
+                    .content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -264,12 +278,15 @@ class ClanZakonaResourceIT {
         int databaseSizeBeforeUpdate = clanZakonaRepository.findAll().size();
         clanZakona.setId(UUID.randomUUID().toString());
 
+        // Create the ClanZakona
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restClanZakonaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(clanZakona))
+                    .content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -283,9 +300,12 @@ class ClanZakonaResourceIT {
         int databaseSizeBeforeUpdate = clanZakonaRepository.findAll().size();
         clanZakona.setId(UUID.randomUUID().toString());
 
+        // Create the ClanZakona
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restClanZakonaMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakona)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the ClanZakona in the database
@@ -360,12 +380,15 @@ class ClanZakonaResourceIT {
         int databaseSizeBeforeUpdate = clanZakonaRepository.findAll().size();
         clanZakona.setId(UUID.randomUUID().toString());
 
+        // Create the ClanZakona
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restClanZakonaMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, clanZakona.getId())
+                patch(ENTITY_API_URL_ID, clanZakonaDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(clanZakona))
+                    .content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -379,12 +402,15 @@ class ClanZakonaResourceIT {
         int databaseSizeBeforeUpdate = clanZakonaRepository.findAll().size();
         clanZakona.setId(UUID.randomUUID().toString());
 
+        // Create the ClanZakona
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restClanZakonaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(clanZakona))
+                    .content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -398,10 +424,13 @@ class ClanZakonaResourceIT {
         int databaseSizeBeforeUpdate = clanZakonaRepository.findAll().size();
         clanZakona.setId(UUID.randomUUID().toString());
 
+        // Create the ClanZakona
+        ClanZakonaDTO clanZakonaDTO = clanZakonaMapper.toDto(clanZakona);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restClanZakonaMockMvc
             .perform(
-                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(clanZakona))
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(clanZakonaDTO))
             )
             .andExpect(status().isMethodNotAllowed());
 

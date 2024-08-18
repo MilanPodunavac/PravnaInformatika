@@ -7,7 +7,6 @@ export interface IOsoba {
   presudeZapisnicars?: IPresuda[] | null;
   presudeTuzilacs?: IPresuda[] | null;
   presudeBranilacs?: IPresuda[] | null;
-  presudeVeces?: IPresuda[] | null;
 }
 
 export const defaultValue: Readonly<IOsoba> = {};

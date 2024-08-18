@@ -18,6 +18,8 @@ import pravna.com.myapp.IntegrationTest;
 import pravna.com.myapp.domain.Kazna;
 import pravna.com.myapp.domain.enumeration.TipKazne;
 import pravna.com.myapp.repository.KaznaRepository;
+import pravna.com.myapp.service.dto.KaznaDTO;
+import pravna.com.myapp.service.mapper.KaznaMapper;
 
 /**
  * Integration tests for the {@link KaznaResource} REST controller.
@@ -50,6 +52,9 @@ class KaznaResourceIT {
 
     @Autowired
     private KaznaRepository kaznaRepository;
+
+    @Autowired
+    private KaznaMapper kaznaMapper;
 
     @Autowired
     private MockMvc restKaznaMockMvc;
@@ -100,8 +105,9 @@ class KaznaResourceIT {
     void createKazna() throws Exception {
         int databaseSizeBeforeCreate = kaznaRepository.findAll().size();
         // Create the Kazna
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
         restKaznaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kazna)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Kazna in the database
@@ -120,12 +126,13 @@ class KaznaResourceIT {
     void createKaznaWithExistingId() throws Exception {
         // Create the Kazna with an existing ID
         kazna.setId("existing_id");
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
 
         int databaseSizeBeforeCreate = kaznaRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restKaznaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kazna)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Kazna in the database
@@ -140,9 +147,10 @@ class KaznaResourceIT {
         kazna.setTip(null);
 
         // Create the Kazna, which fails.
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
 
         restKaznaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kazna)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
             .andExpect(status().isBadRequest());
 
         List<Kazna> kaznaList = kaznaRepository.findAll();
@@ -209,12 +217,13 @@ class KaznaResourceIT {
             .kolicinaNovca(UPDATED_KOLICINA_NOVCA)
             .primalacNovca(UPDATED_PRIMALAC_NOVCA)
             .nazivImovine(UPDATED_NAZIV_IMOVINE);
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(updatedKazna);
 
         restKaznaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedKazna.getId())
+                put(ENTITY_API_URL_ID, kaznaDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedKazna))
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
             .andExpect(status().isOk());
 
@@ -235,12 +244,15 @@ class KaznaResourceIT {
         int databaseSizeBeforeUpdate = kaznaRepository.findAll().size();
         kazna.setId(UUID.randomUUID().toString());
 
+        // Create the Kazna
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restKaznaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, kazna.getId())
+                put(ENTITY_API_URL_ID, kaznaDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(kazna))
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -254,12 +266,15 @@ class KaznaResourceIT {
         int databaseSizeBeforeUpdate = kaznaRepository.findAll().size();
         kazna.setId(UUID.randomUUID().toString());
 
+        // Create the Kazna
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restKaznaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(kazna))
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -273,9 +288,12 @@ class KaznaResourceIT {
         int databaseSizeBeforeUpdate = kaznaRepository.findAll().size();
         kazna.setId(UUID.randomUUID().toString());
 
+        // Create the Kazna
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restKaznaMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kazna)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Kazna in the database
@@ -360,12 +378,15 @@ class KaznaResourceIT {
         int databaseSizeBeforeUpdate = kaznaRepository.findAll().size();
         kazna.setId(UUID.randomUUID().toString());
 
+        // Create the Kazna
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restKaznaMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, kazna.getId())
+                patch(ENTITY_API_URL_ID, kaznaDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(kazna))
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -379,12 +400,15 @@ class KaznaResourceIT {
         int databaseSizeBeforeUpdate = kaznaRepository.findAll().size();
         kazna.setId(UUID.randomUUID().toString());
 
+        // Create the Kazna
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restKaznaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(kazna))
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -398,9 +422,12 @@ class KaznaResourceIT {
         int databaseSizeBeforeUpdate = kaznaRepository.findAll().size();
         kazna.setId(UUID.randomUUID().toString());
 
+        // Create the Kazna
+        KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restKaznaMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(kazna)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Kazna in the database

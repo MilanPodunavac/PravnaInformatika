@@ -1,7 +1,7 @@
 {
   "applications": ["pravnaInformatika"],
   "changelogDate": "20240815190409",
-  "dto": "no",
+  "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "povreda",
   "fields": [

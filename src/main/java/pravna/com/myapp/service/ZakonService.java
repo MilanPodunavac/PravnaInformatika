@@ -3,35 +3,35 @@ package pravna.com.myapp.service;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import pravna.com.myapp.domain.Zakon;
+import pravna.com.myapp.service.dto.ZakonDTO;
 
 /**
- * Service Interface for managing {@link Zakon}.
+ * Service Interface for managing {@link pravna.com.myapp.domain.Zakon}.
  */
 public interface ZakonService {
     /**
      * Save a zakon.
      *
-     * @param zakon the entity to save.
+     * @param zakonDTO the entity to save.
      * @return the persisted entity.
      */
-    Zakon save(Zakon zakon);
+    ZakonDTO save(ZakonDTO zakonDTO);
 
     /**
      * Updates a zakon.
      *
-     * @param zakon the entity to update.
+     * @param zakonDTO the entity to update.
      * @return the persisted entity.
      */
-    Zakon update(Zakon zakon);
+    ZakonDTO update(ZakonDTO zakonDTO);
 
     /**
      * Partially updates a zakon.
      *
-     * @param zakon the entity to update partially.
+     * @param zakonDTO the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<Zakon> partialUpdate(Zakon zakon);
+    Optional<ZakonDTO> partialUpdate(ZakonDTO zakonDTO);
 
     /**
      * Get all the zakons.
@@ -39,7 +39,7 @@ public interface ZakonService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<Zakon> findAll(Pageable pageable);
+    Page<ZakonDTO> findAll(Pageable pageable);
 
     /**
      * Get the "id" zakon.
@@ -47,7 +47,7 @@ public interface ZakonService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Zakon> findOne(String id);
+    Optional<ZakonDTO> findOne(String id);
 
     /**
      * Delete the "id" zakon.

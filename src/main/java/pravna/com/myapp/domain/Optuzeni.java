@@ -80,10 +80,7 @@ public class Optuzeni implements Serializable {
 
     @DBRef
     @Field("presudeOptuzeni")
-    @JsonIgnoreProperties(
-        value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "veces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
     private Set<Presuda> presudeOptuzenis = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

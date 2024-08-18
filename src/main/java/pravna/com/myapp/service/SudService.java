@@ -1,12 +1,16 @@
 package pravna.com.myapp.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.Sud;
 import pravna.com.myapp.repository.SudRepository;
+import pravna.com.myapp.service.dto.SudDTO;
+import pravna.com.myapp.service.mapper.SudMapper;
 
 /**
  * Service Implementation for managing {@link Sud}.
@@ -18,54 +22,57 @@ public class SudService {
 
     private final SudRepository sudRepository;
 
-    public SudService(SudRepository sudRepository) {
+    private final SudMapper sudMapper;
+
+    public SudService(SudRepository sudRepository, SudMapper sudMapper) {
         this.sudRepository = sudRepository;
+        this.sudMapper = sudMapper;
     }
 
     /**
      * Save a sud.
      *
-     * @param sud the entity to save.
+     * @param sudDTO the entity to save.
      * @return the persisted entity.
      */
-    public Sud save(Sud sud) {
-        log.debug("Request to save Sud : {}", sud);
-        return sudRepository.save(sud);
+    public SudDTO save(SudDTO sudDTO) {
+        log.debug("Request to save Sud : {}", sudDTO);
+        Sud sud = sudMapper.toEntity(sudDTO);
+        sud = sudRepository.save(sud);
+        return sudMapper.toDto(sud);
     }
 
     /**
      * Update a sud.
      *
-     * @param sud the entity to save.
+     * @param sudDTO the entity to save.
      * @return the persisted entity.
      */
-    public Sud update(Sud sud) {
-        log.debug("Request to update Sud : {}", sud);
-        return sudRepository.save(sud);
+    public SudDTO update(SudDTO sudDTO) {
+        log.debug("Request to update Sud : {}", sudDTO);
+        Sud sud = sudMapper.toEntity(sudDTO);
+        sud = sudRepository.save(sud);
+        return sudMapper.toDto(sud);
     }
 
     /**
      * Partially update a sud.
      *
-     * @param sud the entity to update partially.
+     * @param sudDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<Sud> partialUpdate(Sud sud) {
-        log.debug("Request to partially update Sud : {}", sud);
+    public Optional<SudDTO> partialUpdate(SudDTO sudDTO) {
+        log.debug("Request to partially update Sud : {}", sudDTO);
 
         return sudRepository
-            .findById(sud.getId())
+            .findById(sudDTO.getId())
             .map(existingSud -> {
-                if (sud.getTip() != null) {
-                    existingSud.setTip(sud.getTip());
-                }
-                if (sud.getNaselje() != null) {
-                    existingSud.setNaselje(sud.getNaselje());
-                }
+                sudMapper.partialUpdate(existingSud, sudDTO);
 
                 return existingSud;
             })
-            .map(sudRepository::save);
+            .map(sudRepository::save)
+            .map(sudMapper::toDto);
     }
 
     /**
@@ -73,9 +80,9 @@ public class SudService {
      *
      * @return the list of entities.
      */
-    public List<Sud> findAll() {
+    public List<SudDTO> findAll() {
         log.debug("Request to get all Suds");
-        return sudRepository.findAll();
+        return sudRepository.findAll().stream().map(sudMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -84,9 +91,9 @@ public class SudService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    public Optional<Sud> findOne(String id) {
+    public Optional<SudDTO> findOne(String id) {
         log.debug("Request to get Sud : {}", id);
-        return sudRepository.findById(id);
+        return sudRepository.findById(id).map(sudMapper::toDto);
     }
 
     /**

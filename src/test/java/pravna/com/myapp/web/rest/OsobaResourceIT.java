@@ -2,36 +2,28 @@ package pravna.com.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import pravna.com.myapp.IntegrationTest;
 import pravna.com.myapp.domain.Osoba;
 import pravna.com.myapp.repository.OsobaRepository;
-import pravna.com.myapp.service.OsobaService;
+import pravna.com.myapp.service.dto.OsobaDTO;
+import pravna.com.myapp.service.mapper.OsobaMapper;
 
 /**
  * Integration tests for the {@link OsobaResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class OsobaResourceIT {
@@ -45,11 +37,8 @@ class OsobaResourceIT {
     @Autowired
     private OsobaRepository osobaRepository;
 
-    @Mock
-    private OsobaRepository osobaRepositoryMock;
-
-    @Mock
-    private OsobaService osobaServiceMock;
+    @Autowired
+    private OsobaMapper osobaMapper;
 
     @Autowired
     private MockMvc restOsobaMockMvc;
@@ -88,8 +77,9 @@ class OsobaResourceIT {
     void createOsoba() throws Exception {
         int databaseSizeBeforeCreate = osobaRepository.findAll().size();
         // Create the Osoba
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
         restOsobaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osoba)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Osoba in the database
@@ -103,12 +93,13 @@ class OsobaResourceIT {
     void createOsobaWithExistingId() throws Exception {
         // Create the Osoba with an existing ID
         osoba.setId("existing_id");
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
 
         int databaseSizeBeforeCreate = osobaRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restOsobaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osoba)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Osoba in the database
@@ -123,9 +114,10 @@ class OsobaResourceIT {
         osoba.setIme(null);
 
         // Create the Osoba, which fails.
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
 
         restOsobaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osoba)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
             .andExpect(status().isBadRequest());
 
         List<Osoba> osobaList = osobaRepository.findAll();
@@ -144,23 +136,6 @@ class OsobaResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(osoba.getId())))
             .andExpect(jsonPath("$.[*].ime").value(hasItem(DEFAULT_IME)));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllOsobasWithEagerRelationshipsIsEnabled() throws Exception {
-        when(osobaServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restOsobaMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(osobaServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllOsobasWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(osobaServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restOsobaMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(osobaRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -193,12 +168,13 @@ class OsobaResourceIT {
         // Update the osoba
         Osoba updatedOsoba = osobaRepository.findById(osoba.getId()).get();
         updatedOsoba.ime(UPDATED_IME);
+        OsobaDTO osobaDTO = osobaMapper.toDto(updatedOsoba);
 
         restOsobaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedOsoba.getId())
+                put(ENTITY_API_URL_ID, osobaDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedOsoba))
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
             .andExpect(status().isOk());
 
@@ -214,12 +190,15 @@ class OsobaResourceIT {
         int databaseSizeBeforeUpdate = osobaRepository.findAll().size();
         osoba.setId(UUID.randomUUID().toString());
 
+        // Create the Osoba
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOsobaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, osoba.getId())
+                put(ENTITY_API_URL_ID, osobaDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(osoba))
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -233,12 +212,15 @@ class OsobaResourceIT {
         int databaseSizeBeforeUpdate = osobaRepository.findAll().size();
         osoba.setId(UUID.randomUUID().toString());
 
+        // Create the Osoba
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOsobaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(osoba))
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -252,9 +234,12 @@ class OsobaResourceIT {
         int databaseSizeBeforeUpdate = osobaRepository.findAll().size();
         osoba.setId(UUID.randomUUID().toString());
 
+        // Create the Osoba
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOsobaMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osoba)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Osoba in the database
@@ -323,12 +308,15 @@ class OsobaResourceIT {
         int databaseSizeBeforeUpdate = osobaRepository.findAll().size();
         osoba.setId(UUID.randomUUID().toString());
 
+        // Create the Osoba
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOsobaMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, osoba.getId())
+                patch(ENTITY_API_URL_ID, osobaDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(osoba))
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -342,12 +330,15 @@ class OsobaResourceIT {
         int databaseSizeBeforeUpdate = osobaRepository.findAll().size();
         osoba.setId(UUID.randomUUID().toString());
 
+        // Create the Osoba
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOsobaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(osoba))
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -361,9 +352,12 @@ class OsobaResourceIT {
         int databaseSizeBeforeUpdate = osobaRepository.findAll().size();
         osoba.setId(UUID.randomUUID().toString());
 
+        // Create the Osoba
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOsobaMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(osoba)))
+            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Osoba in the database

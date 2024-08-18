@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import pravna.com.myapp.IntegrationTest;
 import pravna.com.myapp.domain.RadnjaPresude;
 import pravna.com.myapp.repository.RadnjaPresudeRepository;
+import pravna.com.myapp.service.dto.RadnjaPresudeDTO;
+import pravna.com.myapp.service.mapper.RadnjaPresudeMapper;
 
 /**
  * Integration tests for the {@link RadnjaPresudeResource} REST controller.
@@ -48,6 +50,9 @@ class RadnjaPresudeResourceIT {
 
     @Autowired
     private RadnjaPresudeRepository radnjaPresudeRepository;
+
+    @Autowired
+    private RadnjaPresudeMapper radnjaPresudeMapper;
 
     @Autowired
     private MockMvc restRadnjaPresudeMockMvc;
@@ -96,8 +101,11 @@ class RadnjaPresudeResourceIT {
     void createRadnjaPresude() throws Exception {
         int databaseSizeBeforeCreate = radnjaPresudeRepository.findAll().size();
         // Create the RadnjaPresude
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
         restRadnjaPresudeMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresude)))
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+            )
             .andExpect(status().isCreated());
 
         // Validate the RadnjaPresude in the database
@@ -115,12 +123,15 @@ class RadnjaPresudeResourceIT {
     void createRadnjaPresudeWithExistingId() throws Exception {
         // Create the RadnjaPresude with an existing ID
         radnjaPresude.setId("existing_id");
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
 
         int databaseSizeBeforeCreate = radnjaPresudeRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restRadnjaPresudeMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresude)))
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the RadnjaPresude in the database
@@ -135,9 +146,12 @@ class RadnjaPresudeResourceIT {
         radnjaPresude.setVremeRadnje(null);
 
         // Create the RadnjaPresude, which fails.
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
 
         restRadnjaPresudeMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresude)))
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<RadnjaPresude> radnjaPresudeList = radnjaPresudeRepository.findAll();
@@ -151,9 +165,12 @@ class RadnjaPresudeResourceIT {
         radnjaPresude.setMestoRadnje(null);
 
         // Create the RadnjaPresude, which fails.
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
 
         restRadnjaPresudeMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresude)))
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<RadnjaPresude> radnjaPresudeList = radnjaPresudeRepository.findAll();
@@ -217,12 +234,13 @@ class RadnjaPresudeResourceIT {
             .bitneNapomene(UPDATED_BITNE_NAPOMENE)
             .mestoSmrti(UPDATED_MESTO_SMRTI)
             .vremeSmrti(UPDATED_VREME_SMRTI);
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(updatedRadnjaPresude);
 
         restRadnjaPresudeMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedRadnjaPresude.getId())
+                put(ENTITY_API_URL_ID, radnjaPresudeDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedRadnjaPresude))
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isOk());
 
@@ -242,12 +260,15 @@ class RadnjaPresudeResourceIT {
         int databaseSizeBeforeUpdate = radnjaPresudeRepository.findAll().size();
         radnjaPresude.setId(UUID.randomUUID().toString());
 
+        // Create the RadnjaPresude
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRadnjaPresudeMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, radnjaPresude.getId())
+                put(ENTITY_API_URL_ID, radnjaPresudeDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresude))
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -261,12 +282,15 @@ class RadnjaPresudeResourceIT {
         int databaseSizeBeforeUpdate = radnjaPresudeRepository.findAll().size();
         radnjaPresude.setId(UUID.randomUUID().toString());
 
+        // Create the RadnjaPresude
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRadnjaPresudeMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresude))
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -280,9 +304,14 @@ class RadnjaPresudeResourceIT {
         int databaseSizeBeforeUpdate = radnjaPresudeRepository.findAll().size();
         radnjaPresude.setId(UUID.randomUUID().toString());
 
+        // Create the RadnjaPresude
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRadnjaPresudeMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresude)))
+            .perform(
+                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the RadnjaPresude in the database
@@ -364,12 +393,15 @@ class RadnjaPresudeResourceIT {
         int databaseSizeBeforeUpdate = radnjaPresudeRepository.findAll().size();
         radnjaPresude.setId(UUID.randomUUID().toString());
 
+        // Create the RadnjaPresude
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRadnjaPresudeMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, radnjaPresude.getId())
+                patch(ENTITY_API_URL_ID, radnjaPresudeDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresude))
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -383,12 +415,15 @@ class RadnjaPresudeResourceIT {
         int databaseSizeBeforeUpdate = radnjaPresudeRepository.findAll().size();
         radnjaPresude.setId(UUID.randomUUID().toString());
 
+        // Create the RadnjaPresude
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRadnjaPresudeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresude))
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -402,10 +437,15 @@ class RadnjaPresudeResourceIT {
         int databaseSizeBeforeUpdate = radnjaPresudeRepository.findAll().size();
         radnjaPresude.setId(UUID.randomUUID().toString());
 
+        // Create the RadnjaPresude
+        RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRadnjaPresudeMockMvc
             .perform(
-                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(radnjaPresude))
+                patch(ENTITY_API_URL)
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isMethodNotAllowed());
 

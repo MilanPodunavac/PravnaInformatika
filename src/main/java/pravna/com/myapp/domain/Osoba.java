@@ -28,43 +28,23 @@ public class Osoba implements Serializable {
 
     @DBRef
     @Field("presudeSudija")
-    @JsonIgnoreProperties(
-        value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "veces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
     private Set<Presuda> presudeSudijas = new HashSet<>();
 
     @DBRef
     @Field("presudeZapisnicar")
-    @JsonIgnoreProperties(
-        value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "veces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
     private Set<Presuda> presudeZapisnicars = new HashSet<>();
 
     @DBRef
     @Field("presudeTuzilac")
-    @JsonIgnoreProperties(
-        value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "veces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
     private Set<Presuda> presudeTuzilacs = new HashSet<>();
 
     @DBRef
     @Field("presudeBranilac")
-    @JsonIgnoreProperties(
-        value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "veces" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
     private Set<Presuda> presudeBranilacs = new HashSet<>();
-
-    @DBRef
-    @Field("presudeVeces")
-    @JsonIgnoreProperties(
-        value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "veces" },
-        allowSetters = true
-    )
-    private Set<Presuda> presudeVeces = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -215,31 +195,6 @@ public class Osoba implements Serializable {
     public Osoba removePresudeBranilac(Presuda presuda) {
         this.presudeBranilacs.remove(presuda);
         presuda.setBranilac(null);
-        return this;
-    }
-
-    public Set<Presuda> getPresudeVeces() {
-        return this.presudeVeces;
-    }
-
-    public void setPresudeVeces(Set<Presuda> presudas) {
-        this.presudeVeces = presudas;
-    }
-
-    public Osoba presudeVeces(Set<Presuda> presudas) {
-        this.setPresudeVeces(presudas);
-        return this;
-    }
-
-    public Osoba addPresudeVece(Presuda presuda) {
-        this.presudeVeces.add(presuda);
-        presuda.getVeces().add(this);
-        return this;
-    }
-
-    public Osoba removePresudeVece(Presuda presuda) {
-        this.presudeVeces.remove(presuda);
-        presuda.getVeces().remove(this);
         return this;
     }
 

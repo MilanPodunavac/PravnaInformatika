@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pravna.com.myapp.domain.Kazna;
 import pravna.com.myapp.repository.KaznaRepository;
 import pravna.com.myapp.service.KaznaService;
+import pravna.com.myapp.service.dto.KaznaDTO;
 import pravna.com.myapp.web.rest.errors.BadRequestAlertException;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -45,17 +45,17 @@ public class KaznaResource {
     /**
      * {@code POST  /kaznas} : Create a new kazna.
      *
-     * @param kazna the kazna to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new kazna, or with status {@code 400 (Bad Request)} if the kazna has already an ID.
+     * @param kaznaDTO the kaznaDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new kaznaDTO, or with status {@code 400 (Bad Request)} if the kazna has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/kaznas")
-    public ResponseEntity<Kazna> createKazna(@Valid @RequestBody Kazna kazna) throws URISyntaxException {
-        log.debug("REST request to save Kazna : {}", kazna);
-        if (kazna.getId() != null) {
+    public ResponseEntity<KaznaDTO> createKazna(@Valid @RequestBody KaznaDTO kaznaDTO) throws URISyntaxException {
+        log.debug("REST request to save Kazna : {}", kaznaDTO);
+        if (kaznaDTO.getId() != null) {
             throw new BadRequestAlertException("A new kazna cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Kazna result = kaznaService.save(kazna);
+        KaznaDTO result = kaznaService.save(kaznaDTO);
         return ResponseEntity
             .created(new URI("/api/kaznas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId()))
@@ -65,23 +65,23 @@ public class KaznaResource {
     /**
      * {@code PUT  /kaznas/:id} : Updates an existing kazna.
      *
-     * @param id the id of the kazna to save.
-     * @param kazna the kazna to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated kazna,
-     * or with status {@code 400 (Bad Request)} if the kazna is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the kazna couldn't be updated.
+     * @param id the id of the kaznaDTO to save.
+     * @param kaznaDTO the kaznaDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated kaznaDTO,
+     * or with status {@code 400 (Bad Request)} if the kaznaDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the kaznaDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/kaznas/{id}")
-    public ResponseEntity<Kazna> updateKazna(
+    public ResponseEntity<KaznaDTO> updateKazna(
         @PathVariable(value = "id", required = false) final String id,
-        @Valid @RequestBody Kazna kazna
+        @Valid @RequestBody KaznaDTO kaznaDTO
     ) throws URISyntaxException {
-        log.debug("REST request to update Kazna : {}, {}", id, kazna);
-        if (kazna.getId() == null) {
+        log.debug("REST request to update Kazna : {}, {}", id, kaznaDTO);
+        if (kaznaDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, kazna.getId())) {
+        if (!Objects.equals(id, kaznaDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -89,34 +89,34 @@ public class KaznaResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Kazna result = kaznaService.update(kazna);
+        KaznaDTO result = kaznaService.update(kaznaDTO);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, kazna.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, kaznaDTO.getId()))
             .body(result);
     }
 
     /**
      * {@code PATCH  /kaznas/:id} : Partial updates given fields of an existing kazna, field will ignore if it is null
      *
-     * @param id the id of the kazna to save.
-     * @param kazna the kazna to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated kazna,
-     * or with status {@code 400 (Bad Request)} if the kazna is not valid,
-     * or with status {@code 404 (Not Found)} if the kazna is not found,
-     * or with status {@code 500 (Internal Server Error)} if the kazna couldn't be updated.
+     * @param id the id of the kaznaDTO to save.
+     * @param kaznaDTO the kaznaDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated kaznaDTO,
+     * or with status {@code 400 (Bad Request)} if the kaznaDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the kaznaDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the kaznaDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/kaznas/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<Kazna> partialUpdateKazna(
+    public ResponseEntity<KaznaDTO> partialUpdateKazna(
         @PathVariable(value = "id", required = false) final String id,
-        @NotNull @RequestBody Kazna kazna
+        @NotNull @RequestBody KaznaDTO kaznaDTO
     ) throws URISyntaxException {
-        log.debug("REST request to partial update Kazna partially : {}, {}", id, kazna);
-        if (kazna.getId() == null) {
+        log.debug("REST request to partial update Kazna partially : {}, {}", id, kaznaDTO);
+        if (kaznaDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, kazna.getId())) {
+        if (!Objects.equals(id, kaznaDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -124,9 +124,12 @@ public class KaznaResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Kazna> result = kaznaService.partialUpdate(kazna);
+        Optional<KaznaDTO> result = kaznaService.partialUpdate(kaznaDTO);
 
-        return ResponseUtil.wrapOrNotFound(result, HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, kazna.getId()));
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, kaznaDTO.getId())
+        );
     }
 
     /**
@@ -135,7 +138,7 @@ public class KaznaResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of kaznas in body.
      */
     @GetMapping("/kaznas")
-    public List<Kazna> getAllKaznas() {
+    public List<KaznaDTO> getAllKaznas() {
         log.debug("REST request to get all Kaznas");
         return kaznaService.findAll();
     }
@@ -143,20 +146,20 @@ public class KaznaResource {
     /**
      * {@code GET  /kaznas/:id} : get the "id" kazna.
      *
-     * @param id the id of the kazna to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the kazna, or with status {@code 404 (Not Found)}.
+     * @param id the id of the kaznaDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the kaznaDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/kaznas/{id}")
-    public ResponseEntity<Kazna> getKazna(@PathVariable String id) {
+    public ResponseEntity<KaznaDTO> getKazna(@PathVariable String id) {
         log.debug("REST request to get Kazna : {}", id);
-        Optional<Kazna> kazna = kaznaService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(kazna);
+        Optional<KaznaDTO> kaznaDTO = kaznaService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(kaznaDTO);
     }
 
     /**
      * {@code DELETE  /kaznas/:id} : delete the "id" kazna.
      *
-     * @param id the id of the kazna to delete.
+     * @param id the id of the kaznaDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/kaznas/{id}")

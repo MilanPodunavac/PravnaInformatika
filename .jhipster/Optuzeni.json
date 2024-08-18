@@ -1,7 +1,7 @@
 {
   "applications": ["pravnaInformatika"],
   "changelogDate": "20240815190209",
-  "dto": "no",
+  "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "optuzeni",
   "fields": [

@@ -27,7 +27,6 @@ export interface IPresuda {
   zapisnicar?: IOsoba;
   tuzilac?: IOsoba;
   branilac?: IOsoba;
-  veces?: IOsoba[] | null;
 }
 
 export const defaultValue: Readonly<IPresuda> = {

@@ -1,5 +1,6 @@
 package pravna.com.myapp.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.RadnjaPresude;
 import pravna.com.myapp.repository.RadnjaPresudeRepository;
+import pravna.com.myapp.service.dto.RadnjaPresudeDTO;
+import pravna.com.myapp.service.mapper.RadnjaPresudeMapper;
 
 /**
  * Service Implementation for managing {@link RadnjaPresude}.
@@ -20,63 +23,57 @@ public class RadnjaPresudeService {
 
     private final RadnjaPresudeRepository radnjaPresudeRepository;
 
-    public RadnjaPresudeService(RadnjaPresudeRepository radnjaPresudeRepository) {
+    private final RadnjaPresudeMapper radnjaPresudeMapper;
+
+    public RadnjaPresudeService(RadnjaPresudeRepository radnjaPresudeRepository, RadnjaPresudeMapper radnjaPresudeMapper) {
         this.radnjaPresudeRepository = radnjaPresudeRepository;
+        this.radnjaPresudeMapper = radnjaPresudeMapper;
     }
 
     /**
      * Save a radnjaPresude.
      *
-     * @param radnjaPresude the entity to save.
+     * @param radnjaPresudeDTO the entity to save.
      * @return the persisted entity.
      */
-    public RadnjaPresude save(RadnjaPresude radnjaPresude) {
-        log.debug("Request to save RadnjaPresude : {}", radnjaPresude);
-        return radnjaPresudeRepository.save(radnjaPresude);
+    public RadnjaPresudeDTO save(RadnjaPresudeDTO radnjaPresudeDTO) {
+        log.debug("Request to save RadnjaPresude : {}", radnjaPresudeDTO);
+        RadnjaPresude radnjaPresude = radnjaPresudeMapper.toEntity(radnjaPresudeDTO);
+        radnjaPresude = radnjaPresudeRepository.save(radnjaPresude);
+        return radnjaPresudeMapper.toDto(radnjaPresude);
     }
 
     /**
      * Update a radnjaPresude.
      *
-     * @param radnjaPresude the entity to save.
+     * @param radnjaPresudeDTO the entity to save.
      * @return the persisted entity.
      */
-    public RadnjaPresude update(RadnjaPresude radnjaPresude) {
-        log.debug("Request to update RadnjaPresude : {}", radnjaPresude);
-        return radnjaPresudeRepository.save(radnjaPresude);
+    public RadnjaPresudeDTO update(RadnjaPresudeDTO radnjaPresudeDTO) {
+        log.debug("Request to update RadnjaPresude : {}", radnjaPresudeDTO);
+        RadnjaPresude radnjaPresude = radnjaPresudeMapper.toEntity(radnjaPresudeDTO);
+        radnjaPresude = radnjaPresudeRepository.save(radnjaPresude);
+        return radnjaPresudeMapper.toDto(radnjaPresude);
     }
 
     /**
      * Partially update a radnjaPresude.
      *
-     * @param radnjaPresude the entity to update partially.
+     * @param radnjaPresudeDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<RadnjaPresude> partialUpdate(RadnjaPresude radnjaPresude) {
-        log.debug("Request to partially update RadnjaPresude : {}", radnjaPresude);
+    public Optional<RadnjaPresudeDTO> partialUpdate(RadnjaPresudeDTO radnjaPresudeDTO) {
+        log.debug("Request to partially update RadnjaPresude : {}", radnjaPresudeDTO);
 
         return radnjaPresudeRepository
-            .findById(radnjaPresude.getId())
+            .findById(radnjaPresudeDTO.getId())
             .map(existingRadnjaPresude -> {
-                if (radnjaPresude.getVremeRadnje() != null) {
-                    existingRadnjaPresude.setVremeRadnje(radnjaPresude.getVremeRadnje());
-                }
-                if (radnjaPresude.getMestoRadnje() != null) {
-                    existingRadnjaPresude.setMestoRadnje(radnjaPresude.getMestoRadnje());
-                }
-                if (radnjaPresude.getBitneNapomene() != null) {
-                    existingRadnjaPresude.setBitneNapomene(radnjaPresude.getBitneNapomene());
-                }
-                if (radnjaPresude.getMestoSmrti() != null) {
-                    existingRadnjaPresude.setMestoSmrti(radnjaPresude.getMestoSmrti());
-                }
-                if (radnjaPresude.getVremeSmrti() != null) {
-                    existingRadnjaPresude.setVremeSmrti(radnjaPresude.getVremeSmrti());
-                }
+                radnjaPresudeMapper.partialUpdate(existingRadnjaPresude, radnjaPresudeDTO);
 
                 return existingRadnjaPresude;
             })
-            .map(radnjaPresudeRepository::save);
+            .map(radnjaPresudeRepository::save)
+            .map(radnjaPresudeMapper::toDto);
     }
 
     /**
@@ -84,9 +81,9 @@ public class RadnjaPresudeService {
      *
      * @return the list of entities.
      */
-    public List<RadnjaPresude> findAll() {
+    public List<RadnjaPresudeDTO> findAll() {
         log.debug("Request to get all RadnjaPresudes");
-        return radnjaPresudeRepository.findAll();
+        return radnjaPresudeRepository.findAll().stream().map(radnjaPresudeMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -94,12 +91,13 @@ public class RadnjaPresudeService {
      *  @return the list of entities.
      */
 
-    public List<RadnjaPresude> findAllWherePresudaIsNull() {
+    public List<RadnjaPresudeDTO> findAllWherePresudaIsNull() {
         log.debug("Request to get all radnjaPresudes where Presuda is null");
         return StreamSupport
             .stream(radnjaPresudeRepository.findAll().spliterator(), false)
             .filter(radnjaPresude -> radnjaPresude.getPresuda() == null)
-            .collect(Collectors.toList());
+            .map(radnjaPresudeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**
@@ -108,9 +106,9 @@ public class RadnjaPresudeService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    public Optional<RadnjaPresude> findOne(String id) {
+    public Optional<RadnjaPresudeDTO> findOne(String id) {
         log.debug("Request to get RadnjaPresude : {}", id);
-        return radnjaPresudeRepository.findById(id);
+        return radnjaPresudeRepository.findById(id).map(radnjaPresudeMapper::toDto);
     }
 
     /**

@@ -38,19 +38,6 @@ export const OsobaDetail = () => {
             </span>
           </dt>
           <dd>{osobaEntity.ime}</dd>
-          <dt>
-            <Translate contentKey="pravnaInformatikaApp.osoba.presudeVece">Presude Vece</Translate>
-          </dt>
-          <dd>
-            {osobaEntity.presudeVeces
-              ? osobaEntity.presudeVeces.map((val, i) => (
-                  <span key={val.id}>
-                    <a>{val.presudeVece}</a>
-                    {osobaEntity.presudeVeces && i === osobaEntity.presudeVeces.length - 1 ? '' : ', '}
-                  </span>
-                ))
-              : null}
-          </dd>
         </dl>
         <Button tag={Link} to="/osoba" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

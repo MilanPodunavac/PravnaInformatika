@@ -1,7 +1,7 @@
 {
   "applications": ["pravnaInformatika"],
   "changelogDate": "20240815190009",
-  "dto": "no",
+  "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "presuda",
   "fields": [
@@ -119,14 +119,6 @@
       "relationshipName": "branilac",
       "relationshipType": "many-to-one",
       "relationshipValidateRules": "required"
-    },
-    {
-      "otherEntityField": "vece",
-      "otherEntityName": "osoba",
-      "otherEntityRelationshipName": "presudeVece",
-      "ownerSide": false,
-      "relationshipName": "vece",
-      "relationshipType": "many-to-many"
     }
   ],
   "service": "serviceImpl"

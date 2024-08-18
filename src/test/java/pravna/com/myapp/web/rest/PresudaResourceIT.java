@@ -24,6 +24,8 @@ import pravna.com.myapp.domain.RadnjaPresude;
 import pravna.com.myapp.domain.enumeration.TipPresude;
 import pravna.com.myapp.domain.enumeration.TipUbistva;
 import pravna.com.myapp.repository.PresudaRepository;
+import pravna.com.myapp.service.dto.PresudaDTO;
+import pravna.com.myapp.service.mapper.PresudaMapper;
 
 /**
  * Integration tests for the {@link PresudaResource} REST controller.
@@ -74,6 +76,9 @@ class PresudaResourceIT {
 
     @Autowired
     private PresudaRepository presudaRepository;
+
+    @Autowired
+    private PresudaMapper presudaMapper;
 
     @Autowired
     private MockMvc restPresudaMockMvc;
@@ -178,8 +183,9 @@ class PresudaResourceIT {
     void createPresuda() throws Exception {
         int databaseSizeBeforeCreate = presudaRepository.findAll().size();
         // Create the Presuda
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
         restPresudaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presuda)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presudaDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Presuda in the database
@@ -204,12 +210,13 @@ class PresudaResourceIT {
     void createPresudaWithExistingId() throws Exception {
         // Create the Presuda with an existing ID
         presuda.setId("existing_id");
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
 
         int databaseSizeBeforeCreate = presudaRepository.findAll().size();
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restPresudaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presuda)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presudaDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Presuda in the database
@@ -224,9 +231,10 @@ class PresudaResourceIT {
         presuda.setDatum(null);
 
         // Create the Presuda, which fails.
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
 
         restPresudaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presuda)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presudaDTO)))
             .andExpect(status().isBadRequest());
 
         List<Presuda> presudaList = presudaRepository.findAll();
@@ -240,9 +248,10 @@ class PresudaResourceIT {
         presuda.setTip(null);
 
         // Create the Presuda, which fails.
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
 
         restPresudaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presuda)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presudaDTO)))
             .andExpect(status().isBadRequest());
 
         List<Presuda> presudaList = presudaRepository.findAll();
@@ -256,9 +265,10 @@ class PresudaResourceIT {
         presuda.setBroj(null);
 
         // Create the Presuda, which fails.
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
 
         restPresudaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presuda)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presudaDTO)))
             .andExpect(status().isBadRequest());
 
         List<Presuda> presudaList = presudaRepository.findAll();
@@ -272,9 +282,10 @@ class PresudaResourceIT {
         presuda.setGodina(null);
 
         // Create the Presuda, which fails.
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
 
         restPresudaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presuda)))
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presudaDTO)))
             .andExpect(status().isBadRequest());
 
         List<Presuda> presudaList = presudaRepository.findAll();
@@ -359,12 +370,13 @@ class PresudaResourceIT {
             .pokusaj(UPDATED_POKUSAJ)
             .krivica(UPDATED_KRIVICA)
             .nacin(UPDATED_NACIN);
+        PresudaDTO presudaDTO = presudaMapper.toDto(updatedPresuda);
 
         restPresudaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, updatedPresuda.getId())
+                put(ENTITY_API_URL_ID, presudaDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedPresuda))
+                    .content(TestUtil.convertObjectToJsonBytes(presudaDTO))
             )
             .andExpect(status().isOk());
 
@@ -391,12 +403,15 @@ class PresudaResourceIT {
         int databaseSizeBeforeUpdate = presudaRepository.findAll().size();
         presuda.setId(UUID.randomUUID().toString());
 
+        // Create the Presuda
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPresudaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, presuda.getId())
+                put(ENTITY_API_URL_ID, presudaDTO.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(presuda))
+                    .content(TestUtil.convertObjectToJsonBytes(presudaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -410,12 +425,15 @@ class PresudaResourceIT {
         int databaseSizeBeforeUpdate = presudaRepository.findAll().size();
         presuda.setId(UUID.randomUUID().toString());
 
+        // Create the Presuda
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPresudaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(presuda))
+                    .content(TestUtil.convertObjectToJsonBytes(presudaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -429,9 +447,12 @@ class PresudaResourceIT {
         int databaseSizeBeforeUpdate = presudaRepository.findAll().size();
         presuda.setId(UUID.randomUUID().toString());
 
+        // Create the Presuda
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPresudaMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presuda)))
+            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(presudaDTO)))
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Presuda in the database
@@ -534,12 +555,15 @@ class PresudaResourceIT {
         int databaseSizeBeforeUpdate = presudaRepository.findAll().size();
         presuda.setId(UUID.randomUUID().toString());
 
+        // Create the Presuda
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
+
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPresudaMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, presuda.getId())
+                patch(ENTITY_API_URL_ID, presudaDTO.getId())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(presuda))
+                    .content(TestUtil.convertObjectToJsonBytes(presudaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -553,12 +577,15 @@ class PresudaResourceIT {
         int databaseSizeBeforeUpdate = presudaRepository.findAll().size();
         presuda.setId(UUID.randomUUID().toString());
 
+        // Create the Presuda
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPresudaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
-                    .content(TestUtil.convertObjectToJsonBytes(presuda))
+                    .content(TestUtil.convertObjectToJsonBytes(presudaDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -572,9 +599,14 @@ class PresudaResourceIT {
         int databaseSizeBeforeUpdate = presudaRepository.findAll().size();
         presuda.setId(UUID.randomUUID().toString());
 
+        // Create the Presuda
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
+
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPresudaMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(presuda)))
+            .perform(
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(presudaDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Presuda in the database

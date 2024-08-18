@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import pravna.com.myapp.domain.Zakon;
 import pravna.com.myapp.repository.ZakonRepository;
 import pravna.com.myapp.service.ZakonService;
+import pravna.com.myapp.service.dto.ZakonDTO;
+import pravna.com.myapp.service.mapper.ZakonMapper;
 
 /**
  * Service Implementation for managing {@link Zakon}.
@@ -20,48 +22,54 @@ public class ZakonServiceImpl implements ZakonService {
 
     private final ZakonRepository zakonRepository;
 
-    public ZakonServiceImpl(ZakonRepository zakonRepository) {
+    private final ZakonMapper zakonMapper;
+
+    public ZakonServiceImpl(ZakonRepository zakonRepository, ZakonMapper zakonMapper) {
         this.zakonRepository = zakonRepository;
+        this.zakonMapper = zakonMapper;
     }
 
     @Override
-    public Zakon save(Zakon zakon) {
-        log.debug("Request to save Zakon : {}", zakon);
-        return zakonRepository.save(zakon);
+    public ZakonDTO save(ZakonDTO zakonDTO) {
+        log.debug("Request to save Zakon : {}", zakonDTO);
+        Zakon zakon = zakonMapper.toEntity(zakonDTO);
+        zakon = zakonRepository.save(zakon);
+        return zakonMapper.toDto(zakon);
     }
 
     @Override
-    public Zakon update(Zakon zakon) {
-        log.debug("Request to update Zakon : {}", zakon);
-        return zakonRepository.save(zakon);
+    public ZakonDTO update(ZakonDTO zakonDTO) {
+        log.debug("Request to update Zakon : {}", zakonDTO);
+        Zakon zakon = zakonMapper.toEntity(zakonDTO);
+        zakon = zakonRepository.save(zakon);
+        return zakonMapper.toDto(zakon);
     }
 
     @Override
-    public Optional<Zakon> partialUpdate(Zakon zakon) {
-        log.debug("Request to partially update Zakon : {}", zakon);
+    public Optional<ZakonDTO> partialUpdate(ZakonDTO zakonDTO) {
+        log.debug("Request to partially update Zakon : {}", zakonDTO);
 
         return zakonRepository
-            .findById(zakon.getId())
+            .findById(zakonDTO.getId())
             .map(existingZakon -> {
-                if (zakon.getNaziv() != null) {
-                    existingZakon.setNaziv(zakon.getNaziv());
-                }
+                zakonMapper.partialUpdate(existingZakon, zakonDTO);
 
                 return existingZakon;
             })
-            .map(zakonRepository::save);
+            .map(zakonRepository::save)
+            .map(zakonMapper::toDto);
     }
 
     @Override
-    public Page<Zakon> findAll(Pageable pageable) {
+    public Page<ZakonDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Zakons");
-        return zakonRepository.findAll(pageable);
+        return zakonRepository.findAll(pageable).map(zakonMapper::toDto);
     }
 
     @Override
-    public Optional<Zakon> findOne(String id) {
+    public Optional<ZakonDTO> findOne(String id) {
         log.debug("Request to get Zakon : {}", id);
-        return zakonRepository.findById(id);
+        return zakonRepository.findById(id).map(zakonMapper::toDto);
     }
 
     @Override

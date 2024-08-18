@@ -9,7 +9,7 @@ application {
     devDatabaseType h2Disk
     clientFramework react
     serverPort 8081
-    languages [sr, en]
+    languages [en, sr]
   }
   entities *
 }
@@ -109,9 +109,7 @@ relationship OneToOne {
 	Presuda{radnja required} to RadnjaPresude{presuda}
 }
 
-relationship ManyToMany {
-	Osoba{presudeVece(presudeVece)} to Presuda{vece(vece)}
-}
+
 
 enum TipPresude {
 	PRVOSTEPENI_KRIVICNI_PREDMET ("K - Prvostepeni krivični predmet"),
@@ -186,7 +184,7 @@ enum TipSuda {
 paginate Zakon, ClanZakona, Presuda with infinite-scroll
 paginate Osoba, Optuzeni with pagination
 
-//dto * with mapstruct
-
 service Zakon, ClanZakona, Presuda with serviceImpl
 service Osoba, Optuzeni, RadnjaPresude, Kazna, Povreda, Sud with serviceClass
+
+dto all with mapstruct

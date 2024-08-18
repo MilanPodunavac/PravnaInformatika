@@ -1,7 +1,7 @@
 {
   "applications": ["pravnaInformatika"],
   "changelogDate": "20240815190509",
-  "dto": "no",
+  "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "kazna",
   "fields": [
