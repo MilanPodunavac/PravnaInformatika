@@ -1,16 +1,26 @@
 package pravna.com.myapp.web.rest.extended;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pravna.com.myapp.repository.PresudaRepository;
 import pravna.com.myapp.repository.extended.PresudaExtendedRepository;
-import pravna.com.myapp.service.PresudaService;
+import pravna.com.myapp.service.dto.PovredaDTO;
+import pravna.com.myapp.service.dto.PresudaDTO;
+import pravna.com.myapp.service.dto.PresudaFullDTO;
+import pravna.com.myapp.service.extended.KaznaExtendedService;
+import pravna.com.myapp.service.extended.PovredaExtendedService;
 import pravna.com.myapp.service.extended.PresudaExtendedService;
 import pravna.com.myapp.web.rest.PresudaResource;
+import tech.jhipster.web.util.HeaderUtil;
 
 @RestController
 @Primary
@@ -28,9 +38,32 @@ public class PresudaExtendedResource extends PresudaResource {
 
     private final PresudaExtendedRepository presudaRepository;
 
-    public PresudaExtendedResource(PresudaExtendedService presudaService, PresudaExtendedRepository presudaRepository) {
+    private final PovredaExtendedService povredaService;
+
+    private final KaznaExtendedService kaznaService;
+
+    public PresudaExtendedResource(
+        PresudaExtendedService presudaService,
+        PresudaExtendedRepository presudaRepository,
+        PovredaExtendedService povredaService,
+        KaznaExtendedService kaznaService
+    ) {
         super(presudaService, presudaRepository);
         this.presudaService = presudaService;
         this.presudaRepository = presudaRepository;
+        this.povredaService = povredaService;
+        this.kaznaService = kaznaService;
+    }
+
+    @PostMapping("/presudas/full")
+    public ResponseEntity<PresudaFullDTO> createPresudaFull(@Valid @RequestBody PresudaFullDTO presudaFullDTO) throws URISyntaxException {
+        System.out.println(presudaFullDTO);
+
+        PresudaDTO presudaSaved = presudaService.save(presudaFullDTO.toPresudaDTO());
+
+        return ResponseEntity
+            .created(new URI("/api/presudas"))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "1"))
+            .body(presudaFullDTO);
     }
 }

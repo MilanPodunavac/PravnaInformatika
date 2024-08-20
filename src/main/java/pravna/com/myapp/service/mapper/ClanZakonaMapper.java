@@ -17,5 +17,6 @@ public interface ClanZakonaMapper extends EntityMapper<ClanZakonaDTO, ClanZakona
     @Named("zakonId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "naziv", source = "naziv")
     ZakonDTO toDtoZakonId(Zakon zakon);
 }

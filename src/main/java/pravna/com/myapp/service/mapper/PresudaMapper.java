@@ -26,15 +26,37 @@ public interface PresudaMapper extends EntityMapper<PresudaDTO, Presuda> {
     @Named("radnjaPresudeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "vremeRadnje", source = "vremeRadnje")
+    @Mapping(target = "mestoRadnje", source = "mestoRadnje")
+    @Mapping(target = "bitneNapomene", source = "bitneNapomene")
+    @Mapping(target = "mestoSmrti", source = "mestoSmrti")
+    @Mapping(target = "vremeSmrti", source = "vremeSmrti")
     RadnjaPresudeDTO toDtoRadnjaPresudeId(RadnjaPresude radnjaPresude);
 
     @Named("optuzeniId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "ime", source = "ime")
+    @Mapping(target = "jmbg", source = "jmbg")
+    @Mapping(target = "imeOca", source = "imeOca")
+    @Mapping(target = "imeMajke", source = "imeMajke")
+    @Mapping(target = "pol", source = "pol")
+    @Mapping(target = "datumRodjenja", source = "datumRodjenja")
+    @Mapping(target = "mestoRodjenja", source = "mestoRodjenja")
+    @Mapping(target = "drzavaRodjenja", source = "drzavaRodjenja")
+    @Mapping(target = "prebivaliste", source = "prebivaliste")
+    @Mapping(target = "bracniStatus", source = "bracniStatus")
+    @Mapping(target = "brojDece", source = "brojDece")
+    @Mapping(target = "brojMaloletneDece", source = "brojMaloletneDece")
+    @Mapping(target = "imovinskoStanje", source = "imovinskoStanje")
+    @Mapping(target = "obrazovanje", source = "obrazovanje")
+    @Mapping(target = "zaposlenje", source = "zaposlenje")
+    @Mapping(target = "mestoZaposlenja", source = "mestoZaposlenja")
     OptuzeniDTO toDtoOptuzeniId(Optuzeni optuzeni);
 
     @Named("osobaId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "ime", source = "ime")
     OsobaDTO toDtoOsobaId(Osoba osoba);
 }

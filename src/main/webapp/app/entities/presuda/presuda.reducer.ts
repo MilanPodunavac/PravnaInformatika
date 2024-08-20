@@ -17,7 +17,7 @@ const initialState: EntityState<IPresuda> = {
   updateSuccess: false,
 };
 
-const apiUrl = 'api/presudas';
+const apiUrl = 'api/xt/presudas';
 
 // Actions
 
@@ -64,6 +64,17 @@ export const deleteEntity = createAsyncThunk(
   async (id: string | number, thunkAPI) => {
     const requestUrl = `${apiUrl}/${id}`;
     return await axios.delete<IPresuda>(requestUrl);
+  },
+  { serializeError: serializeAxiosError }
+);
+
+// added methods
+
+export const createEntityFull = createAsyncThunk(
+  'presuda/create_entity_full',
+  async (entity: any, thunkAPI) => {
+    console.log(entity);
+    return axios.post<IPresuda>(`${apiUrl}/full`, entity);
   },
   { serializeError: serializeAxiosError }
 );

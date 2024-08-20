@@ -17,5 +17,10 @@ public interface PovredaMapper extends EntityMapper<PovredaDTO, Povreda> {
     @Named("radnjaPresudeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "vremeRadnje", source = "vremeRadnje")
+    @Mapping(target = "mestoRadnje", source = "mestoRadnje")
+    @Mapping(target = "bitneNapomene", source = "bitneNapomene")
+    @Mapping(target = "mestoSmrti", source = "mestoSmrti")
+    @Mapping(target = "vremeSmrti", source = "vremeSmrti")
     RadnjaPresudeDTO toDtoRadnjaPresudeId(RadnjaPresude radnjaPresude);
 }
