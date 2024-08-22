@@ -2,6 +2,7 @@ package pravna.com.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -96,7 +97,12 @@ class PovredaResourceIT {
         // Create the Povreda
         PovredaDTO povredaDTO = povredaMapper.toDto(povreda);
         restPovredaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(povredaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
+            )
             .andExpect(status().isCreated());
 
         // Validate the Povreda in the database
@@ -118,7 +124,12 @@ class PovredaResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restPovredaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(povredaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Povreda in the database
@@ -136,7 +147,12 @@ class PovredaResourceIT {
         PovredaDTO povredaDTO = povredaMapper.toDto(povreda);
 
         restPovredaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(povredaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Povreda> povredaList = povredaRepository.findAll();
@@ -153,7 +169,12 @@ class PovredaResourceIT {
         PovredaDTO povredaDTO = povredaMapper.toDto(povreda);
 
         restPovredaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(povredaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Povreda> povredaList = povredaRepository.findAll();
@@ -170,7 +191,12 @@ class PovredaResourceIT {
         PovredaDTO povredaDTO = povredaMapper.toDto(povreda);
 
         restPovredaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(povredaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Povreda> povredaList = povredaRepository.findAll();
@@ -230,6 +256,7 @@ class PovredaResourceIT {
         restPovredaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, povredaDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
             )
@@ -256,6 +283,7 @@ class PovredaResourceIT {
         restPovredaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, povredaDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
             )
@@ -278,6 +306,7 @@ class PovredaResourceIT {
         restPovredaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
             )
@@ -298,7 +327,12 @@ class PovredaResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPovredaMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(povredaDTO)))
+            .perform(
+                put(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Povreda in the database
@@ -322,6 +356,7 @@ class PovredaResourceIT {
         restPovredaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedPovreda.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedPovreda))
             )
@@ -352,6 +387,7 @@ class PovredaResourceIT {
         restPovredaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedPovreda.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedPovreda))
             )
@@ -378,6 +414,7 @@ class PovredaResourceIT {
         restPovredaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, povredaDTO.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
             )
@@ -400,6 +437,7 @@ class PovredaResourceIT {
         restPovredaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
             )
@@ -421,7 +459,10 @@ class PovredaResourceIT {
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPovredaMockMvc
             .perform(
-                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(povredaDTO))
+                patch(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(povredaDTO))
             )
             .andExpect(status().isMethodNotAllowed());
 
@@ -439,7 +480,7 @@ class PovredaResourceIT {
 
         // Delete the povreda
         restPovredaMockMvc
-            .perform(delete(ENTITY_API_URL_ID, povreda.getId()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, povreda.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

@@ -1,7 +1,6 @@
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import sinon from 'sinon';
-import { Storage } from 'react-jhipster';
 import configureStore from 'redux-mock-store';
 
 import authentication, {
@@ -9,10 +8,9 @@ import authentication, {
   getAccount,
   authenticate,
   login,
+  logoutServer,
   clearAuthentication,
   logout,
-  logoutSession,
-  clearAuthToken,
   authError,
   clearAuth,
   initialState,
@@ -112,7 +110,7 @@ describe('Authentication reducer tests', () => {
 
   describe('Other cases', () => {
     it('should properly reset the current state when a logout is requested', () => {
-      const toTest = authentication(undefined, logoutSession());
+      const toTest = authentication(undefined, { type: logoutServer.fulfilled.type });
       expect(toTest).toMatchObject({
         loading: false,
         isAuthenticated: false,
@@ -183,9 +181,23 @@ describe('Authentication reducer tests', () => {
     });
 
     it('dispatches LOGOUT actions', async () => {
-      const expectedActions = [logoutSession()];
+      axios.post = sinon.stub().returns(Promise.resolve({}));
+      const expectedActions = [
+        {
+          type: logoutServer.pending.type,
+        },
+        {
+          type: logoutServer.fulfilled.type,
+          payload: {},
+        },
+        {
+          type: getAccount.pending.type,
+        },
+      ];
       await store.dispatch(logout());
       expect(store.getActions()[0]).toMatchObject(expectedActions[0]);
+      expect(store.getActions()[1]).toMatchObject(expectedActions[1]);
+      expect(store.getActions()[2]).toMatchObject(expectedActions[2]);
     });
 
     it('dispatches CLEAR_AUTH actions', async () => {
@@ -195,7 +207,7 @@ describe('Authentication reducer tests', () => {
     });
 
     it('dispatches LOGIN, GET_SESSION and SET_LOCALE success and request actions', async () => {
-      const loginResponse = { headers: { authorization: 'auth' } };
+      const loginResponse = { value: 'any' };
       axios.post = sinon.stub().returns(Promise.resolve(loginResponse));
       const expectedActions = [
         {
@@ -213,37 +225,6 @@ describe('Authentication reducer tests', () => {
       expect(store.getActions()[0]).toMatchObject(expectedActions[0]);
       expect(store.getActions()[1]).toMatchObject(expectedActions[1]);
       expect(store.getActions()[2]).toMatchObject(expectedActions[2]);
-    });
-  });
-  describe('clearAuthToken', () => {
-    let store;
-    beforeEach(() => {
-      const mockStore = configureStore([thunk]);
-      store = mockStore({ authentication: { account: { langKey: 'en' } } });
-    });
-    it('clears the session token on clearAuthToken', async () => {
-      const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
-      const loginResponse = { headers: { authorization: 'Bearer TestToken' } };
-      axios.post = sinon.stub().returns(Promise.resolve(loginResponse));
-
-      await store.dispatch(login('test', 'test'));
-      expect(Storage.session.get(AUTH_TOKEN_KEY)).toBe('TestToken');
-      expect(Storage.local.get(AUTH_TOKEN_KEY)).toBe(undefined);
-      clearAuthToken();
-      expect(Storage.session.get(AUTH_TOKEN_KEY)).toBe(undefined);
-      expect(Storage.local.get(AUTH_TOKEN_KEY)).toBe(undefined);
-    });
-    it('clears the local storage token on clearAuthToken', async () => {
-      const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
-      const loginResponse = { headers: { authorization: 'Bearer TestToken' } };
-      axios.post = sinon.stub().returns(Promise.resolve(loginResponse));
-
-      await store.dispatch(login('user', 'user', true));
-      expect(Storage.session.get(AUTH_TOKEN_KEY)).toBe(undefined);
-      expect(Storage.local.get(AUTH_TOKEN_KEY)).toBe('TestToken');
-      clearAuthToken();
-      expect(Storage.session.get(AUTH_TOKEN_KEY)).toBe(undefined);
-      expect(Storage.local.get(AUTH_TOKEN_KEY)).toBe(undefined);
     });
   });
 });

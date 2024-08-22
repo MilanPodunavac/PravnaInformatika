@@ -2,6 +2,7 @@ package pravna.com.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -107,7 +108,12 @@ class KaznaResourceIT {
         // Create the Kazna
         KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
         restKaznaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
+            )
             .andExpect(status().isCreated());
 
         // Validate the Kazna in the database
@@ -132,7 +138,12 @@ class KaznaResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restKaznaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Kazna in the database
@@ -150,7 +161,12 @@ class KaznaResourceIT {
         KaznaDTO kaznaDTO = kaznaMapper.toDto(kazna);
 
         restKaznaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Kazna> kaznaList = kaznaRepository.findAll();
@@ -222,6 +238,7 @@ class KaznaResourceIT {
         restKaznaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, kaznaDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
@@ -251,6 +268,7 @@ class KaznaResourceIT {
         restKaznaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, kaznaDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
@@ -273,6 +291,7 @@ class KaznaResourceIT {
         restKaznaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
@@ -293,7 +312,12 @@ class KaznaResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restKaznaMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
+            .perform(
+                put(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Kazna in the database
@@ -317,6 +341,7 @@ class KaznaResourceIT {
         restKaznaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedKazna.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedKazna))
             )
@@ -356,6 +381,7 @@ class KaznaResourceIT {
         restKaznaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedKazna.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedKazna))
             )
@@ -385,6 +411,7 @@ class KaznaResourceIT {
         restKaznaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, kaznaDTO.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
@@ -407,6 +434,7 @@ class KaznaResourceIT {
         restKaznaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
             )
@@ -427,7 +455,12 @@ class KaznaResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restKaznaMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(kaznaDTO)))
+            .perform(
+                patch(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(kaznaDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Kazna in the database
@@ -444,7 +477,7 @@ class KaznaResourceIT {
 
         // Delete the kazna
         restKaznaMockMvc
-            .perform(delete(ENTITY_API_URL_ID, kazna.getId()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, kazna.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

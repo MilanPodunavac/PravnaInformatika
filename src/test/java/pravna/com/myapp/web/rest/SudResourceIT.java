@@ -2,6 +2,7 @@ package pravna.com.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -83,7 +84,9 @@ class SudResourceIT {
         // Create the Sud
         SudDTO sudDTO = sudMapper.toDto(sud);
         restSudMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
+            .perform(
+                post(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO))
+            )
             .andExpect(status().isCreated());
 
         // Validate the Sud in the database
@@ -104,7 +107,9 @@ class SudResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restSudMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
+            .perform(
+                post(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Sud in the database
@@ -122,7 +127,9 @@ class SudResourceIT {
         SudDTO sudDTO = sudMapper.toDto(sud);
 
         restSudMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
+            .perform(
+                post(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Sud> sudList = sudRepository.findAll();
@@ -139,7 +146,9 @@ class SudResourceIT {
         SudDTO sudDTO = sudMapper.toDto(sud);
 
         restSudMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
+            .perform(
+                post(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Sud> sudList = sudRepository.findAll();
@@ -197,6 +206,7 @@ class SudResourceIT {
         restSudMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, sudDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
@@ -222,6 +232,7 @@ class SudResourceIT {
         restSudMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, sudDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
@@ -244,6 +255,7 @@ class SudResourceIT {
         restSudMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
@@ -264,7 +276,9 @@ class SudResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSudMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO)))
+            .perform(
+                put(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Sud in the database
@@ -286,6 +300,7 @@ class SudResourceIT {
         restSudMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedSud.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedSud))
             )
@@ -315,6 +330,7 @@ class SudResourceIT {
         restSudMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedSud.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedSud))
             )
@@ -340,6 +356,7 @@ class SudResourceIT {
         restSudMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, sudDTO.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
@@ -362,6 +379,7 @@ class SudResourceIT {
         restSudMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(sudDTO))
             )
@@ -382,7 +400,12 @@ class SudResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSudMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(sudDTO)))
+            .perform(
+                patch(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(sudDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Sud in the database
@@ -398,7 +421,9 @@ class SudResourceIT {
         int databaseSizeBeforeDelete = sudRepository.findAll().size();
 
         // Delete the sud
-        restSudMockMvc.perform(delete(ENTITY_API_URL_ID, sud.getId()).accept(MediaType.APPLICATION_JSON)).andExpect(status().isNoContent());
+        restSudMockMvc
+            .perform(delete(ENTITY_API_URL_ID, sud.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
         List<Sud> sudList = sudRepository.findAll();

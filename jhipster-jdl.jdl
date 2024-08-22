@@ -4,7 +4,7 @@ application {
     baseName pravnaInformatika
     applicationType monolith
     packageName pravna.com.myapp
-    authenticationType jwt
+    authenticationType session
     databaseType mongodb
     devDatabaseType h2Disk
     clientFramework react
@@ -149,7 +149,7 @@ enum Pol {
 enum BracniStatus {
 	VAN_BRAKA ("Neoženjen/Neudata"),
     U_BRAKU ("Oženjen/Udata"),
-    PREKINUT_BRAK ("Razveden(a)"),
+    PREKINUT_BRAK ("Razveden/Razvedena"),
     SMRT_U_BRAKU ("Udovac/Udovica")
 }
 
@@ -171,7 +171,7 @@ enum TipKazne {
 	ZATVORSKA_KAZNA ("Zatvorska kazna"),
     USLOVNA_KAZNA ("Uslovna kazna"),
     NOVCANA_KAZNA ("Novčana kazna"),
-    ODUZIMANJE_IMOVINE ("Oduzimanje imovine")
+    IMOVINSKA_KAZNA ("Imovinska kazna")
 }
 
 enum TipSuda {

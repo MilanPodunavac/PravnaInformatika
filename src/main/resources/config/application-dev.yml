@@ -66,17 +66,13 @@ jhipster:
     allowed-origin-patterns: 'https://*.githubpreview.dev'
     allowed-methods: '*'
     allowed-headers: '*'
-    exposed-headers: 'Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params'
+    exposed-headers: 'Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params'
     allow-credentials: true
     max-age: 1800
   security:
-    authentication:
-      jwt:
-        # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: YzExN2Q1MWM4ZDZmMzNiMWMzODFmOGYzN2E4MGNiMGJkZDE2YzRkNTJhNTg4YWQ3N2Q4MWNlOTBkMzVkNjZmOWYwMDBmYTk1ZGFiNWQ3MTZlYmJjYmEwNjMyMjg5Y2VmYTJmNjkyNWJiNjg1OGM0YjFmNjlhYWViMWQ1MmIzNmY=
-        # Token is valid 24 hours
-        token-validity-in-seconds: 86400
-        token-validity-in-seconds-for-remember-me: 2592000
+    remember-me:
+      # security key (this key should be unique for your application, and kept secret)
+      key: 2432ce40ecc5d6fa6d5fbe1e706d5c198fa9664d3777a6f564b607d8d3866f8d467bfaa49acbac93b01bdaa93b1d35704016
   mail: # specific JHipster mail property, for standard properties see MailProperties
     base-url: http://127.0.0.1:8081
   logging:

@@ -2,6 +2,7 @@ package pravna.com.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -162,7 +163,12 @@ class OptuzeniResourceIT {
         // Create the Optuzeni
         OptuzeniDTO optuzeniDTO = optuzeniMapper.toDto(optuzeni);
         restOptuzeniMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(optuzeniDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
+            )
             .andExpect(status().isCreated());
 
         // Validate the Optuzeni in the database
@@ -197,7 +203,12 @@ class OptuzeniResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restOptuzeniMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(optuzeniDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Optuzeni in the database
@@ -215,7 +226,12 @@ class OptuzeniResourceIT {
         OptuzeniDTO optuzeniDTO = optuzeniMapper.toDto(optuzeni);
 
         restOptuzeniMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(optuzeniDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Optuzeni> optuzeniList = optuzeniRepository.findAll();
@@ -232,7 +248,12 @@ class OptuzeniResourceIT {
         OptuzeniDTO optuzeniDTO = optuzeniMapper.toDto(optuzeni);
 
         restOptuzeniMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(optuzeniDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Optuzeni> optuzeniList = optuzeniRepository.findAll();
@@ -334,6 +355,7 @@ class OptuzeniResourceIT {
         restOptuzeniMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, optuzeniDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
             )
@@ -373,6 +395,7 @@ class OptuzeniResourceIT {
         restOptuzeniMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, optuzeniDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
             )
@@ -395,6 +418,7 @@ class OptuzeniResourceIT {
         restOptuzeniMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
             )
@@ -415,7 +439,12 @@ class OptuzeniResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOptuzeniMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(optuzeniDTO)))
+            .perform(
+                put(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Optuzeni in the database
@@ -448,6 +477,7 @@ class OptuzeniResourceIT {
         restOptuzeniMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedOptuzeni.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedOptuzeni))
             )
@@ -507,6 +537,7 @@ class OptuzeniResourceIT {
         restOptuzeniMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedOptuzeni.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedOptuzeni))
             )
@@ -546,6 +577,7 @@ class OptuzeniResourceIT {
         restOptuzeniMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, optuzeniDTO.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
             )
@@ -568,6 +600,7 @@ class OptuzeniResourceIT {
         restOptuzeniMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
             )
@@ -589,7 +622,10 @@ class OptuzeniResourceIT {
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOptuzeniMockMvc
             .perform(
-                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
+                patch(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(optuzeniDTO))
             )
             .andExpect(status().isMethodNotAllowed());
 
@@ -607,7 +643,7 @@ class OptuzeniResourceIT {
 
         // Delete the optuzeni
         restOptuzeniMockMvc
-            .perform(delete(ENTITY_API_URL_ID, optuzeni.getId()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, optuzeni.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

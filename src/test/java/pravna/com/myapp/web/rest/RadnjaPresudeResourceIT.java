@@ -2,6 +2,7 @@ package pravna.com.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -104,7 +105,10 @@ class RadnjaPresudeResourceIT {
         RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(radnjaPresude);
         restRadnjaPresudeMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isCreated());
 
@@ -130,7 +134,10 @@ class RadnjaPresudeResourceIT {
         // An entity with an existing ID cannot be created, so this API call must fail
         restRadnjaPresudeMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -150,7 +157,10 @@ class RadnjaPresudeResourceIT {
 
         restRadnjaPresudeMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -169,7 +179,10 @@ class RadnjaPresudeResourceIT {
 
         restRadnjaPresudeMockMvc
             .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isBadRequest());
 
@@ -239,6 +252,7 @@ class RadnjaPresudeResourceIT {
         restRadnjaPresudeMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, radnjaPresudeDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
@@ -267,6 +281,7 @@ class RadnjaPresudeResourceIT {
         restRadnjaPresudeMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, radnjaPresudeDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
@@ -289,6 +304,7 @@ class RadnjaPresudeResourceIT {
         restRadnjaPresudeMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
@@ -310,7 +326,10 @@ class RadnjaPresudeResourceIT {
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRadnjaPresudeMockMvc
             .perform(
-                put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
+                put(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
             .andExpect(status().isMethodNotAllowed());
 
@@ -335,6 +354,7 @@ class RadnjaPresudeResourceIT {
         restRadnjaPresudeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedRadnjaPresude.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedRadnjaPresude))
             )
@@ -372,6 +392,7 @@ class RadnjaPresudeResourceIT {
         restRadnjaPresudeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedRadnjaPresude.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedRadnjaPresude))
             )
@@ -400,6 +421,7 @@ class RadnjaPresudeResourceIT {
         restRadnjaPresudeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, radnjaPresudeDTO.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
@@ -422,6 +444,7 @@ class RadnjaPresudeResourceIT {
         restRadnjaPresudeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
@@ -444,6 +467,7 @@ class RadnjaPresudeResourceIT {
         restRadnjaPresudeMockMvc
             .perform(
                 patch(ENTITY_API_URL)
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(radnjaPresudeDTO))
             )
@@ -463,7 +487,7 @@ class RadnjaPresudeResourceIT {
 
         // Delete the radnjaPresude
         restRadnjaPresudeMockMvc
-            .perform(delete(ENTITY_API_URL_ID, radnjaPresude.getId()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, radnjaPresude.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

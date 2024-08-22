@@ -2,7 +2,7 @@
   "generator-jhipster": {
     "applicationIndex": 0,
     "applicationType": "monolith",
-    "authenticationType": "jwt",
+    "authenticationType": "session",
     "baseName": "pravnaInformatika",
     "blueprints": [],
     "buildTool": "maven",
@@ -36,6 +36,7 @@
     "pages": [],
     "prodDatabaseType": "mongodb",
     "reactive": false,
+    "rememberMeKey": "2432ce40ecc5d6fa6d5fbe1e706d5c198fa9664d3777a6f564b607d8d3866f8d467bfaa49acbac93b01bdaa93b1d35704016",
     "searchEngine": false,
     "serverPort": "8081",
     "serviceDiscoveryType": false,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
@@ -22,6 +22,8 @@ import { Pol } from 'app/shared/model/enumerations/pol.model';
 import { BracniStatus } from 'app/shared/model/enumerations/bracni-status.model';
 import { ImovinskoStanje } from 'app/shared/model/enumerations/imovinsko-stanje.model';
 import { TipObrazovanja } from 'app/shared/model/enumerations/tip-obrazovanja.model';
+import { chatExtractPresuda } from 'app/modules/chat/chat';
+import pdfToText from 'react-pdftotext';
 
 export const PresudaUpdate = () => {
   const dispatch = useAppDispatch();
@@ -44,6 +46,8 @@ export const PresudaUpdate = () => {
   const bracniStatusValues = Object.keys(BracniStatus);
   const imovinskoStanjeValues = Object.keys(ImovinskoStanje);
   const tipObrazovanjaValues = Object.keys(TipObrazovanja);
+
+  const [tekstInput, setTekstInput] = useState('');
 
   const handleClose = () => {
     navigate('/presuda');
@@ -124,6 +128,22 @@ export const PresudaUpdate = () => {
           branilac: presudaEntity?.branilac?.id,
         };
 
+  function extractText(event: ChangeEvent<HTMLInputElement>): void {
+    const file = event.target.files[0];
+    pdfToText(file)
+      .then(text => handlePresudaText(text))
+      .catch(error => console.error(error));
+  }
+
+  const handlePresudaText = async (text: string) => {
+    console.log(text);
+    var presuda = JSON.parse(await chatExtractPresuda(text));
+    console.log(presuda);
+    console.log(presuda.godina);
+    console.log(presuda.sud.naziv);
+    setTekstInput(presuda);
+  };
+
   return (
     <div>
       <Row className="justify-content-center">
@@ -133,6 +153,7 @@ export const PresudaUpdate = () => {
           </h2>
         </Col>
       </Row>
+      {isNew && <input type="file" accept="application/pdf" onChange={extractText} />}
       <Row className="justify-content-center">
         <Col md="8">
           {loading ? (
@@ -155,6 +176,7 @@ export const PresudaUpdate = () => {
                 name="tekst"
                 data-cy="tekst"
                 type="text"
+                value={tekstInput}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.datum')}

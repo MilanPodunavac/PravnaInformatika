@@ -3,6 +3,7 @@ package pravna.com.myapp.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import pravna.com.myapp.IntegrationTest;
 import pravna.com.myapp.config.Constants;
+import pravna.com.myapp.domain.PersistentToken;
 import pravna.com.myapp.domain.User;
+import pravna.com.myapp.repository.PersistentTokenRepository;
 import pravna.com.myapp.repository.UserRepository;
 import pravna.com.myapp.service.dto.AdminUserDTO;
 import tech.jhipster.security.RandomUtil;
@@ -38,6 +41,9 @@ class UserServiceIT {
     private static final String DEFAULT_LANGKEY = "dummy";
 
     @Autowired
+    private PersistentTokenRepository persistentTokenRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -47,6 +53,7 @@ class UserServiceIT {
 
     @BeforeEach
     public void init() {
+        persistentTokenRepository.deleteAll();
         userRepository.deleteAll();
         user = new User();
         user.setLogin(DEFAULT_LOGIN);
@@ -57,6 +64,18 @@ class UserServiceIT {
         user.setLastName(DEFAULT_LASTNAME);
         user.setImageUrl(DEFAULT_IMAGEURL);
         user.setLangKey(DEFAULT_LANGKEY);
+    }
+
+    @Test
+    void testRemoveOldPersistentTokens() {
+        userRepository.save(user);
+        int existingCount = persistentTokenRepository.findByUser(user).size();
+        LocalDate today = LocalDate.now();
+        generateUserToken(user, "1111-1111", today);
+        generateUserToken(user, "2222-2222", today.minusDays(32));
+        assertThat(persistentTokenRepository.findByUser(user)).hasSize(existingCount + 2);
+        userService.removeOldPersistentTokens();
+        assertThat(persistentTokenRepository.findByUser(user)).hasSize(existingCount + 1);
     }
 
     @Test
@@ -157,5 +176,16 @@ class UserServiceIT {
         userService.removeNotActivatedUsers();
         Optional<User> maybeDbUser = userRepository.findById(dbUser.getId());
         assertThat(maybeDbUser).contains(dbUser);
+    }
+
+    private void generateUserToken(User user, String tokenSeries, LocalDate localDate) {
+        PersistentToken token = new PersistentToken();
+        token.setSeries(tokenSeries);
+        token.setUser(user);
+        token.setTokenValue(tokenSeries + "-data");
+        token.setTokenDate(localDate);
+        token.setIpAddress("127.0.0.1");
+        token.setUserAgent("Test agent");
+        persistentTokenRepository.save(token);
     }
 }

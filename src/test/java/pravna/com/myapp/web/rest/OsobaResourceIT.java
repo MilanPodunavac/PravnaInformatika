@@ -2,6 +2,7 @@ package pravna.com.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -79,7 +80,12 @@ class OsobaResourceIT {
         // Create the Osoba
         OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
         restOsobaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
+            )
             .andExpect(status().isCreated());
 
         // Validate the Osoba in the database
@@ -99,7 +105,12 @@ class OsobaResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restOsobaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Osoba in the database
@@ -117,7 +128,12 @@ class OsobaResourceIT {
         OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
 
         restOsobaMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
+            )
             .andExpect(status().isBadRequest());
 
         List<Osoba> osobaList = osobaRepository.findAll();
@@ -173,6 +189,7 @@ class OsobaResourceIT {
         restOsobaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, osobaDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
@@ -197,6 +214,7 @@ class OsobaResourceIT {
         restOsobaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, osobaDTO.getId())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
@@ -219,6 +237,7 @@ class OsobaResourceIT {
         restOsobaMockMvc
             .perform(
                 put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
@@ -239,7 +258,12 @@ class OsobaResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOsobaMockMvc
-            .perform(put(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
+            .perform(
+                put(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Osoba in the database
@@ -263,6 +287,7 @@ class OsobaResourceIT {
         restOsobaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedOsoba.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedOsoba))
             )
@@ -291,6 +316,7 @@ class OsobaResourceIT {
         restOsobaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedOsoba.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(partialUpdatedOsoba))
             )
@@ -315,6 +341,7 @@ class OsobaResourceIT {
         restOsobaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, osobaDTO.getId())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
@@ -337,6 +364,7 @@ class OsobaResourceIT {
         restOsobaMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                    .with(csrf())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
             )
@@ -357,7 +385,12 @@ class OsobaResourceIT {
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOsobaMockMvc
-            .perform(patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(osobaDTO)))
+            .perform(
+                patch(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
+            )
             .andExpect(status().isMethodNotAllowed());
 
         // Validate the Osoba in the database
@@ -374,7 +407,7 @@ class OsobaResourceIT {
 
         // Delete the osoba
         restOsobaMockMvc
-            .perform(delete(ENTITY_API_URL_ID, osoba.getId()).accept(MediaType.APPLICATION_JSON))
+            .perform(delete(ENTITY_API_URL_ID, osoba.getId()).with(csrf()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
