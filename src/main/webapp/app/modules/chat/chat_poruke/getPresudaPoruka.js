@@ -129,7 +129,7 @@ export const getPresudaSema = {
   parameters: {
     type: 'object',
     properties: {
-      id: {
+      kod: {
         type: 'string',
         description: 'Identifikacioni broj presude.',
       },
@@ -191,7 +191,7 @@ export const getPresudaSema = {
         type: 'object',
         description: 'Optužnica podneta prema optuženom.',
         properties: {
-          id: {
+          kod: {
             type: 'string',
             description: 'Identifikacioni broj optužnice.',
           },
@@ -573,7 +573,7 @@ export const getPresudaSema = {
             },
           },
         },
-        required: ['ime', 'pol', 'bracni_status', 'drzavljanstvo', 'imovinsko_stanje', 'obrazovanje'],
+        required: ['ime', 'pol', 'drzavljanstvo', 'bracni_status', 'imovinsko_stanje', 'obrazovanje'],
       },
       clanovi_zakona: {
         type: 'array',
@@ -636,7 +636,7 @@ export const getPresudaSema = {
       },
     },
     required: [
-      'id',
+      'kod',
       'datum',
       'datum_objave',
       'tip',

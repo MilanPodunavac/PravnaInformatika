@@ -24,6 +24,7 @@ import { ImovinskoStanje } from 'app/shared/model/enumerations/imovinsko-stanje.
 import { TipObrazovanja } from 'app/shared/model/enumerations/tip-obrazovanja.model';
 import { chatExtractPresuda } from 'app/modules/chat/chat';
 import pdfToText from 'react-pdftotext';
+import { set } from 'lodash';
 
 export const PresudaUpdate = () => {
   const dispatch = useAppDispatch();
@@ -48,6 +49,67 @@ export const PresudaUpdate = () => {
   const tipObrazovanjaValues = Object.keys(TipObrazovanja);
 
   const [tekstInput, setTekstInput] = useState('');
+  const [kodInput, setKodInput] = useState('');
+  const [datumInput, setDatumInput] = useState('');
+  const [datumPritvoraInput, setDatumPritvoraInput] = useState('');
+  const [tipInput, setTipInput] = useState('');
+  const [brojInput, setBrojInput] = useState('');
+  const [godinaInput, setGodinaInput] = useState('');
+  const [pokusajInput, setPokusajInput] = useState(false);
+  const [krivicaInput, setKrivicaInput] = useState(false);
+  const [nacinInput, setNacinInput] = useState('');
+
+  const [sudNazivInput, setSudNazivInput] = useState('');
+  const [mestoSudaNazivInput, setMestoSudaNazivInput] = useState('');
+
+  const [optuznicaKodInput, setOptuznicaKodInput] = useState('');
+  const [optuznicaDatumInput, setOptuznicaDatumInput] = useState('');
+  const [optuznicaUstanovaInput, setOptuznicaUstanovaInput] = useState('');
+
+  const [osteceniImeInput, setOsteceniImeInput] = useState('');
+  const [osteceniPolInput, setOsteceniPolInput] = useState('');
+  const [vremeRadnjeInput, setVremeRadnjeInput] = useState('');
+  const [mestoRadnjeInput, setMestoRadnjeInput] = useState('');
+  const [vremeSmrtiInput, setVremeSmrtiInput] = useState('');
+  const [mestoSmrtiInput, setMestoSmrtiInput] = useState('');
+  const [povredeInput, setPovredeInput] = useState([]);
+
+  const [optuzeniImeInput, setOptuzeniImeInput] = useState('');
+  const [optuzeniJmbgInput, setOptuzeniJmbgInput] = useState('');
+  const [optuzeniImeOcaInput, setOptuzeniImeOcaInput] = useState('');
+  const [optuzeniImeMajkeInput, setOptuzeniImeMajkeInput] = useState('');
+  const [optuzeniPolInput, setOptuzeniPolInput] = useState('');
+  const [optuzeniDatumRodjenjaInput, setOptuzeniDatumRodjenjaInput] = useState('');
+  const [optuzeniMestoRodjenjaInput, setOptuzeniMestoRodjenjaInput] = useState('');
+  const [optuzeniDrzavaRodjenjaInput, setOptuzeniDrzavaRodjenjaInput] = useState('');
+  const [optuzeniPrebivalisteInput, setOptuzeniPrebivalisteInput] = useState('');
+  const [optuzeniDrzavljanstvoInput, setOptuzeniDrzavljanstvoInput] = useState('');
+  const [optuzeniBracniStatusInput, setOptuzeniBracniStatusInput] = useState('');
+  const [optuzeniBrojDeceInput, setOptuzeniBrojDeceInput] = useState('');
+  const [optuzeniBrojMaloletneDeceInput, setOptuzeniBrojMaloletneDeceInput] = useState('');
+  const [optuzeniImovinskoStanjeInput, setOptuzeniImovinskoStanjeInput] = useState('');
+  const [optuzeniObrazovanjeInput, setOptuzeniObrazovanjeInput] = useState('');
+  const [optuzeniZaposlenjeInput, setOptuzeniZaposlenjeInput] = useState('');
+  const [optuzeniMestoZaposlenjeInput, setOptuzeniMestoZaposlenjaInput] = useState('');
+  const [optuzeniPresudeInput, setOptuzeniPresudeInput] = useState([]);
+
+  const [clanoviZakonaInput, setClanoviZakonaInput] = useState([]);
+
+  const [kazneInput, setKazneInput] = useState([]);
+
+  const [sudijaImeInput, setSudijaImeInput] = useState('');
+  const [sudijaPolInput, setSudijaPolInput] = useState('');
+
+  const [veceInput, setVeceInput] = useState([]);
+
+  const [zapisnicarImeInput, setZapisnicarImeInput] = useState('');
+  const [zapisnicarPolInput, setZapisnicarPolInput] = useState('');
+
+  const [tuzilacImeInput, setTuzilacImeInput] = useState('');
+  const [tuzilacPolInput, setTuzilacPolInput] = useState('');
+
+  const [branilacImeInput, setBranilacImeInput] = useState('');
+  const [branilacPolInput, setBranilacPolInput] = useState('');
 
   const handleClose = () => {
     navigate('/presuda');
@@ -141,7 +203,71 @@ export const PresudaUpdate = () => {
     console.log(presuda);
     console.log(presuda.godina);
     console.log(presuda.sud.naziv);
-    setTekstInput(presuda);
+    insertDataStates(presuda);
+  };
+
+  const insertDataStates = (presuda: any) => {
+    setKodInput(presuda.kod);
+    setTipInput(presuda.tip);
+    setBrojInput(presuda.broj);
+    setGodinaInput(presuda.godina);
+    setDatumInput(presuda.datum);
+    setDatumPritvoraInput(presuda.datum_pritvora);
+    setPokusajInput(presuda.pokusaj);
+    setKrivicaInput(presuda.krivica);
+    setNacinInput(presuda.nacin);
+
+    setSudNazivInput(presuda.sud.naziv);
+    setMestoSudaNazivInput(presuda.sud.mesto);
+
+    setOptuznicaKodInput(presuda.optuznica.kod);
+    setOptuznicaDatumInput(presuda.optuznica.datum);
+    setOptuznicaUstanovaInput(presuda.optuznica.ustanova ?? '');
+
+    setSudijaImeInput(presuda.sudija.ime);
+    setSudijaPolInput(presuda.sudija.pol);
+
+    setVeceInput(presuda.vece);
+
+    setZapisnicarImeInput(presuda.zapisnicar.ime);
+    setZapisnicarPolInput(presuda.zapisnicar.pol);
+
+    setTuzilacImeInput(presuda.tuzilac.ime);
+    setTuzilacPolInput(presuda.tuzilac.pol);
+
+    setBranilacImeInput(presuda.branilac.ime);
+    setBranilacPolInput(presuda.branilac.pol);
+
+    setOsteceniImeInput(presuda.radnja.osteceni.ime);
+    setOsteceniPolInput(presuda.radnja.osteceni.pol);
+    setVremeRadnjeInput(presuda.radnja.vreme_radnje);
+    setMestoRadnjeInput(presuda.radnja.mesto_radnje);
+    setVremeSmrtiInput(presuda.radnja.vreme_smrti ?? '');
+    setMestoSmrtiInput(presuda.radnja.mesto_smrti ?? '');
+    setPovredeInput(presuda.radnja.povrede);
+
+    setOptuzeniImeInput(presuda.optuzeni.ime);
+    setOptuzeniJmbgInput(presuda.optuzeni.jmbg ?? '1111111111111');
+    setOptuzeniImeOcaInput(presuda.optuzeni.ime_oca ?? '');
+    setOptuzeniImeMajkeInput(presuda.optuzeni.ime_majke ?? '');
+    setOptuzeniPolInput(presuda.optuzeni.pol);
+    setOptuzeniDatumRodjenjaInput(presuda.optuzeni.datum_rodjenja ?? '');
+    setOptuzeniMestoRodjenjaInput(presuda.optuzeni.mesto_rodjenja ?? '');
+    setOptuzeniDrzavaRodjenjaInput(presuda.optuzeni.drzava_rodjenja ?? '');
+    setOptuzeniPrebivalisteInput(presuda.optuzeni.prebivaliste ?? '');
+    setOptuzeniDrzavljanstvoInput(presuda.optuzeni.drzavljanstvo ?? '');
+    setOptuzeniBracniStatusInput(presuda.optuzeni.bracni_status);
+    setOptuzeniBrojDeceInput(presuda.optuzeni.broj_dece ?? 0);
+    setOptuzeniBrojMaloletneDeceInput(presuda.optuzeni.broj_maloletne_dece ?? 0);
+    setOptuzeniImovinskoStanjeInput(presuda.optuzeni.imovinsko_stanje);
+    setOptuzeniObrazovanjeInput(presuda.optuzeni.obrazovanje);
+    setOptuzeniZaposlenjeInput(presuda.optuzeni.zaposlenje ?? '');
+    setOptuzeniMestoZaposlenjaInput(presuda.optuzeni.mesto_zaposlenja ?? '');
+    setOptuzeniPresudeInput(presuda.optuzeni.presude);
+
+    setClanoviZakonaInput(presuda.clanovi_zakona);
+
+    setKazneInput(presuda.kazne);
   };
 
   return (
@@ -177,6 +303,7 @@ export const PresudaUpdate = () => {
                 data-cy="tekst"
                 type="text"
                 value={tekstInput}
+                onChange={e => setTekstInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.datum')}
@@ -187,6 +314,8 @@ export const PresudaUpdate = () => {
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
+                value={datumInput}
+                onChange={e => setDatumInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.datumObjave')}
@@ -194,6 +323,8 @@ export const PresudaUpdate = () => {
                 name="datumObjave"
                 data-cy="datumObjave"
                 type="date"
+                value={datumInput}
+                onChange={e => setDatumInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.datumPritvora')}
@@ -201,8 +332,18 @@ export const PresudaUpdate = () => {
                 name="datumPritvora"
                 data-cy="datumPritvora"
                 type="date"
+                value={datumPritvoraInput}
+                onChange={e => setDatumPritvoraInput(e.target.value)}
               />
-              <ValidatedField label={translate('pravnaInformatikaApp.presuda.tip')} id="presuda-tip" name="tip" data-cy="tip" type="select">
+              <ValidatedField
+                label={translate('pravnaInformatikaApp.presuda.tip')}
+                id="presuda-tip"
+                name="tip"
+                data-cy="tip"
+                type="select"
+                value={tipInput}
+                onChange={e => setTipInput(e.target.value)}
+              >
                 {tipPresudeValues.map(tipPresude => (
                   <option value={tipPresude} key={tipPresude}>
                     {translate('pravnaInformatikaApp.TipPresude.' + tipPresude)}
@@ -219,6 +360,8 @@ export const PresudaUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                   validate: v => isNumber(v) || translate('entity.validation.number'),
                 }}
+                value={brojInput}
+                onChange={e => setBrojInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.godina')}
@@ -230,6 +373,8 @@ export const PresudaUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                   validate: v => isNumber(v) || translate('entity.validation.number'),
                 }}
+                value={godinaInput}
+                onChange={e => setGodinaInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.optuznica')}
@@ -237,6 +382,8 @@ export const PresudaUpdate = () => {
                 name="optuznica"
                 data-cy="optuznica"
                 type="text"
+                value={optuznicaKodInput}
+                onChange={e => setOptuznicaKodInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.datumOptuznice')}
@@ -244,6 +391,8 @@ export const PresudaUpdate = () => {
                 name="datumOptuznice"
                 data-cy="datumOptuznice"
                 type="date"
+                value={optuznicaDatumInput}
+                onChange={e => setOptuznicaDatumInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.pokusaj')}
@@ -252,6 +401,8 @@ export const PresudaUpdate = () => {
                 data-cy="pokusaj"
                 check
                 type="checkbox"
+                checked={pokusajInput}
+                onChange={e => setPokusajInput(e.target.checked)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.krivica')}
@@ -260,6 +411,8 @@ export const PresudaUpdate = () => {
                 data-cy="krivica"
                 check
                 type="checkbox"
+                checked={krivicaInput}
+                onChange={e => setKrivicaInput(e.target.checked)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.nacin')}
@@ -267,6 +420,8 @@ export const PresudaUpdate = () => {
                 name="nacin"
                 data-cy="nacin"
                 type="select"
+                value={nacinInput}
+                onChange={e => setNacinInput(e.target.value)}
               >
                 {tipUbistvaValues.map(tipUbistva => (
                   <option value={tipUbistva} key={tipUbistva}>
@@ -301,6 +456,8 @@ export const PresudaUpdate = () => {
                   name="radnja.vremeRadnje"
                   data-cy="radnja.vremeRadnje"
                   type="date"
+                  value={vremeRadnjeInput}
+                  onChange={e => setVremeRadnjeInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -310,6 +467,8 @@ export const PresudaUpdate = () => {
                   name="radnja.mestoRadnje"
                   data-cy="radnja.mestoRadnje"
                   type="text"
+                  value={mestoRadnjeInput}
+                  onChange={e => setMestoRadnjeInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -328,6 +487,8 @@ export const PresudaUpdate = () => {
                   name="radnja.vremeSmrti"
                   data-cy="radnja.vremeSmrti"
                   type="date"
+                  value={vremeSmrtiInput}
+                  onChange={e => setVremeSmrtiInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -337,6 +498,8 @@ export const PresudaUpdate = () => {
                   name="radnja.mestoSmrti"
                   data-cy="radnja.mestoSmrti"
                   type="text"
+                  value={mestoSmrtiInput}
+                  onChange={e => setMestoSmrtiInput(e.target.value)}
                 />
               )}
               <FormText>
@@ -368,6 +531,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.ime"
                   data-cy="optuzeni.ime"
                   type="text"
+                  value={optuzeniImeInput}
+                  onChange={e => setOptuzeniImeInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -377,6 +542,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.jmbg"
                   data-cy="optuzeni.jmbg"
                   type="text"
+                  value={optuzeniJmbgInput}
+                  onChange={e => setOptuzeniJmbgInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -386,6 +553,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.imeOca"
                   data-cy="optuzeni.imeOca"
                   type="text"
+                  value={optuzeniImeOcaInput}
+                  onChange={e => setOptuzeniImeOcaInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -395,6 +564,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.imeMajke"
                   data-cy="optuzeni.imeMajke"
                   type="text"
+                  value={optuzeniImeMajkeInput}
+                  onChange={e => setOptuzeniImeMajkeInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -404,6 +575,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.pol"
                   data-cy="optuzeni.pol"
                   type="select"
+                  value={optuzeniPolInput}
+                  onChange={e => setOptuzeniPolInput(e.target.value)}
                 >
                   {polValues.map(pol => (
                     <option value={pol} key={pol}>
@@ -419,6 +592,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.datumRodjenja"
                   data-cy="optuzeni.datumRodjenja"
                   type="date"
+                  value={optuzeniDatumRodjenjaInput}
+                  onChange={e => setOptuzeniDatumRodjenjaInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -428,6 +603,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.mestoRodjenja"
                   data-cy="optuzeni.mestoRodjenja"
                   type="text"
+                  value={optuzeniMestoRodjenjaInput}
+                  onChange={e => setOptuzeniMestoRodjenjaInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -437,6 +614,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.drzavaRodjenja"
                   data-cy="optuzeni.drzavaRodjenja"
                   type="text"
+                  value={optuzeniDrzavaRodjenjaInput}
+                  onChange={e => setOptuzeniDrzavaRodjenjaInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -446,6 +625,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.prebivaliste"
                   data-cy="optuzeni.prebivaliste"
                   type="text"
+                  value={optuzeniPrebivalisteInput}
+                  onChange={e => setOptuzeniPrebivalisteInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -455,6 +636,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.bracniStatus"
                   data-cy="optuzeni.bracniStatus"
                   type="select"
+                  value={optuzeniBracniStatusInput}
+                  onChange={e => setOptuzeniBracniStatusInput(e.target.value)}
                 >
                   {bracniStatusValues.map(bracniStatus => (
                     <option value={bracniStatus} key={bracniStatus}>
@@ -470,6 +653,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.brojDece"
                   data-cy="optuzeni.brojDece"
                   type="text"
+                  value={optuzeniBrojDeceInput}
+                  onChange={e => setOptuzeniBrojDeceInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -479,6 +664,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.brojMaloletneDece"
                   data-cy="optuzeni.brojMaloletneDece"
                   type="text"
+                  value={optuzeniBrojMaloletneDeceInput}
+                  onChange={e => setOptuzeniBrojMaloletneDeceInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -488,6 +675,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.imovinskoStanje"
                   data-cy="optuzeni.imovinskoStanje"
                   type="select"
+                  value={optuzeniImovinskoStanjeInput}
+                  onChange={e => setOptuzeniImovinskoStanjeInput(e.target.value)}
                 >
                   {imovinskoStanjeValues.map(imovinskoStanje => (
                     <option value={imovinskoStanje} key={imovinskoStanje}>
@@ -503,6 +692,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.obrazovanje"
                   data-cy="optuzeni.obrazovanje"
                   type="select"
+                  value={optuzeniObrazovanjeInput}
+                  onChange={e => setOptuzeniObrazovanjeInput(e.target.value)}
                 >
                   {tipObrazovanjaValues.map(tipObrazovanja => (
                     <option value={tipObrazovanja} key={tipObrazovanja}>
@@ -521,6 +712,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.zaposlenje"
                   data-cy="optuzeni.zaposlenje"
                   type="text"
+                  value={optuzeniZaposlenjeInput}
+                  onChange={e => setOptuzeniZaposlenjeInput(e.target.value)}
                 />
               )}
               {isNew && (
@@ -530,6 +723,8 @@ export const PresudaUpdate = () => {
                   name="optuzeni.mestoZaposlenja"
                   data-cy="optuzeni.mestoZaposlenja"
                   type="text"
+                  value={optuzeniMestoZaposlenjeInput}
+                  onChange={e => setOptuzeniMestoZaposlenjaInput(e.target.value)}
                 />
               )}
               {!isNew && (
@@ -559,6 +754,8 @@ export const PresudaUpdate = () => {
                   name="sudija.ime"
                   data-cy="sudija.ime"
                   type="text"
+                  value={sudijaImeInput}
+                  onChange={e => setSudijaImeInput(e.target.value)}
                 />
               )}
               <FormText>
@@ -591,6 +788,8 @@ export const PresudaUpdate = () => {
                   name="zapisnicar.ime"
                   data-cy="zapisnicar.ime"
                   type="text"
+                  value={zapisnicarImeInput}
+                  onChange={e => setZapisnicarImeInput(e.target.value)}
                 />
               )}
               <FormText>
@@ -623,6 +822,8 @@ export const PresudaUpdate = () => {
                   name="tuzilac.ime"
                   data-cy="tuzilac.ime"
                   type="text"
+                  value={tuzilacImeInput}
+                  onChange={e => setTuzilacImeInput(e.target.value)}
                 />
               )}
               <FormText>
@@ -655,6 +856,8 @@ export const PresudaUpdate = () => {
                   name="branilac.ime"
                   data-cy="branilac.ime"
                   type="text"
+                  value={branilacImeInput}
+                  onChange={e => setBranilacImeInput(e.target.value)}
                 />
               )}
               <FormText>
