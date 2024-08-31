@@ -28,13 +28,16 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
 
     private final SudExtendedService sudService;
 
+    private final OptuznicaExtendedService optuznicaService;
+
     public PresudaExtendedServiceImpl(
         PresudaExtendedRepository presudaRepository,
         PresudaMapper presudaMapper,
         OptuzeniExtendedService optuzeniService,
         OsobaExtendedService osobaService,
         RadnjaPresudeExtendedService radnjaPresudeService,
-        SudExtendedService sudService
+        SudExtendedService sudService,
+        OptuznicaExtendedService optuznicaService
     ) {
         super(presudaRepository, presudaMapper);
         this.presudaRepository = presudaRepository;
@@ -43,12 +46,14 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
         this.osobaService = osobaService;
         this.radnjaPresudeService = radnjaPresudeService;
         this.sudService = sudService;
+        this.optuznicaService = optuznicaService;
     }
 
     @Override
     public PresudaDTO save(PresudaDTO presudaDTO) {
         if (presudaDTO.getRadnja().getId() == null) presudaDTO.setRadnja(radnjaPresudeService.save(presudaDTO.getRadnja()));
         if (presudaDTO.getOptuzeni().getId() == null) presudaDTO.setOptuzeni(optuzeniService.save(presudaDTO.getOptuzeni()));
+        if (presudaDTO.getOptuznica().getId() == null) presudaDTO.setOptuznica(optuznicaService.save(presudaDTO.getOptuznica()));
         if (presudaDTO.getSud().getId() == null) presudaDTO.setSud(sudService.save(presudaDTO.getSud()));
         if (presudaDTO.getBranilac().getId() == null) presudaDTO.setBranilac(osobaService.save(presudaDTO.getBranilac()));
         if (presudaDTO.getSudija().getId() == null) presudaDTO.setSudija(osobaService.save(presudaDTO.getSudija()));

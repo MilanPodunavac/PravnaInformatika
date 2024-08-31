@@ -292,6 +292,7 @@ public class PresudaFullDTO implements Serializable {
         presudaDTO.setBranilac(getBranilac());
         presudaDTO.setOsteceni(getOsteceni());
         presudaDTO.setSud(getSud());
+        presudaDTO.setOptuznica(getOptuznica());
         return presudaDTO;
     }
 }

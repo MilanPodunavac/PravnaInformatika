@@ -683,6 +683,17 @@ export const PresudaUpdate = () => {
               )}
               {isNew && (
                 <ValidatedField
+                  label={translate('pravnaInformatikaApp.optuzeni.drzavljanstvo')}
+                  id="presuda-optuzeni-drzavljanstvo"
+                  name="optuzeni.drzavljanstvo"
+                  data-cy="optuzeni.drzavljanstvo"
+                  type="text"
+                  value={optuzeniDrzavljanstvoInput}
+                  onChange={e => setOptuzeniDrzavljanstvoInput(e.target.value)}
+                />
+              )}
+              {isNew && (
+                <ValidatedField
                   label={translate('pravnaInformatikaApp.optuzeni.bracniStatus')}
                   id="presuda-optuzeni-bracniStatus"
                   name="optuzeni.bracniStatus"
