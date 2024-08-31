@@ -21,7 +21,7 @@ export interface IPresuda {
   nacin?: TipUbistva | null;
   radnja?: IRadnjaPresude;
   optuznica?: IOptuznica;
-  kaznes?: IKazna[] | null;
+  kazne?: IKazna[] | null;
   optuzeni?: IOptuzeni | null;
   sudija?: IOsoba | null;
   zapisnicar?: IOsoba | null;

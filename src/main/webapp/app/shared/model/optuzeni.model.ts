@@ -24,7 +24,7 @@ export interface IOptuzeni {
   obrazovanje?: TipObrazovanja | null;
   zaposlenje?: string | null;
   mestoZaposlenja?: string | null;
-  presudeOptuzenis?: IPresuda[] | null;
+  presude?: IPresuda[] | null;
 }
 
 export const defaultValue: Readonly<IOptuzeni> = {};

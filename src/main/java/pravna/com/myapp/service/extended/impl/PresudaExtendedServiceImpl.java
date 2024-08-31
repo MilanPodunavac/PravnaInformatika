@@ -51,16 +51,32 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
 
     @Override
     public PresudaDTO save(PresudaDTO presudaDTO) {
-        if (presudaDTO.getRadnja().getId() == null) presudaDTO.setRadnja(radnjaPresudeService.save(presudaDTO.getRadnja()));
-        if (presudaDTO.getOptuzeni().getId() == null) presudaDTO.setOptuzeni(optuzeniService.save(presudaDTO.getOptuzeni()));
-        if (presudaDTO.getOptuznica().getId() == null) presudaDTO.setOptuznica(optuznicaService.save(presudaDTO.getOptuznica()));
-        if (presudaDTO.getSud().getId() == null) presudaDTO.setSud(sudService.save(presudaDTO.getSud()));
-        if (presudaDTO.getBranilac().getId() == null) presudaDTO.setBranilac(osobaService.save(presudaDTO.getBranilac()));
-        if (presudaDTO.getSudija().getId() == null) presudaDTO.setSudija(osobaService.save(presudaDTO.getSudija()));
-        if (presudaDTO.getZapisnicar().getId() == null) presudaDTO.setZapisnicar(osobaService.save(presudaDTO.getZapisnicar()));
-        if (presudaDTO.getTuzilac().getId() == null) presudaDTO.setTuzilac(osobaService.save(presudaDTO.getTuzilac()));
-        if (presudaDTO.getOsteceni().getId() == null) presudaDTO.setOsteceni(osobaService.save(presudaDTO.getOsteceni()));
-        super.save(presudaDTO);
+        if (presudaDTO.getRadnja() != null && presudaDTO.getRadnja().getId() == null) presudaDTO.setRadnja(
+            radnjaPresudeService.save(presudaDTO.getRadnja())
+        );
+        if (presudaDTO.getOptuzeni() != null && presudaDTO.getOptuzeni().getId() == null) presudaDTO.setOptuzeni(
+            optuzeniService.save(presudaDTO.getOptuzeni())
+        );
+        if (presudaDTO.getOptuznica() != null && presudaDTO.getOptuznica().getId() == null) presudaDTO.setOptuznica(
+            optuznicaService.save(presudaDTO.getOptuznica())
+        );
+        if (presudaDTO.getSud() != null && presudaDTO.getSud().getId() == null) presudaDTO.setSud(sudService.save(presudaDTO.getSud()));
+        if (presudaDTO.getBranilac() != null && presudaDTO.getBranilac().getId() == null) presudaDTO.setBranilac(
+            osobaService.save(presudaDTO.getBranilac())
+        );
+        if (presudaDTO.getSudija() != null && presudaDTO.getSudija().getId() == null) presudaDTO.setSudija(
+            osobaService.save(presudaDTO.getSudija())
+        );
+        if (presudaDTO.getZapisnicar() != null && presudaDTO.getZapisnicar().getId() == null) presudaDTO.setZapisnicar(
+            osobaService.save(presudaDTO.getZapisnicar())
+        );
+        if (presudaDTO.getTuzilac() != null && presudaDTO.getTuzilac().getId() == null) presudaDTO.setTuzilac(
+            osobaService.save(presudaDTO.getTuzilac())
+        );
+        if (presudaDTO.getOsteceni() != null && presudaDTO.getOsteceni().getId() == null) presudaDTO.setOsteceni(
+            osobaService.save(presudaDTO.getOsteceni())
+        );
+        presudaDTO = super.save(presudaDTO);
 
         return presudaDTO;
     }

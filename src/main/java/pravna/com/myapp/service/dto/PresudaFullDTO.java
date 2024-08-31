@@ -36,9 +36,9 @@ public class PresudaFullDTO implements Serializable {
 
     private TipUbistva nacin;
 
-    private RadnjaPresudeDTO radnja;
+    private RadnjaPresudeFullDTO radnja;
 
-    private OptuzeniDTO optuzeni;
+    private OptuzeniFullDTO optuzeni;
 
     private OsobaDTO sudija;
 
@@ -52,9 +52,7 @@ public class PresudaFullDTO implements Serializable {
 
     private SudDTO sud;
 
-    private String povrede;
-
-    private String kazne;
+    private KaznaDTO[] kazne;
 
     public String getId() {
         return id;
@@ -136,19 +134,19 @@ public class PresudaFullDTO implements Serializable {
         this.nacin = nacin;
     }
 
-    public RadnjaPresudeDTO getRadnja() {
+    public RadnjaPresudeFullDTO getRadnja() {
         return radnja;
     }
 
-    public void setRadnja(RadnjaPresudeDTO radnja) {
+    public void setRadnja(RadnjaPresudeFullDTO radnja) {
         this.radnja = radnja;
     }
 
-    public OptuzeniDTO getOptuzeni() {
+    public OptuzeniFullDTO getOptuzeni() {
         return optuzeni;
     }
 
-    public void setOptuzeni(OptuzeniDTO optuzeni) {
+    public void setOptuzeni(OptuzeniFullDTO optuzeni) {
         this.optuzeni = optuzeni;
     }
 
@@ -184,19 +182,11 @@ public class PresudaFullDTO implements Serializable {
         this.branilac = branilac;
     }
 
-    public String getPovrede() {
-        return povrede;
-    }
-
-    public void setPovrede(String povrede) {
-        this.povrede = povrede;
-    }
-
-    public String getKazne() {
+    public KaznaDTO[] getKazne() {
         return kazne;
     }
 
-    public void setKazne(String kazne) {
+    public void setKazne(KaznaDTO[] kazne) {
         this.kazne = kazne;
     }
 
@@ -284,8 +274,8 @@ public class PresudaFullDTO implements Serializable {
         presudaDTO.setPokusaj(getPokusaj());
         presudaDTO.setKrivica(getKrivica());
         presudaDTO.setNacin(getNacin());
-        presudaDTO.setRadnja(getRadnja());
-        presudaDTO.setOptuzeni(getOptuzeni());
+        presudaDTO.setRadnja(getRadnja() != null ? getRadnja().toRadnjaPresudaDTO() : null);
+        presudaDTO.setOptuzeni(getOptuzeni() != null ? getOptuzeni().toOptuzeniDTO() : null);
         presudaDTO.setSudija(getSudija());
         presudaDTO.setZapisnicar(getZapisnicar());
         presudaDTO.setTuzilac(getTuzilac());

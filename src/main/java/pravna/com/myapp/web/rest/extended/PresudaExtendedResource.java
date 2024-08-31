@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pravna.com.myapp.repository.extended.PresudaExtendedRepository;
+import pravna.com.myapp.service.dto.KaznaDTO;
 import pravna.com.myapp.service.dto.PovredaDTO;
 import pravna.com.myapp.service.dto.PresudaDTO;
 import pravna.com.myapp.service.dto.PresudaFullDTO;
@@ -60,6 +61,22 @@ public class PresudaExtendedResource extends PresudaResource {
         System.out.println(presudaFullDTO);
 
         PresudaDTO presudaSaved = presudaService.save(presudaFullDTO.toPresudaDTO());
+
+        for (KaznaDTO kaznaDTO : presudaFullDTO.getKazne()) {
+            kaznaDTO.setPresuda(presudaSaved);
+            kaznaService.save(kaznaDTO);
+        }
+
+        for (PovredaDTO povredaDTO : presudaFullDTO.getRadnja().getPovrede()) {
+            povredaDTO.setRadnja(presudaSaved.getRadnja());
+            povredaService.save(povredaDTO);
+        }
+
+        for (PresudaFullDTO optuzeniPresudaFullDTO : presudaFullDTO.getOptuzeni().getPresude()) {
+            PresudaDTO optuzeniPresudaDTO = optuzeniPresudaFullDTO.toPresudaDTO();
+            optuzeniPresudaDTO.setOptuzeni(presudaSaved.getOptuzeni());
+            presudaService.save(optuzeniPresudaDTO);
+        }
 
         return ResponseEntity
             .created(new URI("/api/presudas"))

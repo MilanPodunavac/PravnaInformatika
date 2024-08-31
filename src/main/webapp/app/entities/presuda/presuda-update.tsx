@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, Table } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -28,7 +28,7 @@ import { ImovinskoStanje } from 'app/shared/model/enumerations/imovinsko-stanje.
 import { TipObrazovanja } from 'app/shared/model/enumerations/tip-obrazovanja.model';
 import { chatExtractPresuda } from 'app/modules/chat/chat';
 import pdfToText from 'react-pdftotext';
-import { set } from 'lodash';
+import { forEach, set } from 'lodash';
 import { TipSuda } from 'app/shared/model/enumerations/tip-suda.model';
 
 export const PresudaUpdate = () => {
@@ -149,11 +149,13 @@ export const PresudaUpdate = () => {
       radnja: isNew
         ? {
             ...values.radnja,
+            povrede: convertToPovredeObjects(povredeInput),
           }
         : radnjaPresudes.find(it => it.id.toString() === values.radnja.toString()),
       optuzeni: isNew
         ? {
             ...values.optuzeni,
+            presude: convertToPresudaObjects(optuzeniPresudeInput),
           }
         : optuzenis.find(it => it.id.toString() === values.optuzeni.toString()),
       sudija: isNew
@@ -191,6 +193,7 @@ export const PresudaUpdate = () => {
             ...values.sud,
           }
         : suds.find(it => it.id.toString() === values.sud.toString()),
+      kazne: convertToKaznaObject(kazneInput),
     };
 
     if (isNew) {
@@ -278,7 +281,7 @@ export const PresudaUpdate = () => {
     setPovredeInput(presuda.radnja.povrede);
 
     setOptuzeniImeInput(presuda.optuzeni.ime);
-    setOptuzeniJmbgInput(presuda.optuzeni.jmbg ?? '1111111111111');
+    setOptuzeniJmbgInput(presuda.optuzeni.jmbg ?? '');
     setOptuzeniImeOcaInput(presuda.optuzeni.ime_oca ?? '');
     setOptuzeniImeMajkeInput(presuda.optuzeni.ime_majke ?? '');
     setOptuzeniPolInput(presuda.optuzeni.pol);
@@ -299,6 +302,59 @@ export const PresudaUpdate = () => {
     setClanoviZakonaInput(presuda.clanovi_zakona);
 
     setKazneInput(presuda.kazne);
+  };
+
+  const convertToKaznaObject = (kazne: any) => {
+    var kazneObjects = [];
+    kazne.forEach(function (kazna) {
+      kazneObjects.push({
+        id: null,
+        tip: kazna.tip,
+        duzinaPritvora: kazna.duzina,
+        uracunavanjePritvora: kazna.uracunavanje_pritvora,
+        kolicinaNovca: kazna.kolicina_novca,
+        primalacNovca: kazna.primalac_novca,
+        nazivImovine: kazna.naziv_imovine,
+        presuda: null,
+      });
+    });
+    return kazneObjects;
+  };
+
+  const convertToPovredeObjects = (povrede: any) => {
+    var povredeObjects = [];
+    povrede.forEach(function (povreda) {
+      povredeObjects.push({
+        id: null,
+        tip: povreda.tip,
+        oruzje: povreda.oruzje,
+        deoTela: povreda.deo_tela,
+        povrede: povreda.povrede,
+        radnja: null,
+      });
+    });
+    return povredeObjects;
+  };
+
+  const convertToPresudaObjects = (presude: any) => {
+    var presudeObjects = [];
+    presude.forEach(function (presuda) {
+      presudeObjects.push({
+        id: null,
+        kod: presuda.kod,
+        tip: 'PRVOSTEPENI_KRIVICNI_PREDMET', //temp
+        broj: presuda.broj,
+        sud: {
+          id: null,
+          naziv: presuda.sud.naziv,
+          mesto: presuda.sud.mesto,
+          tip: presuda.sud.tip,
+        },
+        datum: presuda.datum,
+        kazne: presuda.kazne ? convertToKaznaObject(presuda.kazne) : [],
+      });
+    });
+    return presudeObjects;
   };
 
   return (
@@ -501,6 +557,40 @@ export const PresudaUpdate = () => {
               <FormText>
                 <Translate contentKey="entity.validation.required">This field is required.</Translate>
               </FormText>
+              <div className="table-responsive">
+                {povredeInput && povredeInput.length > 0 ? (
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.povreda.oruzje">Oruzje</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.povreda.deoTela">Deo Tela</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.povreda.povrede">Povrede</Translate>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {povredeInput.map((povreda, i) => (
+                        <tr key={`entity-${i}`} data-cy="entityTable">
+                          <td>{povreda.oruzje}</td>
+                          <td>{povreda.deo_tela}</td>
+                          <td>{povreda.povrede}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  !loading && (
+                    <div className="alert alert-warning">
+                      <Translate contentKey="pravnaInformatikaApp.povreda.home.notFound">No Povredas found</Translate>
+                    </div>
+                  )
+                )}
+              </div>
               {!isNew && (
                 <ValidatedField
                   id="presuda-optuznica"
@@ -790,6 +880,56 @@ export const PresudaUpdate = () => {
                   onChange={e => setOptuzeniMestoZaposlenjaInput(e.target.value)}
                 />
               )}
+              <div className="table-responsive">
+                {optuzeniPresudeInput && optuzeniPresudeInput.length > 0 ? (
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.presuda.kod">Kod</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.presuda.datum">Datum</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.sud.naziv">Naziv Suda</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.clanZakona.zakon">Clan Zakona</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.tip">Kazna</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.duzinaPritvora">Duzina</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.kolicinaNovca">Kolicina</Translate>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {optuzeniPresudeInput.map((presuda, i) => (
+                        <tr key={`entity-${i}`} data-cy="entityTable">
+                          <td>{presuda.kod}</td>
+                          <td>{presuda.datum}</td>
+                          <td>{presuda.sud ? presuda.sud.naziv : ''}</td>
+                          <td>{presuda.clanovi_zakona ? presuda.clanovi_zakona[0].broj + ', ' + presuda.clanovi_zakona[0].zakon : ''}</td>
+                          <td>{presuda.kazne ? presuda.kazne[0].tip : ''}</td>
+                          <td>{presuda.kazne ? presuda.kazne[0].duzina : ''}</td>
+                          <td>{presuda.kazne ? presuda.kazne[0].kolicina_novca : ''}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  !loading && (
+                    <div className="alert alert-warning">
+                      <Translate contentKey="pravnaInformatikaApp.presuda.home.notFound">No Povredas found</Translate>
+                    </div>
+                  )
+                )}
+              </div>
               {!isNew && (
                 <ValidatedField
                   id="presuda-sudija"
@@ -1087,6 +1227,54 @@ export const PresudaUpdate = () => {
                   onChange={e => setMestoSudaNazivInput(e.target.value)}
                 />
               )}
+              <div className="table-responsive">
+                {kazneInput && kazneInput.length > 0 ? (
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.tip">Tip</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.duzinaPritvora">Duzina Pritvora</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.uracunavanjePritvora">Uracunavanje Pritvora</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.kolicinaNovca">Kolicina Novca</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.primalacNovca">Primalac Novca</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.nazivImovine">Naziv Imovine</Translate>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {kazneInput.map((kazna, i) => (
+                        <tr key={`entity-${i}`} data-cy="entityTable">
+                          <td>
+                            <Translate contentKey={`pravnaInformatikaApp.TipKazne.${kazna.tip}`} />
+                          </td>
+                          <td>{kazna.duzina}</td>
+                          <td>{kazna.uracunavanje_pritvora ? 'true' : 'false'}</td>
+                          <td>{kazna.kolicina_novca}</td>
+                          <td>{kazna.primalac_novca}</td>
+                          <td>{kazna.naziv_imovine}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  !loading && (
+                    <div className="alert alert-warning">
+                      <Translate contentKey="pravnaInformatikaApp.kazna.home.notFound">No Kaznas found</Translate>
+                    </div>
+                  )
+                )}
+              </div>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/presuda" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

@@ -457,7 +457,7 @@ export const getPresudaSema = {
             items: {
               type: 'object',
               properties: {
-                id: {
+                kod: {
                   type: 'string',
                   description: 'Identifikacioni broj presude.',
                 },
@@ -502,6 +502,11 @@ export const getPresudaSema = {
                     naziv: {
                       type: 'string',
                       description: 'Naziv suda u kom je izvršeno suđenje',
+                    },
+                    tip: {
+                      type: 'string',
+                      enum: ['OSNOVNI', 'VISI', 'APELACIONI', 'VRHOVNI'],
+                      description: 'Tip suda u kom je izvršeno suđenje.',
                     },
                     mesto: {
                       type: 'string',
@@ -552,12 +557,12 @@ export const getPresudaSema = {
                           'U slučaju zatvorske ili uslovne kazne, vremenska dužina kazne. Obrati pažnju da dužinu kazne sabereš ukoliko je napisana u različitim jedinicama, i konvertuješ u mesece.',
                       },
                       uracunavanje_pritvora: {
-                        type: 'string',
+                        type: 'boolean',
                         description:
                           'U slučaju zatvorske ili uslovne kazne, da li se uračunava vreme već provedeno u pritvoru pre suđenja gde je objavljena ova presuda.',
                       },
                       kolicina_novca: {
-                        type: 'string',
+                        type: 'number',
                         description: ' U slučaju novčane kazne, količina novca (u evrima) koja se nalaže za plaćanje.',
                       },
                       primalac_novca: {
@@ -575,6 +580,7 @@ export const getPresudaSema = {
                   },
                 },
               },
+              required: ['kod', 'tip', 'broj', 'godina', 'datum', 'sud', 'kazne'],
             },
           },
         },
@@ -617,7 +623,7 @@ export const getPresudaSema = {
                 'U slučaju zatvorske ili uslovne kazne, vremenska dužina kazne. Obrati pažnju da dužinu kazne sabereš ukoliko je napisana u različitim jedinicama, i konvertuješ u mesece.',
             },
             uracunavanje_pritvora: {
-              type: 'string',
+              type: 'boolean',
               description:
                 'U slučaju zatvorske ili uslovne kazne, da li se uračunava vreme već provedeno u pritvoru pre suđenja gde je objavljena ova presuda.',
             },

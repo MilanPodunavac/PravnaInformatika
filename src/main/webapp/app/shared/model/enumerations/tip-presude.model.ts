@@ -1,39 +1,39 @@
 export enum TipPresude {
-  PRVOSTEPENI_KRIVICNI_PREDMET = 'K - Prvostepeni krivični predmet',
+  PRVOSTEPENI_KRIVICNI_PREDMET = <any>'K - Prvostepeni krivični predmet',
 
-  SPECIJALNI_KRIVICNI_PREDMET = 'K-S - Specijalni krivični predmet',
+  SPECIJALNI_KRIVICNI_PREDMET = <any>'K-S - Specijalni krivični predmet',
 
-  PREDMET_SUDIJE_ZA_ISTRAGU = 'Ki - Predmet sudije za istragu',
+  PREDMET_SUDIJE_ZA_ISTRAGU = <any>'Ki - Predmet sudije za istragu',
 
-  SPECIJALNI_ISTRAZNI_PREDMET = 'Ki-S - Specijalni istražni predmet',
+  SPECIJALNI_ISTRAZNI_PREDMET = <any>'Ki-S - Specijalni istražni predmet',
 
-  PRIPREMNI_POSTUPAK_PREMA_MALOLETNICIMA = 'Kim - Pripremni postupak prema maloletnicima',
+  PRIPREMNI_POSTUPAK_PREMA_MALOLETNICIMA = <any>'Kim - Pripremni postupak prema maloletnicima',
 
-  KRIVICNI_POSTUPAK_PREMA_MALOLETNICIMA = 'Km - Krivični postupak prema maloletnicima',
+  KRIVICNI_POSTUPAK_PREMA_MALOLETNICIMA = <any>'Km - Krivični postupak prema maloletnicima',
 
-  PREDMETI_POMILOVANJA = 'Kp - Predmeti pomilovanja',
+  PREDMETI_POMILOVANJA = <any>'Kp - Predmeti pomilovanja',
 
-  RAZNA_KRIVICNA_STVAR = 'Kr - Razna krivična stvar',
+  RAZNA_KRIVICNA_STVAR = <any>'Kr - Razna krivična stvar',
 
-  KRIVICNI_SPECIJALNI = 'Kr-S - Krivični specijalni',
+  KRIVICNI_SPECIJALNI = <any>'Kr-S - Krivični specijalni',
 
-  ISTRAZNA_RADNJA = 'Kri - Istražna radnja',
+  ISTRAZNA_RADNJA = <any>'Kri - Istražna radnja',
 
-  DISCIPLINSKA_ZALBA = 'Dž - Disciplinarska žalba',
+  DISCIPLINSKA_ZALBA = <any>'Dž - Disciplinarska žalba',
 
-  ZASTITA_ZAKONITOSTI_U_PARNICNOM_POSTUPKU = 'Gzz - Zaštita zakonitosti u parničnom postupku',
+  ZASTITA_ZAKONITOSTI_U_PARNICNOM_POSTUPKU = <any>'Gzz - Zaštita zakonitosti u parničnom postupku',
 
-  DRUGOSTEPENSKI_GRADJANSKI_PREDMET = 'Gž - Drugostepeni građanski predmet',
+  DRUGOSTEPENSKI_GRADJANSKI_PREDMET = <any>'Gž - Drugostepeni građanski predmet',
 
-  PREDMET_IZVRSENJA = 'I - Predmet izvršenja',
+  PREDMET_IZVRSENJA = <any>'I - Predmet izvršenja',
 
-  PREDMET_O_IZVRSENJU_PREKRSAJNIH_SANKCIJA = 'IPS - Predmet o izvršenju prekršajnih sankcija i postupaka',
+  PREDMET_O_IZVRSENJU_PREKRSAJNIH_SANKCIJA = <any>'IPS - Predmet o izvršenju prekršajnih sankcija i postupaka',
 
-  IZVRSENJE_PO_VERODOSTOJNOJ_ISPRAVI = 'IV - Izvršenje po verodostojnoj ispravi',
+  IZVRSENJE_PO_VERODOSTOJNOJ_ISPRAVI = <any>'IV - Izvršenje po verodostojnoj ispravi',
 
-  KONTROLNI_ZAHTEV = 'IV-Su-2 - Kontrolni zahtev',
+  KONTROLNI_ZAHTEV = <any>'IV-Su-2 - Kontrolni zahtev',
 
-  IZUZECE = 'IV-Su-3 - Izuzeće',
+  IZUZECE = <any>'IV-Su-3 - Izuzeće',
 
-  IZVRSENJE_KRIVICNIH_SANKCIJA = 'Iks - Izvršenje krivičnih sankcija',
+  IZVRSENJE_KRIVICNIH_SANKCIJA = <any>'Iks - Izvršenje krivičnih sankcija',
 }
