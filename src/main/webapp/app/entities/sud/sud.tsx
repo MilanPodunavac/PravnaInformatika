@@ -52,10 +52,13 @@ export const Sud = () => {
                   <Translate contentKey="pravnaInformatikaApp.sud.id">ID</Translate>
                 </th>
                 <th>
+                  <Translate contentKey="pravnaInformatikaApp.sud.naziv">Naziv</Translate>
+                </th>
+                <th>
                   <Translate contentKey="pravnaInformatikaApp.sud.tip">Tip</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="pravnaInformatikaApp.sud.naselje">Naselje</Translate>
+                  <Translate contentKey="pravnaInformatikaApp.sud.mesto">Mesto</Translate>
                 </th>
                 <th />
               </tr>
@@ -68,10 +71,11 @@ export const Sud = () => {
                       {sud.id}
                     </Button>
                   </td>
+                  <td>{sud.naziv}</td>
                   <td>
                     <Translate contentKey={`pravnaInformatikaApp.TipSuda.${sud.tip}`} />
                   </td>
-                  <td>{sud.naselje}</td>
+                  <td>{sud.mesto}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/sud/${sud.id}`} color="info" size="sm" data-cy="entityDetailsButton">

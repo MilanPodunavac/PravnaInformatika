@@ -1,8 +1,12 @@
 package pravna.com.myapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.validation.constraints.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import pravna.com.myapp.domain.enumeration.TipSuda;
@@ -20,12 +24,24 @@ public class Sud implements Serializable {
     private String id;
 
     @NotNull
+    @Field("naziv")
+    private String naziv;
+
+    @NotNull
     @Field("tip")
     private TipSuda tip;
 
     @NotNull
-    @Field("naselje")
-    private String naselje;
+    @Field("mesto")
+    private String mesto;
+
+    @DBRef
+    @Field("presudeSud")
+    @JsonIgnoreProperties(
+        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        allowSetters = true
+    )
+    private Set<Presuda> presudeSuds = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -42,6 +58,19 @@ public class Sud implements Serializable {
         this.id = id;
     }
 
+    public String getNaziv() {
+        return this.naziv;
+    }
+
+    public Sud naziv(String naziv) {
+        this.setNaziv(naziv);
+        return this;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
     public TipSuda getTip() {
         return this.tip;
     }
@@ -55,17 +84,48 @@ public class Sud implements Serializable {
         this.tip = tip;
     }
 
-    public String getNaselje() {
-        return this.naselje;
+    public String getMesto() {
+        return this.mesto;
     }
 
-    public Sud naselje(String naselje) {
-        this.setNaselje(naselje);
+    public Sud mesto(String mesto) {
+        this.setMesto(mesto);
         return this;
     }
 
-    public void setNaselje(String naselje) {
-        this.naselje = naselje;
+    public void setMesto(String mesto) {
+        this.mesto = mesto;
+    }
+
+    public Set<Presuda> getPresudeSuds() {
+        return this.presudeSuds;
+    }
+
+    public void setPresudeSuds(Set<Presuda> presudas) {
+        if (this.presudeSuds != null) {
+            this.presudeSuds.forEach(i -> i.setSud(null));
+        }
+        if (presudas != null) {
+            presudas.forEach(i -> i.setSud(this));
+        }
+        this.presudeSuds = presudas;
+    }
+
+    public Sud presudeSuds(Set<Presuda> presudas) {
+        this.setPresudeSuds(presudas);
+        return this;
+    }
+
+    public Sud addPresudeSud(Presuda presuda) {
+        this.presudeSuds.add(presuda);
+        presuda.setSud(this);
+        return this;
+    }
+
+    public Sud removePresudeSud(Presuda presuda) {
+        this.presudeSuds.remove(presuda);
+        presuda.setSud(null);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -92,8 +152,9 @@ public class Sud implements Serializable {
     public String toString() {
         return "Sud{" +
             "id=" + getId() +
+            ", naziv='" + getNaziv() + "'" +
             ", tip='" + getTip() + "'" +
-            ", naselje='" + getNaselje() + "'" +
+            ", mesto='" + getMesto() + "'" +
             "}";
     }
 }

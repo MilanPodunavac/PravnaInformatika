@@ -7,6 +7,7 @@ import kazna from 'app/entities/kazna/kazna.reducer';
 import zakon from 'app/entities/zakon/zakon.reducer';
 import clanZakona from 'app/entities/clan-zakona/clan-zakona.reducer';
 import sud from 'app/entities/sud/sud.reducer';
+import optuznica from 'app/entities/optuznica/optuznica.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const entitiesReducers = {
@@ -19,6 +20,7 @@ const entitiesReducers = {
   zakon,
   clanZakona,
   sud,
+  optuznica,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 };
 

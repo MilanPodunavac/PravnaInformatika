@@ -3,6 +3,7 @@ package pravna.com.myapp.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import pravna.com.myapp.domain.enumeration.Pol;
 
 /**
  * A DTO for the {@link pravna.com.myapp.domain.Osoba} entity.
@@ -14,6 +15,9 @@ public class OsobaDTO implements Serializable {
 
     @NotNull
     private String ime;
+
+    @NotNull
+    private Pol pol;
 
     public String getId() {
         return id;
@@ -29,6 +33,14 @@ public class OsobaDTO implements Serializable {
 
     public void setIme(String ime) {
         this.ime = ime;
+    }
+
+    public Pol getPol() {
+        return pol;
+    }
+
+    public void setPol(Pol pol) {
+        this.pol = pol;
     }
 
     @Override
@@ -58,6 +70,7 @@ public class OsobaDTO implements Serializable {
         return "OsobaDTO{" +
             "id='" + getId() + "'" +
             ", ime='" + getIme() + "'" +
+            ", pol='" + getPol() + "'" +
             "}";
     }
 }

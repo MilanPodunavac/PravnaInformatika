@@ -6,13 +6,18 @@
   "entityTableName": "sud",
   "fields": [
     {
+      "fieldName": "naziv",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
       "fieldName": "tip",
       "fieldType": "TipSuda",
       "fieldValidateRules": ["required"],
       "fieldValues": "OSNOVNI (Osnovni),VISI (Viši),APELACIONI (Apelacioni),VRHOVNI (Vrhovni)"
     },
     {
-      "fieldName": "naselje",
+      "fieldName": "mesto",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
     }
@@ -22,6 +27,14 @@
   "name": "Sud",
   "pagination": "no",
   "readOnly": false,
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityField": "presudeSud",
+      "otherEntityName": "presuda",
+      "otherEntityRelationshipName": "sud",
+      "relationshipName": "presudeSud",
+      "relationshipType": "one-to-many"
+    }
+  ],
   "service": "serviceClass"
 }

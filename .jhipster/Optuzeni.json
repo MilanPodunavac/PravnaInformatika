@@ -13,7 +13,7 @@
     {
       "fieldName": "jmbg",
       "fieldType": "String",
-      "fieldValidateRules": ["required", "unique", "pattern"],
+      "fieldValidateRules": ["unique", "pattern"],
       "fieldValidateRulesPattern": "^[0-9]{13}"
     },
     {
@@ -27,6 +27,7 @@
     {
       "fieldName": "pol",
       "fieldType": "Pol",
+      "fieldValidateRules": ["required"],
       "fieldValues": "MUSKI (Muški),ZENSKI (Ženski)"
     },
     {
@@ -46,9 +47,13 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "drzavljanstvo",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "bracniStatus",
       "fieldType": "BracniStatus",
-      "fieldValues": "VAN_BRAKA (Neoženjen/Neudata),U_BRAKU (Oženjen/Udata),PREKINUT_BRAK (Razveden(a)),SMRT_U_BRAKU (Udovac/Udovica)"
+      "fieldValues": "VAN_BRAKA (Neoženjen/Neudata),U_BRAKU (Oženjen/Udata),PREKINUT_BRAK (Razveden/Razvedena),SMRT_U_BRAKU (Udovac/Udovica)"
     },
     {
       "fieldName": "brojDece",

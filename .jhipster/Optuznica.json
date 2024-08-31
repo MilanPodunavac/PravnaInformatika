@@ -1,0 +1,38 @@
+{
+  "applications": ["pravnaInformatika"],
+  "changelogDate": "20240830184105",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "optuznica",
+  "fields": [
+    {
+      "fieldName": "kod",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "datum",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ustanova",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Optuznica",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "presuda",
+      "otherEntityRelationshipName": "optuznica",
+      "ownerSide": false,
+      "relationshipName": "presuda",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

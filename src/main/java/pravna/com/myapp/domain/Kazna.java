@@ -42,7 +42,10 @@ public class Kazna implements Serializable {
 
     @DBRef
     @Field("presuda")
-    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        allowSetters = true
+    )
     private Presuda presuda;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

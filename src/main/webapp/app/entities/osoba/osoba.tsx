@@ -108,6 +108,9 @@ export const Osoba = () => {
                 <th className="hand" onClick={sort('ime')}>
                   <Translate contentKey="pravnaInformatikaApp.osoba.ime">Ime</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('pol')}>
+                  <Translate contentKey="pravnaInformatikaApp.osoba.pol">Pol</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -120,6 +123,9 @@ export const Osoba = () => {
                     </Button>
                   </td>
                   <td>{osoba.ime}</td>
+                  <td>
+                    <Translate contentKey={`pravnaInformatikaApp.Pol.${osoba.pol}`} />
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/osoba/${osoba.id}`} color="info" size="sm" data-cy="entityDetailsButton">

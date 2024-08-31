@@ -38,6 +38,12 @@ export const OsobaDetail = () => {
             </span>
           </dt>
           <dd>{osobaEntity.ime}</dd>
+          <dt>
+            <span id="pol">
+              <Translate contentKey="pravnaInformatikaApp.osoba.pol">Pol</Translate>
+            </span>
+          </dt>
+          <dd>{osobaEntity.pol}</dd>
         </dl>
         <Button tag={Link} to="/osoba" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

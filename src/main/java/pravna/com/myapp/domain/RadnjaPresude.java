@@ -31,9 +31,6 @@ public class RadnjaPresude implements Serializable {
     @Field("mesto_radnje")
     private String mestoRadnje;
 
-    @Field("bitne_napomene")
-    private String bitneNapomene;
-
     @Field("mesto_smrti")
     private String mestoSmrti;
 
@@ -87,19 +84,6 @@ public class RadnjaPresude implements Serializable {
 
     public void setMestoRadnje(String mestoRadnje) {
         this.mestoRadnje = mestoRadnje;
-    }
-
-    public String getBitneNapomene() {
-        return this.bitneNapomene;
-    }
-
-    public RadnjaPresude bitneNapomene(String bitneNapomene) {
-        this.setBitneNapomene(bitneNapomene);
-        return this;
-    }
-
-    public void setBitneNapomene(String bitneNapomene) {
-        this.bitneNapomene = bitneNapomene;
     }
 
     public String getMestoSmrti() {
@@ -204,7 +188,6 @@ public class RadnjaPresude implements Serializable {
             "id=" + getId() +
             ", vremeRadnje='" + getVremeRadnje() + "'" +
             ", mestoRadnje='" + getMestoRadnje() + "'" +
-            ", bitneNapomene='" + getBitneNapomene() + "'" +
             ", mestoSmrti='" + getMestoSmrti() + "'" +
             ", vremeSmrti='" + getVremeSmrti() + "'" +
             "}";

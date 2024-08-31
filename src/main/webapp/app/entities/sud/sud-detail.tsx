@@ -33,17 +33,23 @@ export const SudDetail = () => {
           </dt>
           <dd>{sudEntity.id}</dd>
           <dt>
+            <span id="naziv">
+              <Translate contentKey="pravnaInformatikaApp.sud.naziv">Naziv</Translate>
+            </span>
+          </dt>
+          <dd>{sudEntity.naziv}</dd>
+          <dt>
             <span id="tip">
               <Translate contentKey="pravnaInformatikaApp.sud.tip">Tip</Translate>
             </span>
           </dt>
           <dd>{sudEntity.tip}</dd>
           <dt>
-            <span id="naselje">
-              <Translate contentKey="pravnaInformatikaApp.sud.naselje">Naselje</Translate>
+            <span id="mesto">
+              <Translate contentKey="pravnaInformatikaApp.sud.mesto">Mesto</Translate>
             </span>
           </dt>
-          <dd>{sudEntity.naselje}</dd>
+          <dd>{sudEntity.mesto}</dd>
         </dl>
         <Button tag={Link} to="/sud" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

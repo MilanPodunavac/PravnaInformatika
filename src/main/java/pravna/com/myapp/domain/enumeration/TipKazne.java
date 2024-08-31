@@ -7,7 +7,7 @@ public enum TipKazne {
     ZATVORSKA_KAZNA("Zatvorska kazna"),
     USLOVNA_KAZNA("Uslovna kazna"),
     NOVCANA_KAZNA("Novčana kazna"),
-    ODUZIMANJE_IMOVINE("Oduzimanje imovine");
+    IMOVINSKA_KAZNA("Imovinska kazna");
 
     private final String value;
 

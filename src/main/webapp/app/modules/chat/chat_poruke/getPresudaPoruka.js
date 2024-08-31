@@ -176,6 +176,11 @@ export const getPresudaSema = {
             type: 'string',
             description: 'Naziv suda u kom je izvršeno suđenje',
           },
+          tip: {
+            type: 'string',
+            enum: ['OSNOVNI', 'VISI', 'APELACIONI', 'VRHOVNI'],
+            description: 'Tip suda u kom je izvršeno suđenje.',
+          },
           mesto: {
             type: 'string',
             description: 'Mesto suda u kom je izvršeno suđenje',
@@ -285,6 +290,22 @@ export const getPresudaSema = {
         },
         required: ['ime', 'pol'],
       },
+      osteceni: {
+        type: 'object',
+        description: 'Žrtva za krivično delo za koje se tereti optuženi',
+        properties: {
+          ime: {
+            type: 'string',
+            description: 'Ime oštećenog, žrtve krivičnog dela optuženog.',
+          },
+          pol: {
+            type: 'string',
+            enum: ['MUSKI', 'ZENSKI'],
+            description: 'Pol oštećenog, žrtve krivičnog dela optuženog.',
+          },
+        },
+        required: ['ime', 'pol'],
+      },
       datum_pritvora: {
         type: 'string',
         description:
@@ -306,22 +327,6 @@ export const getPresudaSema = {
       radnja: {
         type: 'object',
         properties: {
-          osteceni: {
-            type: 'object',
-            description: 'Žrtva za krivično delo za koje se tereti optuženi',
-            properties: {
-              ime: {
-                type: 'string',
-                description: 'Ime oštećenog, žrtve krivičnog dela optuženog.',
-              },
-              pol: {
-                type: 'string',
-                enum: ['MUSKI', 'ZENSKI'],
-                description: 'Pol oštećenog, žrtve krivičnog dela optuženog.',
-              },
-            },
-            required: ['ime', 'pol'],
-          },
           vreme_radnje: {
             type: 'string',
             description: "Datum izvršenja krivičnog dela za koje se optuženi tereti, u formatu 'YYYY-MM-DD'.",
@@ -365,7 +370,7 @@ export const getPresudaSema = {
             },
           },
         },
-        required: ['osteceni', 'vreme_radnje', 'mesto_radnje', 'povrede'],
+        required: ['vreme_radnje', 'mesto_radnje', 'povrede'],
       },
       optuzeni: {
         type: 'object',
@@ -409,7 +414,7 @@ export const getPresudaSema = {
             description:
               'Prebivalište optuženog. Ukoliko je prebivalište anonimizovano, vrati anonimizovanu verziju prebivališta ukoliko je dostupno.',
           },
-          državljanstvo: {
+          drzavljanstvo: {
             type: 'string',
             description:
               'Državljanstvo optuženog. Vrati vrednost državljanstva u vidu prideva (npr. crnogorsko umesto državljanin Crne Gore).',
@@ -653,6 +658,7 @@ export const getPresudaSema = {
       'tuzilac',
       'branilac',
       'zapisnicar',
+      'osteceni',
       'vece',
     ],
   },

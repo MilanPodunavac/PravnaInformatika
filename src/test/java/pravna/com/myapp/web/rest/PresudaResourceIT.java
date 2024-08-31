@@ -18,8 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import pravna.com.myapp.IntegrationTest;
-import pravna.com.myapp.domain.Optuzeni;
-import pravna.com.myapp.domain.Osoba;
+import pravna.com.myapp.domain.Optuznica;
 import pravna.com.myapp.domain.Presuda;
 import pravna.com.myapp.domain.RadnjaPresude;
 import pravna.com.myapp.domain.enumeration.TipPresude;
@@ -36,17 +35,14 @@ import pravna.com.myapp.service.mapper.PresudaMapper;
 @WithMockUser
 class PresudaResourceIT {
 
-    private static final String DEFAULT_TEKST = "AAAAAAAAAA";
-    private static final String UPDATED_TEKST = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DATUM = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATUM = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_DATUM_OBJAVE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATUM_OBJAVE = LocalDate.now(ZoneId.systemDefault());
-
     private static final LocalDate DEFAULT_DATUM_PRITVORA = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATUM_PRITVORA = LocalDate.now(ZoneId.systemDefault());
+
+    private static final String DEFAULT_KOD = "AAAAAAAAAA";
+    private static final String UPDATED_KOD = "BBBBBBBBBB";
 
     private static final TipPresude DEFAULT_TIP = TipPresude.PRVOSTEPENI_KRIVICNI_PREDMET;
     private static final TipPresude UPDATED_TIP = TipPresude.SPECIJALNI_KRIVICNI_PREDMET;
@@ -56,12 +52,6 @@ class PresudaResourceIT {
 
     private static final Integer DEFAULT_GODINA = 1;
     private static final Integer UPDATED_GODINA = 2;
-
-    private static final String DEFAULT_OPTUZNICA = "AAAAAAAAAA";
-    private static final String UPDATED_OPTUZNICA = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_DATUM_OPTUZNICE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATUM_OPTUZNICE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Boolean DEFAULT_POKUSAJ = false;
     private static final Boolean UPDATED_POKUSAJ = true;
@@ -94,15 +84,12 @@ class PresudaResourceIT {
      */
     public static Presuda createEntity() {
         Presuda presuda = new Presuda()
-            .tekst(DEFAULT_TEKST)
             .datum(DEFAULT_DATUM)
-            .datumObjave(DEFAULT_DATUM_OBJAVE)
             .datumPritvora(DEFAULT_DATUM_PRITVORA)
+            .kod(DEFAULT_KOD)
             .tip(DEFAULT_TIP)
             .broj(DEFAULT_BROJ)
             .godina(DEFAULT_GODINA)
-            .optuznica(DEFAULT_OPTUZNICA)
-            .datumOptuznice(DEFAULT_DATUM_OPTUZNICE)
             .pokusaj(DEFAULT_POKUSAJ)
             .krivica(DEFAULT_KRIVICA)
             .nacin(DEFAULT_NACIN);
@@ -112,21 +99,10 @@ class PresudaResourceIT {
         radnjaPresude.setId("fixed-id-for-tests");
         presuda.setRadnja(radnjaPresude);
         // Add required entity
-        Optuzeni optuzeni;
-        optuzeni = OptuzeniResourceIT.createEntity();
-        optuzeni.setId("fixed-id-for-tests");
-        presuda.setOptuzeni(optuzeni);
-        // Add required entity
-        Osoba osoba;
-        osoba = OsobaResourceIT.createEntity();
-        osoba.setId("fixed-id-for-tests");
-        presuda.setSudija(osoba);
-        // Add required entity
-        presuda.setZapisnicar(osoba);
-        // Add required entity
-        presuda.setTuzilac(osoba);
-        // Add required entity
-        presuda.setBranilac(osoba);
+        Optuznica optuznica;
+        optuznica = OptuznicaResourceIT.createEntity();
+        optuznica.setId("fixed-id-for-tests");
+        presuda.setOptuznica(optuznica);
         return presuda;
     }
 
@@ -138,15 +114,12 @@ class PresudaResourceIT {
      */
     public static Presuda createUpdatedEntity() {
         Presuda presuda = new Presuda()
-            .tekst(UPDATED_TEKST)
             .datum(UPDATED_DATUM)
-            .datumObjave(UPDATED_DATUM_OBJAVE)
             .datumPritvora(UPDATED_DATUM_PRITVORA)
+            .kod(UPDATED_KOD)
             .tip(UPDATED_TIP)
             .broj(UPDATED_BROJ)
             .godina(UPDATED_GODINA)
-            .optuznica(UPDATED_OPTUZNICA)
-            .datumOptuznice(UPDATED_DATUM_OPTUZNICE)
             .pokusaj(UPDATED_POKUSAJ)
             .krivica(UPDATED_KRIVICA)
             .nacin(UPDATED_NACIN);
@@ -156,21 +129,10 @@ class PresudaResourceIT {
         radnjaPresude.setId("fixed-id-for-tests");
         presuda.setRadnja(radnjaPresude);
         // Add required entity
-        Optuzeni optuzeni;
-        optuzeni = OptuzeniResourceIT.createUpdatedEntity();
-        optuzeni.setId("fixed-id-for-tests");
-        presuda.setOptuzeni(optuzeni);
-        // Add required entity
-        Osoba osoba;
-        osoba = OsobaResourceIT.createUpdatedEntity();
-        osoba.setId("fixed-id-for-tests");
-        presuda.setSudija(osoba);
-        // Add required entity
-        presuda.setZapisnicar(osoba);
-        // Add required entity
-        presuda.setTuzilac(osoba);
-        // Add required entity
-        presuda.setBranilac(osoba);
+        Optuznica optuznica;
+        optuznica = OptuznicaResourceIT.createUpdatedEntity();
+        optuznica.setId("fixed-id-for-tests");
+        presuda.setOptuznica(optuznica);
         return presuda;
     }
 
@@ -198,15 +160,12 @@ class PresudaResourceIT {
         List<Presuda> presudaList = presudaRepository.findAll();
         assertThat(presudaList).hasSize(databaseSizeBeforeCreate + 1);
         Presuda testPresuda = presudaList.get(presudaList.size() - 1);
-        assertThat(testPresuda.getTekst()).isEqualTo(DEFAULT_TEKST);
         assertThat(testPresuda.getDatum()).isEqualTo(DEFAULT_DATUM);
-        assertThat(testPresuda.getDatumObjave()).isEqualTo(DEFAULT_DATUM_OBJAVE);
         assertThat(testPresuda.getDatumPritvora()).isEqualTo(DEFAULT_DATUM_PRITVORA);
+        assertThat(testPresuda.getKod()).isEqualTo(DEFAULT_KOD);
         assertThat(testPresuda.getTip()).isEqualTo(DEFAULT_TIP);
         assertThat(testPresuda.getBroj()).isEqualTo(DEFAULT_BROJ);
         assertThat(testPresuda.getGodina()).isEqualTo(DEFAULT_GODINA);
-        assertThat(testPresuda.getOptuznica()).isEqualTo(DEFAULT_OPTUZNICA);
-        assertThat(testPresuda.getDatumOptuznice()).isEqualTo(DEFAULT_DATUM_OPTUZNICE);
         assertThat(testPresuda.getPokusaj()).isEqualTo(DEFAULT_POKUSAJ);
         assertThat(testPresuda.getKrivica()).isEqualTo(DEFAULT_KRIVICA);
         assertThat(testPresuda.getNacin()).isEqualTo(DEFAULT_NACIN);
@@ -258,54 +217,32 @@ class PresudaResourceIT {
     }
 
     @Test
+    void checkKodIsRequired() throws Exception {
+        int databaseSizeBeforeTest = presudaRepository.findAll().size();
+        // set the field null
+        presuda.setKod(null);
+
+        // Create the Presuda, which fails.
+        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
+
+        restPresudaMockMvc
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(presudaDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<Presuda> presudaList = presudaRepository.findAll();
+        assertThat(presudaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     void checkTipIsRequired() throws Exception {
         int databaseSizeBeforeTest = presudaRepository.findAll().size();
         // set the field null
         presuda.setTip(null);
-
-        // Create the Presuda, which fails.
-        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
-
-        restPresudaMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(presudaDTO))
-            )
-            .andExpect(status().isBadRequest());
-
-        List<Presuda> presudaList = presudaRepository.findAll();
-        assertThat(presudaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    void checkBrojIsRequired() throws Exception {
-        int databaseSizeBeforeTest = presudaRepository.findAll().size();
-        // set the field null
-        presuda.setBroj(null);
-
-        // Create the Presuda, which fails.
-        PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
-
-        restPresudaMockMvc
-            .perform(
-                post(ENTITY_API_URL)
-                    .with(csrf())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(presudaDTO))
-            )
-            .andExpect(status().isBadRequest());
-
-        List<Presuda> presudaList = presudaRepository.findAll();
-        assertThat(presudaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    void checkGodinaIsRequired() throws Exception {
-        int databaseSizeBeforeTest = presudaRepository.findAll().size();
-        // set the field null
-        presuda.setGodina(null);
 
         // Create the Presuda, which fails.
         PresudaDTO presudaDTO = presudaMapper.toDto(presuda);
@@ -334,15 +271,12 @@ class PresudaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(presuda.getId())))
-            .andExpect(jsonPath("$.[*].tekst").value(hasItem(DEFAULT_TEKST)))
             .andExpect(jsonPath("$.[*].datum").value(hasItem(DEFAULT_DATUM.toString())))
-            .andExpect(jsonPath("$.[*].datumObjave").value(hasItem(DEFAULT_DATUM_OBJAVE.toString())))
             .andExpect(jsonPath("$.[*].datumPritvora").value(hasItem(DEFAULT_DATUM_PRITVORA.toString())))
+            .andExpect(jsonPath("$.[*].kod").value(hasItem(DEFAULT_KOD)))
             .andExpect(jsonPath("$.[*].tip").value(hasItem(DEFAULT_TIP.toString())))
             .andExpect(jsonPath("$.[*].broj").value(hasItem(DEFAULT_BROJ)))
             .andExpect(jsonPath("$.[*].godina").value(hasItem(DEFAULT_GODINA)))
-            .andExpect(jsonPath("$.[*].optuznica").value(hasItem(DEFAULT_OPTUZNICA)))
-            .andExpect(jsonPath("$.[*].datumOptuznice").value(hasItem(DEFAULT_DATUM_OPTUZNICE.toString())))
             .andExpect(jsonPath("$.[*].pokusaj").value(hasItem(DEFAULT_POKUSAJ.booleanValue())))
             .andExpect(jsonPath("$.[*].krivica").value(hasItem(DEFAULT_KRIVICA.booleanValue())))
             .andExpect(jsonPath("$.[*].nacin").value(hasItem(DEFAULT_NACIN.toString())));
@@ -359,15 +293,12 @@ class PresudaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(presuda.getId()))
-            .andExpect(jsonPath("$.tekst").value(DEFAULT_TEKST))
             .andExpect(jsonPath("$.datum").value(DEFAULT_DATUM.toString()))
-            .andExpect(jsonPath("$.datumObjave").value(DEFAULT_DATUM_OBJAVE.toString()))
             .andExpect(jsonPath("$.datumPritvora").value(DEFAULT_DATUM_PRITVORA.toString()))
+            .andExpect(jsonPath("$.kod").value(DEFAULT_KOD))
             .andExpect(jsonPath("$.tip").value(DEFAULT_TIP.toString()))
             .andExpect(jsonPath("$.broj").value(DEFAULT_BROJ))
             .andExpect(jsonPath("$.godina").value(DEFAULT_GODINA))
-            .andExpect(jsonPath("$.optuznica").value(DEFAULT_OPTUZNICA))
-            .andExpect(jsonPath("$.datumOptuznice").value(DEFAULT_DATUM_OPTUZNICE.toString()))
             .andExpect(jsonPath("$.pokusaj").value(DEFAULT_POKUSAJ.booleanValue()))
             .andExpect(jsonPath("$.krivica").value(DEFAULT_KRIVICA.booleanValue()))
             .andExpect(jsonPath("$.nacin").value(DEFAULT_NACIN.toString()));
@@ -389,15 +320,12 @@ class PresudaResourceIT {
         // Update the presuda
         Presuda updatedPresuda = presudaRepository.findById(presuda.getId()).get();
         updatedPresuda
-            .tekst(UPDATED_TEKST)
             .datum(UPDATED_DATUM)
-            .datumObjave(UPDATED_DATUM_OBJAVE)
             .datumPritvora(UPDATED_DATUM_PRITVORA)
+            .kod(UPDATED_KOD)
             .tip(UPDATED_TIP)
             .broj(UPDATED_BROJ)
             .godina(UPDATED_GODINA)
-            .optuznica(UPDATED_OPTUZNICA)
-            .datumOptuznice(UPDATED_DATUM_OPTUZNICE)
             .pokusaj(UPDATED_POKUSAJ)
             .krivica(UPDATED_KRIVICA)
             .nacin(UPDATED_NACIN);
@@ -416,15 +344,12 @@ class PresudaResourceIT {
         List<Presuda> presudaList = presudaRepository.findAll();
         assertThat(presudaList).hasSize(databaseSizeBeforeUpdate);
         Presuda testPresuda = presudaList.get(presudaList.size() - 1);
-        assertThat(testPresuda.getTekst()).isEqualTo(UPDATED_TEKST);
         assertThat(testPresuda.getDatum()).isEqualTo(UPDATED_DATUM);
-        assertThat(testPresuda.getDatumObjave()).isEqualTo(UPDATED_DATUM_OBJAVE);
         assertThat(testPresuda.getDatumPritvora()).isEqualTo(UPDATED_DATUM_PRITVORA);
+        assertThat(testPresuda.getKod()).isEqualTo(UPDATED_KOD);
         assertThat(testPresuda.getTip()).isEqualTo(UPDATED_TIP);
         assertThat(testPresuda.getBroj()).isEqualTo(UPDATED_BROJ);
         assertThat(testPresuda.getGodina()).isEqualTo(UPDATED_GODINA);
-        assertThat(testPresuda.getOptuznica()).isEqualTo(UPDATED_OPTUZNICA);
-        assertThat(testPresuda.getDatumOptuznice()).isEqualTo(UPDATED_DATUM_OPTUZNICE);
         assertThat(testPresuda.getPokusaj()).isEqualTo(UPDATED_POKUSAJ);
         assertThat(testPresuda.getKrivica()).isEqualTo(UPDATED_KRIVICA);
         assertThat(testPresuda.getNacin()).isEqualTo(UPDATED_NACIN);
@@ -510,7 +435,7 @@ class PresudaResourceIT {
         Presuda partialUpdatedPresuda = new Presuda();
         partialUpdatedPresuda.setId(presuda.getId());
 
-        partialUpdatedPresuda.datumObjave(UPDATED_DATUM_OBJAVE).tip(UPDATED_TIP).broj(UPDATED_BROJ).nacin(UPDATED_NACIN);
+        partialUpdatedPresuda.kod(UPDATED_KOD).broj(UPDATED_BROJ).godina(UPDATED_GODINA);
 
         restPresudaMockMvc
             .perform(
@@ -525,18 +450,15 @@ class PresudaResourceIT {
         List<Presuda> presudaList = presudaRepository.findAll();
         assertThat(presudaList).hasSize(databaseSizeBeforeUpdate);
         Presuda testPresuda = presudaList.get(presudaList.size() - 1);
-        assertThat(testPresuda.getTekst()).isEqualTo(DEFAULT_TEKST);
         assertThat(testPresuda.getDatum()).isEqualTo(DEFAULT_DATUM);
-        assertThat(testPresuda.getDatumObjave()).isEqualTo(UPDATED_DATUM_OBJAVE);
         assertThat(testPresuda.getDatumPritvora()).isEqualTo(DEFAULT_DATUM_PRITVORA);
-        assertThat(testPresuda.getTip()).isEqualTo(UPDATED_TIP);
+        assertThat(testPresuda.getKod()).isEqualTo(UPDATED_KOD);
+        assertThat(testPresuda.getTip()).isEqualTo(DEFAULT_TIP);
         assertThat(testPresuda.getBroj()).isEqualTo(UPDATED_BROJ);
-        assertThat(testPresuda.getGodina()).isEqualTo(DEFAULT_GODINA);
-        assertThat(testPresuda.getOptuznica()).isEqualTo(DEFAULT_OPTUZNICA);
-        assertThat(testPresuda.getDatumOptuznice()).isEqualTo(DEFAULT_DATUM_OPTUZNICE);
+        assertThat(testPresuda.getGodina()).isEqualTo(UPDATED_GODINA);
         assertThat(testPresuda.getPokusaj()).isEqualTo(DEFAULT_POKUSAJ);
         assertThat(testPresuda.getKrivica()).isEqualTo(DEFAULT_KRIVICA);
-        assertThat(testPresuda.getNacin()).isEqualTo(UPDATED_NACIN);
+        assertThat(testPresuda.getNacin()).isEqualTo(DEFAULT_NACIN);
     }
 
     @Test
@@ -551,15 +473,12 @@ class PresudaResourceIT {
         partialUpdatedPresuda.setId(presuda.getId());
 
         partialUpdatedPresuda
-            .tekst(UPDATED_TEKST)
             .datum(UPDATED_DATUM)
-            .datumObjave(UPDATED_DATUM_OBJAVE)
             .datumPritvora(UPDATED_DATUM_PRITVORA)
+            .kod(UPDATED_KOD)
             .tip(UPDATED_TIP)
             .broj(UPDATED_BROJ)
             .godina(UPDATED_GODINA)
-            .optuznica(UPDATED_OPTUZNICA)
-            .datumOptuznice(UPDATED_DATUM_OPTUZNICE)
             .pokusaj(UPDATED_POKUSAJ)
             .krivica(UPDATED_KRIVICA)
             .nacin(UPDATED_NACIN);
@@ -577,15 +496,12 @@ class PresudaResourceIT {
         List<Presuda> presudaList = presudaRepository.findAll();
         assertThat(presudaList).hasSize(databaseSizeBeforeUpdate);
         Presuda testPresuda = presudaList.get(presudaList.size() - 1);
-        assertThat(testPresuda.getTekst()).isEqualTo(UPDATED_TEKST);
         assertThat(testPresuda.getDatum()).isEqualTo(UPDATED_DATUM);
-        assertThat(testPresuda.getDatumObjave()).isEqualTo(UPDATED_DATUM_OBJAVE);
         assertThat(testPresuda.getDatumPritvora()).isEqualTo(UPDATED_DATUM_PRITVORA);
+        assertThat(testPresuda.getKod()).isEqualTo(UPDATED_KOD);
         assertThat(testPresuda.getTip()).isEqualTo(UPDATED_TIP);
         assertThat(testPresuda.getBroj()).isEqualTo(UPDATED_BROJ);
         assertThat(testPresuda.getGodina()).isEqualTo(UPDATED_GODINA);
-        assertThat(testPresuda.getOptuznica()).isEqualTo(UPDATED_OPTUZNICA);
-        assertThat(testPresuda.getDatumOptuznice()).isEqualTo(UPDATED_DATUM_OPTUZNICE);
         assertThat(testPresuda.getPokusaj()).isEqualTo(UPDATED_POKUSAJ);
         assertThat(testPresuda.getKrivica()).isEqualTo(UPDATED_KRIVICA);
         assertThat(testPresuda.getNacin()).isEqualTo(UPDATED_NACIN);

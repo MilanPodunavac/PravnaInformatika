@@ -113,13 +113,6 @@ export const RadnjaPresudeUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('pravnaInformatikaApp.radnjaPresude.bitneNapomene')}
-                id="radnja-presude-bitneNapomene"
-                name="bitneNapomene"
-                data-cy="bitneNapomene"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('pravnaInformatikaApp.radnjaPresude.mestoSmrti')}
                 id="radnja-presude-mestoSmrti"
                 name="mestoSmrti"

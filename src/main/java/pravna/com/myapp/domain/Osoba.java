@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import pravna.com.myapp.domain.enumeration.Pol;
 
 /**
  * A Osoba.
@@ -26,25 +27,49 @@ public class Osoba implements Serializable {
     @Field("ime")
     private String ime;
 
+    @NotNull
+    @Field("pol")
+    private Pol pol;
+
     @DBRef
     @Field("presudeSudija")
-    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        allowSetters = true
+    )
     private Set<Presuda> presudeSudijas = new HashSet<>();
 
     @DBRef
     @Field("presudeZapisnicar")
-    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        allowSetters = true
+    )
     private Set<Presuda> presudeZapisnicars = new HashSet<>();
 
     @DBRef
     @Field("presudeTuzilac")
-    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        allowSetters = true
+    )
     private Set<Presuda> presudeTuzilacs = new HashSet<>();
 
     @DBRef
     @Field("presudeBranilac")
-    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        allowSetters = true
+    )
     private Set<Presuda> presudeBranilacs = new HashSet<>();
+
+    @DBRef
+    @Field("presudeOsteceni")
+    @JsonIgnoreProperties(
+        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        allowSetters = true
+    )
+    private Set<Presuda> presudeOstecenis = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -72,6 +97,19 @@ public class Osoba implements Serializable {
 
     public void setIme(String ime) {
         this.ime = ime;
+    }
+
+    public Pol getPol() {
+        return this.pol;
+    }
+
+    public Osoba pol(Pol pol) {
+        this.setPol(pol);
+        return this;
+    }
+
+    public void setPol(Pol pol) {
+        this.pol = pol;
     }
 
     public Set<Presuda> getPresudeSudijas() {
@@ -198,6 +236,37 @@ public class Osoba implements Serializable {
         return this;
     }
 
+    public Set<Presuda> getPresudeOstecenis() {
+        return this.presudeOstecenis;
+    }
+
+    public void setPresudeOstecenis(Set<Presuda> presudas) {
+        if (this.presudeOstecenis != null) {
+            this.presudeOstecenis.forEach(i -> i.setOsteceni(null));
+        }
+        if (presudas != null) {
+            presudas.forEach(i -> i.setOsteceni(this));
+        }
+        this.presudeOstecenis = presudas;
+    }
+
+    public Osoba presudeOstecenis(Set<Presuda> presudas) {
+        this.setPresudeOstecenis(presudas);
+        return this;
+    }
+
+    public Osoba addPresudeOsteceni(Presuda presuda) {
+        this.presudeOstecenis.add(presuda);
+        presuda.setOsteceni(this);
+        return this;
+    }
+
+    public Osoba removePresudeOsteceni(Presuda presuda) {
+        this.presudeOstecenis.remove(presuda);
+        presuda.setOsteceni(null);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -223,6 +292,7 @@ public class Osoba implements Serializable {
         return "Osoba{" +
             "id=" + getId() +
             ", ime='" + getIme() + "'" +
+            ", pol='" + getPol() + "'" +
             "}";
     }
 }

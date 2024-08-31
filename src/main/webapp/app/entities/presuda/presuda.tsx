@@ -125,19 +125,15 @@ export const Presuda = () => {
                   <th className="hand" onClick={sort('id')}>
                     <Translate contentKey="pravnaInformatikaApp.presuda.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
-                  <th className="hand" onClick={sort('tekst')}>
-                    <Translate contentKey="pravnaInformatikaApp.presuda.tekst">Tekst</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
                   <th className="hand" onClick={sort('datum')}>
                     <Translate contentKey="pravnaInformatikaApp.presuda.datum">Datum</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
-                  <th className="hand" onClick={sort('datumObjave')}>
-                    <Translate contentKey="pravnaInformatikaApp.presuda.datumObjave">Datum Objave</Translate>{' '}
-                    <FontAwesomeIcon icon="sort" />
                   </th>
                   <th className="hand" onClick={sort('datumPritvora')}>
                     <Translate contentKey="pravnaInformatikaApp.presuda.datumPritvora">Datum Pritvora</Translate>{' '}
                     <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th className="hand" onClick={sort('kod')}>
+                    <Translate contentKey="pravnaInformatikaApp.presuda.kod">Kod</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
                   <th className="hand" onClick={sort('tip')}>
                     <Translate contentKey="pravnaInformatikaApp.presuda.tip">Tip</Translate> <FontAwesomeIcon icon="sort" />
@@ -147,13 +143,6 @@ export const Presuda = () => {
                   </th>
                   <th className="hand" onClick={sort('godina')}>
                     <Translate contentKey="pravnaInformatikaApp.presuda.godina">Godina</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
-                  <th className="hand" onClick={sort('optuznica')}>
-                    <Translate contentKey="pravnaInformatikaApp.presuda.optuznica">Optuznica</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
-                  <th className="hand" onClick={sort('datumOptuznice')}>
-                    <Translate contentKey="pravnaInformatikaApp.presuda.datumOptuznice">Datum Optuznice</Translate>{' '}
-                    <FontAwesomeIcon icon="sort" />
                   </th>
                   <th className="hand" onClick={sort('pokusaj')}>
                     <Translate contentKey="pravnaInformatikaApp.presuda.pokusaj">Pokusaj</Translate> <FontAwesomeIcon icon="sort" />
@@ -166,6 +155,9 @@ export const Presuda = () => {
                   </th>
                   <th>
                     <Translate contentKey="pravnaInformatikaApp.presuda.radnja">Radnja</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th>
+                    <Translate contentKey="pravnaInformatikaApp.presuda.optuznica">Optuznica</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
                   <th>
                     <Translate contentKey="pravnaInformatikaApp.presuda.optuzeni">Optuzeni</Translate> <FontAwesomeIcon icon="sort" />
@@ -182,6 +174,12 @@ export const Presuda = () => {
                   <th>
                     <Translate contentKey="pravnaInformatikaApp.presuda.branilac">Branilac</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
+                  <th>
+                    <Translate contentKey="pravnaInformatikaApp.presuda.osteceni">Osteceni</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th>
+                    <Translate contentKey="pravnaInformatikaApp.presuda.sud">Sud</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
                   <th />
                 </tr>
               </thead>
@@ -193,38 +191,32 @@ export const Presuda = () => {
                         {presuda.id}
                       </Button>
                     </td>
-                    <td>{presuda.tekst}</td>
                     <td>{presuda.datum ? <TextFormat type="date" value={presuda.datum} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
-                    <td>
-                      {presuda.datumObjave ? <TextFormat type="date" value={presuda.datumObjave} format={APP_LOCAL_DATE_FORMAT} /> : null}
-                    </td>
                     <td>
                       {presuda.datumPritvora ? (
                         <TextFormat type="date" value={presuda.datumPritvora} format={APP_LOCAL_DATE_FORMAT} />
                       ) : null}
                     </td>
+                    <td>{presuda.kod}</td>
                     <td>
                       <Translate contentKey={`pravnaInformatikaApp.TipPresude.${presuda.tip}`} />
                     </td>
                     <td>{presuda.broj}</td>
                     <td>{presuda.godina}</td>
-                    <td>{presuda.optuznica}</td>
-                    <td>
-                      {presuda.datumOptuznice ? (
-                        <TextFormat type="date" value={presuda.datumOptuznice} format={APP_LOCAL_DATE_FORMAT} />
-                      ) : null}
-                    </td>
                     <td>{presuda.pokusaj ? 'true' : 'false'}</td>
                     <td>{presuda.krivica ? 'true' : 'false'}</td>
                     <td>
                       <Translate contentKey={`pravnaInformatikaApp.TipUbistva.${presuda.nacin}`} />
                     </td>
                     <td>{presuda.radnja ? <Link to={`/radnja-presude/${presuda.radnja.id}`}>{presuda.radnja.id}</Link> : ''}</td>
+                    <td>{presuda.optuznica ? <Link to={`/optuznica/${presuda.optuznica.id}`}>{presuda.optuznica.id}</Link> : ''}</td>
                     <td>{presuda.optuzeni ? <Link to={`/optuzeni/${presuda.optuzeni.id}`}>{presuda.optuzeni.id}</Link> : ''}</td>
                     <td>{presuda.sudija ? <Link to={`/osoba/${presuda.sudija.id}`}>{presuda.sudija.id}</Link> : ''}</td>
                     <td>{presuda.zapisnicar ? <Link to={`/osoba/${presuda.zapisnicar.id}`}>{presuda.zapisnicar.id}</Link> : ''}</td>
                     <td>{presuda.tuzilac ? <Link to={`/osoba/${presuda.tuzilac.id}`}>{presuda.tuzilac.id}</Link> : ''}</td>
                     <td>{presuda.branilac ? <Link to={`/osoba/${presuda.branilac.id}`}>{presuda.branilac.id}</Link> : ''}</td>
+                    <td>{presuda.osteceni ? <Link to={`/osoba/${presuda.osteceni.id}`}>{presuda.osteceni.id}</Link> : ''}</td>
+                    <td>{presuda.sud ? <Link to={`/sud/${presuda.sud.id}`}>{presuda.sud.id}</Link> : ''}</td>
                     <td className="text-end">
                       <div className="btn-group flex-btn-group-container">
                         <Button tag={Link} to={`/presuda/${presuda.id}`} color="info" size="sm" data-cy="entityDetailsButton">

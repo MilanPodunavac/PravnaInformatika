@@ -9,6 +9,7 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IOsoba } from 'app/shared/model/osoba.model';
+import { Pol } from 'app/shared/model/enumerations/pol.model';
 import { getEntity, updateEntity, createEntity, reset } from './osoba.reducer';
 
 export const OsobaUpdate = () => {
@@ -23,6 +24,7 @@ export const OsobaUpdate = () => {
   const loading = useAppSelector(state => state.osoba.loading);
   const updating = useAppSelector(state => state.osoba.updating);
   const updateSuccess = useAppSelector(state => state.osoba.updateSuccess);
+  const polValues = Object.keys(Pol);
 
   const handleClose = () => {
     navigate('/osoba' + location.search);
@@ -59,6 +61,7 @@ export const OsobaUpdate = () => {
     isNew
       ? {}
       : {
+          pol: 'MUSKI',
           ...osobaEntity,
         };
 
@@ -97,6 +100,13 @@ export const OsobaUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
+              <ValidatedField label={translate('pravnaInformatikaApp.osoba.pol')} id="osoba-pol" name="pol" data-cy="pol" type="select">
+                {polValues.map(pol => (
+                  <option value={pol} key={pol}>
+                    {translate('pravnaInformatikaApp.Pol.' + pol)}
+                  </option>
+                ))}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/osoba" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

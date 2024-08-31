@@ -11,14 +11,13 @@ public class PresudaFullDTO implements Serializable {
 
     private String id;
 
-    private String tekst;
-
     @NotNull
     private LocalDate datum;
 
-    private LocalDate datumObjave;
-
     private LocalDate datumPritvora;
+
+    @NotNull
+    private String kod;
 
     @NotNull
     private TipPresude tip;
@@ -29,9 +28,7 @@ public class PresudaFullDTO implements Serializable {
     @NotNull
     private Integer godina;
 
-    private String optuznica;
-
-    private LocalDate datumOptuznice;
+    private OptuznicaDTO optuznica;
 
     private Boolean pokusaj;
 
@@ -51,6 +48,10 @@ public class PresudaFullDTO implements Serializable {
 
     private OsobaDTO branilac;
 
+    private OsobaDTO osteceni;
+
+    private SudDTO sud;
+
     private String povrede;
 
     private String kazne;
@@ -63,28 +64,12 @@ public class PresudaFullDTO implements Serializable {
         this.id = id;
     }
 
-    public String getTekst() {
-        return tekst;
-    }
-
-    public void setTekst(String tekst) {
-        this.tekst = tekst;
-    }
-
     public LocalDate getDatum() {
         return datum;
     }
 
     public void setDatum(LocalDate datum) {
         this.datum = datum;
-    }
-
-    public LocalDate getDatumObjave() {
-        return datumObjave;
-    }
-
-    public void setDatumObjave(LocalDate datumObjave) {
-        this.datumObjave = datumObjave;
     }
 
     public LocalDate getDatumPritvora() {
@@ -119,20 +104,12 @@ public class PresudaFullDTO implements Serializable {
         this.godina = godina;
     }
 
-    public String getOptuznica() {
+    public OptuznicaDTO getOptuznica() {
         return optuznica;
     }
 
-    public void setOptuznica(String optuznica) {
+    public void setOptuznica(OptuznicaDTO optuznica) {
         this.optuznica = optuznica;
-    }
-
-    public LocalDate getDatumOptuznice() {
-        return datumOptuznice;
-    }
-
-    public void setDatumOptuznice(LocalDate datumOptuznice) {
-        this.datumOptuznice = datumOptuznice;
     }
 
     public Boolean getPokusaj() {
@@ -223,6 +200,30 @@ public class PresudaFullDTO implements Serializable {
         this.kazne = kazne;
     }
 
+    public String getKod() {
+        return kod;
+    }
+
+    public void setKod(String kod) {
+        this.kod = kod;
+    }
+
+    public OsobaDTO getOsteceni() {
+        return osteceni;
+    }
+
+    public void setOsteceni(OsobaDTO osteceni) {
+        this.osteceni = osteceni;
+    }
+
+    public SudDTO getSud() {
+        return sud;
+    }
+
+    public void setSud(SudDTO sud) {
+        this.sud = sud;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -249,15 +250,13 @@ public class PresudaFullDTO implements Serializable {
     public String toString() {
         return "PresudaDTO{" +
             "id='" + getId() + "'" +
-            ", tekst='" + getTekst() + "'" +
             ", datum='" + getDatum() + "'" +
-            ", datumObjave='" + getDatumObjave() + "'" +
             ", datumPritvora='" + getDatumPritvora() + "'" +
+            ", kod='" + getKod() + "'" +
             ", tip='" + getTip() + "'" +
             ", broj=" + getBroj() +
             ", godina=" + getGodina() +
             ", optuznica='" + getOptuznica() + "'" +
-            ", datumOptuznice='" + getDatumOptuznice() + "'" +
             ", pokusaj='" + getPokusaj() + "'" +
             ", krivica='" + getKrivica() + "'" +
             ", nacin='" + getNacin() + "'" +
@@ -267,22 +266,21 @@ public class PresudaFullDTO implements Serializable {
             ", zapisnicar=" + getZapisnicar() +
             ", tuzilac=" + getTuzilac() +
             ", branilac=" + getBranilac() +
-            ", povrede=" + getPovrede() +
+            ", tuzilac=" + getTuzilac() +
+            ", osteceni=" + getOsteceni() +
+            ", sud=" + getSud() +
             ", kazne=" + getKazne() +
             "}";
     }
 
     public PresudaDTO toPresudaDTO() {
         PresudaDTO presudaDTO = new PresudaDTO();
-        presudaDTO.setTekst(getTekst());
         presudaDTO.setDatum(getDatum());
-        presudaDTO.setDatumObjave(getDatumObjave());
         presudaDTO.setDatumPritvora(getDatumPritvora());
+        presudaDTO.setKod(getKod());
         presudaDTO.setTip(getTip());
         presudaDTO.setBroj(getBroj());
         presudaDTO.setGodina(getGodina());
-        presudaDTO.setOptuznica(getOptuznica());
-        presudaDTO.setDatumOptuznice(getDatumOptuznice());
         presudaDTO.setPokusaj(getPokusaj());
         presudaDTO.setKrivica(getKrivica());
         presudaDTO.setNacin(getNacin());
@@ -292,6 +290,8 @@ public class PresudaFullDTO implements Serializable {
         presudaDTO.setZapisnicar(getZapisnicar());
         presudaDTO.setTuzilac(getTuzilac());
         presudaDTO.setBranilac(getBranilac());
+        presudaDTO.setOsteceni(getOsteceni());
+        presudaDTO.setSud(getSud());
         return presudaDTO;
     }
 }

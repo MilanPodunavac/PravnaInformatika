@@ -30,11 +30,14 @@ import pravna.com.myapp.service.mapper.SudMapper;
 @WithMockUser
 class SudResourceIT {
 
+    private static final String DEFAULT_NAZIV = "AAAAAAAAAA";
+    private static final String UPDATED_NAZIV = "BBBBBBBBBB";
+
     private static final TipSuda DEFAULT_TIP = TipSuda.OSNOVNI;
     private static final TipSuda UPDATED_TIP = TipSuda.VISI;
 
-    private static final String DEFAULT_NASELJE = "AAAAAAAAAA";
-    private static final String UPDATED_NASELJE = "BBBBBBBBBB";
+    private static final String DEFAULT_MESTO = "AAAAAAAAAA";
+    private static final String UPDATED_MESTO = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/suds";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -57,7 +60,7 @@ class SudResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Sud createEntity() {
-        Sud sud = new Sud().tip(DEFAULT_TIP).naselje(DEFAULT_NASELJE);
+        Sud sud = new Sud().naziv(DEFAULT_NAZIV).tip(DEFAULT_TIP).mesto(DEFAULT_MESTO);
         return sud;
     }
 
@@ -68,7 +71,7 @@ class SudResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Sud createUpdatedEntity() {
-        Sud sud = new Sud().tip(UPDATED_TIP).naselje(UPDATED_NASELJE);
+        Sud sud = new Sud().naziv(UPDATED_NAZIV).tip(UPDATED_TIP).mesto(UPDATED_MESTO);
         return sud;
     }
 
@@ -93,8 +96,9 @@ class SudResourceIT {
         List<Sud> sudList = sudRepository.findAll();
         assertThat(sudList).hasSize(databaseSizeBeforeCreate + 1);
         Sud testSud = sudList.get(sudList.size() - 1);
+        assertThat(testSud.getNaziv()).isEqualTo(DEFAULT_NAZIV);
         assertThat(testSud.getTip()).isEqualTo(DEFAULT_TIP);
-        assertThat(testSud.getNaselje()).isEqualTo(DEFAULT_NASELJE);
+        assertThat(testSud.getMesto()).isEqualTo(DEFAULT_MESTO);
     }
 
     @Test
@@ -118,6 +122,25 @@ class SudResourceIT {
     }
 
     @Test
+    void checkNazivIsRequired() throws Exception {
+        int databaseSizeBeforeTest = sudRepository.findAll().size();
+        // set the field null
+        sud.setNaziv(null);
+
+        // Create the Sud, which fails.
+        SudDTO sudDTO = sudMapper.toDto(sud);
+
+        restSudMockMvc
+            .perform(
+                post(ENTITY_API_URL).with(csrf()).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(sudDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<Sud> sudList = sudRepository.findAll();
+        assertThat(sudList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     void checkTipIsRequired() throws Exception {
         int databaseSizeBeforeTest = sudRepository.findAll().size();
         // set the field null
@@ -137,10 +160,10 @@ class SudResourceIT {
     }
 
     @Test
-    void checkNaseljeIsRequired() throws Exception {
+    void checkMestoIsRequired() throws Exception {
         int databaseSizeBeforeTest = sudRepository.findAll().size();
         // set the field null
-        sud.setNaselje(null);
+        sud.setMesto(null);
 
         // Create the Sud, which fails.
         SudDTO sudDTO = sudMapper.toDto(sud);
@@ -166,8 +189,9 @@ class SudResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sud.getId())))
+            .andExpect(jsonPath("$.[*].naziv").value(hasItem(DEFAULT_NAZIV)))
             .andExpect(jsonPath("$.[*].tip").value(hasItem(DEFAULT_TIP.toString())))
-            .andExpect(jsonPath("$.[*].naselje").value(hasItem(DEFAULT_NASELJE)));
+            .andExpect(jsonPath("$.[*].mesto").value(hasItem(DEFAULT_MESTO)));
     }
 
     @Test
@@ -181,8 +205,9 @@ class SudResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(sud.getId()))
+            .andExpect(jsonPath("$.naziv").value(DEFAULT_NAZIV))
             .andExpect(jsonPath("$.tip").value(DEFAULT_TIP.toString()))
-            .andExpect(jsonPath("$.naselje").value(DEFAULT_NASELJE));
+            .andExpect(jsonPath("$.mesto").value(DEFAULT_MESTO));
     }
 
     @Test
@@ -200,7 +225,7 @@ class SudResourceIT {
 
         // Update the sud
         Sud updatedSud = sudRepository.findById(sud.getId()).get();
-        updatedSud.tip(UPDATED_TIP).naselje(UPDATED_NASELJE);
+        updatedSud.naziv(UPDATED_NAZIV).tip(UPDATED_TIP).mesto(UPDATED_MESTO);
         SudDTO sudDTO = sudMapper.toDto(updatedSud);
 
         restSudMockMvc
@@ -216,8 +241,9 @@ class SudResourceIT {
         List<Sud> sudList = sudRepository.findAll();
         assertThat(sudList).hasSize(databaseSizeBeforeUpdate);
         Sud testSud = sudList.get(sudList.size() - 1);
+        assertThat(testSud.getNaziv()).isEqualTo(UPDATED_NAZIV);
         assertThat(testSud.getTip()).isEqualTo(UPDATED_TIP);
-        assertThat(testSud.getNaselje()).isEqualTo(UPDATED_NASELJE);
+        assertThat(testSud.getMesto()).isEqualTo(UPDATED_MESTO);
     }
 
     @Test
@@ -297,6 +323,8 @@ class SudResourceIT {
         Sud partialUpdatedSud = new Sud();
         partialUpdatedSud.setId(sud.getId());
 
+        partialUpdatedSud.mesto(UPDATED_MESTO);
+
         restSudMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedSud.getId())
@@ -310,8 +338,9 @@ class SudResourceIT {
         List<Sud> sudList = sudRepository.findAll();
         assertThat(sudList).hasSize(databaseSizeBeforeUpdate);
         Sud testSud = sudList.get(sudList.size() - 1);
+        assertThat(testSud.getNaziv()).isEqualTo(DEFAULT_NAZIV);
         assertThat(testSud.getTip()).isEqualTo(DEFAULT_TIP);
-        assertThat(testSud.getNaselje()).isEqualTo(DEFAULT_NASELJE);
+        assertThat(testSud.getMesto()).isEqualTo(UPDATED_MESTO);
     }
 
     @Test
@@ -325,7 +354,7 @@ class SudResourceIT {
         Sud partialUpdatedSud = new Sud();
         partialUpdatedSud.setId(sud.getId());
 
-        partialUpdatedSud.tip(UPDATED_TIP).naselje(UPDATED_NASELJE);
+        partialUpdatedSud.naziv(UPDATED_NAZIV).tip(UPDATED_TIP).mesto(UPDATED_MESTO);
 
         restSudMockMvc
             .perform(
@@ -340,8 +369,9 @@ class SudResourceIT {
         List<Sud> sudList = sudRepository.findAll();
         assertThat(sudList).hasSize(databaseSizeBeforeUpdate);
         Sud testSud = sudList.get(sudList.size() - 1);
+        assertThat(testSud.getNaziv()).isEqualTo(UPDATED_NAZIV);
         assertThat(testSud.getTip()).isEqualTo(UPDATED_TIP);
-        assertThat(testSud.getNaselje()).isEqualTo(UPDATED_NASELJE);
+        assertThat(testSud.getMesto()).isEqualTo(UPDATED_MESTO);
     }
 
     @Test

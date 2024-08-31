@@ -19,8 +19,6 @@ public class RadnjaPresudeDTO implements Serializable {
     @NotNull
     private String mestoRadnje;
 
-    private String bitneNapomene;
-
     private String mestoSmrti;
 
     private LocalDate vremeSmrti;
@@ -47,14 +45,6 @@ public class RadnjaPresudeDTO implements Serializable {
 
     public void setMestoRadnje(String mestoRadnje) {
         this.mestoRadnje = mestoRadnje;
-    }
-
-    public String getBitneNapomene() {
-        return bitneNapomene;
-    }
-
-    public void setBitneNapomene(String bitneNapomene) {
-        this.bitneNapomene = bitneNapomene;
     }
 
     public String getMestoSmrti() {
@@ -101,7 +91,6 @@ public class RadnjaPresudeDTO implements Serializable {
             "id='" + getId() + "'" +
             ", vremeRadnje='" + getVremeRadnje() + "'" +
             ", mestoRadnje='" + getMestoRadnje() + "'" +
-            ", bitneNapomene='" + getBitneNapomene() + "'" +
             ", mestoSmrti='" + getMestoSmrti() + "'" +
             ", vremeSmrti='" + getVremeSmrti() + "'" +
             "}";

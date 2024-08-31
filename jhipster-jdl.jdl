@@ -15,15 +15,12 @@ application {
 }
 
 entity Presuda {
-	tekst String
     datum LocalDate required
-    datumObjave LocalDate
     datumPritvora LocalDate
+    kod String required
     tip TipPresude required
-    broj Integer required
-    godina Integer required
-    optuznica String
-    datumOptuznice LocalDate
+    broj Integer
+    godina Integer
     pokusaj Boolean
     krivica Boolean
     nacin TipUbistva
@@ -31,18 +28,32 @@ entity Presuda {
 
 entity Osoba {
 	ime String required
+	pol Pol required
+}
+
+entity Sud {
+    naziv String required
+    tip TipSuda required
+    mesto String required
+}
+
+entity Optuznica {
+    kod String required
+    datum LocalDate required
+    ustanova String
 }
 
 entity Optuzeni {
 	ime String required
-    jmbg String required unique pattern(/^[0-9]{13}/)
+    jmbg String unique pattern(/^[0-9]{13}/)
     imeOca String
     imeMajke String
-    pol Pol
+    pol Pol required
     datumRodjenja LocalDate
     mestoRodjenja String
     drzavaRodjenja String
     prebivaliste String
+    drzavljanstvo String
     bracniStatus BracniStatus
     brojDece Integer
     brojMaloletneDece Integer
@@ -55,7 +66,6 @@ entity Optuzeni {
 entity RadnjaPresude {
 	vremeRadnje LocalDate required
     mestoRadnje String required
-    bitneNapomene String
     mestoSmrti String
     vremeSmrti LocalDate
 }
@@ -86,19 +96,17 @@ entity ClanZakona {
     tekst String
 }
 
-entity Sud {
-	tip TipSuda required
-    naselje String required
-}
-
 relationship OneToMany {
 	Zakon{clanovi(clanovi)} to ClanZakona{zakon required}
     
-    Optuzeni{presudeOptuzeni(presudeOptuzeni)} to Presuda{optuzeni required}
-    Osoba{presudeSudija(presudeSudija)} to Presuda{sudija required}
-    Osoba{presudeZapisnicar(presudeZapisnicar)} to Presuda{zapisnicar required}
-    Osoba{presudeTuzilac(presudeTuzilac)} to Presuda{tuzilac required}
-    Osoba{presudeBranilac(presudeBranilac)} to Presuda{branilac required}
+    Optuzeni{presudeOptuzeni(presudeOptuzeni)} to Presuda{optuzeni}
+    Osoba{presudeSudija(presudeSudija)} to Presuda{sudija}
+    Osoba{presudeZapisnicar(presudeZapisnicar)} to Presuda{zapisnicar}
+    Osoba{presudeTuzilac(presudeTuzilac)} to Presuda{tuzilac}
+    Osoba{presudeBranilac(presudeBranilac)} to Presuda{branilac}
+    Osoba{presudeOsteceni(presudeOsteceni)} to Presuda{osteceni}
+
+    Sud{presudeSud(presudeSud)} to Presuda{sud}
     
     Presuda{kazne(kazne)} to @OnDelete("SET NULL") @OnUpdate("CASCADE") Kazna
     
@@ -107,8 +115,8 @@ relationship OneToMany {
 
 relationship OneToOne {
 	Presuda{radnja required} to RadnjaPresude{presuda}
+	Presuda{optuznica required} to Optuznica{presuda}
 }
-
 
 
 enum TipPresude {

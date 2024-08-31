@@ -25,36 +25,26 @@ public class Presuda implements Serializable {
     @Id
     private String id;
 
-    @Field("tekst")
-    private String tekst;
-
     @NotNull
     @Field("datum")
     private LocalDate datum;
-
-    @Field("datum_objave")
-    private LocalDate datumObjave;
 
     @Field("datum_pritvora")
     private LocalDate datumPritvora;
 
     @NotNull
+    @Field("kod")
+    private String kod;
+
+    @NotNull
     @Field("tip")
     private TipPresude tip;
 
-    @NotNull
     @Field("broj")
     private Integer broj;
 
-    @NotNull
     @Field("godina")
     private Integer godina;
-
-    @Field("optuznica")
-    private String optuznica;
-
-    @Field("datum_optuznice")
-    private LocalDate datumOptuznice;
 
     @Field("pokusaj")
     private Boolean pokusaj;
@@ -70,6 +60,10 @@ public class Presuda implements Serializable {
     private RadnjaPresude radnja;
 
     @DBRef
+    @Field("optuznica")
+    private Optuznica optuznica;
+
+    @DBRef
     @Field("kazne")
     @JsonIgnoreProperties(value = { "presuda" }, allowSetters = true)
     private Set<Kazna> kaznes = new HashSet<>();
@@ -81,23 +75,48 @@ public class Presuda implements Serializable {
 
     @DBRef
     @Field("sudija")
-    @JsonIgnoreProperties(value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        allowSetters = true
+    )
     private Osoba sudija;
 
     @DBRef
     @Field("zapisnicar")
-    @JsonIgnoreProperties(value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        allowSetters = true
+    )
     private Osoba zapisnicar;
 
     @DBRef
     @Field("tuzilac")
-    @JsonIgnoreProperties(value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        allowSetters = true
+    )
     private Osoba tuzilac;
 
     @DBRef
     @Field("branilac")
-    @JsonIgnoreProperties(value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        allowSetters = true
+    )
     private Osoba branilac;
+
+    @DBRef
+    @Field("osteceni")
+    @JsonIgnoreProperties(
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        allowSetters = true
+    )
+    private Osoba osteceni;
+
+    @DBRef
+    @Field("sud")
+    @JsonIgnoreProperties(value = { "presudeSuds" }, allowSetters = true)
+    private Sud sud;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -114,19 +133,6 @@ public class Presuda implements Serializable {
         this.id = id;
     }
 
-    public String getTekst() {
-        return this.tekst;
-    }
-
-    public Presuda tekst(String tekst) {
-        this.setTekst(tekst);
-        return this;
-    }
-
-    public void setTekst(String tekst) {
-        this.tekst = tekst;
-    }
-
     public LocalDate getDatum() {
         return this.datum;
     }
@@ -140,19 +146,6 @@ public class Presuda implements Serializable {
         this.datum = datum;
     }
 
-    public LocalDate getDatumObjave() {
-        return this.datumObjave;
-    }
-
-    public Presuda datumObjave(LocalDate datumObjave) {
-        this.setDatumObjave(datumObjave);
-        return this;
-    }
-
-    public void setDatumObjave(LocalDate datumObjave) {
-        this.datumObjave = datumObjave;
-    }
-
     public LocalDate getDatumPritvora() {
         return this.datumPritvora;
     }
@@ -164,6 +157,19 @@ public class Presuda implements Serializable {
 
     public void setDatumPritvora(LocalDate datumPritvora) {
         this.datumPritvora = datumPritvora;
+    }
+
+    public String getKod() {
+        return this.kod;
+    }
+
+    public Presuda kod(String kod) {
+        this.setKod(kod);
+        return this;
+    }
+
+    public void setKod(String kod) {
+        this.kod = kod;
     }
 
     public TipPresude getTip() {
@@ -203,32 +209,6 @@ public class Presuda implements Serializable {
 
     public void setGodina(Integer godina) {
         this.godina = godina;
-    }
-
-    public String getOptuznica() {
-        return this.optuznica;
-    }
-
-    public Presuda optuznica(String optuznica) {
-        this.setOptuznica(optuznica);
-        return this;
-    }
-
-    public void setOptuznica(String optuznica) {
-        this.optuznica = optuznica;
-    }
-
-    public LocalDate getDatumOptuznice() {
-        return this.datumOptuznice;
-    }
-
-    public Presuda datumOptuznice(LocalDate datumOptuznice) {
-        this.setDatumOptuznice(datumOptuznice);
-        return this;
-    }
-
-    public void setDatumOptuznice(LocalDate datumOptuznice) {
-        this.datumOptuznice = datumOptuznice;
     }
 
     public Boolean getPokusaj() {
@@ -280,6 +260,19 @@ public class Presuda implements Serializable {
 
     public Presuda radnja(RadnjaPresude radnjaPresude) {
         this.setRadnja(radnjaPresude);
+        return this;
+    }
+
+    public Optuznica getOptuznica() {
+        return this.optuznica;
+    }
+
+    public void setOptuznica(Optuznica optuznica) {
+        this.optuznica = optuznica;
+    }
+
+    public Presuda optuznica(Optuznica optuznica) {
+        this.setOptuznica(optuznica);
         return this;
     }
 
@@ -379,6 +372,32 @@ public class Presuda implements Serializable {
         return this;
     }
 
+    public Osoba getOsteceni() {
+        return this.osteceni;
+    }
+
+    public void setOsteceni(Osoba osoba) {
+        this.osteceni = osoba;
+    }
+
+    public Presuda osteceni(Osoba osoba) {
+        this.setOsteceni(osoba);
+        return this;
+    }
+
+    public Sud getSud() {
+        return this.sud;
+    }
+
+    public void setSud(Sud sud) {
+        this.sud = sud;
+    }
+
+    public Presuda sud(Sud sud) {
+        this.setSud(sud);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -403,15 +422,12 @@ public class Presuda implements Serializable {
     public String toString() {
         return "Presuda{" +
             "id=" + getId() +
-            ", tekst='" + getTekst() + "'" +
             ", datum='" + getDatum() + "'" +
-            ", datumObjave='" + getDatumObjave() + "'" +
             ", datumPritvora='" + getDatumPritvora() + "'" +
+            ", kod='" + getKod() + "'" +
             ", tip='" + getTip() + "'" +
             ", broj=" + getBroj() +
             ", godina=" + getGodina() +
-            ", optuznica='" + getOptuznica() + "'" +
-            ", datumOptuznice='" + getDatumOptuznice() + "'" +
             ", pokusaj='" + getPokusaj() + "'" +
             ", krivica='" + getKrivica() + "'" +
             ", nacin='" + getNacin() + "'" +

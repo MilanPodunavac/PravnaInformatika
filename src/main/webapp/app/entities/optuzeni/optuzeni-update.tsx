@@ -116,7 +116,6 @@ export const OptuzeniUpdate = () => {
                 data-cy="jmbg"
                 type="text"
                 validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
                   pattern: { value: /^[0-9]{13}/, message: translate('entity.validation.pattern', { pattern: '^[0-9]{13}' }) },
                 }}
               />
@@ -173,6 +172,13 @@ export const OptuzeniUpdate = () => {
                 id="optuzeni-prebivaliste"
                 name="prebivaliste"
                 data-cy="prebivaliste"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('pravnaInformatikaApp.optuzeni.drzavljanstvo')}
+                id="optuzeni-drzavljanstvo"
+                name="drzavljanstvo"
+                data-cy="drzavljanstvo"
                 type="text"
               />
               <ValidatedField

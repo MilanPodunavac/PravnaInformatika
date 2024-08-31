@@ -8,14 +8,15 @@ import { TipObrazovanja } from 'app/shared/model/enumerations/tip-obrazovanja.mo
 export interface IOptuzeni {
   id?: string;
   ime?: string;
-  jmbg?: string;
+  jmbg?: string | null;
   imeOca?: string | null;
   imeMajke?: string | null;
-  pol?: Pol | null;
+  pol?: Pol;
   datumRodjenja?: string | null;
   mestoRodjenja?: string | null;
   drzavaRodjenja?: string | null;
   prebivaliste?: string | null;
+  drzavljanstvo?: string | null;
   bracniStatus?: BracniStatus | null;
   brojDece?: number | null;
   brojMaloletneDece?: number | null;

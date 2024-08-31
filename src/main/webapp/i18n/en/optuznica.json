@@ -1,0 +1,27 @@
+{
+  "pravnaInformatikaApp": {
+    "optuznica": {
+      "home": {
+        "title": "Optuznicas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Optuznica",
+        "createOrEditLabel": "Create or edit a Optuznica",
+        "notFound": "No Optuznicas found"
+      },
+      "created": "A new Optuznica is created with identifier {{ param }}",
+      "updated": "A Optuznica is updated with identifier {{ param }}",
+      "deleted": "A Optuznica is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Optuznica {{ id }}?"
+      },
+      "detail": {
+        "title": "Optuznica"
+      },
+      "id": "ID",
+      "kod": "Kod",
+      "datum": "Datum",
+      "ustanova": "Ustanova",
+      "presuda": "Presuda"
+    }
+  }
+}

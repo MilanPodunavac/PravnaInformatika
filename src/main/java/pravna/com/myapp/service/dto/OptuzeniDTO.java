@@ -20,7 +20,6 @@ public class OptuzeniDTO implements Serializable {
     @NotNull
     private String ime;
 
-    @NotNull
     @Pattern(regexp = "^[0-9]{13}")
     private String jmbg;
 
@@ -28,6 +27,7 @@ public class OptuzeniDTO implements Serializable {
 
     private String imeMajke;
 
+    @NotNull
     private Pol pol;
 
     private LocalDate datumRodjenja;
@@ -37,6 +37,8 @@ public class OptuzeniDTO implements Serializable {
     private String drzavaRodjenja;
 
     private String prebivaliste;
+
+    private String drzavljanstvo;
 
     private BracniStatus bracniStatus;
 
@@ -132,6 +134,14 @@ public class OptuzeniDTO implements Serializable {
         this.prebivaliste = prebivaliste;
     }
 
+    public String getDrzavljanstvo() {
+        return drzavljanstvo;
+    }
+
+    public void setDrzavljanstvo(String drzavljanstvo) {
+        this.drzavljanstvo = drzavljanstvo;
+    }
+
     public BracniStatus getBracniStatus() {
         return bracniStatus;
     }
@@ -223,6 +233,7 @@ public class OptuzeniDTO implements Serializable {
             ", mestoRodjenja='" + getMestoRodjenja() + "'" +
             ", drzavaRodjenja='" + getDrzavaRodjenja() + "'" +
             ", prebivaliste='" + getPrebivaliste() + "'" +
+            ", drzavljanstvo='" + getDrzavljanstvo() + "'" +
             ", bracniStatus='" + getBracniStatus() + "'" +
             ", brojDece=" + getBrojDece() +
             ", brojMaloletneDece=" + getBrojMaloletneDece() +

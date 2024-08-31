@@ -10,10 +10,14 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IRadnjaPresude } from 'app/shared/model/radnja-presude.model';
 import { getEntities as getRadnjaPresudes } from 'app/entities/radnja-presude/radnja-presude.reducer';
+import { IOptuznica } from 'app/shared/model/optuznica.model';
+import { getEntities as getOptuznicas } from 'app/entities/optuznica/optuznica.reducer';
 import { IOptuzeni } from 'app/shared/model/optuzeni.model';
 import { getEntities as getOptuzenis } from 'app/entities/optuzeni/optuzeni.reducer';
 import { IOsoba } from 'app/shared/model/osoba.model';
 import { getEntities as getOsobas } from 'app/entities/osoba/osoba.reducer';
+import { ISud } from 'app/shared/model/sud.model';
+import { getEntities as getSuds } from 'app/entities/sud/sud.reducer';
 import { IPresuda } from 'app/shared/model/presuda.model';
 import { TipPresude } from 'app/shared/model/enumerations/tip-presude.model';
 import { TipUbistva } from 'app/shared/model/enumerations/tip-ubistva.model';
@@ -25,6 +29,7 @@ import { TipObrazovanja } from 'app/shared/model/enumerations/tip-obrazovanja.mo
 import { chatExtractPresuda } from 'app/modules/chat/chat';
 import pdfToText from 'react-pdftotext';
 import { set } from 'lodash';
+import { TipSuda } from 'app/shared/model/enumerations/tip-suda.model';
 
 export const PresudaUpdate = () => {
   const dispatch = useAppDispatch();
@@ -35,8 +40,10 @@ export const PresudaUpdate = () => {
   const isNew = id === undefined;
 
   const radnjaPresudes = useAppSelector(state => state.radnjaPresude.entities);
+  const optuznicas = useAppSelector(state => state.optuznica.entities);
   const optuzenis = useAppSelector(state => state.optuzeni.entities);
   const osobas = useAppSelector(state => state.osoba.entities);
+  const suds = useAppSelector(state => state.sud.entities);
   const presudaEntity = useAppSelector(state => state.presuda.entity);
   const loading = useAppSelector(state => state.presuda.loading);
   const updating = useAppSelector(state => state.presuda.updating);
@@ -47,8 +54,8 @@ export const PresudaUpdate = () => {
   const bracniStatusValues = Object.keys(BracniStatus);
   const imovinskoStanjeValues = Object.keys(ImovinskoStanje);
   const tipObrazovanjaValues = Object.keys(TipObrazovanja);
+  const tipSudaValues = Object.keys(TipSuda);
 
-  const [tekstInput, setTekstInput] = useState('');
   const [kodInput, setKodInput] = useState('');
   const [datumInput, setDatumInput] = useState('');
   const [datumPritvoraInput, setDatumPritvoraInput] = useState('');
@@ -60,14 +67,13 @@ export const PresudaUpdate = () => {
   const [nacinInput, setNacinInput] = useState('');
 
   const [sudNazivInput, setSudNazivInput] = useState('');
+  const [sudTipInput, setSudTipInput] = useState('');
   const [mestoSudaNazivInput, setMestoSudaNazivInput] = useState('');
 
   const [optuznicaKodInput, setOptuznicaKodInput] = useState('');
   const [optuznicaDatumInput, setOptuznicaDatumInput] = useState('');
   const [optuznicaUstanovaInput, setOptuznicaUstanovaInput] = useState('');
 
-  const [osteceniImeInput, setOsteceniImeInput] = useState('');
-  const [osteceniPolInput, setOsteceniPolInput] = useState('');
   const [vremeRadnjeInput, setVremeRadnjeInput] = useState('');
   const [mestoRadnjeInput, setMestoRadnjeInput] = useState('');
   const [vremeSmrtiInput, setVremeSmrtiInput] = useState('');
@@ -111,6 +117,9 @@ export const PresudaUpdate = () => {
   const [branilacImeInput, setBranilacImeInput] = useState('');
   const [branilacPolInput, setBranilacPolInput] = useState('');
 
+  const [osteceniImeInput, setOsteceniImeInput] = useState('');
+  const [osteceniPolInput, setOsteceniPolInput] = useState('');
+
   const handleClose = () => {
     navigate('/presuda');
   };
@@ -121,8 +130,10 @@ export const PresudaUpdate = () => {
     }
 
     dispatch(getRadnjaPresudes({}));
+    dispatch(getOptuznicas({}));
     dispatch(getOptuzenis({}));
     dispatch(getOsobas({}));
+    dispatch(getSuds({}));
   }, []);
 
   useEffect(() => {
@@ -165,6 +176,21 @@ export const PresudaUpdate = () => {
             ...values.branilac,
           }
         : osobas.find(it => it.id.toString() === values.branilac.toString()),
+      optuznica: isNew
+        ? {
+            ...values.optuznica,
+          }
+        : optuznicas.find(it => it.id.toString() === values.optuznica.toString()),
+      osteceni: isNew
+        ? {
+            ...values.osteceni,
+          }
+        : osobas.find(it => it.id.toString() === values.osteceni.toString()),
+      sud: isNew
+        ? {
+            ...values.sud,
+          }
+        : suds.find(it => it.id.toString() === values.sud.toString()),
     };
 
     if (isNew) {
@@ -183,11 +209,14 @@ export const PresudaUpdate = () => {
           nacin: 'SA_PREDUMISLJANJEM',
           ...presudaEntity,
           radnja: presudaEntity?.radnja?.id,
+          optuznica: presudaEntity?.optuznica?.id,
           optuzeni: presudaEntity?.optuzeni?.id,
           sudija: presudaEntity?.sudija?.id,
           zapisnicar: presudaEntity?.zapisnicar?.id,
           tuzilac: presudaEntity?.tuzilac?.id,
           branilac: presudaEntity?.branilac?.id,
+          osteceni: presudaEntity?.osteceni?.id,
+          sud: presudaEntity?.sud?.id,
         };
 
   function extractText(event: ChangeEvent<HTMLInputElement>): void {
@@ -218,6 +247,7 @@ export const PresudaUpdate = () => {
     setNacinInput(presuda.nacin);
 
     setSudNazivInput(presuda.sud.naziv);
+    setSudTipInput(presuda.sud.tip);
     setMestoSudaNazivInput(presuda.sud.mesto);
 
     setOptuznicaKodInput(presuda.optuznica.kod);
@@ -238,8 +268,9 @@ export const PresudaUpdate = () => {
     setBranilacImeInput(presuda.branilac.ime);
     setBranilacPolInput(presuda.branilac.pol);
 
-    setOsteceniImeInput(presuda.radnja.osteceni.ime);
-    setOsteceniPolInput(presuda.radnja.osteceni.pol);
+    setOsteceniImeInput(presuda.osteceni.ime);
+    setOsteceniPolInput(presuda.osteceni.pol);
+
     setVremeRadnjeInput(presuda.radnja.vreme_radnje);
     setMestoRadnjeInput(presuda.radnja.mesto_radnje);
     setVremeSmrtiInput(presuda.radnja.vreme_smrti ?? '');
@@ -297,15 +328,6 @@ export const PresudaUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('pravnaInformatikaApp.presuda.tekst')}
-                id="presuda-tekst"
-                name="tekst"
-                data-cy="tekst"
-                type="text"
-                value={tekstInput}
-                onChange={e => setTekstInput(e.target.value)}
-              />
-              <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.datum')}
                 id="presuda-datum"
                 name="datum"
@@ -318,15 +340,6 @@ export const PresudaUpdate = () => {
                 onChange={e => setDatumInput(e.target.value)}
               />
               <ValidatedField
-                label={translate('pravnaInformatikaApp.presuda.datumObjave')}
-                id="presuda-datumObjave"
-                name="datumObjave"
-                data-cy="datumObjave"
-                type="date"
-                value={datumInput}
-                onChange={e => setDatumInput(e.target.value)}
-              />
-              <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.datumPritvora')}
                 id="presuda-datumPritvora"
                 name="datumPritvora"
@@ -334,6 +347,18 @@ export const PresudaUpdate = () => {
                 type="date"
                 value={datumPritvoraInput}
                 onChange={e => setDatumPritvoraInput(e.target.value)}
+              />
+              <ValidatedField
+                label={translate('pravnaInformatikaApp.presuda.kod')}
+                id="presuda-kod"
+                name="kod"
+                data-cy="kod"
+                type="text"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                }}
+                value={kodInput}
+                onChange={e => setKodInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.tip')}
@@ -357,7 +382,6 @@ export const PresudaUpdate = () => {
                 data-cy="broj"
                 type="text"
                 validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
                   validate: v => isNumber(v) || translate('entity.validation.number'),
                 }}
                 value={brojInput}
@@ -370,29 +394,10 @@ export const PresudaUpdate = () => {
                 data-cy="godina"
                 type="text"
                 validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
                   validate: v => isNumber(v) || translate('entity.validation.number'),
                 }}
                 value={godinaInput}
                 onChange={e => setGodinaInput(e.target.value)}
-              />
-              <ValidatedField
-                label={translate('pravnaInformatikaApp.presuda.optuznica')}
-                id="presuda-optuznica"
-                name="optuznica"
-                data-cy="optuznica"
-                type="text"
-                value={optuznicaKodInput}
-                onChange={e => setOptuznicaKodInput(e.target.value)}
-              />
-              <ValidatedField
-                label={translate('pravnaInformatikaApp.presuda.datumOptuznice')}
-                id="presuda-datumOptuznice"
-                name="datumOptuznice"
-                data-cy="datumOptuznice"
-                type="date"
-                value={optuznicaDatumInput}
-                onChange={e => setOptuznicaDatumInput(e.target.value)}
               />
               <ValidatedField
                 label={translate('pravnaInformatikaApp.presuda.pokusaj')}
@@ -473,15 +478,6 @@ export const PresudaUpdate = () => {
               )}
               {isNew && (
                 <ValidatedField
-                  label={translate('pravnaInformatikaApp.radnjaPresude.bitneNapomene')}
-                  id="presuda-radnja-bitneNapomene"
-                  name="radnja.bitneNapomene"
-                  data-cy="radnja.bitneNapomene"
-                  type="text"
-                />
-              )}
-              {isNew && (
-                <ValidatedField
                   label={translate('pravnaInformatikaApp.radnjaPresude.vremeSmrti')}
                   id="presuda-radnja-vremeSmrti"
                   name="radnja.vremeSmrti"
@@ -500,6 +496,62 @@ export const PresudaUpdate = () => {
                   type="text"
                   value={mestoSmrtiInput}
                   onChange={e => setMestoSmrtiInput(e.target.value)}
+                />
+              )}
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
+              {!isNew && (
+                <ValidatedField
+                  id="presuda-optuznica"
+                  name="optuznica"
+                  data-cy="optuznica"
+                  label={translate('pravnaInformatikaApp.presuda.optuznica')}
+                  type="select"
+                  disabled={!isNew}
+                  required
+                >
+                  <option value="" key="0" />
+                  {optuznicas
+                    ? optuznicas.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </ValidatedField>
+              )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.optuznica.kod')}
+                  id="presuda-optuznica-kod"
+                  name="optuznica.kod"
+                  data-cy="optuznica.kod"
+                  type="text"
+                  value={optuznicaKodInput}
+                  onChange={e => setOptuznicaKodInput(e.target.value)}
+                />
+              )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.optuznica.datum')}
+                  id="presuda-optuznica-datum"
+                  name="optuznica.datum"
+                  data-cy="optuznica.datum"
+                  type="date"
+                  value={optuznicaDatumInput}
+                  onChange={e => setOptuznicaDatumInput(e.target.value)}
+                />
+              )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.optuznica.ustanova')}
+                  id="presuda-optuznica-ustanova"
+                  name="optuznica.ustanova"
+                  data-cy="optuznica.ustanova"
+                  type="text"
+                  value={optuznicaUstanovaInput}
+                  onChange={e => setOptuznicaUstanovaInput(e.target.value)}
                 />
               )}
               <FormText>
@@ -758,6 +810,23 @@ export const PresudaUpdate = () => {
                   onChange={e => setSudijaImeInput(e.target.value)}
                 />
               )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.osoba.pol')}
+                  id="presuda-sudija-pol"
+                  name="sudija.pol"
+                  data-cy="sudija.pol"
+                  type="select"
+                  value={sudijaPolInput}
+                  onChange={e => setSudijaPolInput(e.target.value)}
+                >
+                  {polValues.map(pol => (
+                    <option value={pol} key={pol}>
+                      {translate('pravnaInformatikaApp.Pol.' + pol)}
+                    </option>
+                  ))}
+                </ValidatedField>
+              )}
               <FormText>
                 <Translate contentKey="entity.validation.required">This field is required.</Translate>
               </FormText>
@@ -769,13 +838,12 @@ export const PresudaUpdate = () => {
                   label={translate('pravnaInformatikaApp.presuda.zapisnicar')}
                   type="select"
                   disabled={!isNew}
-                  required
                 >
                   <option value="" key="0" />
                   {osobas
                     ? osobas.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.ime}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}
@@ -792,9 +860,23 @@ export const PresudaUpdate = () => {
                   onChange={e => setZapisnicarImeInput(e.target.value)}
                 />
               )}
-              <FormText>
-                <Translate contentKey="entity.validation.required">This field is required.</Translate>
-              </FormText>
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.osoba.pol')}
+                  id="presuda-zapisnicar-pol"
+                  name="zapisnicar.pol"
+                  data-cy="zapisnicar.pol"
+                  type="select"
+                  value={zapisnicarPolInput}
+                  onChange={e => setZapisnicarPolInput(e.target.value)}
+                >
+                  {polValues.map(pol => (
+                    <option value={pol} key={pol}>
+                      {translate('pravnaInformatikaApp.Pol.' + pol)}
+                    </option>
+                  ))}
+                </ValidatedField>
+              )}
               {!isNew && (
                 <ValidatedField
                   id="presuda-tuzilac"
@@ -803,13 +885,12 @@ export const PresudaUpdate = () => {
                   label={translate('pravnaInformatikaApp.presuda.tuzilac')}
                   type="select"
                   disabled={!isNew}
-                  required
                 >
                   <option value="" key="0" />
                   {osobas
                     ? osobas.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.ime}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}
@@ -826,9 +907,23 @@ export const PresudaUpdate = () => {
                   onChange={e => setTuzilacImeInput(e.target.value)}
                 />
               )}
-              <FormText>
-                <Translate contentKey="entity.validation.required">This field is required.</Translate>
-              </FormText>
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.osoba.pol')}
+                  id="presuda-tuzilac-pol"
+                  name="tuzilac.pol"
+                  data-cy="tuzilac.pol"
+                  type="select"
+                  value={tuzilacPolInput}
+                  onChange={e => setTuzilacPolInput(e.target.value)}
+                >
+                  {polValues.map(pol => (
+                    <option value={pol} key={pol}>
+                      {translate('pravnaInformatikaApp.Pol.' + pol)}
+                    </option>
+                  ))}
+                </ValidatedField>
+              )}
               {!isNew && (
                 <ValidatedField
                   id="presuda-branilac"
@@ -837,13 +932,12 @@ export const PresudaUpdate = () => {
                   label={translate('pravnaInformatikaApp.presuda.branilac')}
                   type="select"
                   disabled={!isNew}
-                  required
                 >
                   <option value="" key="0" />
                   {osobas
                     ? osobas.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.ime}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}
@@ -860,9 +954,128 @@ export const PresudaUpdate = () => {
                   onChange={e => setBranilacImeInput(e.target.value)}
                 />
               )}
-              <FormText>
-                <Translate contentKey="entity.validation.required">This field is required.</Translate>
-              </FormText>
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.osoba.pol')}
+                  id="presuda-branilac-pol"
+                  name="branilac.pol"
+                  data-cy="branilac.pol"
+                  type="select"
+                  value={branilacPolInput}
+                  onChange={e => setBranilacPolInput(e.target.value)}
+                >
+                  {polValues.map(pol => (
+                    <option value={pol} key={pol}>
+                      {translate('pravnaInformatikaApp.Pol.' + pol)}
+                    </option>
+                  ))}
+                </ValidatedField>
+              )}
+              {!isNew && (
+                <ValidatedField
+                  id="presuda-osteceni"
+                  name="osteceni"
+                  data-cy="osteceni"
+                  label={translate('pravnaInformatikaApp.presuda.osteceni')}
+                  type="select"
+                  disabled={!isNew}
+                >
+                  <option value="" key="0" />
+                  {osobas
+                    ? osobas.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </ValidatedField>
+              )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.osoba.ime')}
+                  id="presuda-osteceni-ime"
+                  name="osteceni.ime"
+                  data-cy="osteceni.ime"
+                  type="text"
+                  value={osteceniImeInput}
+                  onChange={e => setOsteceniImeInput(e.target.value)}
+                />
+              )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.osoba.pol')}
+                  id="presuda-osteceni-pol"
+                  name="osteceni.pol"
+                  data-cy="osteceni.pol"
+                  type="select"
+                  value={osteceniPolInput}
+                  onChange={e => setOsteceniPolInput(e.target.value)}
+                >
+                  {polValues.map(pol => (
+                    <option value={pol} key={pol}>
+                      {translate('pravnaInformatikaApp.Pol.' + pol)}
+                    </option>
+                  ))}
+                </ValidatedField>
+              )}
+              {!isNew && (
+                <ValidatedField
+                  id="presuda-sud"
+                  name="sud"
+                  data-cy="sud"
+                  label={translate('pravnaInformatikaApp.presuda.sud')}
+                  type="select"
+                  disabled={!isNew}
+                >
+                  <option value="" key="0" />
+                  {suds
+                    ? suds.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </ValidatedField>
+              )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.sud.naziv')}
+                  id="presuda-sud-naziv"
+                  name="sud.naziv"
+                  data-cy="sud.naziv"
+                  type="text"
+                  value={sudNazivInput}
+                  onChange={e => setSudNazivInput(e.target.value)}
+                />
+              )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.sud.tip')}
+                  id="presuda-sud-tip"
+                  name="sud.tip"
+                  data-cy="sud.tip"
+                  type="select"
+                  value={sudTipInput}
+                  onChange={e => setSudTipInput(e.target.value)}
+                >
+                  {tipSudaValues.map(tipSuda => (
+                    <option value={tipSuda} key={tipSuda}>
+                      {translate('pravnaInformatikaApp.TipSuda.' + tipSuda)}
+                    </option>
+                  ))}
+                </ValidatedField>
+              )}
+              {isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.sud.mesto')}
+                  id="presuda-sud-mesto"
+                  name="sud.mesto"
+                  data-cy="sud.mesto"
+                  type="text"
+                  value={mestoSudaNazivInput}
+                  onChange={e => setMestoSudaNazivInput(e.target.value)}
+                />
+              )}
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/presuda" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

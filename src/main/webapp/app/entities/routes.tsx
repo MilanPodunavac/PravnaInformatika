@@ -12,6 +12,7 @@ import Kazna from './kazna';
 import Zakon from './zakon';
 import ClanZakona from './clan-zakona';
 import Sud from './sud';
+import Optuznica from './optuznica';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -28,6 +29,7 @@ export default () => {
         <Route path="zakon/*" element={<Zakon />} />
         <Route path="clan-zakona/*" element={<ClanZakona />} />
         <Route path="sud/*" element={<Sud />} />
+        <Route path="optuznica/*" element={<Optuznica />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

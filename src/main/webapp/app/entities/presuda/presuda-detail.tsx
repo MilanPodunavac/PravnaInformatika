@@ -33,25 +33,11 @@ export const PresudaDetail = () => {
           </dt>
           <dd>{presudaEntity.id}</dd>
           <dt>
-            <span id="tekst">
-              <Translate contentKey="pravnaInformatikaApp.presuda.tekst">Tekst</Translate>
-            </span>
-          </dt>
-          <dd>{presudaEntity.tekst}</dd>
-          <dt>
             <span id="datum">
               <Translate contentKey="pravnaInformatikaApp.presuda.datum">Datum</Translate>
             </span>
           </dt>
           <dd>{presudaEntity.datum ? <TextFormat value={presudaEntity.datum} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}</dd>
-          <dt>
-            <span id="datumObjave">
-              <Translate contentKey="pravnaInformatikaApp.presuda.datumObjave">Datum Objave</Translate>
-            </span>
-          </dt>
-          <dd>
-            {presudaEntity.datumObjave ? <TextFormat value={presudaEntity.datumObjave} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}
-          </dd>
           <dt>
             <span id="datumPritvora">
               <Translate contentKey="pravnaInformatikaApp.presuda.datumPritvora">Datum Pritvora</Translate>
@@ -62,6 +48,12 @@ export const PresudaDetail = () => {
               <TextFormat value={presudaEntity.datumPritvora} type="date" format={APP_LOCAL_DATE_FORMAT} />
             ) : null}
           </dd>
+          <dt>
+            <span id="kod">
+              <Translate contentKey="pravnaInformatikaApp.presuda.kod">Kod</Translate>
+            </span>
+          </dt>
+          <dd>{presudaEntity.kod}</dd>
           <dt>
             <span id="tip">
               <Translate contentKey="pravnaInformatikaApp.presuda.tip">Tip</Translate>
@@ -80,22 +72,6 @@ export const PresudaDetail = () => {
             </span>
           </dt>
           <dd>{presudaEntity.godina}</dd>
-          <dt>
-            <span id="optuznica">
-              <Translate contentKey="pravnaInformatikaApp.presuda.optuznica">Optuznica</Translate>
-            </span>
-          </dt>
-          <dd>{presudaEntity.optuznica}</dd>
-          <dt>
-            <span id="datumOptuznice">
-              <Translate contentKey="pravnaInformatikaApp.presuda.datumOptuznice">Datum Optuznice</Translate>
-            </span>
-          </dt>
-          <dd>
-            {presudaEntity.datumOptuznice ? (
-              <TextFormat value={presudaEntity.datumOptuznice} type="date" format={APP_LOCAL_DATE_FORMAT} />
-            ) : null}
-          </dd>
           <dt>
             <span id="pokusaj">
               <Translate contentKey="pravnaInformatikaApp.presuda.pokusaj">Pokusaj</Translate>
@@ -119,6 +95,10 @@ export const PresudaDetail = () => {
           </dt>
           <dd>{presudaEntity.radnja ? presudaEntity.radnja.id : ''}</dd>
           <dt>
+            <Translate contentKey="pravnaInformatikaApp.presuda.optuznica">Optuznica</Translate>
+          </dt>
+          <dd>{presudaEntity.optuznica ? presudaEntity.optuznica.id : ''}</dd>
+          <dt>
             <Translate contentKey="pravnaInformatikaApp.presuda.optuzeni">Optuzeni</Translate>
           </dt>
           <dd>{presudaEntity.optuzeni ? presudaEntity.optuzeni.id : ''}</dd>
@@ -138,6 +118,14 @@ export const PresudaDetail = () => {
             <Translate contentKey="pravnaInformatikaApp.presuda.branilac">Branilac</Translate>
           </dt>
           <dd>{presudaEntity.branilac ? presudaEntity.branilac.id : ''}</dd>
+          <dt>
+            <Translate contentKey="pravnaInformatikaApp.presuda.osteceni">Osteceni</Translate>
+          </dt>
+          <dd>{presudaEntity.osteceni ? presudaEntity.osteceni.id : ''}</dd>
+          <dt>
+            <Translate contentKey="pravnaInformatikaApp.presuda.sud">Sud</Translate>
+          </dt>
+          <dd>{presudaEntity.sud ? presudaEntity.sud.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/presuda" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

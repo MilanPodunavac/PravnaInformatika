@@ -6,10 +6,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import pravna.com.myapp.repository.extended.PresudaExtendedRepository;
 import pravna.com.myapp.service.dto.PresudaDTO;
-import pravna.com.myapp.service.extended.OptuzeniExtendedService;
-import pravna.com.myapp.service.extended.OsobaExtendedService;
-import pravna.com.myapp.service.extended.PresudaExtendedService;
-import pravna.com.myapp.service.extended.RadnjaPresudeExtendedService;
+import pravna.com.myapp.service.extended.*;
 import pravna.com.myapp.service.impl.PresudaServiceImpl;
 import pravna.com.myapp.service.mapper.PresudaMapper;
 
@@ -29,12 +26,15 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
 
     private final RadnjaPresudeExtendedService radnjaPresudeService;
 
+    private final SudExtendedService sudService;
+
     public PresudaExtendedServiceImpl(
         PresudaExtendedRepository presudaRepository,
         PresudaMapper presudaMapper,
         OptuzeniExtendedService optuzeniService,
         OsobaExtendedService osobaService,
-        RadnjaPresudeExtendedService radnjaPresudeService
+        RadnjaPresudeExtendedService radnjaPresudeService,
+        SudExtendedService sudService
     ) {
         super(presudaRepository, presudaMapper);
         this.presudaRepository = presudaRepository;
@@ -42,16 +42,19 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
         this.optuzeniService = optuzeniService;
         this.osobaService = osobaService;
         this.radnjaPresudeService = radnjaPresudeService;
+        this.sudService = sudService;
     }
 
     @Override
     public PresudaDTO save(PresudaDTO presudaDTO) {
         if (presudaDTO.getRadnja().getId() == null) presudaDTO.setRadnja(radnjaPresudeService.save(presudaDTO.getRadnja()));
         if (presudaDTO.getOptuzeni().getId() == null) presudaDTO.setOptuzeni(optuzeniService.save(presudaDTO.getOptuzeni()));
+        if (presudaDTO.getSud().getId() == null) presudaDTO.setSud(sudService.save(presudaDTO.getSud()));
         if (presudaDTO.getBranilac().getId() == null) presudaDTO.setBranilac(osobaService.save(presudaDTO.getBranilac()));
         if (presudaDTO.getSudija().getId() == null) presudaDTO.setSudija(osobaService.save(presudaDTO.getSudija()));
         if (presudaDTO.getZapisnicar().getId() == null) presudaDTO.setZapisnicar(osobaService.save(presudaDTO.getZapisnicar()));
         if (presudaDTO.getTuzilac().getId() == null) presudaDTO.setTuzilac(osobaService.save(presudaDTO.getTuzilac()));
+        if (presudaDTO.getOsteceni().getId() == null) presudaDTO.setOsteceni(osobaService.save(presudaDTO.getOsteceni()));
         super.save(presudaDTO);
 
         return presudaDTO;

@@ -14,10 +14,13 @@ public class SudDTO implements Serializable {
     private String id;
 
     @NotNull
+    private String naziv;
+
+    @NotNull
     private TipSuda tip;
 
     @NotNull
-    private String naselje;
+    private String mesto;
 
     public String getId() {
         return id;
@@ -25,6 +28,14 @@ public class SudDTO implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
     }
 
     public TipSuda getTip() {
@@ -35,12 +46,12 @@ public class SudDTO implements Serializable {
         this.tip = tip;
     }
 
-    public String getNaselje() {
-        return naselje;
+    public String getMesto() {
+        return mesto;
     }
 
-    public void setNaselje(String naselje) {
-        this.naselje = naselje;
+    public void setMesto(String mesto) {
+        this.mesto = mesto;
     }
 
     @Override
@@ -69,8 +80,9 @@ public class SudDTO implements Serializable {
     public String toString() {
         return "SudDTO{" +
             "id='" + getId() + "'" +
+            ", naziv='" + getNaziv() + "'" +
             ", tip='" + getTip() + "'" +
-            ", naselje='" + getNaselje() + "'" +
+            ", mesto='" + getMesto() + "'" +
             "}";
     }
 }

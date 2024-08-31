@@ -1,0 +1,27 @@
+{
+  "pravnaInformatikaApp": {
+    "optuznica": {
+      "home": {
+        "title": "Optuznicas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Kreiraj novi Optuznica",
+        "createOrEditLabel": "Kreirajte ili izmenite Optuznica",
+        "notFound": "No Optuznicas found"
+      },
+      "created": "Kreiran je novi Optuznica pod nazivom {{ param }}",
+      "updated": "Optuznica pod nazivom {{ param }} je ažuriran",
+      "deleted": "Optuznica pod nazivom {{ param }} je obrisan",
+      "delete": {
+        "question": "Da li ste sigurni da želite da obrišete Optuznica pod nazivom {{ id }}?"
+      },
+      "detail": {
+        "title": "Optuznica"
+      },
+      "id": "ID",
+      "kod": "Kod",
+      "datum": "Datum",
+      "ustanova": "Ustanova",
+      "presuda": "Presuda"
+    }
+  }
+}

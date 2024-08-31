@@ -37,9 +37,6 @@ class RadnjaPresudeResourceIT {
     private static final String DEFAULT_MESTO_RADNJE = "AAAAAAAAAA";
     private static final String UPDATED_MESTO_RADNJE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_BITNE_NAPOMENE = "AAAAAAAAAA";
-    private static final String UPDATED_BITNE_NAPOMENE = "BBBBBBBBBB";
-
     private static final String DEFAULT_MESTO_SMRTI = "AAAAAAAAAA";
     private static final String UPDATED_MESTO_SMRTI = "BBBBBBBBBB";
 
@@ -70,7 +67,6 @@ class RadnjaPresudeResourceIT {
         RadnjaPresude radnjaPresude = new RadnjaPresude()
             .vremeRadnje(DEFAULT_VREME_RADNJE)
             .mestoRadnje(DEFAULT_MESTO_RADNJE)
-            .bitneNapomene(DEFAULT_BITNE_NAPOMENE)
             .mestoSmrti(DEFAULT_MESTO_SMRTI)
             .vremeSmrti(DEFAULT_VREME_SMRTI);
         return radnjaPresude;
@@ -86,7 +82,6 @@ class RadnjaPresudeResourceIT {
         RadnjaPresude radnjaPresude = new RadnjaPresude()
             .vremeRadnje(UPDATED_VREME_RADNJE)
             .mestoRadnje(UPDATED_MESTO_RADNJE)
-            .bitneNapomene(UPDATED_BITNE_NAPOMENE)
             .mestoSmrti(UPDATED_MESTO_SMRTI)
             .vremeSmrti(UPDATED_VREME_SMRTI);
         return radnjaPresude;
@@ -118,7 +113,6 @@ class RadnjaPresudeResourceIT {
         RadnjaPresude testRadnjaPresude = radnjaPresudeList.get(radnjaPresudeList.size() - 1);
         assertThat(testRadnjaPresude.getVremeRadnje()).isEqualTo(DEFAULT_VREME_RADNJE);
         assertThat(testRadnjaPresude.getMestoRadnje()).isEqualTo(DEFAULT_MESTO_RADNJE);
-        assertThat(testRadnjaPresude.getBitneNapomene()).isEqualTo(DEFAULT_BITNE_NAPOMENE);
         assertThat(testRadnjaPresude.getMestoSmrti()).isEqualTo(DEFAULT_MESTO_SMRTI);
         assertThat(testRadnjaPresude.getVremeSmrti()).isEqualTo(DEFAULT_VREME_SMRTI);
     }
@@ -203,7 +197,6 @@ class RadnjaPresudeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(radnjaPresude.getId())))
             .andExpect(jsonPath("$.[*].vremeRadnje").value(hasItem(DEFAULT_VREME_RADNJE.toString())))
             .andExpect(jsonPath("$.[*].mestoRadnje").value(hasItem(DEFAULT_MESTO_RADNJE)))
-            .andExpect(jsonPath("$.[*].bitneNapomene").value(hasItem(DEFAULT_BITNE_NAPOMENE)))
             .andExpect(jsonPath("$.[*].mestoSmrti").value(hasItem(DEFAULT_MESTO_SMRTI)))
             .andExpect(jsonPath("$.[*].vremeSmrti").value(hasItem(DEFAULT_VREME_SMRTI.toString())));
     }
@@ -221,7 +214,6 @@ class RadnjaPresudeResourceIT {
             .andExpect(jsonPath("$.id").value(radnjaPresude.getId()))
             .andExpect(jsonPath("$.vremeRadnje").value(DEFAULT_VREME_RADNJE.toString()))
             .andExpect(jsonPath("$.mestoRadnje").value(DEFAULT_MESTO_RADNJE))
-            .andExpect(jsonPath("$.bitneNapomene").value(DEFAULT_BITNE_NAPOMENE))
             .andExpect(jsonPath("$.mestoSmrti").value(DEFAULT_MESTO_SMRTI))
             .andExpect(jsonPath("$.vremeSmrti").value(DEFAULT_VREME_SMRTI.toString()));
     }
@@ -244,7 +236,6 @@ class RadnjaPresudeResourceIT {
         updatedRadnjaPresude
             .vremeRadnje(UPDATED_VREME_RADNJE)
             .mestoRadnje(UPDATED_MESTO_RADNJE)
-            .bitneNapomene(UPDATED_BITNE_NAPOMENE)
             .mestoSmrti(UPDATED_MESTO_SMRTI)
             .vremeSmrti(UPDATED_VREME_SMRTI);
         RadnjaPresudeDTO radnjaPresudeDTO = radnjaPresudeMapper.toDto(updatedRadnjaPresude);
@@ -264,7 +255,6 @@ class RadnjaPresudeResourceIT {
         RadnjaPresude testRadnjaPresude = radnjaPresudeList.get(radnjaPresudeList.size() - 1);
         assertThat(testRadnjaPresude.getVremeRadnje()).isEqualTo(UPDATED_VREME_RADNJE);
         assertThat(testRadnjaPresude.getMestoRadnje()).isEqualTo(UPDATED_MESTO_RADNJE);
-        assertThat(testRadnjaPresude.getBitneNapomene()).isEqualTo(UPDATED_BITNE_NAPOMENE);
         assertThat(testRadnjaPresude.getMestoSmrti()).isEqualTo(UPDATED_MESTO_SMRTI);
         assertThat(testRadnjaPresude.getVremeSmrti()).isEqualTo(UPDATED_VREME_SMRTI);
     }
@@ -349,8 +339,6 @@ class RadnjaPresudeResourceIT {
         RadnjaPresude partialUpdatedRadnjaPresude = new RadnjaPresude();
         partialUpdatedRadnjaPresude.setId(radnjaPresude.getId());
 
-        partialUpdatedRadnjaPresude.vremeSmrti(UPDATED_VREME_SMRTI);
-
         restRadnjaPresudeMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedRadnjaPresude.getId())
@@ -366,9 +354,8 @@ class RadnjaPresudeResourceIT {
         RadnjaPresude testRadnjaPresude = radnjaPresudeList.get(radnjaPresudeList.size() - 1);
         assertThat(testRadnjaPresude.getVremeRadnje()).isEqualTo(DEFAULT_VREME_RADNJE);
         assertThat(testRadnjaPresude.getMestoRadnje()).isEqualTo(DEFAULT_MESTO_RADNJE);
-        assertThat(testRadnjaPresude.getBitneNapomene()).isEqualTo(DEFAULT_BITNE_NAPOMENE);
         assertThat(testRadnjaPresude.getMestoSmrti()).isEqualTo(DEFAULT_MESTO_SMRTI);
-        assertThat(testRadnjaPresude.getVremeSmrti()).isEqualTo(UPDATED_VREME_SMRTI);
+        assertThat(testRadnjaPresude.getVremeSmrti()).isEqualTo(DEFAULT_VREME_SMRTI);
     }
 
     @Test
@@ -385,7 +372,6 @@ class RadnjaPresudeResourceIT {
         partialUpdatedRadnjaPresude
             .vremeRadnje(UPDATED_VREME_RADNJE)
             .mestoRadnje(UPDATED_MESTO_RADNJE)
-            .bitneNapomene(UPDATED_BITNE_NAPOMENE)
             .mestoSmrti(UPDATED_MESTO_SMRTI)
             .vremeSmrti(UPDATED_VREME_SMRTI);
 
@@ -404,7 +390,6 @@ class RadnjaPresudeResourceIT {
         RadnjaPresude testRadnjaPresude = radnjaPresudeList.get(radnjaPresudeList.size() - 1);
         assertThat(testRadnjaPresude.getVremeRadnje()).isEqualTo(UPDATED_VREME_RADNJE);
         assertThat(testRadnjaPresude.getMestoRadnje()).isEqualTo(UPDATED_MESTO_RADNJE);
-        assertThat(testRadnjaPresude.getBitneNapomene()).isEqualTo(UPDATED_BITNE_NAPOMENE);
         assertThat(testRadnjaPresude.getMestoSmrti()).isEqualTo(UPDATED_MESTO_SMRTI);
         assertThat(testRadnjaPresude.getVremeSmrti()).isEqualTo(UPDATED_VREME_SMRTI);
     }

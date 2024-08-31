@@ -31,7 +31,6 @@ public class Optuzeni implements Serializable {
     @Field("ime")
     private String ime;
 
-    @NotNull
     @Pattern(regexp = "^[0-9]{13}")
     @Field("jmbg")
     private String jmbg;
@@ -42,6 +41,7 @@ public class Optuzeni implements Serializable {
     @Field("ime_majke")
     private String imeMajke;
 
+    @NotNull
     @Field("pol")
     private Pol pol;
 
@@ -56,6 +56,9 @@ public class Optuzeni implements Serializable {
 
     @Field("prebivaliste")
     private String prebivaliste;
+
+    @Field("drzavljanstvo")
+    private String drzavljanstvo;
 
     @Field("bracni_status")
     private BracniStatus bracniStatus;
@@ -80,7 +83,10 @@ public class Optuzeni implements Serializable {
 
     @DBRef
     @Field("presudeOptuzeni")
-    @JsonIgnoreProperties(value = { "radnja", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        allowSetters = true
+    )
     private Set<Presuda> presudeOptuzenis = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -213,6 +219,19 @@ public class Optuzeni implements Serializable {
 
     public void setPrebivaliste(String prebivaliste) {
         this.prebivaliste = prebivaliste;
+    }
+
+    public String getDrzavljanstvo() {
+        return this.drzavljanstvo;
+    }
+
+    public Optuzeni drzavljanstvo(String drzavljanstvo) {
+        this.setDrzavljanstvo(drzavljanstvo);
+        return this;
+    }
+
+    public void setDrzavljanstvo(String drzavljanstvo) {
+        this.drzavljanstvo = drzavljanstvo;
     }
 
     public BracniStatus getBracniStatus() {
@@ -370,6 +389,7 @@ public class Optuzeni implements Serializable {
             ", mestoRodjenja='" + getMestoRodjenja() + "'" +
             ", drzavaRodjenja='" + getDrzavaRodjenja() + "'" +
             ", prebivaliste='" + getPrebivaliste() + "'" +
+            ", drzavljanstvo='" + getDrzavljanstvo() + "'" +
             ", bracniStatus='" + getBracniStatus() + "'" +
             ", brojDece=" + getBrojDece() +
             ", brojMaloletneDece=" + getBrojMaloletneDece() +

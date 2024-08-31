@@ -91,6 +91,12 @@ export const OptuzeniDetail = () => {
           </dt>
           <dd>{optuzeniEntity.prebivaliste}</dd>
           <dt>
+            <span id="drzavljanstvo">
+              <Translate contentKey="pravnaInformatikaApp.optuzeni.drzavljanstvo">Drzavljanstvo</Translate>
+            </span>
+          </dt>
+          <dd>{optuzeniEntity.drzavljanstvo}</dd>
+          <dt>
             <span id="bracniStatus">
               <Translate contentKey="pravnaInformatikaApp.optuzeni.bracniStatus">Bracni Status</Translate>
             </span>

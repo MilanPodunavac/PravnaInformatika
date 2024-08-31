@@ -49,12 +49,6 @@ export const RadnjaPresudeDetail = () => {
           </dt>
           <dd>{radnjaPresudeEntity.mestoRadnje}</dd>
           <dt>
-            <span id="bitneNapomene">
-              <Translate contentKey="pravnaInformatikaApp.radnjaPresude.bitneNapomene">Bitne Napomene</Translate>
-            </span>
-          </dt>
-          <dd>{radnjaPresudeEntity.bitneNapomene}</dd>
-          <dt>
             <span id="mestoSmrti">
               <Translate contentKey="pravnaInformatikaApp.radnjaPresude.mestoSmrti">Mesto Smrti</Translate>
             </span>

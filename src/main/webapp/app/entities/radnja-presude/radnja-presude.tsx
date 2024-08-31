@@ -58,9 +58,6 @@ export const RadnjaPresude = () => {
                   <Translate contentKey="pravnaInformatikaApp.radnjaPresude.mestoRadnje">Mesto Radnje</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="pravnaInformatikaApp.radnjaPresude.bitneNapomene">Bitne Napomene</Translate>
-                </th>
-                <th>
                   <Translate contentKey="pravnaInformatikaApp.radnjaPresude.mestoSmrti">Mesto Smrti</Translate>
                 </th>
                 <th>
@@ -83,7 +80,6 @@ export const RadnjaPresude = () => {
                     ) : null}
                   </td>
                   <td>{radnjaPresude.mestoRadnje}</td>
-                  <td>{radnjaPresude.bitneNapomene}</td>
                   <td>{radnjaPresude.mestoSmrti}</td>
                   <td>
                     {radnjaPresude.vremeSmrti ? (

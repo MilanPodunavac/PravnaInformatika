@@ -16,10 +16,6 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "bitneNapomene",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "mestoSmrti",
       "fieldType": "String"
     },

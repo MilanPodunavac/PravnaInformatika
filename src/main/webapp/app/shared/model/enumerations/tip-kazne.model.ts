@@ -5,5 +5,5 @@ export enum TipKazne {
 
   NOVCANA_KAZNA = 'Novčana kazna',
 
-  ODUZIMANJE_IMOVINE = 'Oduzimanje imovine',
+  IMOVINSKA_KAZNA = 'Imovinska kazna',
 }

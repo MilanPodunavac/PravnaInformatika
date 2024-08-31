@@ -15,27 +15,20 @@ public class PresudaDTO implements Serializable {
 
     private String id;
 
-    private String tekst;
-
     @NotNull
     private LocalDate datum;
-
-    private LocalDate datumObjave;
 
     private LocalDate datumPritvora;
 
     @NotNull
+    private String kod;
+
+    @NotNull
     private TipPresude tip;
 
-    @NotNull
     private Integer broj;
 
-    @NotNull
     private Integer godina;
-
-    private String optuznica;
-
-    private LocalDate datumOptuznice;
 
     private Boolean pokusaj;
 
@@ -44,6 +37,8 @@ public class PresudaDTO implements Serializable {
     private TipUbistva nacin;
 
     private RadnjaPresudeDTO radnja;
+
+    private OptuznicaDTO optuznica;
 
     private OptuzeniDTO optuzeni;
 
@@ -55,20 +50,16 @@ public class PresudaDTO implements Serializable {
 
     private OsobaDTO branilac;
 
+    private OsobaDTO osteceni;
+
+    private SudDTO sud;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTekst() {
-        return tekst;
-    }
-
-    public void setTekst(String tekst) {
-        this.tekst = tekst;
     }
 
     public LocalDate getDatum() {
@@ -79,20 +70,20 @@ public class PresudaDTO implements Serializable {
         this.datum = datum;
     }
 
-    public LocalDate getDatumObjave() {
-        return datumObjave;
-    }
-
-    public void setDatumObjave(LocalDate datumObjave) {
-        this.datumObjave = datumObjave;
-    }
-
     public LocalDate getDatumPritvora() {
         return datumPritvora;
     }
 
     public void setDatumPritvora(LocalDate datumPritvora) {
         this.datumPritvora = datumPritvora;
+    }
+
+    public String getKod() {
+        return kod;
+    }
+
+    public void setKod(String kod) {
+        this.kod = kod;
     }
 
     public TipPresude getTip() {
@@ -117,22 +108,6 @@ public class PresudaDTO implements Serializable {
 
     public void setGodina(Integer godina) {
         this.godina = godina;
-    }
-
-    public String getOptuznica() {
-        return optuznica;
-    }
-
-    public void setOptuznica(String optuznica) {
-        this.optuznica = optuznica;
-    }
-
-    public LocalDate getDatumOptuznice() {
-        return datumOptuznice;
-    }
-
-    public void setDatumOptuznice(LocalDate datumOptuznice) {
-        this.datumOptuznice = datumOptuznice;
     }
 
     public Boolean getPokusaj() {
@@ -165,6 +140,14 @@ public class PresudaDTO implements Serializable {
 
     public void setRadnja(RadnjaPresudeDTO radnja) {
         this.radnja = radnja;
+    }
+
+    public OptuznicaDTO getOptuznica() {
+        return optuznica;
+    }
+
+    public void setOptuznica(OptuznicaDTO optuznica) {
+        this.optuznica = optuznica;
     }
 
     public OptuzeniDTO getOptuzeni() {
@@ -207,6 +190,22 @@ public class PresudaDTO implements Serializable {
         this.branilac = branilac;
     }
 
+    public OsobaDTO getOsteceni() {
+        return osteceni;
+    }
+
+    public void setOsteceni(OsobaDTO osteceni) {
+        this.osteceni = osteceni;
+    }
+
+    public SudDTO getSud() {
+        return sud;
+    }
+
+    public void setSud(SudDTO sud) {
+        this.sud = sud;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -233,24 +232,24 @@ public class PresudaDTO implements Serializable {
     public String toString() {
         return "PresudaDTO{" +
             "id='" + getId() + "'" +
-            ", tekst='" + getTekst() + "'" +
             ", datum='" + getDatum() + "'" +
-            ", datumObjave='" + getDatumObjave() + "'" +
             ", datumPritvora='" + getDatumPritvora() + "'" +
+            ", kod='" + getKod() + "'" +
             ", tip='" + getTip() + "'" +
             ", broj=" + getBroj() +
             ", godina=" + getGodina() +
-            ", optuznica='" + getOptuznica() + "'" +
-            ", datumOptuznice='" + getDatumOptuznice() + "'" +
             ", pokusaj='" + getPokusaj() + "'" +
             ", krivica='" + getKrivica() + "'" +
             ", nacin='" + getNacin() + "'" +
             ", radnja=" + getRadnja() +
+            ", optuznica=" + getOptuznica() +
             ", optuzeni=" + getOptuzeni() +
             ", sudija=" + getSudija() +
             ", zapisnicar=" + getZapisnicar() +
             ", tuzilac=" + getTuzilac() +
             ", branilac=" + getBranilac() +
+            ", osteceni=" + getOsteceni() +
+            ", sud=" + getSud() +
             "}";
     }
 }

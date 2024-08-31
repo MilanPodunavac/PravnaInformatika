@@ -18,8 +18,10 @@
         "title": "Sud"
       },
       "id": "ID",
+      "naziv": "Naziv",
       "tip": "Tip",
-      "naselje": "Naselje"
+      "mesto": "Mesto",
+      "presudeSud": "Presude Sud"
     }
   }
 }

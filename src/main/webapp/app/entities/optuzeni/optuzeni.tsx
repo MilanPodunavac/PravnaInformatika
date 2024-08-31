@@ -136,6 +136,10 @@ export const Optuzeni = () => {
                   <Translate contentKey="pravnaInformatikaApp.optuzeni.prebivaliste">Prebivaliste</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('drzavljanstvo')}>
+                  <Translate contentKey="pravnaInformatikaApp.optuzeni.drzavljanstvo">Drzavljanstvo</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('bracniStatus')}>
                   <Translate contentKey="pravnaInformatikaApp.optuzeni.bracniStatus">Bracni Status</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
@@ -187,6 +191,7 @@ export const Optuzeni = () => {
                   <td>{optuzeni.mestoRodjenja}</td>
                   <td>{optuzeni.drzavaRodjenja}</td>
                   <td>{optuzeni.prebivaliste}</td>
+                  <td>{optuzeni.drzavljanstvo}</td>
                   <td>
                     <Translate contentKey={`pravnaInformatikaApp.BracniStatus.${optuzeni.bracniStatus}`} />
                   </td>

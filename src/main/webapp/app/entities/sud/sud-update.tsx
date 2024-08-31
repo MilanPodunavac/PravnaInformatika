@@ -90,6 +90,16 @@ export const SudUpdate = () => {
                   validate={{ required: true }}
                 />
               ) : null}
+              <ValidatedField
+                label={translate('pravnaInformatikaApp.sud.naziv')}
+                id="sud-naziv"
+                name="naziv"
+                data-cy="naziv"
+                type="text"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                }}
+              />
               <ValidatedField label={translate('pravnaInformatikaApp.sud.tip')} id="sud-tip" name="tip" data-cy="tip" type="select">
                 {tipSudaValues.map(tipSuda => (
                   <option value={tipSuda} key={tipSuda}>
@@ -98,10 +108,10 @@ export const SudUpdate = () => {
                 ))}
               </ValidatedField>
               <ValidatedField
-                label={translate('pravnaInformatikaApp.sud.naselje')}
-                id="sud-naselje"
-                name="naselje"
-                data-cy="naselje"
+                label={translate('pravnaInformatikaApp.sud.mesto')}
+                id="sud-mesto"
+                name="mesto"
+                data-cy="mesto"
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },

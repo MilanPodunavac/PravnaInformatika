@@ -3,7 +3,7 @@ export enum BracniStatus {
 
   U_BRAKU = 'Oženjen/Udata',
 
-  PREKINUT_BRAK = 'Razveden(a',
+  PREKINUT_BRAK = 'Razveden/Razvedena',
 
   SMRT_U_BRAKU = 'Udovac/Udovica',
 }

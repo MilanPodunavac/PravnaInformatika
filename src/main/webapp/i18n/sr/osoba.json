@@ -19,10 +19,12 @@
       },
       "id": "ID",
       "ime": "Ime",
+      "pol": "Pol",
       "presudeSudija": "Presude Sudija",
       "presudeZapisnicar": "Presude Zapisnicar",
       "presudeTuzilac": "Presude Tuzilac",
-      "presudeBranilac": "Presude Branilac"
+      "presudeBranilac": "Presude Branilac",
+      "presudeOsteceni": "Presude Osteceni"
     }
   }
 }

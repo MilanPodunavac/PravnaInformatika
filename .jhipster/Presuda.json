@@ -6,21 +6,18 @@
   "entityTableName": "presuda",
   "fields": [
     {
-      "fieldName": "tekst",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "datum",
       "fieldType": "LocalDate",
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "datumObjave",
+      "fieldName": "datumPritvora",
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "datumPritvora",
-      "fieldType": "LocalDate"
+      "fieldName": "kod",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "tip",
@@ -30,21 +27,11 @@
     },
     {
       "fieldName": "broj",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Integer"
     },
     {
       "fieldName": "godina",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "optuznica",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "datumOptuznice",
-      "fieldType": "LocalDate"
+      "fieldType": "Integer"
     },
     {
       "fieldName": "pokusaj",
@@ -75,6 +62,14 @@
       "relationshipValidateRules": "required"
     },
     {
+      "otherEntityName": "optuznica",
+      "otherEntityRelationshipName": "presuda",
+      "ownerSide": true,
+      "relationshipName": "optuznica",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
       "options": {
         "onDelete": "SET NULL",
         "onUpdate": "CASCADE"
@@ -89,36 +84,43 @@
       "otherEntityName": "optuzeni",
       "otherEntityRelationshipName": "presudeOptuzeni",
       "relationshipName": "optuzeni",
-      "relationshipType": "many-to-one",
-      "relationshipValidateRules": "required"
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "osoba",
       "otherEntityRelationshipName": "presudeSudija",
       "relationshipName": "sudija",
-      "relationshipType": "many-to-one",
-      "relationshipValidateRules": "required"
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "osoba",
       "otherEntityRelationshipName": "presudeZapisnicar",
       "relationshipName": "zapisnicar",
-      "relationshipType": "many-to-one",
-      "relationshipValidateRules": "required"
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "osoba",
       "otherEntityRelationshipName": "presudeTuzilac",
       "relationshipName": "tuzilac",
-      "relationshipType": "many-to-one",
-      "relationshipValidateRules": "required"
+      "relationshipType": "many-to-one"
     },
     {
       "otherEntityName": "osoba",
       "otherEntityRelationshipName": "presudeBranilac",
       "relationshipName": "branilac",
-      "relationshipType": "many-to-one",
-      "relationshipValidateRules": "required"
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "osoba",
+      "otherEntityRelationshipName": "presudeOsteceni",
+      "relationshipName": "osteceni",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "sud",
+      "otherEntityRelationshipName": "presudeSud",
+      "relationshipName": "sud",
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "serviceImpl"

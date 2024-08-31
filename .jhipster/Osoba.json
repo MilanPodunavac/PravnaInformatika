@@ -9,6 +9,12 @@
       "fieldName": "ime",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pol",
+      "fieldType": "Pol",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MUSKI (Muški),ZENSKI (Ženski)"
     }
   ],
   "fluentMethods": true,
@@ -43,6 +49,13 @@
       "otherEntityName": "presuda",
       "otherEntityRelationshipName": "branilac",
       "relationshipName": "presudeBranilac",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "presudeOsteceni",
+      "otherEntityName": "presuda",
+      "otherEntityRelationshipName": "osteceni",
+      "relationshipName": "presudeOsteceni",
       "relationshipType": "one-to-many"
     }
   ],

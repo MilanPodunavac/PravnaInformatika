@@ -6,7 +6,6 @@ export interface IRadnjaPresude {
   id?: string;
   vremeRadnje?: string;
   mestoRadnje?: string;
-  bitneNapomene?: string | null;
   mestoSmrti?: string | null;
   vremeSmrti?: string | null;
   povredes?: IPovreda[] | null;

@@ -17,6 +17,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import pravna.com.myapp.IntegrationTest;
 import pravna.com.myapp.domain.Osoba;
+import pravna.com.myapp.domain.enumeration.Pol;
 import pravna.com.myapp.repository.OsobaRepository;
 import pravna.com.myapp.service.dto.OsobaDTO;
 import pravna.com.myapp.service.mapper.OsobaMapper;
@@ -31,6 +32,9 @@ class OsobaResourceIT {
 
     private static final String DEFAULT_IME = "AAAAAAAAAA";
     private static final String UPDATED_IME = "BBBBBBBBBB";
+
+    private static final Pol DEFAULT_POL = Pol.MUSKI;
+    private static final Pol UPDATED_POL = Pol.ZENSKI;
 
     private static final String ENTITY_API_URL = "/api/osobas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -53,7 +57,7 @@ class OsobaResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Osoba createEntity() {
-        Osoba osoba = new Osoba().ime(DEFAULT_IME);
+        Osoba osoba = new Osoba().ime(DEFAULT_IME).pol(DEFAULT_POL);
         return osoba;
     }
 
@@ -64,7 +68,7 @@ class OsobaResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Osoba createUpdatedEntity() {
-        Osoba osoba = new Osoba().ime(UPDATED_IME);
+        Osoba osoba = new Osoba().ime(UPDATED_IME).pol(UPDATED_POL);
         return osoba;
     }
 
@@ -93,6 +97,7 @@ class OsobaResourceIT {
         assertThat(osobaList).hasSize(databaseSizeBeforeCreate + 1);
         Osoba testOsoba = osobaList.get(osobaList.size() - 1);
         assertThat(testOsoba.getIme()).isEqualTo(DEFAULT_IME);
+        assertThat(testOsoba.getPol()).isEqualTo(DEFAULT_POL);
     }
 
     @Test
@@ -141,6 +146,28 @@ class OsobaResourceIT {
     }
 
     @Test
+    void checkPolIsRequired() throws Exception {
+        int databaseSizeBeforeTest = osobaRepository.findAll().size();
+        // set the field null
+        osoba.setPol(null);
+
+        // Create the Osoba, which fails.
+        OsobaDTO osobaDTO = osobaMapper.toDto(osoba);
+
+        restOsobaMockMvc
+            .perform(
+                post(ENTITY_API_URL)
+                    .with(csrf())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(osobaDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<Osoba> osobaList = osobaRepository.findAll();
+        assertThat(osobaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     void getAllOsobas() throws Exception {
         // Initialize the database
         osobaRepository.save(osoba);
@@ -151,7 +178,8 @@ class OsobaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(osoba.getId())))
-            .andExpect(jsonPath("$.[*].ime").value(hasItem(DEFAULT_IME)));
+            .andExpect(jsonPath("$.[*].ime").value(hasItem(DEFAULT_IME)))
+            .andExpect(jsonPath("$.[*].pol").value(hasItem(DEFAULT_POL.toString())));
     }
 
     @Test
@@ -165,7 +193,8 @@ class OsobaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(osoba.getId()))
-            .andExpect(jsonPath("$.ime").value(DEFAULT_IME));
+            .andExpect(jsonPath("$.ime").value(DEFAULT_IME))
+            .andExpect(jsonPath("$.pol").value(DEFAULT_POL.toString()));
     }
 
     @Test
@@ -183,7 +212,7 @@ class OsobaResourceIT {
 
         // Update the osoba
         Osoba updatedOsoba = osobaRepository.findById(osoba.getId()).get();
-        updatedOsoba.ime(UPDATED_IME);
+        updatedOsoba.ime(UPDATED_IME).pol(UPDATED_POL);
         OsobaDTO osobaDTO = osobaMapper.toDto(updatedOsoba);
 
         restOsobaMockMvc
@@ -200,6 +229,7 @@ class OsobaResourceIT {
         assertThat(osobaList).hasSize(databaseSizeBeforeUpdate);
         Osoba testOsoba = osobaList.get(osobaList.size() - 1);
         assertThat(testOsoba.getIme()).isEqualTo(UPDATED_IME);
+        assertThat(testOsoba.getPol()).isEqualTo(UPDATED_POL);
     }
 
     @Test
@@ -298,6 +328,7 @@ class OsobaResourceIT {
         assertThat(osobaList).hasSize(databaseSizeBeforeUpdate);
         Osoba testOsoba = osobaList.get(osobaList.size() - 1);
         assertThat(testOsoba.getIme()).isEqualTo(UPDATED_IME);
+        assertThat(testOsoba.getPol()).isEqualTo(DEFAULT_POL);
     }
 
     @Test
@@ -311,7 +342,7 @@ class OsobaResourceIT {
         Osoba partialUpdatedOsoba = new Osoba();
         partialUpdatedOsoba.setId(osoba.getId());
 
-        partialUpdatedOsoba.ime(UPDATED_IME);
+        partialUpdatedOsoba.ime(UPDATED_IME).pol(UPDATED_POL);
 
         restOsobaMockMvc
             .perform(
@@ -327,6 +358,7 @@ class OsobaResourceIT {
         assertThat(osobaList).hasSize(databaseSizeBeforeUpdate);
         Osoba testOsoba = osobaList.get(osobaList.size() - 1);
         assertThat(testOsoba.getIme()).isEqualTo(UPDATED_IME);
+        assertThat(testOsoba.getPol()).isEqualTo(UPDATED_POL);
     }
 
     @Test

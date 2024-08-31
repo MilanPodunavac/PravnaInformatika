@@ -62,6 +62,9 @@ class OptuzeniResourceIT {
     private static final String DEFAULT_PREBIVALISTE = "AAAAAAAAAA";
     private static final String UPDATED_PREBIVALISTE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DRZAVLJANSTVO = "AAAAAAAAAA";
+    private static final String UPDATED_DRZAVLJANSTVO = "BBBBBBBBBB";
+
     private static final BracniStatus DEFAULT_BRACNI_STATUS = BracniStatus.VAN_BRAKA;
     private static final BracniStatus UPDATED_BRACNI_STATUS = BracniStatus.U_BRAKU;
 
@@ -114,6 +117,7 @@ class OptuzeniResourceIT {
             .mestoRodjenja(DEFAULT_MESTO_RODJENJA)
             .drzavaRodjenja(DEFAULT_DRZAVA_RODJENJA)
             .prebivaliste(DEFAULT_PREBIVALISTE)
+            .drzavljanstvo(DEFAULT_DRZAVLJANSTVO)
             .bracniStatus(DEFAULT_BRACNI_STATUS)
             .brojDece(DEFAULT_BROJ_DECE)
             .brojMaloletneDece(DEFAULT_BROJ_MALOLETNE_DECE)
@@ -141,6 +145,7 @@ class OptuzeniResourceIT {
             .mestoRodjenja(UPDATED_MESTO_RODJENJA)
             .drzavaRodjenja(UPDATED_DRZAVA_RODJENJA)
             .prebivaliste(UPDATED_PREBIVALISTE)
+            .drzavljanstvo(UPDATED_DRZAVLJANSTVO)
             .bracniStatus(UPDATED_BRACNI_STATUS)
             .brojDece(UPDATED_BROJ_DECE)
             .brojMaloletneDece(UPDATED_BROJ_MALOLETNE_DECE)
@@ -184,6 +189,7 @@ class OptuzeniResourceIT {
         assertThat(testOptuzeni.getMestoRodjenja()).isEqualTo(DEFAULT_MESTO_RODJENJA);
         assertThat(testOptuzeni.getDrzavaRodjenja()).isEqualTo(DEFAULT_DRZAVA_RODJENJA);
         assertThat(testOptuzeni.getPrebivaliste()).isEqualTo(DEFAULT_PREBIVALISTE);
+        assertThat(testOptuzeni.getDrzavljanstvo()).isEqualTo(DEFAULT_DRZAVLJANSTVO);
         assertThat(testOptuzeni.getBracniStatus()).isEqualTo(DEFAULT_BRACNI_STATUS);
         assertThat(testOptuzeni.getBrojDece()).isEqualTo(DEFAULT_BROJ_DECE);
         assertThat(testOptuzeni.getBrojMaloletneDece()).isEqualTo(DEFAULT_BROJ_MALOLETNE_DECE);
@@ -239,10 +245,10 @@ class OptuzeniResourceIT {
     }
 
     @Test
-    void checkJmbgIsRequired() throws Exception {
+    void checkPolIsRequired() throws Exception {
         int databaseSizeBeforeTest = optuzeniRepository.findAll().size();
         // set the field null
-        optuzeni.setJmbg(null);
+        optuzeni.setPol(null);
 
         // Create the Optuzeni, which fails.
         OptuzeniDTO optuzeniDTO = optuzeniMapper.toDto(optuzeni);
@@ -280,6 +286,7 @@ class OptuzeniResourceIT {
             .andExpect(jsonPath("$.[*].mestoRodjenja").value(hasItem(DEFAULT_MESTO_RODJENJA)))
             .andExpect(jsonPath("$.[*].drzavaRodjenja").value(hasItem(DEFAULT_DRZAVA_RODJENJA)))
             .andExpect(jsonPath("$.[*].prebivaliste").value(hasItem(DEFAULT_PREBIVALISTE)))
+            .andExpect(jsonPath("$.[*].drzavljanstvo").value(hasItem(DEFAULT_DRZAVLJANSTVO)))
             .andExpect(jsonPath("$.[*].bracniStatus").value(hasItem(DEFAULT_BRACNI_STATUS.toString())))
             .andExpect(jsonPath("$.[*].brojDece").value(hasItem(DEFAULT_BROJ_DECE)))
             .andExpect(jsonPath("$.[*].brojMaloletneDece").value(hasItem(DEFAULT_BROJ_MALOLETNE_DECE)))
@@ -309,6 +316,7 @@ class OptuzeniResourceIT {
             .andExpect(jsonPath("$.mestoRodjenja").value(DEFAULT_MESTO_RODJENJA))
             .andExpect(jsonPath("$.drzavaRodjenja").value(DEFAULT_DRZAVA_RODJENJA))
             .andExpect(jsonPath("$.prebivaliste").value(DEFAULT_PREBIVALISTE))
+            .andExpect(jsonPath("$.drzavljanstvo").value(DEFAULT_DRZAVLJANSTVO))
             .andExpect(jsonPath("$.bracniStatus").value(DEFAULT_BRACNI_STATUS.toString()))
             .andExpect(jsonPath("$.brojDece").value(DEFAULT_BROJ_DECE))
             .andExpect(jsonPath("$.brojMaloletneDece").value(DEFAULT_BROJ_MALOLETNE_DECE))
@@ -343,6 +351,7 @@ class OptuzeniResourceIT {
             .mestoRodjenja(UPDATED_MESTO_RODJENJA)
             .drzavaRodjenja(UPDATED_DRZAVA_RODJENJA)
             .prebivaliste(UPDATED_PREBIVALISTE)
+            .drzavljanstvo(UPDATED_DRZAVLJANSTVO)
             .bracniStatus(UPDATED_BRACNI_STATUS)
             .brojDece(UPDATED_BROJ_DECE)
             .brojMaloletneDece(UPDATED_BROJ_MALOLETNE_DECE)
@@ -374,6 +383,7 @@ class OptuzeniResourceIT {
         assertThat(testOptuzeni.getMestoRodjenja()).isEqualTo(UPDATED_MESTO_RODJENJA);
         assertThat(testOptuzeni.getDrzavaRodjenja()).isEqualTo(UPDATED_DRZAVA_RODJENJA);
         assertThat(testOptuzeni.getPrebivaliste()).isEqualTo(UPDATED_PREBIVALISTE);
+        assertThat(testOptuzeni.getDrzavljanstvo()).isEqualTo(UPDATED_DRZAVLJANSTVO);
         assertThat(testOptuzeni.getBracniStatus()).isEqualTo(UPDATED_BRACNI_STATUS);
         assertThat(testOptuzeni.getBrojDece()).isEqualTo(UPDATED_BROJ_DECE);
         assertThat(testOptuzeni.getBrojMaloletneDece()).isEqualTo(UPDATED_BROJ_MALOLETNE_DECE);
@@ -469,10 +479,11 @@ class OptuzeniResourceIT {
             .imeMajke(UPDATED_IME_MAJKE)
             .mestoRodjenja(UPDATED_MESTO_RODJENJA)
             .drzavaRodjenja(UPDATED_DRZAVA_RODJENJA)
+            .drzavljanstvo(UPDATED_DRZAVLJANSTVO)
             .bracniStatus(UPDATED_BRACNI_STATUS)
             .brojDece(UPDATED_BROJ_DECE)
-            .brojMaloletneDece(UPDATED_BROJ_MALOLETNE_DECE)
-            .zaposlenje(UPDATED_ZAPOSLENJE);
+            .obrazovanje(UPDATED_OBRAZOVANJE)
+            .mestoZaposlenja(UPDATED_MESTO_ZAPOSLENJA);
 
         restOptuzeniMockMvc
             .perform(
@@ -496,13 +507,14 @@ class OptuzeniResourceIT {
         assertThat(testOptuzeni.getMestoRodjenja()).isEqualTo(UPDATED_MESTO_RODJENJA);
         assertThat(testOptuzeni.getDrzavaRodjenja()).isEqualTo(UPDATED_DRZAVA_RODJENJA);
         assertThat(testOptuzeni.getPrebivaliste()).isEqualTo(DEFAULT_PREBIVALISTE);
+        assertThat(testOptuzeni.getDrzavljanstvo()).isEqualTo(UPDATED_DRZAVLJANSTVO);
         assertThat(testOptuzeni.getBracniStatus()).isEqualTo(UPDATED_BRACNI_STATUS);
         assertThat(testOptuzeni.getBrojDece()).isEqualTo(UPDATED_BROJ_DECE);
-        assertThat(testOptuzeni.getBrojMaloletneDece()).isEqualTo(UPDATED_BROJ_MALOLETNE_DECE);
+        assertThat(testOptuzeni.getBrojMaloletneDece()).isEqualTo(DEFAULT_BROJ_MALOLETNE_DECE);
         assertThat(testOptuzeni.getImovinskoStanje()).isEqualTo(DEFAULT_IMOVINSKO_STANJE);
-        assertThat(testOptuzeni.getObrazovanje()).isEqualTo(DEFAULT_OBRAZOVANJE);
-        assertThat(testOptuzeni.getZaposlenje()).isEqualTo(UPDATED_ZAPOSLENJE);
-        assertThat(testOptuzeni.getMestoZaposlenja()).isEqualTo(DEFAULT_MESTO_ZAPOSLENJA);
+        assertThat(testOptuzeni.getObrazovanje()).isEqualTo(UPDATED_OBRAZOVANJE);
+        assertThat(testOptuzeni.getZaposlenje()).isEqualTo(DEFAULT_ZAPOSLENJE);
+        assertThat(testOptuzeni.getMestoZaposlenja()).isEqualTo(UPDATED_MESTO_ZAPOSLENJA);
     }
 
     @Test
@@ -526,6 +538,7 @@ class OptuzeniResourceIT {
             .mestoRodjenja(UPDATED_MESTO_RODJENJA)
             .drzavaRodjenja(UPDATED_DRZAVA_RODJENJA)
             .prebivaliste(UPDATED_PREBIVALISTE)
+            .drzavljanstvo(UPDATED_DRZAVLJANSTVO)
             .bracniStatus(UPDATED_BRACNI_STATUS)
             .brojDece(UPDATED_BROJ_DECE)
             .brojMaloletneDece(UPDATED_BROJ_MALOLETNE_DECE)
@@ -556,6 +569,7 @@ class OptuzeniResourceIT {
         assertThat(testOptuzeni.getMestoRodjenja()).isEqualTo(UPDATED_MESTO_RODJENJA);
         assertThat(testOptuzeni.getDrzavaRodjenja()).isEqualTo(UPDATED_DRZAVA_RODJENJA);
         assertThat(testOptuzeni.getPrebivaliste()).isEqualTo(UPDATED_PREBIVALISTE);
+        assertThat(testOptuzeni.getDrzavljanstvo()).isEqualTo(UPDATED_DRZAVLJANSTVO);
         assertThat(testOptuzeni.getBracniStatus()).isEqualTo(UPDATED_BRACNI_STATUS);
         assertThat(testOptuzeni.getBrojDece()).isEqualTo(UPDATED_BROJ_DECE);
         assertThat(testOptuzeni.getBrojMaloletneDece()).isEqualTo(UPDATED_BROJ_MALOLETNE_DECE);
