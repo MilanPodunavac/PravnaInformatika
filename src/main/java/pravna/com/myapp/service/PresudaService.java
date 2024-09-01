@@ -42,6 +42,14 @@ public interface PresudaService {
     Page<PresudaDTO> findAll(Pageable pageable);
 
     /**
+     * Get all the presudas with eager load of many-to-many relationships.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<PresudaDTO> findAllWithEagerRelationships(Pageable pageable);
+
+    /**
      * Get the "id" presuda.
      *
      * @param id the id of the entity.

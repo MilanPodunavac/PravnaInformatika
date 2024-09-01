@@ -2,6 +2,8 @@ package pravna.com.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.validation.constraints.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -39,6 +41,27 @@ public class ClanZakona implements Serializable {
     @Field("zakon")
     @JsonIgnoreProperties(value = { "clanovis" }, allowSetters = true)
     private Zakon zakon;
+
+    @DBRef
+    @Field("presudes")
+    @JsonIgnoreProperties(
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
+        allowSetters = true
+    )
+    private Set<Presuda> presudes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -117,6 +140,37 @@ public class ClanZakona implements Serializable {
 
     public ClanZakona zakon(Zakon zakon) {
         this.setZakon(zakon);
+        return this;
+    }
+
+    public Set<Presuda> getPresudes() {
+        return this.presudes;
+    }
+
+    public void setPresudes(Set<Presuda> presudas) {
+        if (this.presudes != null) {
+            this.presudes.forEach(i -> i.removeClanoviZakona(this));
+        }
+        if (presudas != null) {
+            presudas.forEach(i -> i.addClanoviZakona(this));
+        }
+        this.presudes = presudas;
+    }
+
+    public ClanZakona presudes(Set<Presuda> presudas) {
+        this.setPresudes(presudas);
+        return this;
+    }
+
+    public ClanZakona addPresude(Presuda presuda) {
+        this.presudes.add(presuda);
+        presuda.getClanoviZakonas().add(this);
+        return this;
+    }
+
+    public ClanZakona removePresude(Presuda presuda) {
+        this.presudes.remove(presuda);
+        presuda.getClanoviZakonas().remove(this);
         return this;
     }
 

@@ -8,6 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IPresuda } from 'app/shared/model/presuda.model';
+import { getEntities as getPresudas } from 'app/entities/presuda/presuda.reducer';
 import { IOsoba } from 'app/shared/model/osoba.model';
 import { Pol } from 'app/shared/model/enumerations/pol.model';
 import { getEntity, updateEntity, createEntity, reset } from './osoba.reducer';
@@ -20,6 +22,7 @@ export const OsobaUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const presudas = useAppSelector(state => state.presuda.entities);
   const osobaEntity = useAppSelector(state => state.osoba.entity);
   const loading = useAppSelector(state => state.osoba.loading);
   const updating = useAppSelector(state => state.osoba.updating);
@@ -36,6 +39,8 @@ export const OsobaUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
+
+    dispatch(getPresudas({}));
   }, []);
 
   useEffect(() => {

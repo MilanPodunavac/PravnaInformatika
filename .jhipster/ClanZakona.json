@@ -37,6 +37,13 @@
       "relationshipName": "zakon",
       "relationshipType": "many-to-one",
       "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "presuda",
+      "otherEntityRelationshipName": "clanoviZakona",
+      "ownerSide": false,
+      "relationshipName": "presude",
+      "relationshipType": "many-to-many"
     }
   ],
   "service": "serviceImpl"

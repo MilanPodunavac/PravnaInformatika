@@ -66,10 +66,14 @@ public class PresudaServiceImpl implements PresudaService {
         return presudaRepository.findAll(pageable).map(presudaMapper::toDto);
     }
 
+    public Page<PresudaDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return presudaRepository.findAllWithEagerRelationships(pageable).map(presudaMapper::toDto);
+    }
+
     @Override
     public Optional<PresudaDTO> findOne(String id) {
         log.debug("Request to get Presuda : {}", id);
-        return presudaRepository.findById(id).map(presudaMapper::toDto);
+        return presudaRepository.findOneWithEagerRelationships(id).map(presudaMapper::toDto);
     }
 
     @Override

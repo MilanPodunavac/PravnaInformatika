@@ -118,6 +118,11 @@ relationship OneToOne {
 	Presuda{optuznica required} to Optuznica{presuda}
 }
 
+relationship ManyToMany {
+	Presuda{vece} to Osoba{presudeVece}
+	Presuda{clanoviZakona} to ClanZakona{presude}
+}
+
 
 enum TipPresude {
 	PRVOSTEPENI_KRIVICNI_PREDMET ("K - Prvostepeni krivični predmet"),

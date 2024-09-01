@@ -28,7 +28,7 @@ public class Zakon implements Serializable {
 
     @DBRef
     @Field("clanovi")
-    @JsonIgnoreProperties(value = { "zakon" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "zakon", "presudes" }, allowSetters = true)
     private Set<ClanZakona> clanovis = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

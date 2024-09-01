@@ -34,7 +34,20 @@ public class Osoba implements Serializable {
     @DBRef
     @Field("presudeSudija")
     @JsonIgnoreProperties(
-        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
         allowSetters = true
     )
     private Set<Presuda> presudeSudijas = new HashSet<>();
@@ -42,7 +55,20 @@ public class Osoba implements Serializable {
     @DBRef
     @Field("presudeZapisnicar")
     @JsonIgnoreProperties(
-        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
         allowSetters = true
     )
     private Set<Presuda> presudeZapisnicars = new HashSet<>();
@@ -50,7 +76,20 @@ public class Osoba implements Serializable {
     @DBRef
     @Field("presudeTuzilac")
     @JsonIgnoreProperties(
-        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
         allowSetters = true
     )
     private Set<Presuda> presudeTuzilacs = new HashSet<>();
@@ -58,7 +97,20 @@ public class Osoba implements Serializable {
     @DBRef
     @Field("presudeBranilac")
     @JsonIgnoreProperties(
-        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
         allowSetters = true
     )
     private Set<Presuda> presudeBranilacs = new HashSet<>();
@@ -66,10 +118,44 @@ public class Osoba implements Serializable {
     @DBRef
     @Field("presudeOsteceni")
     @JsonIgnoreProperties(
-        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
         allowSetters = true
     )
     private Set<Presuda> presudeOstecenis = new HashSet<>();
+
+    @DBRef
+    @Field("presudeVeces")
+    @JsonIgnoreProperties(
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
+        allowSetters = true
+    )
+    private Set<Presuda> presudeVeces = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -264,6 +350,37 @@ public class Osoba implements Serializable {
     public Osoba removePresudeOsteceni(Presuda presuda) {
         this.presudeOstecenis.remove(presuda);
         presuda.setOsteceni(null);
+        return this;
+    }
+
+    public Set<Presuda> getPresudeVeces() {
+        return this.presudeVeces;
+    }
+
+    public void setPresudeVeces(Set<Presuda> presudas) {
+        if (this.presudeVeces != null) {
+            this.presudeVeces.forEach(i -> i.removeVece(this));
+        }
+        if (presudas != null) {
+            presudas.forEach(i -> i.addVece(this));
+        }
+        this.presudeVeces = presudas;
+    }
+
+    public Osoba presudeVeces(Set<Presuda> presudas) {
+        this.setPresudeVeces(presudas);
+        return this;
+    }
+
+    public Osoba addPresudeVece(Presuda presuda) {
+        this.presudeVeces.add(presuda);
+        presuda.getVeces().add(this);
+        return this;
+    }
+
+    public Osoba removePresudeVece(Presuda presuda) {
+        this.presudeVeces.remove(presuda);
+        presuda.getVeces().remove(this);
         return this;
     }
 

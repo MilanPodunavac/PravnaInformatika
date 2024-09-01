@@ -84,7 +84,20 @@ public class Optuzeni implements Serializable {
     @DBRef
     @Field("presudeOptuzeni")
     @JsonIgnoreProperties(
-        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
         allowSetters = true
     )
     private Set<Presuda> presudeOptuzenis = new HashSet<>();

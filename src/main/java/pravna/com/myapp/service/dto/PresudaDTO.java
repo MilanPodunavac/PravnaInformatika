@@ -2,7 +2,9 @@ package pravna.com.myapp.service.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.validation.constraints.*;
 import pravna.com.myapp.domain.enumeration.TipPresude;
 import pravna.com.myapp.domain.enumeration.TipUbistva;
@@ -39,6 +41,10 @@ public class PresudaDTO implements Serializable {
     private RadnjaPresudeDTO radnja;
 
     private OptuznicaDTO optuznica;
+
+    private Set<OsobaDTO> veces = new HashSet<>();
+
+    private Set<ClanZakonaDTO> clanoviZakonas = new HashSet<>();
 
     private OptuzeniDTO optuzeni;
 
@@ -150,6 +156,22 @@ public class PresudaDTO implements Serializable {
         this.optuznica = optuznica;
     }
 
+    public Set<OsobaDTO> getVeces() {
+        return veces;
+    }
+
+    public void setVeces(Set<OsobaDTO> veces) {
+        this.veces = veces;
+    }
+
+    public Set<ClanZakonaDTO> getClanoviZakonas() {
+        return clanoviZakonas;
+    }
+
+    public void setClanoviZakonas(Set<ClanZakonaDTO> clanoviZakonas) {
+        this.clanoviZakonas = clanoviZakonas;
+    }
+
     public OptuzeniDTO getOptuzeni() {
         return optuzeni;
     }
@@ -243,6 +265,8 @@ public class PresudaDTO implements Serializable {
             ", nacin='" + getNacin() + "'" +
             ", radnja=" + getRadnja() +
             ", optuznica=" + getOptuznica() +
+            ", veces=" + getVeces() +
+            ", clanoviZakonas=" + getClanoviZakonas() +
             ", optuzeni=" + getOptuzeni() +
             ", sudija=" + getSudija() +
             ", zapisnicar=" + getZapisnicar() +

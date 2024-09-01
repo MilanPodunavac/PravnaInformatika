@@ -81,6 +81,20 @@
       "relationshipType": "one-to-many"
     },
     {
+      "otherEntityName": "osoba",
+      "otherEntityRelationshipName": "presudeVece",
+      "ownerSide": true,
+      "relationshipName": "vece",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "clanZakona",
+      "otherEntityRelationshipName": "presude",
+      "ownerSide": true,
+      "relationshipName": "clanoviZakona",
+      "relationshipType": "many-to-many"
+    },
+    {
       "otherEntityName": "optuzeni",
       "otherEntityRelationshipName": "presudeOptuzeni",
       "relationshipName": "optuzeni",

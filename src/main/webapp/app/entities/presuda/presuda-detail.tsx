@@ -99,6 +99,32 @@ export const PresudaDetail = () => {
           </dt>
           <dd>{presudaEntity.optuznica ? presudaEntity.optuznica.id : ''}</dd>
           <dt>
+            <Translate contentKey="pravnaInformatikaApp.presuda.vece">Vece</Translate>
+          </dt>
+          <dd>
+            {presudaEntity.veces
+              ? presudaEntity.veces.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {presudaEntity.veces && i === presudaEntity.veces.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
+            <Translate contentKey="pravnaInformatikaApp.presuda.clanoviZakona">Clanovi Zakona</Translate>
+          </dt>
+          <dd>
+            {presudaEntity.clanoviZakonas
+              ? presudaEntity.clanoviZakonas.map((val, i) => (
+                  <span key={val.id}>
+                    <a>{val.id}</a>
+                    {presudaEntity.clanoviZakonas && i === presudaEntity.clanoviZakonas.length - 1 ? '' : ', '}
+                  </span>
+                ))
+              : null}
+          </dd>
+          <dt>
             <Translate contentKey="pravnaInformatikaApp.presuda.optuzeni">Optuzeni</Translate>
           </dt>
           <dd>{presudaEntity.optuzeni ? presudaEntity.optuzeni.id : ''}</dd>

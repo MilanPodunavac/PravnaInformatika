@@ -12,10 +12,12 @@ import { IRadnjaPresude } from 'app/shared/model/radnja-presude.model';
 import { getEntities as getRadnjaPresudes } from 'app/entities/radnja-presude/radnja-presude.reducer';
 import { IOptuznica } from 'app/shared/model/optuznica.model';
 import { getEntities as getOptuznicas } from 'app/entities/optuznica/optuznica.reducer';
-import { IOptuzeni } from 'app/shared/model/optuzeni.model';
-import { getEntities as getOptuzenis } from 'app/entities/optuzeni/optuzeni.reducer';
 import { IOsoba } from 'app/shared/model/osoba.model';
 import { getEntities as getOsobas } from 'app/entities/osoba/osoba.reducer';
+import { IClanZakona } from 'app/shared/model/clan-zakona.model';
+import { getEntities as getClanZakonas } from 'app/entities/clan-zakona/clan-zakona.reducer';
+import { IOptuzeni } from 'app/shared/model/optuzeni.model';
+import { getEntities as getOptuzenis } from 'app/entities/optuzeni/optuzeni.reducer';
 import { ISud } from 'app/shared/model/sud.model';
 import { getEntities as getSuds } from 'app/entities/sud/sud.reducer';
 import { IPresuda } from 'app/shared/model/presuda.model';
@@ -30,6 +32,7 @@ import { chatExtractPresuda } from 'app/modules/chat/chat';
 import pdfToText from 'react-pdftotext';
 import { forEach, set } from 'lodash';
 import { TipSuda } from 'app/shared/model/enumerations/tip-suda.model';
+import moment from 'moment';
 
 export const PresudaUpdate = () => {
   const dispatch = useAppDispatch();
@@ -41,8 +44,9 @@ export const PresudaUpdate = () => {
 
   const radnjaPresudes = useAppSelector(state => state.radnjaPresude.entities);
   const optuznicas = useAppSelector(state => state.optuznica.entities);
-  const optuzenis = useAppSelector(state => state.optuzeni.entities);
   const osobas = useAppSelector(state => state.osoba.entities);
+  const clanZakonas = useAppSelector(state => state.clanZakona.entities);
+  const optuzenis = useAppSelector(state => state.optuzeni.entities);
   const suds = useAppSelector(state => state.sud.entities);
   const presudaEntity = useAppSelector(state => state.presuda.entity);
   const loading = useAppSelector(state => state.presuda.loading);
@@ -131,8 +135,9 @@ export const PresudaUpdate = () => {
 
     dispatch(getRadnjaPresudes({}));
     dispatch(getOptuznicas({}));
-    dispatch(getOptuzenis({}));
     dispatch(getOsobas({}));
+    dispatch(getClanZakonas({}));
+    dispatch(getOptuzenis({}));
     dispatch(getSuds({}));
   }, []);
 
@@ -146,6 +151,8 @@ export const PresudaUpdate = () => {
     const entity = {
       ...presudaEntity,
       ...values,
+      veces: isNew ? convertToOsobaObjects(veceInput) : mapIdList(values.veces),
+      clanoviZakonas: isNew ? convertToClanoviZakonaObjects(clanoviZakonaInput) : mapIdList(values.clanoviZakonas),
       radnja: isNew
         ? {
             ...values.radnja,
@@ -213,6 +220,8 @@ export const PresudaUpdate = () => {
           ...presudaEntity,
           radnja: presudaEntity?.radnja?.id,
           optuznica: presudaEntity?.optuznica?.id,
+          veces: presudaEntity?.veces?.map(e => e.id.toString()),
+          clanoviZakonas: presudaEntity?.clanoviZakonas?.map(e => e.id.toString()),
           optuzeni: presudaEntity?.optuzeni?.id,
           sudija: presudaEntity?.sudija?.id,
           zapisnicar: presudaEntity?.zapisnicar?.id,
@@ -350,11 +359,41 @@ export const PresudaUpdate = () => {
           mesto: presuda.sud.mesto,
           tip: presuda.sud.tip,
         },
-        datum: presuda.datum,
+        datum: moment(presuda.datum, 'YYYY-MM-DD', true).isValid() ? presuda.datum : '1901-01-01',
+        clanoviZakonas: presuda.clanovi_zakona ? convertToClanoviZakonaObjects(presuda.clanovi_zakona) : [],
         kazne: presuda.kazne ? convertToKaznaObject(presuda.kazne) : [],
       });
     });
     return presudeObjects;
+  };
+
+  const convertToOsobaObjects = (osobe: any) => {
+    var osobeObjects = [];
+    osobe.forEach(function (osoba) {
+      osobeObjects.push({
+        id: null,
+        ime: osoba.ime,
+        pol: osoba.pol.replace('Š', 'S').replace('Ž', 'Z'),
+      });
+    });
+    return osobeObjects;
+  };
+
+  const convertToClanoviZakonaObjects = (clanovi: any) => {
+    var clanoviObjects = [];
+    clanovi.forEach(function (clan) {
+      clanoviObjects.push({
+        id: null,
+        broj: clan.broj,
+        zakon: {
+          id: null,
+          naziv: clan.zakon,
+        },
+        glava: 0,
+        naziv: '',
+      });
+    });
+    return clanoviObjects;
   };
 
   return (
@@ -437,9 +476,6 @@ export const PresudaUpdate = () => {
                 name="broj"
                 data-cy="broj"
                 type="text"
-                validate={{
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
-                }}
                 value={brojInput}
                 onChange={e => setBrojInput(e.target.value)}
               />
@@ -449,9 +485,6 @@ export const PresudaUpdate = () => {
                 name="godina"
                 data-cy="godina"
                 type="text"
-                validate={{
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
-                }}
                 value={godinaInput}
                 onChange={e => setGodinaInput(e.target.value)}
               />
@@ -981,6 +1014,104 @@ export const PresudaUpdate = () => {
               <FormText>
                 <Translate contentKey="entity.validation.required">This field is required.</Translate>
               </FormText>
+              {!isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.presuda.vece')}
+                  id="presuda-vece"
+                  data-cy="vece"
+                  type="select"
+                  multiple
+                  name="veces"
+                >
+                  <option value="" key="0" />
+                  {osobas
+                    ? osobas.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </ValidatedField>
+              )}
+              <div className="table-responsive">
+                {veceInput && veceInput.length > 0 ? (
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.osoba.ime">Ime</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.osoba.pol">Pol</Translate>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {veceInput.map((osoba, i) => (
+                        <tr key={`entity-${i}`} data-cy="entityTable">
+                          <td>{osoba.ime}</td>
+                          <td>{osoba.pol}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  !loading && (
+                    <div className="alert alert-warning">
+                      <Translate contentKey="pravnaInformatikaApp.presuda.home.notFound">No Povredas found</Translate>
+                    </div>
+                  )
+                )}
+              </div>
+              {!isNew && (
+                <ValidatedField
+                  label={translate('pravnaInformatikaApp.presuda.clanoviZakona')}
+                  id="presuda-clanoviZakona"
+                  data-cy="clanoviZakona"
+                  type="select"
+                  multiple
+                  name="clanoviZakonas"
+                >
+                  <option value="" key="0" />
+                  {clanZakonas
+                    ? clanZakonas.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </ValidatedField>
+              )}
+              <div className="table-responsive">
+                {clanoviZakonaInput && clanoviZakonaInput.length > 0 ? (
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.clanZakona.broj">Broj</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.zakon.naziv">Zakon</Translate>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {clanoviZakonaInput.map((clanZakona, i) => (
+                        <tr key={`entity-${i}`} data-cy="entityTable">
+                          <td>{clanZakona.broj}</td>
+                          <td>{clanZakona.zakon}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  !loading && (
+                    <div className="alert alert-warning">
+                      <Translate contentKey="pravnaInformatikaApp.presuda.home.notFound">No Povredas found</Translate>
+                    </div>
+                  )
+                )}
+              </div>
               {!isNew && (
                 <ValidatedField
                   id="presuda-zapisnicar"

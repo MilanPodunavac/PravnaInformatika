@@ -2,7 +2,9 @@ package pravna.com.myapp.service.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.validation.constraints.NotNull;
 import pravna.com.myapp.domain.enumeration.TipPresude;
 import pravna.com.myapp.domain.enumeration.TipUbistva;
@@ -39,6 +41,10 @@ public class PresudaFullDTO implements Serializable {
     private RadnjaPresudeFullDTO radnja;
 
     private OptuzeniFullDTO optuzeni;
+
+    private Set<OsobaDTO> veces = new HashSet<>();
+
+    private Set<ClanZakonaDTO> clanoviZakonas = new HashSet<>();
 
     private OsobaDTO sudija;
 
@@ -108,6 +114,22 @@ public class PresudaFullDTO implements Serializable {
 
     public void setOptuznica(OptuznicaDTO optuznica) {
         this.optuznica = optuznica;
+    }
+
+    public Set<OsobaDTO> getVeces() {
+        return veces;
+    }
+
+    public void setVeces(Set<OsobaDTO> veces) {
+        this.veces = veces;
+    }
+
+    public Set<ClanZakonaDTO> getClanoviZakonas() {
+        return clanoviZakonas;
+    }
+
+    public void setClanoviZakonas(Set<ClanZakonaDTO> clanoviZakonas) {
+        this.clanoviZakonas = clanoviZakonas;
     }
 
     public Boolean getPokusaj() {
@@ -247,6 +269,8 @@ public class PresudaFullDTO implements Serializable {
             ", broj=" + getBroj() +
             ", godina=" + getGodina() +
             ", optuznica='" + getOptuznica() + "'" +
+            ", veces=" + getVeces() +
+            ", clanoviZakonas=" + getClanoviZakonas() +
             ", pokusaj='" + getPokusaj() + "'" +
             ", krivica='" + getKrivica() + "'" +
             ", nacin='" + getNacin() + "'" +
@@ -283,6 +307,8 @@ public class PresudaFullDTO implements Serializable {
         presudaDTO.setOsteceni(getOsteceni());
         presudaDTO.setSud(getSud());
         presudaDTO.setOptuznica(getOptuznica());
+        presudaDTO.setVeces(getVeces());
+        presudaDTO.setClanoviZakonas(getClanoviZakonas());
         return presudaDTO;
     }
 }

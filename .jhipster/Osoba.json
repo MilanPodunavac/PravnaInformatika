@@ -57,6 +57,13 @@
       "otherEntityRelationshipName": "osteceni",
       "relationshipName": "presudeOsteceni",
       "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "presuda",
+      "otherEntityRelationshipName": "vece",
+      "ownerSide": false,
+      "relationshipName": "presudeVece",
+      "relationshipType": "many-to-many"
     }
   ],
   "service": "serviceClass"

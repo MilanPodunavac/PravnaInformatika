@@ -43,7 +43,20 @@ public class Kazna implements Serializable {
     @DBRef
     @Field("presuda")
     @JsonIgnoreProperties(
-        value = { "radnja", "optuznica", "kaznes", "optuzeni", "sudija", "zapisnicar", "tuzilac", "branilac", "osteceni", "sud" },
+        value = {
+            "radnja",
+            "optuznica",
+            "kaznes",
+            "veces",
+            "clanoviZakonas",
+            "optuzeni",
+            "sudija",
+            "zapisnicar",
+            "tuzilac",
+            "branilac",
+            "osteceni",
+            "sud",
+        },
         allowSetters = true
     )
     private Presuda presuda;

@@ -1,4 +1,5 @@
 import { IZakon } from 'app/shared/model/zakon.model';
+import { IPresuda } from 'app/shared/model/presuda.model';
 
 export interface IClanZakona {
   id?: string;
@@ -7,6 +8,7 @@ export interface IClanZakona {
   naziv?: string;
   tekst?: string | null;
   zakon?: IZakon;
+  presudes?: IPresuda[] | null;
 }
 
 export const defaultValue: Readonly<IClanZakona> = {};

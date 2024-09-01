@@ -2,18 +2,26 @@ package pravna.com.myapp.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,6 +32,7 @@ import pravna.com.myapp.domain.RadnjaPresude;
 import pravna.com.myapp.domain.enumeration.TipPresude;
 import pravna.com.myapp.domain.enumeration.TipUbistva;
 import pravna.com.myapp.repository.PresudaRepository;
+import pravna.com.myapp.service.PresudaService;
 import pravna.com.myapp.service.dto.PresudaDTO;
 import pravna.com.myapp.service.mapper.PresudaMapper;
 
@@ -31,6 +40,7 @@ import pravna.com.myapp.service.mapper.PresudaMapper;
  * Integration tests for the {@link PresudaResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class PresudaResourceIT {
@@ -68,8 +78,14 @@ class PresudaResourceIT {
     @Autowired
     private PresudaRepository presudaRepository;
 
+    @Mock
+    private PresudaRepository presudaRepositoryMock;
+
     @Autowired
     private PresudaMapper presudaMapper;
+
+    @Mock
+    private PresudaService presudaServiceMock;
 
     @Autowired
     private MockMvc restPresudaMockMvc;
@@ -280,6 +296,23 @@ class PresudaResourceIT {
             .andExpect(jsonPath("$.[*].pokusaj").value(hasItem(DEFAULT_POKUSAJ.booleanValue())))
             .andExpect(jsonPath("$.[*].krivica").value(hasItem(DEFAULT_KRIVICA.booleanValue())))
             .andExpect(jsonPath("$.[*].nacin").value(hasItem(DEFAULT_NACIN.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllPresudasWithEagerRelationshipsIsEnabled() throws Exception {
+        when(presudaServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restPresudaMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(presudaServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllPresudasWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(presudaServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restPresudaMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(presudaRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test

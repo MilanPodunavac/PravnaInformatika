@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import pravna.com.myapp.repository.extended.PresudaExtendedRepository;
+import pravna.com.myapp.service.dto.ClanZakonaDTO;
+import pravna.com.myapp.service.dto.OsobaDTO;
 import pravna.com.myapp.service.dto.PresudaDTO;
 import pravna.com.myapp.service.extended.*;
 import pravna.com.myapp.service.impl.PresudaServiceImpl;
@@ -30,6 +32,8 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
 
     private final OptuznicaExtendedService optuznicaService;
 
+    private final ClanZakonaExtendedService clanZakonaService;
+
     public PresudaExtendedServiceImpl(
         PresudaExtendedRepository presudaRepository,
         PresudaMapper presudaMapper,
@@ -37,7 +41,8 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
         OsobaExtendedService osobaService,
         RadnjaPresudeExtendedService radnjaPresudeService,
         SudExtendedService sudService,
-        OptuznicaExtendedService optuznicaService
+        OptuznicaExtendedService optuznicaService,
+        ClanZakonaExtendedService clanZakonaService
     ) {
         super(presudaRepository, presudaMapper);
         this.presudaRepository = presudaRepository;
@@ -47,6 +52,7 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
         this.radnjaPresudeService = radnjaPresudeService;
         this.sudService = sudService;
         this.optuznicaService = optuznicaService;
+        this.clanZakonaService = clanZakonaService;
     }
 
     @Override
@@ -76,6 +82,16 @@ public class PresudaExtendedServiceImpl extends PresudaServiceImpl implements Pr
         if (presudaDTO.getOsteceni() != null && presudaDTO.getOsteceni().getId() == null) presudaDTO.setOsteceni(
             osobaService.save(presudaDTO.getOsteceni())
         );
+        if (presudaDTO.getVeces() != null) {
+            for (OsobaDTO osoba : presudaDTO.getVeces()) {
+                if (osoba.getId() == null) osoba.setId(osobaService.save(osoba).getId());
+            }
+        }
+        if (presudaDTO.getClanoviZakonas() != null) {
+            for (ClanZakonaDTO clan : presudaDTO.getClanoviZakonas()) {
+                if (clan.getId() == null) clan.setId(clanZakonaService.save(clan).getId());
+            }
+        }
         presudaDTO = super.save(presudaDTO);
 
         return presudaDTO;

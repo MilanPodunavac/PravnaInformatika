@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IZakon } from 'app/shared/model/zakon.model';
 import { getEntities as getZakons } from 'app/entities/zakon/zakon.reducer';
+import { IPresuda } from 'app/shared/model/presuda.model';
+import { getEntities as getPresudas } from 'app/entities/presuda/presuda.reducer';
 import { IClanZakona } from 'app/shared/model/clan-zakona.model';
 import { getEntity, updateEntity, createEntity, reset } from './clan-zakona.reducer';
 
@@ -22,6 +24,7 @@ export const ClanZakonaUpdate = () => {
   const isNew = id === undefined;
 
   const zakons = useAppSelector(state => state.zakon.entities);
+  const presudas = useAppSelector(state => state.presuda.entities);
   const clanZakonaEntity = useAppSelector(state => state.clanZakona.entity);
   const loading = useAppSelector(state => state.clanZakona.loading);
   const updating = useAppSelector(state => state.clanZakona.updating);
@@ -37,6 +40,7 @@ export const ClanZakonaUpdate = () => {
     }
 
     dispatch(getZakons({}));
+    dispatch(getPresudas({}));
   }, []);
 
   useEffect(() => {

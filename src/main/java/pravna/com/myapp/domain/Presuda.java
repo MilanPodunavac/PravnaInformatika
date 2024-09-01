@@ -69,6 +69,19 @@ public class Presuda implements Serializable {
     private Set<Kazna> kaznes = new HashSet<>();
 
     @DBRef
+    @Field("veces")
+    @JsonIgnoreProperties(
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis", "presudeVeces" },
+        allowSetters = true
+    )
+    private Set<Osoba> veces = new HashSet<>();
+
+    @DBRef
+    @Field("clanoviZakonas")
+    @JsonIgnoreProperties(value = { "zakon", "presudes" }, allowSetters = true)
+    private Set<ClanZakona> clanoviZakonas = new HashSet<>();
+
+    @DBRef
     @Field("optuzeni")
     @JsonIgnoreProperties(value = { "presudeOptuzenis" }, allowSetters = true)
     private Optuzeni optuzeni;
@@ -76,7 +89,7 @@ public class Presuda implements Serializable {
     @DBRef
     @Field("sudija")
     @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis", "presudeVeces" },
         allowSetters = true
     )
     private Osoba sudija;
@@ -84,7 +97,7 @@ public class Presuda implements Serializable {
     @DBRef
     @Field("zapisnicar")
     @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis", "presudeVeces" },
         allowSetters = true
     )
     private Osoba zapisnicar;
@@ -92,7 +105,7 @@ public class Presuda implements Serializable {
     @DBRef
     @Field("tuzilac")
     @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis", "presudeVeces" },
         allowSetters = true
     )
     private Osoba tuzilac;
@@ -100,7 +113,7 @@ public class Presuda implements Serializable {
     @DBRef
     @Field("branilac")
     @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis", "presudeVeces" },
         allowSetters = true
     )
     private Osoba branilac;
@@ -108,7 +121,7 @@ public class Presuda implements Serializable {
     @DBRef
     @Field("osteceni")
     @JsonIgnoreProperties(
-        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis" },
+        value = { "presudeSudijas", "presudeZapisnicars", "presudeTuzilacs", "presudeBranilacs", "presudeOstecenis", "presudeVeces" },
         allowSetters = true
     )
     private Osoba osteceni;
@@ -304,6 +317,56 @@ public class Presuda implements Serializable {
     public Presuda removeKazne(Kazna kazna) {
         this.kaznes.remove(kazna);
         kazna.setPresuda(null);
+        return this;
+    }
+
+    public Set<Osoba> getVeces() {
+        return this.veces;
+    }
+
+    public void setVeces(Set<Osoba> osobas) {
+        this.veces = osobas;
+    }
+
+    public Presuda veces(Set<Osoba> osobas) {
+        this.setVeces(osobas);
+        return this;
+    }
+
+    public Presuda addVece(Osoba osoba) {
+        this.veces.add(osoba);
+        osoba.getPresudeVeces().add(this);
+        return this;
+    }
+
+    public Presuda removeVece(Osoba osoba) {
+        this.veces.remove(osoba);
+        osoba.getPresudeVeces().remove(this);
+        return this;
+    }
+
+    public Set<ClanZakona> getClanoviZakonas() {
+        return this.clanoviZakonas;
+    }
+
+    public void setClanoviZakonas(Set<ClanZakona> clanZakonas) {
+        this.clanoviZakonas = clanZakonas;
+    }
+
+    public Presuda clanoviZakonas(Set<ClanZakona> clanZakonas) {
+        this.setClanoviZakonas(clanZakonas);
+        return this;
+    }
+
+    public Presuda addClanoviZakona(ClanZakona clanZakona) {
+        this.clanoviZakonas.add(clanZakona);
+        clanZakona.getPresudes().add(this);
+        return this;
+    }
+
+    public Presuda removeClanoviZakona(ClanZakona clanZakona) {
+        this.clanoviZakonas.remove(clanZakona);
+        clanZakona.getPresudes().remove(this);
         return this;
     }
 
