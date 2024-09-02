@@ -8,6 +8,10 @@ import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './presuda.reducer';
+import { getEntities as getKazne } from '../kazna/kazna.reducer';
+import { getEntities as getPovrede } from '../povreda/povreda.reducer';
+import { chatCreatePresuda } from 'app/modules/chat/chat';
+import generatePDF from 'react-to-pdf';
 
 export const PresudaDetail = () => {
   const dispatch = useAppDispatch();
@@ -16,9 +20,52 @@ export const PresudaDetail = () => {
 
   useEffect(() => {
     dispatch(getEntity(id));
+
+    dispatch(
+      getKazne({
+        page: 0,
+        size: 0,
+        sort: ``,
+      })
+    );
+    dispatch(
+      getPovrede({
+        page: 0,
+        size: 0,
+        sort: ``,
+      })
+    );
   }, []);
 
   const presudaEntity = useAppSelector(state => state.presuda.entity);
+  const kazne = useAppSelector(state => state.kazna.entities);
+  const povrede = useAppSelector(state => state.povreda.entities);
+
+  async function createPDF(event: any): Promise<void> {
+    console.log(presudaEntity);
+    console.log(kazne);
+    var entityFull = {
+      ...presudaEntity,
+      kazne: kazne.filter(kazna => kazna.presuda.id === id),
+      radnja: {
+        ...presudaEntity.radnja,
+        povrede: povrede.filter(povreda => povreda.radnja.id === presudaEntity.radnja.id),
+      },
+    };
+
+    console.log(entityFull);
+    var presudaText = await chatCreatePresuda(entityFull);
+    console.log(presudaText);
+    //generatePDF(presudaText, {filename: '{presudaEntity.kod}.pdf'})
+    const linkSource = `data:application/pdf;base64,${presudaText}`;
+    const downloadLink = document.createElement('a');
+    const fileName = `${entityFull.kod}.pdf`;
+
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
   return (
     <Row>
       <Col md="8">
@@ -165,6 +212,10 @@ export const PresudaDetail = () => {
           <span className="d-none d-md-inline">
             <Translate contentKey="entity.action.edit">Edit</Translate>
           </span>
+        </Button>
+        &nbsp;
+        <Button replace color="info" onClick={createPDF}>
+          <span className="d-none d-md-inline">PDF</span>
         </Button>
       </Col>
     </Row>

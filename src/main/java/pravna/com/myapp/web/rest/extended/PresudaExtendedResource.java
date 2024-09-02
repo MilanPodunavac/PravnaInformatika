@@ -2,13 +2,18 @@ package pravna.com.myapp.web.rest.extended;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pravna.com.myapp.repository.extended.PresudaExtendedRepository;
 import pravna.com.myapp.service.cbr.CbrService;
 import pravna.com.myapp.service.dto.*;
@@ -17,6 +22,7 @@ import pravna.com.myapp.service.extended.PovredaExtendedService;
 import pravna.com.myapp.service.extended.PresudaExtendedService;
 import pravna.com.myapp.web.rest.PresudaResource;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 
 @RestController
 @Primary
