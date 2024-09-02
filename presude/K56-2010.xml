@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Bijelom Polju
+					</FRBRauthor>
+					<FRBRdate date="2011-05-24">
+						2011-05-24
+					</FRBRdate>
+					<FRBRtitle>
+						K 56/2010
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.BijeloPolje" showAs="Visi sud u Bijelom Polju" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.BijeloPolje" showAs="Visi drzavni tuzilac u Bijelom Polju" />
+				<TLCPerson eId="vboskovic" href="/ontology/person/vboskovic" showAs="Vukomir Boskovic" />
+				<TLCPerson eId="gdalovic" href="/ontology/person/gdalovic" showAs="Gorica Dalovic" />
+				<TLCPerson eId="mkrgovic" href="/ontology/person/mkrgovic" showAs="Milos Krgovic" />
+				<TLCPerson eId="dkaljevic" href="/ontology/person/dkaljevic" showAs="Dimitrije Kaljevic" />
+				<TLCPerson eId="rduborije" href="/ontology/person/rduborije" showAs="Radmila Duborija" />
+				<TLCPerson eId="kmustajvasic" href="/ontology/person/kmustajvasic" showAs="Kuja Mustajbasic" />
+				<TLCPerson eId="zs" href="/ontology/person/zs" showAs="Z.S." />
+				<TLCPerson eId="rj" href="/ontology/person/rj" showAs="R.J." />
+				<TLCPerson eId="mn" href="/ontology/person/mn" showAs="M.N." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					Viši sud u Bijelom Polju
+				</organization>
+				u vijeću sastavljenom od
+				<party id="vboskovic" refersTo="#vboskovic" as="#judge">
+					sudije Vukomira Boškovića, kao predsjednika vijeća
+				</party>
+				stalnog
+				<party id="gdalovic" refersTo="#gdalovic" as="#judge">
+					sudije Gorice Đalović
+				</party>
+				, i
+                <party id="mkrgovic" refersTo="#mkrgovic" as="#judge">
+					sudija porotnika Miloša Krgovića
+				</party>
+                ,
+                <party id="kmustajvasic" refersTo="#kmustajvasic" as="#councilor">
+                    Kuja Mustajbašića
+				</party>
+                i
+                <party id="dkaljevic" refersTo="#dkaljevic" as="#councilor">
+                    Dimitrija Kaljevića, kao članova vijeća
+				</party>
+                uz učešće
+                <party id="rduborije" refersTo="#rduborije" as="#clerk">
+                    namještenika suda Radmile Duborije, kao zapisničara
+				</party>
+                u krivičnom predmetu
+                <party id="zs" refersTo="#zs" as="#defendant">
+                    optuženog Z.S.
+				</party>
+                iz D, zbog krivičnog djela teško ubistvo
+                <ref href="/krivicni#art_144">
+					čl. 144 st. 1 tačka 1 Krivičnog zakonika Crne Gore (Kz)
+				</ref>
+                , po optužnici
+                <organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužioca u Bijelom Polju
+				</organization>
+                , Kt. br. 36/10 od 19.07.2010 godine, nakon održanog usmenog, glavnog i javnog pretresa u prisustvu
+                <party id="rj" refersTo="#rj" as="#plaintiff">
+                    zamjenika Višeg državog tužioca R. J,
+				</party>
+                ,
+                <party id="zs" refersTo="#zs" as="#defendant">
+                    optuženog Z.S.
+				</party>
+                i njegovog
+                <party id="mn" refersTo="#mn" as="#attorney">
+                    branioca adv. M. N.
+				</party>
+                iz B. P. i predstavnika oštećene porodice Ž. V, donio je dana 24.05.2011 godine, a javno objavio 27.05.2011 godine, PRESUDU
+                <party id="zs" refersTo="#zs" as="#defendant">
+					Optuženi: Z.S.
+				</party>
+                JMBG ....., zv. „V“, od oca N. i majke M, rođene D, rođen .... godine, u Š, sa stalnim boravkom u D, Ć, državljanin Crne Gore, po zanimanju poljoprivrednik, sada udovac, otac četvoro djece, završio osnovnu školu, osuđivan, nalazi se u pritvoru od 25.06.2010 godine. Krivje Što je: Dana, 09.06.2010 godine, oko 09,00 h. ispred porodične kuće u mjestu S, opština Š, sa umišljajem lišio života svoju suprugu Ž. Z, tako što je šest puta zakrivljenom metalnom šipkom dužine 65 cm. i debljine 1,6 cm. udario u predjelu glave i to tri puta u predjelu tjemenog dijela, usled kojih udaraca je oštećena posrnula i nastavila da se udaljava, da bi je nakon toga optuženi sustigao i još tri puta udario u potiljačni dio glave, nanijevši joj povrede u vidu rana razderotina i to po tri rane razderotine u tjemenom i potiljačnom dijelu glave, od kojih udaraca je ista pala na zemljanu podlogu, pa je nakon toga okrenuo na leđa, a zatim iz džepa izvadio najlonski kanap dužine 207 cm. i debljine 0,5 cm. i isti joj omotao oko vrata, nakon čega je stezao krajeve kanapa sve dok kod iste nije nastupila smrt usled ugušenja, - Čime je izvršio krivično djelo ubistvo iz
+                <ref href="/oruzje#art_143">
+					čl. 143 Kz
+				</ref>
+                ,
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Pa ga sud
+					</organization>
+                    , primjenom citiranih zakonskih propisa i članova
+                    <ref href="/krivicni#art_14">
+						14
+					</ref>
+                    ,
+					<ref href="/krivicni#art_15">
+						15
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_32">
+						32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    i
+                    <ref href="/krivicni#art_51">
+						51KZ CG
+					</ref>
+                    i
+                    <ref href="/postupak#art_199">
+						199
+					</ref>
+                    ,
+                    <ref href="/postupak#art_202">
+						202
+					</ref>
+                    i
+                    <ref href="/postupak#art_364">
+						364. ZKP-a CG
+					</ref>
+                    . Osuđuje Na kaznu zatvora u trajanju 11 (jedanaest) godine, u koju kaznu mu se ima uračunati vrijeme provedeno u pritvoru od 25.06.2010 godine, pa nadalje. Optuženi se obavezuje da ovom sudu na ime
+                    <organization id="vdt" refersTo="#vdt">
+                        paušala
+                    </organization>
+                    plati iznos 150,00 €, kao i na ime troškova krivičnog postupka ukupan iznos od 7.648,00 €, na žiro račun 
+                    <organization id="vs" refersTo="#vs">
+                        suda
+                    </organization>
+                    br.530-12927-32, sve u roku od 15 dana po pravosnažnosti presude pod prijetnjom prinudnog izvršenja.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

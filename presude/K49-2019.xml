@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2021-03-26">
+						2021-03-26
+					</FRBRdate>
+					<FRBRtitle>
+						K 49/2019
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="vmostrokol" href="/ontology/person/vmostrokol" showAs="Vesna Mostrokol" />
+				<TLCPerson eId="djovovic" href="/ontology/person/djovovic" showAs="Danica Jovovic" />
+				<TLCPerson eId="zvucinic" href="/ontology/person/zvucinic" showAs="Zoran Vucinic" />
+				<TLCPerson eId="lg" href="/ontology/person/lg" showAs="L.G." />
+				<TLCPerson eId="dm" href="/ontology/person/dm" showAs="D.M." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični po
+				<party id="vmostrokol" refersTo="#vmostrokol" as="#judge">
+					sudiji Vesni Moštrokol, kao predsjedniku vijeća
+				</party>
+				, uz učešće
+				<party id="djovovic" refersTo="#djovovic" as="#clerk">
+					namještenika Danice Jovović, kao zapisničara
+				</party>
+				, u predmetu protiv
+                <party id="re" refersTo="#re" as="#defendant">
+                    optuženog L.G.
+				</party>
+                koga brani
+                <party id="dm" refersTo="#dm" as="#attorney">
+					D. M., advokat iz P.
+				</party>
+                , zbog krivičnog djela ubistvo u pokušaju iz
+				<ref href="/krivicni#art_143">
+					čl. 143
+				</ref>
+                u vezi
+                <ref href="/krivicni#art_20">
+					čl. 20
+				</ref>
+                u sticaju sa krivičnim djelom nedozvoljeno držanje oružja i eksplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl. 403 st. 1 Krivičnog zakonika Crne Gore
+				</ref>
+                po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužilaštva u Podgorici
+				</organization>
+                Kt.br.48/19 od 31.05.2019. godine, koju je na ročištu povodom odlučivanja o sporazumu o priznanju krivice zastupao
+                <party id="zvucinic" refersTo="#zvucinic" as="#plaintiff">
+					Zoran Vučinić, Državni tužilac u VDT-a u Podgorici
+				</party>
+                , nakon pravosnažnosti rješenja o usvajanju sporazuma o priznanju krivice, dana 26.03.2021. godine, donio je PRESUDU
+                <party id="re" refersTo="#re" as="#defendant">
+					Optuženi: L. G., zvani "L."
+				</party>
+                JMBG..., od oca N. i majke R., rođene Z., rođen ....godine u B. P., sa prebivalištem u B., V. v. bb, državljanin Srbije i Crne Gore, sa prijavljenim prebivalištem u Srbiji na adresi B. – S.g. – M. br.., oženjen, otac troje djece, od kojih je dvoje maloljetno, po zanimanju preduzetnik, vlasnik firme DOO „NLG. L. C.“ i direktor DD „S.“, srednjeg imovnog stanja, osuđivan presudama Osnovnog suda Kotor K.br... od .. godine zbog krivičnog djela nedozvoljeno držanje oružja i ekplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl. 403 st.1 KZ-a
+				</ref>
+                na tri mjeseca zatvora uslovno na jednu godinu i K.br. .. od .. godine zbog krivičnog djela teška tjelesna povreda iz
+                <ref href="/krivicni#art_151">
+					čl.151 st.1 KZ-a
+				</ref>
+                , na osam mjeseci zatvora uslovno na tri godine; presudom
+                <organization id="vs" refersTo="#vs">
+					Višeg suda u Podgorici
+				</organization>
+                K.br...od .. godine zbog krivičnog djela nasilničko ponašanje iz čl.399 u sticaju sa teškom tjelesnom povredom iz
+                <ref href="/krivicni#art_151">
+					čl.151 st.1 
+				</ref>
+                i nedozvoljeno držanje oružja i ekplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl.403 st.1 KZ-a
+				</ref>
+                na 11 mjeseci zatvora i 15 dana; presudom Osnovnog suda Kotor K.br.. od .. godine zbog krivičnog djela nasilničko ponašanje iz
+                <ref href="/krivicni#art_399">
+					čl.399 KZ CG
+				</ref>
+                na šest mjeseci zatvora uslovno na tri godine; presudom Osnovnog suda Podgorica K.br...od ... godine zbog krivičnog djela nedozvoljeno držanje oružja i ekplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl.403 st.1 KZ-a
+				</ref>
+                na tri mjeseca zatvora ipresudom Osnovnog suda Bijelo Polje K.br... od .. godine zbog krivičnog djela laka tjelesna povreda iz
+                <ref href="/krivicni#art_152">
+					čl. 152 st.2 u vezi st.1 KZ-a
+				</ref>
+                na novčanu kaznu u iznosu od 300,00 eura, u ekstradicionom pritvoru od 28.01.2020.godine do 21.10.2020. godine i u pritvoru od 21.10.2020. godine, pa nadalje, KRIV JE Zato što je: Dana 20.03.2019. godine oko 19,15 časova, u naselju L. u B., sa umišljajem pokušao da liši života oštećenog M. R., na način što se sa oštećenim prethodno telefonskim putem dogovorio da se vide u naselju L., pa kada je oštećeni u dogovoreno vrijeme došao na dogovoreno mjesto, i sa optuženim koji ga je već čekao započeo razgovor o fizičkom sukobu koji je optuženi istog dana oko 14,00 časova, imao u Budvi sa P. P., optuženi je iz vatrenog oružja, revolvera crne boje, nepoznate marke, kalibra „32 S&W“, koji je protivno
+                <ref href="/oruzje#art_5">
+					članu 5 stav 2 Zakona o oružju
+				</ref>
+                ,neovlašćeno držao, u pravcu grudnog koša oštećenog, iz neposredne blizine, ispalio jedan projektil, koji je pogodio oštećenog u predjelu stomaka, nanoseći mu osobito tešku tjelesnu povredu u vidu strijelne rane ustreline trbuha, sa ulaznom ranom u predjelu lijeve polovine prednje strane trbuha koja se kanalom nastavlja u trbušnu duplju i probija tanko crijevo, nakon čega je optuženi pobjegao sa lica mjesta, pri čemu je bio svjestan da će optuženog lišiti života, pa je to i htio - čime je izvršio krivično djelo ubistvo u pokušaju iz
+                <ref href="/krivicni#art_143">
+					čl. 143
+				</ref>
+                u vezi
+                <ref href="/krivicni#art_20">
+					čl.403 st.1 KZ-a
+				</ref>
+                u sticaju sa krivičnim djelom nedozvoljeno držanje oružja i eksplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl. 403 st. 1 Krivičnog zakonika Crne Gore
+				</ref>
+                .
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Pa mu sud
+					</organization>
+                    , primjenom citiranih zakonskih odredbi, te odredbi
+                    <ref href="/krivicni#art_4">
+						čl. 4 st. 2
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_5">
+						5
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_13">
+						13
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_14">
+						14
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_15">
+						15
+					</ref>
+                    ,
+					<ref href="/krivicni#art_32">
+						čl. 32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    i
+                    <ref href="/krivicni#art_48">
+						48 st.1 Krivičnog zakonika Crne Gore
+					</ref>
+                    , a u odnosu na krivično djelo ubistvo u pokušaju iz
+                    <ref href="/krivicni#art_143">
+						čl. 143
+					</ref>
+                    u vezi
+                    <ref href="/krivicni#art_20">
+						čl. 20
+					</ref>
+                    i i primjenom odredbi
+                    <ref href="/krivicni#art_45">
+						čl. 45
+					</ref>
+                    i
+                    <ref href="/krivicni#art_46">
+						46 Krivičnog zakonika Crne Gore
+					</ref>
+                    , prethodno u t v r đ u j e: - za krivično djelo ubistvo u pokušaju iz
+                    <ref href="/krivicni#art_143">
+						čl. 143
+					</ref>
+                    u vezi
+                    <ref href="/krivicni#art_20">
+						čl. 20 Krivičnog zakonika Crne Gore
+					</ref>
+                    kaznu zatvora u trajanju od 2 (dvije) godine i 1 (jedan) mjesec - za krivično djelo nedozvoljeno držanje oružja i eksplozivnih materija iz
+                    <ref href="/krivicni#art_403">
+                        čl. 403 st. 1 Krivičnog zakonika Crne Gore
+                    </ref>
+                    u trajanju od 3 (tri) mjeseca.
+                    <organization id="vs" refersTo="#vs">
+						Pa ga sud
+					</organization>
+                    primjenom citiranih zakonskih odredbi, te odredbi
+                    <ref href="/krivicni#art_48">
+						čl. 48 st.2
+					</ref>
+                    i
+                    <ref href="/krivicni#art_51">
+						51 Krivičnog zakonika Crne Gore
+					</ref>
+                    odredbi
+                    <ref href="/postupak#art_226">
+						čl.226
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						229
+					</ref>
+                    ,
+                    <ref href="/postupak#art_301">
+						301 st.3
+					</ref>
+                    u vezi 
+                    <ref href="/postupak#art_272">
+						čl.272 st.1 tač.3
+					</ref>
+                    ,
+                    <ref href="/postupak#art_303">
+						čl.303
+					</ref>
+                    i
+                    <ref href="/postupak#art_374">
+						374 Zakonika o krivičnom postupku
+					</ref>
+                    .
+                    O S U DJ U J E Na jedinstvenu kaznu zatvora u trajanju od 2 (dvije) godine i 3 (tri) mjeseca, u koju kaznu će mu se uračunati vrijeme provedeno u ekstradicionom pritvoru od 28.01.2020. godine do 21.10.2020. godine i u pritvoru od 21.10.2020. godine, pa nadalje, OBAVEZUJE SE optuženi da ispuni obavezu plaćanja određenog novčanog iznosa u korist humanitarne organizacije, fonda ili javne ustanove, na način što će uplatiti novčani iznos od 5.000,00 eura (pet hiljada) Javnoj ustanovi „M. N.“ iz U. na žiro račun ... otvoren kod NLB Montenegro banke, novčani iznos od 5.000,00 eura (pet hiljada) Javnoj ustanovi „S.“– D. C. za djecu i omladinu sa smetnjama i teškoćama u razvoju u U., na žiro račun broj .... kod Hipotekarne banke i novčani iznos od 5.000,00 eura (pet hiljada) NVO „U. r. d. s t. u r.“ u Podgorici na žiro račun ... otvoren kod Podgoričke banke. OBAVEZUJE SE optuženi da na ime troškova krivičnog postupka, Budžetu CG, uplati iznos od 104,50 eura (stočetiri eura i pedeset centi), a na ime paušala iznose od po 100,00 (sto) eura na račun Vrhovnog državnog tužilaštva Crne Gore, broj 832-1187-31, koji se vodi kod Societe Generale Group AD Podgorica, i na račun Budžeta CG, sve u roku od 15 dana po pravosnažnosti presude pod prijetnjom prinudnog izvršenja.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

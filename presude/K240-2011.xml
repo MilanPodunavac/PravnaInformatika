@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2014-02-03">
+						2014-02-03
+					</FRBRdate>
+					<FRBRtitle>
+						K 240/2011
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="vmostrokol" href="/ontology/person/vmostrokol" showAs="Vesna Mostrokol" />
+				<TLCPerson eId="ddragovic" href="/ontology/person/ddragovic" showAs="Dejana Dragovic" />
+				<TLCPerson eId="nbozovic" href="/ontology/person/nbozovic" showAs="Natasa Bozovic" />
+				<TLCPerson eId="ga" href="/ontology/person/ga" showAs="G.A." />
+				<TLCPerson eId="dt" href="/ontology/person/dt" showAs="D.T." />
+				<TLCPerson eId="rfilipovic" href="/ontology/person/rfilipovic" showAs="Radmila Filipovic" />
+				<TLCPerson eId="mguberinic" href="/ontology/person/mguberinic" showAs="Mileva Gubernic" />
+				<TLCPerson eId="mjovanovic" href="/ontology/person/mjovanovic" showAs="Maja Jovanovic" />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični u vijeću sastavljenom od
+				<party id="vmostrokol" refersTo="#vmostrokol" as="#judge">
+					sudije Vesne Moštrokol kao predsjednika vijeća
+				</party>
+				,
+				<party id="ddragovic" refersTo="#ddragovic" as="#judge">
+					i sudija Dragović Dejana
+				</party>
+				, i
+                <party id="nbozovic" refersTo="#nbozovic" as="#councilor">
+					Božović Nataše kao članova vijeća
+				</party>
+                , uz učešće
+                <party id="rfilipovic" refersTo="#rfilipovic" as="#clerk">
+					Radmile Filipović kao zapisničara
+				</party>
+                , u krivičnom predmetu protiv
+                <party id="ga" refersTo="#ga" as="#defendant">
+					G.A. 
+				</party>
+                , iz U., koju brani
+                <party id="dt" refersTo="#dt" as="#attorney">
+					D. T., advokat iz P.
+				</party>
+                , zbog krivičnog djela teško ubistvo iz
+				<ref href="/krivicni#art_144">
+					čl.144 st.1 tač.1 Krivičnog zakonika
+				</ref>
+				i krivičnog djela nedozvoljeno držanje oružja i eksplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl.403 st.1 Krivičnog zakonika
+				</ref>
+                , po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužioca u Podgorici
+				</organization>
+                Kt.br.183/08 od 08.11.2008.godine, koju je na glavnom pretresu zastupala Jovanović Maja, zamjenik
+                <organization id="vdt" refersTo="#vdt">
+					VDT-a u Podgorici
+				</organization>
+                , nakon održanog usmenog, glavnog i javnog pretresa, započetog 23.10.2013.godine, završenog 22.01.2014.godine, u prisustvu zastupnika optužbe, optužene, njenog branioca i predstavnika oštećene porodice Š. R., nakon tajnog vijećanja i glasanja, donio je 03.02.2014.godine i istog dana javno objavio PRESUDU
+
+                <party id="ga" refersTo="#ga" as="#defendant">
+					Optužena: G. A.
+				</party>
+                zv. S., od oca M. V., i majke D., rodjene K., rodjena … u P., sa prebivalištem u U., ul …, državljanka C. G., privatnik, udovica, majka jednog djeteta, završila srednju školu, srednjeg imovnog stanja, neosudjivana, u pritvoru od 10.08.2008.godine. Kriva je zato što je: U noći 09.08.2008.godine, oko 23,00 h, u U., ul ..., lišila života svog svekra-oštećenog G. Lj., na način što je u dvorišnom dijelu porodičine kuće G., kod kapije, iz revolvera marke "K.", model "D. s.", kalibra 32 mm, fabričnog broja …, koji je suprotno čl.15 Zakona o oružju neovlašćeno i bez odobrenja nadležnog organa držala u svom stanu, u preriodu od 1988 do 09.08.2008.godine, ispalila jedan metak u glavu oštećenog, nanoseći mu povrede od kojih je usljed razorenja za život važnih možadanih centara nastupila smrt oštećenog G. Lj..
+                -čime je izvršila krivično djelo ubistvo iz
+                <ref href="/krivicni#art_143">
+					čl.143 Krivičnog zakonika
+				</ref>
+				, i krivično djelo nedozvoljeno držanje oružja i eksplozivih materija iz
+                <ref href="/krivicni#art_403">
+					čl.403 st.1 Krivičnog zakonika
+				</ref>
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Pa joj sud
+					</organization>
+                    , primjenom citiranih zakonskih odredbi, te odredbi
+					<ref href="/krivicni#art_4">
+						4
+					</ref>
+					,
+					<ref href="/krivicni#art_5">
+						5
+					</ref>
+					,
+					<ref href="/krivicni#art_15">
+						15
+					</ref>
+					,
+					<ref href="/krivicni#art_32">
+						32
+					</ref>
+					,
+					<ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , i 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+					, a u odnosu na krivično djelo nedozvoljeno držanje oružja i eksplozivih materija iz
+                    <ref href="/krivicni#art_403">
+						403 čl.403 st.1. Krivičnog zakonika
+					</ref>
+                    i primjenom odredbi
+                    <ref href="/krivicni#art_45">
+						čl.45
+					</ref>
+                    <ref href="/krivicni#art_46">
+						46 Krivičnog zakonika
+					</ref>
+                    , te odredbi
+                    <ref href="/krivicni#art_46">
+						čl.48 st.1 Krivičnog zakonika
+					</ref>
+                    , prethodno utvrdjuje: za krivično djelo ubistvo iz
+                    <ref href="/krivicni#art_143">
+						čl.143 Krivičnog zakonika
+					</ref>
+                    , kaznu zatvora u trajanju od 10 (deset) godina, - za krivično djelo nedozvoljeno držanje oružja i eksplozivih materija iz
+                    <ref href="/krivicni#art_403">
+						čl.403 st.1. Krivičnog zakonika
+					</ref>
+                    , kaznu zatvora u trajanju od 2 (dva) mjeseca. Pa sud optuženu, primjenom citiranih zakonskih odredbi, te odrebi
+                    <ref href="/krivicni#art_48">
+						čl.48 st.2 tač.2
+					</ref>
+                    i
+                    <ref href="/krivicni#art_51">
+						čl.51 Krivičnog zakonika
+					</ref>
+                    te odrebi
+                    <ref href="/postupak#art_226">
+						čl.226
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						čl.229
+					</ref>
+                    i
+                    <ref href="/postupak#art_374">
+						374 Zakonika o krivičnom postupku
+					</ref>
+                    OSUĐUJE Na jedinstvenu kaznu zatvora u trajanju od 10 (deset) godina i 1 (jedan) mjesec, u koju kaznu će se uračunati i vrijeme provedeno u pritvoru od 10.08.2008.godine, pa nadalje. Shodno odrebi
+                    <ref href="/krivicni#art_66">
+						čl.66
+					</ref>
+					i 
+                    <ref href="/krivicni#art_75">
+						 75 Krivičnog zakonika
+					</ref>
+                    , zriče se: MJERA BAZBJEDNOST i ODUZIMANJE PREDMETA Od
+                    <party id="ga" refersTo="#ga" as="#defendant">
+						optužene G. A.
+					</party>
+                    oduzima se revolver marke "K.", model "D. s.", kalibra 32 mm, fabrički broj …. Obavezuje se oputužena da na ime troškova krivičnog postupka, Budžetu Crne Gore, uplati novčani iznos od 4.171,51€ (četirihiljadestosedamdesetjedan euro i pedesetjedan cent), a na ime paušala iznos od 200 (dvjesta) eura, sve u roku 15 dana po pravosnažnosti presude, pod prijetnjom prinudnog izvršenja.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

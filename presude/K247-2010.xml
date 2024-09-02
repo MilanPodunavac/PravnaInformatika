@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2011-03-11">
+						2011-03-11
+					</FRBRdate>
+					<FRBRtitle>
+						K 247/2010
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="buskokovic" href="/ontology/person/buskokovic" showAs="Biljana Uskokovic" />
+				<TLCPerson eId="vjovetic" href="/ontology/person/vjovetic" showAs="Vesna Jovetic" />
+				<TLCPerson eId="jtrtica" href="/ontology/person/jtrtica" showAs="Jelka Trtica" />
+				<TLCPerson eId="mt" href="/ontology/person/mt" showAs="M.T." />
+				<TLCPerson eId="mnedovic" href="/ontology/person/mnedovic" showAs="Miomir Nedovic" />
+				<TLCPerson eId="mguberinic" href="/ontology/person/mguberinic" showAs="Mileva Gubernic" />
+				<TLCPerson eId="vpopovic" href="/ontology/person/vpopovic" showAs="Vera Popovic" />
+				<TLCPerson eId="oraznatovic" href="/ontology/person/oraznatovic" showAs="Olivera Raznatovic" />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični u vijeću sastavljenom od
+				<party id="buskokovic" refersTo="#buskokovic" as="#judge">
+					sudije Biljane Uskoković kao predsjednika vijeća
+				</party>
+				,
+				<party id="vjovetic" refersTo="#vjovetic" as="#judge">
+					sudije Jovetić Vesne
+				</party>
+				, i
+                <party id="jtrtica" refersTo="#jtrtica" as="#judge">
+					sudija porotnika Jelke Trtica
+				</party>
+                ,
+                <party id="mnedovic" refersTo="#mnedovic" as="#councilor">
+					Nedović Miomira
+				</party>
+                , i
+                <party id="mguberinic" refersTo="#mguberinic" as="#councilor">
+					Guberinić Mileve kao članova vijeća
+				</party>
+                ,
+                <party id="vpopovic" refersTo="#vpopovic" as="#clerk">
+					Vere Popović kao zapisničara
+				</party>
+                , u krivičnom predmetu protiv
+				<party id="mt" refersTo="#mt" as="#defendant">
+					optuženog M.T.
+				</party>
+				, zbog krivičnog djela ubistvo iz
+				<ref href="/krivicni#art_143">
+					člana 143. Krivičnog zakonika
+				</ref>
+				, postupajući po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužioca u Podgorici
+				</organization>
+				Kt-br.165/10 od 30.09.2010. godine, nakon održanog glavnog i javnog pretresa dana 08.03.2011. godine u prisustvu zastupnika optužbe
+				<party id="oraznatovic" refersTo="#oraznatovic" as="#advisor">
+					Ražnatović Olivere
+				</party>
+				, zamjenika
+				<organization id="vdt" refersTo="#vdt">
+					VDT-a Podgorica
+				</organization>
+				,
+				<party id="mt" refersTo="#mt" as="#defendant">
+					optuženog
+				</party>
+				, i njegovog branioca po službenoj dužnosti adv.P. J. a nakon tajnog vijećanja i glasanja donio je i dana 11.03.2011. godine javno objavio:
+				<party id="mt" refersTo="#mt" as="#defendant">
+					OPTUŽENI M.T.
+				</party>
+				, rođen....... godine u R. s., Opština V., sa stalnim prebivalištem u Š., L. - Ul.R.BR.... , državljanin Š. i Crne Gore, zaposlen kao viši rentgen tehničar, oženjen, otac troje djece, pismen za završenom Višom medicinskom školom, dobrog imovnog stanja, neosuđivan, ne vodi se postupak za neko drugo krivično djelo. Kriv je Zato što je: Dana 10.avgusta 2010. godine oko 22,00 časa u mjestu Gornja Veruša, Opština Podgorica, sa umišljajem lišio života suprugu oštećenu M.S, na način što je, prilikom kraće svađe i prepirke sa oštećenom, dok su se nalazili u njihovoj kolibi, sa kuhinjskog stola uzeo kuhinjski nož sa natpisom "Solingen" dužine sječiva 12,5 cm, širine 2,5 cm, potom uhvatio oštećenu za kosu lijevom rukom i držeći nož u desnoj ruci prerezao joj vrat i pritom joj nanio više rana u međuključnjačinom predjelu, u lijevom dojkinom predjelu, u desnom podključnjačinom predjelu i u predjelu desne strane lica, nanoseći joj teške tjelesne povrede, pa je usljed iskrvavljenja iz posječenih krvnih sudova rana vrata kod oštećene na licu mjesta nastupila smrt, čime je izvršio krivično djelo – ubistvo iz
+				<ref href="/krivicni#art_143">
+					člana 143. Krivičnog zakonika
+				</ref>
+				.
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Sud
+					</organization>
+                    <party id="mt" refersTo="#mt" as="#defendant">
+                        optuženog
+                    </party>
+                    , za navedeno krivično djelo primjenom citiranog zakonskog propisa, te primjenom člana
+					<ref href="/krivicni#art_4">
+						4
+					</ref>
+					,
+					<ref href="/krivicni#art_5">
+						5
+					</ref>
+					,
+					<ref href="/krivicni#art_32">
+						32
+					</ref>
+					,
+					<ref href="/krivicni#art_36">
+						36
+					</ref>
+					,
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    , i 
+					<ref href="/krivicni#art_51">
+						51
+					</ref>
+					, Krivičnog zakonika, te člana
+					<ref href="/postupak#art_199">
+						199
+					</ref>
+					,
+					<ref href="/postupak#art_202">
+						202
+					</ref>
+                    , i 
+                    <ref href="/postupak#art_364">
+						364
+					</ref>
+					Zakonika o krivičnom postupku, 
+					OSUĐUJE Na kaznu zatvora u trajanju od 10 (deset) godina, u koju mu se uračunava vrijeme provedeno u pritvoru od 11.08.2010. godine pa nadalje do pravosnažnosti presude a najduže dok ne istekne vrijeme trajanja kazne izrečene ovom presudom. Na osnovu 
+                    <ref href="/krivicni#art_75">
+						75
+					</ref>
+                    , Krivičnog zakonika od
+					<party id="mt" refersTo="#mt" as="#defendant">
+						optuženog M.T
+					</party>
+					oduzima se kuhinjski nož sa natpisom „Solingen“ ukupne dužine 25,5 cm, dužine sječiva 12,5 cm kao predmet izvršenja krivičnog djela. Obavezuje se optuženi da na ime troškova krivičnog postupka uplati ovom 
+                    <organization id="vs" refersTo="#vs">
+						sudu
+					</organization>
+                    , novčani iznos od 4.237,25 eura, a na ime sudskog paušala novčani iznos od 100,00 eura, sve prednje u roku od 15 dana, po pravosnažnosti presude, pod prijetnjom prinudnog izvršenja, a na žiro račun Višeg Suda u Podgorici broj 832-7113-04.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>
