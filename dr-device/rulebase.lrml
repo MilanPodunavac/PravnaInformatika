@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lrml:LegalRuleML xmlns:lrml="http://docs.oasis-open.org/legalruleml/ns/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legalruleml/ns/v1.0/ xsd-compact/lrml-compact.xsd" xmlns:ruleml="http://ruleml.org/spec">
+	<lrml:Statements>
+		<lrml:PrescriptiveStatement key="ps1">
+			<ruleml:Rule key=":rule1" closure="universal" strength="defeasible">
+				<ruleml:if>
+                    <ruleml:And>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:hasWeapon"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Var type="hasWeapon">Weapon</ruleml:Var>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:usedWeapon"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">yes</ruleml:Data>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:targetedPerson"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Var type="lc:person">Victim</ruleml:Var>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:personDied"/>
+                            <ruleml:Var type="lc:person">Victim</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">yes</ruleml:Data>
+                        </ruleml:Atom>
+                    </ruleml:And>
+                </ruleml:if>
+                <ruleml:then>
+                    <ruleml:Atom>
+                        <ruleml:Rel>man_committed_murder</ruleml:Rel>
+                        <ruleml:Var type=":defendant">Defendant</ruleml:Var>
+                    </ruleml:Atom>
+                </ruleml:then>
+			</ruleml:Rule>
+		</lrml:PrescriptiveStatement>
+		<lrml:PrescriptiveStatement key="ps2">
+			<ruleml:Rule key=":rule2" closure="universal" strength="defeasible">
+                <ruleml:if>
+                    <ruleml:And>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:hasWeapon"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Var type="hasWeapon">Weapon</ruleml:Var>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:usedWeapon"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">yes</ruleml:Data>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:targetedPerson"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Var type="lc:person">Victim</ruleml:Var>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:personDied"/>
+                            <ruleml:Var type="lc:person">Victim</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">yes</ruleml:Data>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:severity"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">heavy</ruleml:Data>
+                        </ruleml:Atom>
+                    </ruleml:And>
+                </ruleml:if>
+                <ruleml:then>
+                    <ruleml:Atom>
+                        <ruleml:Rel>man_committed_heavy_murder</ruleml:Rel>
+                        <ruleml:Var type=":defendant">Defendant</ruleml:Var>
+                    </ruleml:Atom>
+                </ruleml:then>
+			</ruleml:Rule>
+		</lrml:PrescriptiveStatement>
+		<lrml:PrescriptiveStatement key="ps3">
+			<ruleml:Rule key=":rule3" closure="universal" strength="defeasible">
+				<ruleml:if>
+                    <ruleml:And>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:hasWeapon"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Var type="hasWeapon">Weapon</ruleml:Var>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:usedWeapon"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">yes</ruleml:Data>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:targetedPerson"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Var type="lc:person">Victim</ruleml:Var>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:personDied"/>
+                            <ruleml:Var type="lc:person">Victim</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">no</ruleml:Data>
+                        </ruleml:Atom>
+                    </ruleml:And>
+                </ruleml:if>
+                <ruleml:then>
+                    <ruleml:Atom>
+                        <ruleml:Rel>man_attempted_murder</ruleml:Rel>
+                        <ruleml:Var type=":defendant">Defendant</ruleml:Var>
+                    </ruleml:Atom>
+                </ruleml:then>
+			</ruleml:Rule>
+		</lrml:PrescriptiveStatement>
+        <lrml:PrescriptiveStatement key="ps4">
+			<ruleml:Rule key=":rule1" closure="universal" strength="defeasible">
+				<ruleml:if>
+                    <ruleml:And>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:hasWeapon"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Var type="hasWeapon">Weapon</ruleml:Var>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:usedWeapon"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">no</ruleml:Data>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:targetedPerson"/>
+                            <ruleml:Var type="lc:defendant">Defendant</ruleml:Var>
+                            <ruleml:Var type="lc:person">Victim</ruleml:Var>
+                        </ruleml:Atom>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri="lc:personDied"/>
+                            <ruleml:Var type="lc:person">Victim</ruleml:Var>
+                            <ruleml:Data xsi:type="xs:string">yes</ruleml:Data>
+                        </ruleml:Atom>
+                    </ruleml:And>
+                </ruleml:if>
+                <ruleml:then>
+                    <ruleml:Atom>
+                        <ruleml:Rel>man_committed_weaponless_murder</ruleml:Rel>
+                        <ruleml:Var type=":defendant">Defendant</ruleml:Var>
+                    </ruleml:Atom>
+                </ruleml:then>
+			</ruleml:Rule>
+		</lrml:PrescriptiveStatement>
+		<lrml:PenaltyStatement key="pen1">
+			<lrml:SuborderList>
+				<lrml:Obligation>
+						<ruleml:Atom>
+							<ruleml:Rel iri=":min_imprisonment"/>
+							<ruleml:Var>Years</ruleml:Var>
+							<ruleml:Ind>2</ruleml:Ind>
+						</ruleml:Atom>
+				</lrml:Obligation>
+                <lrml:Obligation>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri=":max_imprisonment"/>
+                            <ruleml:Var>Years</ruleml:Var>
+                            <ruleml:Ind>5</ruleml:Ind>
+                        </ruleml:Atom>
+            </lrml:Obligation>
+			</lrml:SuborderList>
+		</lrml:PenaltyStatement>
+		<lrml:PenaltyStatement key="pen2">
+			<lrml:SuborderList>
+                    <lrml:Obligation>
+                        <ruleml:Atom>
+                            <ruleml:Rel iri=":min_imprisonment"/>
+                            <ruleml:Var>Years</ruleml:Var>
+                            <ruleml:Ind>10</ruleml:Ind>
+                        </ruleml:Atom>
+                </lrml:Obligation>
+				<lrml:Obligation>
+						<ruleml:Atom>
+							<ruleml:Rel iri=":max_imprisonment"/>
+							<ruleml:Var>Years</ruleml:Var>
+							<ruleml:Ind>5</ruleml:Ind>
+						</ruleml:Atom>
+				</lrml:Obligation>
+			</lrml:SuborderList>
+		</lrml:PenaltyStatement>
+
+		<lrml:ReparationStatement>
+			<lrml:Reparation>
+				<lrml:appliesPenalty keyref="#pen1"/>
+				<lrml:toPrescriptiveStatement keyref="#ps1"/>
+			</lrml:Reparation>
+		</lrml:ReparationStatement>
+        <lrml:ReparationStatement>
+			<lrml:Reparation>
+				<lrml:appliesPenalty keyref="#pen1"/>
+				<lrml:toPrescriptiveStatement keyref="#ps3"/>
+			</lrml:Reparation>
+		</lrml:ReparationStatement>
+        <lrml:ReparationStatement>
+			<lrml:Reparation>
+				<lrml:appliesPenalty keyref="#pen1"/>
+				<lrml:toPrescriptiveStatement keyref="#ps4"/>
+			</lrml:Reparation>
+		</lrml:ReparationStatement>
+		<lrml:ReparationStatement>
+			<lrml:Reparation>
+				<lrml:appliesPenalty keyref="#pen2"/>
+				<lrml:toPrescriptiveStatement keyref="#ps2"/>
+			</lrml:Reparation>
+		</lrml:ReparationStatement>
+	</lrml:Statements>
+</lrml:LegalRuleML>
+
