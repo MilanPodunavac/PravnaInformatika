@@ -54,7 +54,7 @@ i 10 (deset) mjeseci
 od 4 (četiri) mjeseca
 I primjenom i čl. 48 KZ CG, istog
 O S U Đ U J E
-Na jedinstvenu kaznu zatvora od [dužina pritvora], u koju kaznu mu se kao izdržano uračunava vrijeme
+Na jedinstvenu kaznu zatvora od [dužina pritvora] meseci, u koju kaznu mu se kao izdržano uračunava vrijeme
 provedeno u pritvoru od 01.04.2021. godine pa do 25.02.2022. godine.
 Okrivljeni se obavezuje da na ime [primalac novca] plati iznos od [količina novca] €, iznos od [količina novca] € na ime ostalih troškova,
 kao i [primalac novca] u iznosu od [količina novca] €, te troškovi
@@ -113,7 +113,7 @@ Crne Gore, kaznu od 6 (šest) mjeseci,
 Krivičnog zakonika Crne Gore izvršenog na štetu sada pok. R. H, kaznu zatvora od 8 (osam) mjeseci,
 -pa ga sud, na osnovu čl. 48 st. 1 i st. 2 tač. 2 KZ-a CG,
 O S U Đ U J E
-Na jedinstvenu kaznu zatvora u trajanju od [dužina pritvora], u koju kaznu mu se uračunava vrijeme
+Na jedinstvenu kaznu zatvora u trajanju od [dužina pritvora] meseci, u koju kaznu mu se uračunava vrijeme
 provedeno u pritvoru od 13. 02. 2020 godine, pa do 05. 02. 2021 godine.
 Okrivljeni se obavezuje da na ime [primalac novca] plati iznos od [količina novca] €, iznos od [količina novca] € na ime ostalih troškova,
 kao i [primalac novca] u iznosu od [količina novca] €, te troškovi
