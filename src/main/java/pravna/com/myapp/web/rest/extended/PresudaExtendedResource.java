@@ -8,15 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pravna.com.myapp.repository.extended.PresudaExtendedRepository;
-import pravna.com.myapp.service.dto.KaznaDTO;
-import pravna.com.myapp.service.dto.PovredaDTO;
-import pravna.com.myapp.service.dto.PresudaDTO;
-import pravna.com.myapp.service.dto.PresudaFullDTO;
+import pravna.com.myapp.service.cbr.CbrService;
+import pravna.com.myapp.service.dto.*;
 import pravna.com.myapp.service.extended.KaznaExtendedService;
 import pravna.com.myapp.service.extended.PovredaExtendedService;
 import pravna.com.myapp.service.extended.PresudaExtendedService;
@@ -43,17 +38,21 @@ public class PresudaExtendedResource extends PresudaResource {
 
     private final KaznaExtendedService kaznaService;
 
+    private final CbrService cbrService;
+
     public PresudaExtendedResource(
         PresudaExtendedService presudaService,
         PresudaExtendedRepository presudaRepository,
         PovredaExtendedService povredaService,
-        KaznaExtendedService kaznaService
+        KaznaExtendedService kaznaService,
+        CbrService cbrService
     ) {
         super(presudaService, presudaRepository);
         this.presudaService = presudaService;
         this.presudaRepository = presudaRepository;
         this.povredaService = povredaService;
         this.kaznaService = kaznaService;
+        this.cbrService = cbrService;
     }
 
     @PostMapping("/presudas/full")
@@ -82,5 +81,14 @@ public class PresudaExtendedResource extends PresudaResource {
             .created(new URI("/api/presudas"))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "1"))
             .body(presudaFullDTO);
+    }
+
+    @PostMapping("/presudas/cbr")
+    public ResponseEntity<CbrDTO> caseBasedReasoning(@Valid @RequestBody PresudaFullDTO presudaFullDTO) throws URISyntaxException {
+        System.out.println(presudaFullDTO);
+
+        CbrDTO cbrDTO = cbrService.calculate(presudaFullDTO);
+
+        return ResponseEntity.ok(cbrDTO);
     }
 }

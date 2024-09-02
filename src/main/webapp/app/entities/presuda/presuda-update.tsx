@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText, Table } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, TextFormat, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -23,7 +23,7 @@ import { getEntities as getSuds } from 'app/entities/sud/sud.reducer';
 import { IPresuda } from 'app/shared/model/presuda.model';
 import { TipPresude } from 'app/shared/model/enumerations/tip-presude.model';
 import { TipUbistva } from 'app/shared/model/enumerations/tip-ubistva.model';
-import { getEntity, updateEntity, createEntity, reset, createEntityFull } from './presuda.reducer';
+import { getEntity, updateEntity, createEntity, reset, createEntityFull, getCbrReasoning } from './presuda.reducer';
 import { Pol } from 'app/shared/model/enumerations/pol.model';
 import { BracniStatus } from 'app/shared/model/enumerations/bracni-status.model';
 import { ImovinskoStanje } from 'app/shared/model/enumerations/imovinsko-stanje.model';
@@ -33,6 +33,7 @@ import pdfToText from 'react-pdftotext';
 import { forEach, set } from 'lodash';
 import { TipSuda } from 'app/shared/model/enumerations/tip-suda.model';
 import moment from 'moment';
+import { APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
 export const PresudaUpdate = () => {
   const dispatch = useAppDispatch();
@@ -52,6 +53,10 @@ export const PresudaUpdate = () => {
   const loading = useAppSelector(state => state.presuda.loading);
   const updating = useAppSelector(state => state.presuda.updating);
   const updateSuccess = useAppSelector(state => state.presuda.updateSuccess);
+
+  const slicnePresude = useAppSelector(state => state.presuda.slicnePresude);
+  const predlozeneKazne = useAppSelector(state => state.presuda.predlozeneKazne);
+
   const tipPresudeValues = Object.keys(TipPresude);
   const tipUbistvaValues = Object.keys(TipUbistva);
   const polValues = Object.keys(Pol);
@@ -315,67 +320,76 @@ export const PresudaUpdate = () => {
 
   const convertToKaznaObject = (kazne: any) => {
     var kazneObjects = [];
-    kazne.forEach(function (kazna) {
-      kazneObjects.push({
-        id: null,
-        tip: kazna.tip,
-        duzinaPritvora: kazna.duzina,
-        uracunavanjePritvora: kazna.uracunavanje_pritvora,
-        kolicinaNovca: kazna.kolicina_novca,
-        primalacNovca: kazna.primalac_novca,
-        nazivImovine: kazna.naziv_imovine,
-        presuda: null,
+    if (kazne) {
+      kazne.forEach(function (kazna) {
+        kazneObjects.push({
+          id: null,
+          tip: kazna.tip,
+          duzinaPritvora: kazna.duzina,
+          uracunavanjePritvora: kazna.uracunavanje_pritvora,
+          kolicinaNovca: kazna.kolicina_novca,
+          primalacNovca: kazna.primalac_novca,
+          nazivImovine: kazna.naziv_imovine,
+          presuda: null,
+        });
       });
-    });
+    }
     return kazneObjects;
   };
 
   const convertToPovredeObjects = (povrede: any) => {
     var povredeObjects = [];
-    povrede.forEach(function (povreda) {
-      povredeObjects.push({
-        id: null,
-        tip: povreda.tip,
-        oruzje: povreda.oruzje,
-        deoTela: povreda.deo_tela,
-        povrede: povreda.povrede,
-        radnja: null,
+    if (povrede) {
+      povrede.forEach(function (povreda) {
+        povredeObjects.push({
+          id: null,
+          tip: povreda.tip,
+          oruzje: povreda.oruzje,
+          deoTela: povreda.deo_tela,
+          povrede: povreda.povrede,
+          radnja: null,
+        });
       });
-    });
+    }
     return povredeObjects;
   };
 
   const convertToPresudaObjects = (presude: any) => {
     var presudeObjects = [];
-    presude.forEach(function (presuda) {
-      presudeObjects.push({
-        id: null,
-        kod: presuda.kod,
-        tip: 'PRVOSTEPENI_KRIVICNI_PREDMET', //temp
-        broj: presuda.broj,
-        sud: {
+    if (presude) {
+      presude.forEach(function (presuda) {
+        presudeObjects.push({
           id: null,
-          naziv: presuda.sud.naziv,
-          mesto: presuda.sud.mesto,
-          tip: presuda.sud.tip,
-        },
-        datum: moment(presuda.datum, 'YYYY-MM-DD', true).isValid() ? presuda.datum : '1901-01-01',
-        clanoviZakonas: presuda.clanovi_zakona ? convertToClanoviZakonaObjects(presuda.clanovi_zakona) : [],
-        kazne: presuda.kazne ? convertToKaznaObject(presuda.kazne) : [],
+          kod: presuda.kod,
+          tip: 'PRVOSTEPENI_KRIVICNI_PREDMET', //temp
+          broj: presuda.broj,
+          sud: {
+            id: null,
+            naziv: presuda.sud.naziv,
+            mesto: presuda.sud.mesto,
+            tip: presuda.sud.tip,
+          },
+          datum: moment(presuda.datum, 'YYYY-MM-DD', true).isValid() ? presuda.datum : '1901-01-01',
+          clanoviZakonas: presuda.clanovi_zakona ? convertToClanoviZakonaObjects(presuda.clanovi_zakona) : [],
+          kazne: presuda.kazne ? convertToKaznaObject(presuda.kazne) : [],
+          krivica: true,
+        });
       });
-    });
+    }
     return presudeObjects;
   };
 
   const convertToOsobaObjects = (osobe: any) => {
     var osobeObjects = [];
-    osobe.forEach(function (osoba) {
-      osobeObjects.push({
-        id: null,
-        ime: osoba.ime,
-        pol: osoba.pol.replace('Š', 'S').replace('Ž', 'Z'),
+    if (osobe) {
+      osobe.forEach(function (osoba) {
+        osobeObjects.push({
+          id: null,
+          ime: osoba.ime,
+          pol: osoba.pol.replace('Š', 'S').replace('Ž', 'Z'),
+        });
       });
-    });
+    }
     return osobeObjects;
   };
 
@@ -394,6 +408,47 @@ export const PresudaUpdate = () => {
       });
     });
     return clanoviObjects;
+  };
+
+  const caseBasedReasoning = () => {
+    const entity = {
+      datum: datumInput,
+      datumPrivora: datumPritvoraInput,
+      kod: kodInput,
+      tip: 'PRVOSTEPENI_KRIVICNI_PREDMET',
+      broj: brojInput,
+      godina: godinaInput,
+      pokusaj: pokusajInput,
+      krivica: krivicaInput,
+      nacin: nacinInput,
+      clanoviZakonas: isNew ? convertToClanoviZakonaObjects(clanoviZakonaInput) : [],
+      radnja: {
+        mestoRadnje: mestoRadnjeInput,
+        vremeRadnje: vremeRadnjeInput,
+        povrede: convertToPovredeObjects(povredeInput),
+      },
+      sudija: {
+        ime: sudijaImeInput,
+        pol: sudijaPolInput,
+      },
+      tuzilac: {
+        ime: tuzilacImeInput,
+        pol: tuzilacPolInput,
+      },
+      branilac: {
+        ime: branilacImeInput,
+        pol: branilacPolInput,
+      },
+      sud: {
+        naziv: sudNazivInput,
+        tip: sudTipInput,
+        mesto: mestoSudaNazivInput,
+      },
+      kazne: convertToKaznaObject(kazneInput),
+    };
+
+    var ret = dispatch(getCbrReasoning(entity));
+    console.log(ret);
   };
 
   return (
@@ -1058,7 +1113,7 @@ export const PresudaUpdate = () => {
                 ) : (
                   !loading && (
                     <div className="alert alert-warning">
-                      <Translate contentKey="pravnaInformatikaApp.presuda.home.notFound">No Povredas found</Translate>
+                      <Translate contentKey="pravnaInformatikaApp.osoba.home.notFound">No Osobas found</Translate>
                     </div>
                   )
                 )}
@@ -1107,7 +1162,7 @@ export const PresudaUpdate = () => {
                 ) : (
                   !loading && (
                     <div className="alert alert-warning">
-                      <Translate contentKey="pravnaInformatikaApp.presuda.home.notFound">No Povredas found</Translate>
+                      <Translate contentKey="pravnaInformatikaApp.clanZakona.home.notFound">No ClanZakonas found</Translate>
                     </div>
                   )
                 )}
@@ -1359,6 +1414,111 @@ export const PresudaUpdate = () => {
                 />
               )}
               <div className="table-responsive">
+                {slicnePresude && slicnePresude.length > 0 ? (
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.presuda.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.presuda.datum">Datum</Translate> <FontAwesomeIcon icon="sort" />
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.presuda.datumPritvora">Datum Pritvora</Translate>{' '}
+                          <FontAwesomeIcon icon="sort" />
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.presuda.kod">Kod</Translate> <FontAwesomeIcon icon="sort" />
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.presuda.pokusaj">Pokusaj</Translate> <FontAwesomeIcon icon="sort" />
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.presuda.nacin">Nacin</Translate> <FontAwesomeIcon icon="sort" />
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {slicnePresude.map((presuda, i) => (
+                        <tr key={`entity-${i}`} data-cy="entityTable">
+                          <td>
+                            <Button tag={Link} to={`/presuda/${presuda.id}`} color="link" size="sm">
+                              {presuda.id}
+                            </Button>
+                          </td>
+                          <td>{presuda.datum ? <TextFormat type="date" value={presuda.datum} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
+                          <td>
+                            {presuda.datumPritvora ? (
+                              <TextFormat type="date" value={presuda.datumPritvora} format={APP_LOCAL_DATE_FORMAT} />
+                            ) : null}
+                          </td>
+                          <td>{presuda.kod}</td>
+                          <td>{presuda.pokusaj ? 'true' : 'false'}</td>
+                          <td>
+                            <Translate contentKey={`pravnaInformatikaApp.TipUbistva.${presuda.nacin}`} />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  !loading && (
+                    <div className="alert alert-warning">
+                      <Translate contentKey="pravnaInformatikaApp.presuda.home.notFound">No Presudas found</Translate>
+                    </div>
+                  )
+                )}
+              </div>
+              <div className="table-responsive">
+                {predlozeneKazne && predlozeneKazne.length > 0 ? (
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.tip">Tip</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.duzinaPritvora">Duzina Pritvora</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.uracunavanjePritvora">Uracunavanje Pritvora</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.kolicinaNovca">Kolicina Novca</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.primalacNovca">Primalac Novca</Translate>
+                        </th>
+                        <th>
+                          <Translate contentKey="pravnaInformatikaApp.kazna.nazivImovine">Naziv Imovine</Translate>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {predlozeneKazne.map((kazna, i) => (
+                        <tr key={`entity-${i}`} data-cy="entityTable">
+                          <td>
+                            <Translate contentKey={`pravnaInformatikaApp.TipKazne.${kazna.tip}`} />
+                          </td>
+                          <td>{kazna.duzinaPritvora}</td>
+                          <td>{kazna.uracunavanjePrivora ? 'true' : 'false'}</td>
+                          <td>{kazna.kolicinaNovca}</td>
+                          <td>{kazna.primalacNovca}</td>
+                          <td>{kazna.nazivImovine}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  !loading && (
+                    <div className="alert alert-warning">
+                      <Translate contentKey="pravnaInformatikaApp.kazna.home.notFound">No Kaznas found</Translate>
+                    </div>
+                  )
+                )}
+              </div>
+              <div className="table-responsive">
                 {kazneInput && kazneInput.length > 0 ? (
                   <Table responsive>
                     <thead>
@@ -1418,6 +1578,11 @@ export const PresudaUpdate = () => {
                 <FontAwesomeIcon icon="save" />
                 &nbsp;
                 <Translate contentKey="entity.action.save">Save</Translate>
+              </Button>
+              &nbsp;
+              <Button color="info" id="cbr-entity" data-cy="entityCbrButton" disabled={updating} onClick={caseBasedReasoning}>
+                &nbsp;
+                <Translate contentKey="entity.action.cbr">CBR</Translate>
               </Button>
             </ValidatedForm>
           )}

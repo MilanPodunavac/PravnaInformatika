@@ -15,6 +15,9 @@ const initialState: EntityState<IPresuda> = {
   updating: false,
   totalItems: 0,
   updateSuccess: false,
+
+  slicnePresude: [],
+  predlozeneKazne: [],
 };
 
 const apiUrl = 'api/xt/presudas';
@@ -79,6 +82,16 @@ export const createEntityFull = createAsyncThunk(
   { serializeError: serializeAxiosError }
 );
 
+export const getCbrReasoning = createAsyncThunk(
+  'presuda/get_cbr',
+  async (entity: any) => {
+    console.log(entity);
+    const requestUrl = `${apiUrl}/cbr`;
+    return axios.post<any>(requestUrl, entity);
+  },
+  { serializeError: serializeAxiosError }
+);
+
 // slice
 
 export const PresudaSlice = createEntitySlice({
@@ -122,6 +135,13 @@ export const PresudaSlice = createEntitySlice({
         state.errorMessage = null;
         state.updateSuccess = false;
         state.updating = true;
+      })
+
+      .addMatcher(isFulfilled(getCbrReasoning), (state, action) => {
+        console.log(action);
+        state.slicnePresude = action.payload.data.presude;
+        state.predlozeneKazne = action.payload.data.kazne;
+        console.log(state);
       });
   },
 });

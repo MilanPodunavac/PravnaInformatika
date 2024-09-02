@@ -5,6 +5,8 @@ const url = 'https://api.openai.com/v1/chat/completions';
 const key = '';
 const userKey = '';
 
+const MAX_MESSAGE_LENGTH = 10000;
+
 export const chatExtractPresuda = async (text: string) => {
   try {
     const apiUrl = url;
@@ -16,6 +18,10 @@ export const chatExtractPresuda = async (text: string) => {
       },
       timeout: 180000,
     };
+
+    if (text.length > MAX_MESSAGE_LENGTH) {
+      text.substring(0, MAX_MESSAGE_LENGTH);
+    }
 
     const requestBody = {
       messages: [
