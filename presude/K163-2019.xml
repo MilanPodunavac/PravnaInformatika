@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2020-04-15">
+						2015-04-15
+					</FRBRdate>
+					<FRBRtitle>
+						K 163/2019
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="vmostrokol" href="/ontology/person/vmostrokol" showAs="Vesna Mostrokol" />
+				<TLCPerson eId="arakovic" href="/ontology/person/arakovic" showAs="Anka Rakovic" />
+				<TLCPerson eId="smilic" href="/ontology/person/smilic" showAs="Suzana Milic" />
+				<TLCPerson eId="vf" href="/ontology/person/vf" showAs="V.F." />
+				<TLCPerson eId="rm" href="/ontology/person/rm" showAs="R.M." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični krivični po
+				<party id="vmostrokol" refersTo="#vmostrokol" as="#judge">
+					sudiji Vesni Moštrokol kao predsjednika vijeća
+				</party>
+				, uz učešće
+				<party id="arakovic" refersTo="#arakovic" as="#clerk">
+					namještenika Anke Raković, kao zapisničara
+				</party>
+				, u predmetu protiv
+                <party id="vf" refersTo="#vf" as="#defendant">
+					V.F. 
+				</party>
+                iz S., R.A., koga po službenoj dužnosti brani
+                <party id="dt" refersTo="#dt" as="#attorney">
+					R.M., advokat iz Podgorice
+				</party>
+                , zbog krivičnog djela ubistvo u pokušaju iz
+				<ref href="/krivicni#art_143">
+					čl.143
+				</ref>
+                , u vezi
+                <ref href="/krivicni#art_20">
+					čl.20 Krivičnog zakonika
+				</ref>
+                , po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužioca u Podgorici
+				</organization>
+                Kt.br.139/19 od 27.11.2019.godine, koju je na ročištu povodom odlučivanja o sporazumu o priznanju krivice zastupala
+                <party id="smilic" refersTo="#smilic" as="#plaintiff">
+					Suzana Milić, Državni tužilac
+				</party>
+                u
+                <organization id="vdt" refersTo="#vdt">
+					VDT-a u Podgorici
+				</organization>
+                , nakon donešenog rješenja o usvajanju sporazuma o priznanju krivice, dana 15.04.2020.godine, donio je PRESUDU
+                <party id="vf" refersTo="#vf" as="#defendant">
+					Optuženi: V.F.
+				</party>
+                , lični broj ...., od oca P. i majke V., rođena P., rođen ....godine u selu D.- S., R.A., sa privremenim boravištembu T., ul. T. bb (podstanar kod izvjesnog D.), državljanin R. A., maternji jezik albanski, po zanimanju keramičar, radi privatno, oženje, otac troje maloljetne djece, završio osnovnu školu, lošeg imovnog stanja, neosuđivan, u pritvoru od 05.08.2019.godine od 03,50 časova, Krivje Zato što je:Dana ....godine, oko 21,25 časova u T., ispred Ugostiteljskog objekta „M.m.“, u ul. K. br.6, sa umišljajem pokušao da liši života oštećenog A.G., na način što se tokom kraće rasprave sa oštećenim, mašio noža, a zatim nasrnuo na istog i uboo ga u predjelu lijeve polovine prednje strane grudnog koša, gdje se nalaze vitalni organi- srce i pluća, nanoseći mu na taj način tjelesnu povredu u vidu ubodne rane koja se kanalom kroz međurebarne mišiće nastavlja u grudnu duplju i praćena je prisustvom vazduha u grudnoj duplji, pri čemu je bio svjestan da ga na taj način može lišiti života, pa je to i htio, da bi ga u daljim nasrtajima nožem na oštećenog spriječili gosti lokala, nakon čega je pobjegao sa lica mjesta, - čime je izvršio krivično djelo ubistvo u pokušaju iz
+                <ref href="/krivicni#art_143">
+					čl.143 
+				</ref>
+				, u vezi 
+                <ref href="/krivicni#art_20">
+					čl.20 Krivičnog zakonika Crne Gore
+				</ref>
+                .
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Pa ga sud
+					</organization>
+                    , primjenom citiranih zakonskih odredbi, te odredbi
+					<ref href="/krivicni#art_4">
+						čl. 4 st. 2
+					</ref>
+					,
+					<ref href="/krivicni#art_5">
+						5
+					</ref>
+					,
+					<ref href="/krivicni#art_13">
+						13
+					</ref>
+					,
+                    <ref href="/krivicni#art_15">
+						15
+					</ref>
+                    ,
+					<ref href="/krivicni#art_32">
+						32
+					</ref>
+					,
+					<ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , i 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_45">
+						45
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_46">
+						46
+					</ref>
+                    i
+                    <ref href="/krivicni#art_51">
+						51
+					</ref>
+					, Krivičnog zakonika Crne Gore, te odredbi
+                    <ref href="/postupak#art_226">
+						čl.226
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						229
+					</ref>
+                    ,
+                    <ref href="/postupak#art_303">
+						303
+					</ref>
+                    i
+                    <ref href="/postupak#art_374">
+						374 Zakonika o krivičnom postupku.
+					</ref>
+                    O S U DJ U J E Na kaznu zatvora u trajanju od 2 (dvije) godine, u koju kaznu će mu se uračunati i vrijeme provedeno u pritvoru od 05.08.2019. godine od 03,50 časova, pa nadalje. OBAVEZUJE SE optuženi da na ime troškova krivičnog postupka Budžetu CG, uplati iznos od 179,00 € (stosedamdesetdevet eura), a na ime paušala, iznose od po 100,00 € (sto eura) Višem državnom tužilaštvu na račun Vrhovnog državnog tužilaštva Crne Gore, i
+                    <organization id="vs" refersTo="#vs">
+						Višem sudu u Podgorici
+					</organization>
+                    na račun Budžeta CG, sve u roku od 15 dana po pravosnažnosti presude pod prijetnjom prinudnog izvršenja.   
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

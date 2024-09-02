@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2014-10-23">
+						2014-10-23
+					</FRBRdate>
+					<FRBRtitle>
+						K 43/2014
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.BijeloPolje" showAs="Visi sud u BijelomPolju" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.BijeloPolje" showAs="Visi drzavni tuzilac u Bijelom Polju" />
+				<TLCPerson eId="vboskovic" href="/ontology/person/vboskovic" showAs="Vidomir Boskovic" />
+				<TLCPerson eId="mmusovic" href="/ontology/person/mmusovic" showAs="Medina Musovic" />
+				<TLCPerson eId="jvaragic" href="/ontology/person/jvaragic" showAs="Jokan Varagic" />
+				<TLCPerson eId="mgacevic" href="/ontology/person/mgacevic" showAs="Mirjana Gacevic" />
+				<TLCPerson eId="vmedojevic" href="/ontology/person/vmedojevic" showAs="Visnja Medojevic" />
+				<TLCPerson eId="pn" href="/ontology/person/pn" showAs="P.N." />
+				<TLCPerson eId="dp" href="/ontology/person/dp" showAs="D.P." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					Viši sud u Bijelom Polju
+				</organization>
+				, kao prvostepeni krivični, u vijeću sastavljenom od
+				<party id="vboskovic" refersTo="#vboskovic" as="#judge">
+					sudije Vidomira Boškovića kao predsjednika vijeća
+				</party>
+                i
+                <party id="mmusovic" refersTo="#mmusovic" as="#judge">
+					sudija Medine Mušović
+				</party>
+                i
+                <party id="jvaragic" refersTo="#jvaragic" as="#judge">
+					Jokana Varagića
+				</party>
+				,kao članova vijeća, sa
+				<party id="mgacevic" refersTo="#mgacevic" as="#clerk">
+					zapisničarem Mirjanom Gačević
+				</party>
+				, u krivičnom predmetu protiv
+                <party id="pn" refersTo="#pn" as="#defendant">
+                    P. N. iz B. P
+				</party>
+                zbog krivičnog djela ubistvo u pokušaju iz
+                <ref href="/krivicni#art_143">
+					člana 143
+				</ref>
+                u vezi
+                <ref href="/krivicni#art_20">
+					čl. 20 Krivičnog zakonika Crne Gore
+				</ref>
+                u sticaju sa krivičnim djelom nedozvoljeno držanje oružja i eksplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl. 403 st. 1 Krivičnog zakonika Crne Gore
+				</ref>
+                ,po optužnici
+                <organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužilaštva u Bijelom Polju
+				</organization>
+                Kt.br.34/14 od 22.09.2014.godine, nakon održanog usmenog, glavnog i javnog pretresa u prisustvu zamjenika
+                <organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužilaštva u Bijelom Polju
+				</organization>
+                <party id="vmedojevic" refersTo="#vmedojevic" as="#plaintiff">
+                    Višnje Medojević
+				</party>
+                ,
+                <party id="pn" refersTo="#pn" as="#defendant">
+                    optuženog P. N.
+				</party>
+                i njegovog branioca
+                <party id="dp" refersTo="#dp" as="#attorney">
+					advokata D. P. advokata iz B.
+				</party>
+                i oštećenog R. D., donio je dana 23. oktobra 2014.godine, a dana 24. oktobra 2014.godine, javno objavio PRESUDU
+                <party id="pn" refersTo="#pn" as="#defendant">
+					Optuženi: P.N.
+				</party>
+                ,JMBG ……. od oca M. i majke J., rodjene C., rodjen 09.09.1984.godine u B. P., sa prebivalištem u B. P., R. R., državljanin CG, neoženjen, student, srednjeg imovnog stanja, neosudjivan, nalazio se u pritvoru od 31.05.2014.godine do 24.10.2014.godine,KRIVJE Što je: Dana 31.05.2014.godine, oko 19,30 časova, u mjestu R. R., opština B. P., u stanju bitno smanjene uračunljivosti s umišljajem svjestan svog djela i uz htjenje posledice pokušao da liši života oštećenog R. D., na način što je iz pištolja marke ‘’B.’’ model .., cal… mm, fab.broja ….., koji je neovlašćeno nosio protivno čl. 10 a Zakona o izmjenama i dopunama zakona o oružju (Sl.list CG br. 20/11) u pravcu oštećenog ispalio više projektila u situaciji dok se oštećeni udaljavao u pravcu rijeke, od kojih ga je jedan projektil pogodio u predjelu lijeve strane ledja na oko .. cm od zadnje središne uzdužne linije tijela nanoseći mu povredu u vidu ustreline, koja se kanalom nastavlja u potkožno meko tkivo tog predjela kojom prilikom mu zrno lomi X rebro, sa zadnje strane i ulazi u lijevu polovinu grudne duplje, prolazeći kroz tkivo lijevog plućnog krila lomeći VII rebro, nakon čega strijelni kanal se nastavlja kroz meko tkivo do lijeve pazušne jame gdje se projektil i zaustavio, koja povreda je po svom karakteru teška tjelesna povreda opasna po život, čime je izvršio krivično djelo ubistvo u pokušaju iz
+                <ref href="/krivicni#art_143">
+					člana 143
+				</ref>
+                u vezi
+                <ref href="/krivicni#art_20">
+					čl. 20 Krivičnog zakonika Crne Gore
+				</ref>
+                u sticaju sa krivičnim djelom nedozvoljeno držanje oružja i eksplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl. 403 st. 1 KZ CG
+				</ref>
+                ,
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						pa mu sud
+					</organization>
+                    , na osnovu tog citiranog propisa te
+                    <ref href="/krivicni#art_15">
+						čl. 15
+					</ref>
+                    ,
+					<ref href="/krivicni#art_32">
+						32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_45">
+						45
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_46">
+						46 st.1 tač.1 i 5
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_51">
+						čl. 51
+					</ref>
+                    <ref href="/krivicni#art_51">
+						75 KZ CG
+					</ref>
+                    ,  te 
+                    <ref href="/postupak#art_226">
+						čl.226
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						229
+					</ref>
+                    i
+                    <ref href="/postupak#art_374">
+						374. ZKP
+					</ref>
+                    , utvrdjuje, za krivično djelo ubistvo u pokušaju iz
+                    <ref href="/krivicni#art_143">
+                        člana 143
+                    </ref>
+                    u vezi
+                    <ref href="/krivicni#art_20">
+                        čl. 20 Krivičnog zakonika Crne Gore
+                    </ref>
+                    kaznu zatvora u trajanju od …. godine i za krivično djelo nedozvoljeno držanje oružja i eksplozivnih materija iz
+                    <ref href="/krivicni#art_403">
+                        čl. 403 st. 1 KZ CG
+                    </ref>
+                    , kaznu zatvora u trajanju od ….. mjeseca, pa ga primjenom i
+                    <ref href="/krivicni#art_48">
+                        čl. 48 KZ CG
+                    </ref>
+                    OSUDJUJE Na jedinstvenu kaznu zatvora u trajanju od …. godine i …. mjeseca, u koju kaznu mu se uračunava vrijeme provedeno u pritvoru od 31.05.2014.godine do 24.10.2014.godine. Optuženi se obavezuje da na ime
+                    <organization id="vdt" refersTo="#vdt">
+                        paušala
+                    </organization>
+                    isplati iznos od 100,00 € /jedna stotina eura/ kao i troškova krivičnog postupka iznos od 859,00 € /osam stotina i pedeset devet eura/, u korist budžeta CG, u roku od 15 dana, od dana pravosnažsnosti presude, pod prijetnjom prinudnog izvršenja. Optuženom se izriče mjera bezbjednosti oduzimanje predmeta izvršenja krivičnog djela pištolja marke ‘’…’’ model .., cal. … mm, fab.broja …., na osnovu čl. 75 KZ CG. Imovinsko pravnog zahtjeva nije bilo.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

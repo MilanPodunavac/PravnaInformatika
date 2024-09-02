@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2011-07-27">
+						2011-07-27
+					</FRBRdate>
+					<FRBRtitle>
+						K 68/2011
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+                <TLCOrganization eId="os" href="/ontology/organization/OsnovniSud.Podgorica" showAs="Osnovni sud u Podgorici" />
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="rcupic" href="/ontology/person/rcupic" showAs="Ratko Cupic" />
+				<TLCPerson eId="rivanovic" href="/ontology/person/rivanovic" showAs="Radomir Ivanovic" />
+				<TLCPerson eId="jmedjedovic" href="/ontology/person/jmedjedovic" showAs="Jelena Medjedovic" />
+				<TLCPerson eId="stodorovic" href="/ontology/person/stodorovic" showAs="Slavica Todorovic" />
+				<TLCPerson eId="rradevic" href="/ontology/person/rradevic" showAs="Radenka Radevic" />
+				<TLCPerson eId="ealibabic" href="/ontology/person/ealibabic" showAs="Emina Alibabic" />
+				<TLCPerson eId="rf" href="/ontology/person/rf" showAs="R.F." />
+				<TLCPerson eId="vv" href="/ontology/person/vv" showAs="V.V." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični, u vijeću sastavljenom od
+				<party id="rcupic" refersTo="#rcupic" as="#judge">
+					sudije Ćupića Ratka, kao predsjednika vijeća
+				</party>
+				, 
+				<party id="rivanovic" refersTo="#rivanovic" as="#judge">
+					sudije Ivanović Radomira
+				</party>
+				i
+                <party id="jmedjedovic" refersTo="#jmedjedovic" as="#judge">
+                    sudija porotnika Međedović Jelene
+				</party>
+                ,
+                <party id="stodorovic" refersTo="#stodorovic" as="#judge">
+                    Todorović Slavice
+				</party>
+                i
+                <party id="stodorovic" refersTo="#stodorovic" as="#judge">
+                    Radević Radenka
+				</party>
+                kao članova vijeća, uz učešće
+                <party id="ealibabic" refersTo="#ealibabic" as="#clerk">
+                    Alibalić Emine kao zapisničara
+				</party>
+                , u krivičnom predmetu protiv
+                <party id="rf" refersTo="#rf" as="#defendant">
+					optuženog R. .F
+				</party>
+                , koga brani
+                <party id="vv" refersTo="#vv" as="#attorney">
+					V. V., advokat iz Podgorice
+				</party>
+                , zbog krivičnog djela –ubistvo u pokušaju iz
+				<ref href="/krivicni#art_143">
+					čl. 143
+				</ref>
+                u vezi
+                <ref href="/krivicni#art_20">
+					čl. 20 KZ
+				</ref>
+                u sticaju sa krivičnim djelom nedozvoljeno držanje oružja i eksplozivnih materija iz
+                <ref href="/krivicni#art_403">
+					čl.403 st.1 Krivičnog zakonika
+				</ref>
+                rješavanjući po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					VDT-a
+				</organization>
+                , nakon održanog usmenog, glavnog javnog pretresa dana 22.07.2011. godine u prisustvu zastupnika optužnice, optuženog i njegovog branioca, donio je, a dana 27.07.2011. godine javno objavio PRESUDU
+                <party id="rf" refersTo="#rf" as="#defendant">
+					Optuženi R. F..
+				</party>
+                rodjen . u C., nastanjen u P.i ul. ., državaljanin Crne Gore, po zanimanju carinik, nezaposlen, neoženjen, pismen, sa završenom srednjom školom, srednjeg imovnog stanja, osudjivan presudom Osnovnog suda u Kolašinu K.br.124/08 od 23.10.2009. godine zbog krivičnog djela iz
+                <ref href="/krivicni#art_399">
+					čl.399 KZ CG
+				</ref>
+                na kaznu zatvora od 6 mjeseci uslovno na 1 godinu i presudom
+                <organization id="os" refersTo="#os">
+                    Osnovnog suda u Podgorici
+                </organization>
+                K.br.1625/09 od 14.05.2010. godine zbog krivičnog djela iz
+                <ref href="/krivicni#art_403">
+                    čl.403 KZ CG
+                </ref>
+                na kaznu zatvora od 3 mjeseca, uslovno na 2 godine, u pritvoru od 04.02.2011. godine do 27.07.2011. godine, KRIV JE Zato što je: Dana 29.01.2011.godine oko 19,00 časova, u Podgorici u ul. R. S., ispred ulaza zgrade ., nakon prethodne svadje i fizičkog obračuna sa oštećenim M. K., sa umišljajem pokušao da liši žiovata oštećenog, na način što ga je telefonskim putem pozvao da izadje ispred ulaza navedene zgrade, pa kada ga je ugledao, iz pištolja marke "Bereta" NN serijskog broja, kal.7,65 mm, za koji pištolj nije imao izdat oružani list i isti je neovlašćeno nosio na javnom mjestu protivpravno odredbi
+                <ref href="/oruzje#art_20">
+                    čl.27
+                </ref>
+                i
+                <ref href="/oruzje#art_11">
+                    11 Zakona o oružju
+                </ref>
+                "(Sl. List RCG" br.49/2004) u njegovom pravcu ispalio više projektila, pa je oštećeni bježeći niz stepenište koje vodi u podrumske prostorije pokušao da se zaštiti, a okrivljeni je i dalje nastavio da puca u pravcu oštećenog, koji projektili su ga pogodili nanoseći mu tešku tjelesnu povredu u vidu prostrelne rane u predjelu desne potkoljenice sa višestrukim otvorenim prelomom desne goljenjače i desne lišnjače, nakon čega je pobjegao sa lica mjesta, - čime je izvršio krivično djelo - ubistvo u pokušaju iz
+                <ref href="/krivicni#art_403">
+                    čl.403 KZ CG
+                </ref>
+                u vezi
+                <ref href="/krivicni#art_20">
+                    čl.20 Krivičnog zakonika
+                </ref>
+                u sticaju sa krivičnim djelom - nedozvoljeno držanje oružja i eksplozivnih materija iz
+                <ref href="/krivicni#art_403">
+                    čl.403 st. 1 Krivičnog zakonika
+                </ref>
+                , 
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						pa sud
+					</organization>
+                    <party id="rf" refersTo="#rf" as="#defendant">
+                        optuženom R. F..
+                    </party>
+                    na osnovu citiranih zakonskih propisa,
+					<ref href="/krivicni#art_4">
+						čl. 4
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_32">
+						32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    i
+                    <ref href="/krivicni#art_48">
+						48 KZ 
+					</ref>  
+                    a za krivično djelo ubistvo u pokušaju iz
+                    <ref href="/krivicni#art_143">
+						člana 143.
+					</ref> 
+                    u vezi
+                    <ref href="/krivicni#art_20">
+						člana 20. KZ-a
+					</ref> 
+                    i primjenom
+                    <ref href="/krivicni#art_45">
+						člana 45.
+					</ref> 
+                    i
+                    <ref href="/krivicni#art_46">
+						46. KZ-a
+					</ref> 
+                    utvrdjuje: - za krivično djelo ubistvo u pokušaju iz
+                    <ref href="/krivicni#art_143">
+						čl.143
+					</ref> 
+                    u vezi
+                    <ref href="/krivicni#art_20">
+						čl. 20. KZ
+					</ref> 
+                    ,kaznu zatvora u trajanju od 2 (dvije) godine i 6(šest) mjeseci, - za krivično djelo nedozvoljeno držanje oružja i eksplozivnih materija iz
+                    <ref href="/krivicni#art_403">
+						čl.403 st.1 KZ
+					</ref> 
+                    kaznu zatvora u trajanju od 4 mjeseca, pa ga sud na osnovu citiranih zakonskih propisa,
+                    <ref href="/krivicni#art_48">
+						čl. 48 st. 2 KZ-a
+					</ref> 
+                    , te
+                    <ref href="/postupak#art_199">
+						čl.199
+					</ref>
+                    ,
+                    <ref href="/postupak#art_202">
+						202
+					</ref>
+                    i
+                    <ref href="/postupak#art_364">
+						364. ZKP-a
+					</ref>
+                    OSUDJUJE Na jedinstvenu kaznu zatvora u trajanju od 2 (dvije) godine i 8 (osam) mjeseci, u koju kaznu mu se uračunava vrijeme provedeno u pritvoru od 04.02.2011. godine do 27.07.2011. godine. Obavezuje se optuženi da ovom
+                    <organization id="vs" refersTo="#vs">
+						sudu 
+					</organization>
+                    plati troškove krivičnog postupka u iznosu od 1.072,50 eura, kao i paušal u iznosu od 100,00 eura, u roku od 15 dana po pravosnažnosti presude, pod prijetnjom prinudne naplate. 
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

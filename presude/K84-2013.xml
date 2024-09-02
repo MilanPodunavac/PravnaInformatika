@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2013-10-04">
+						2013-10-04
+					</FRBRdate>
+					<FRBRtitle>
+						K 84/2013
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+                <TLCOrganization eId="os" href="/ontology/organization/OsnovniSud.Podgorica" showAs="Osnovni sud u Podgorici" />
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="rcupic" href="/ontology/person/rcupic" showAs="Ratko Cupic" />
+				<TLCPerson eId="vpean" href="/ontology/person/vpean" showAs="Vesna Pean" />
+				<TLCPerson eId="ptabas" href="/ontology/person/ptabas" showAs="Predrag Tabas" />
+				<TLCPerson eId="vkazic" href="/ontology/person/vkazic" showAs="Vanja Kazic" />
+				<TLCPerson eId="sjovicevic" href="/ontology/person/sjovicevic" showAs="Sanja Jovicevic" />
+				<TLCPerson eId="sbozovic" href="/ontology/person/sbozovic" showAs="Slavomir Bozovic" />
+				<TLCPerson eId="jd" href="/ontology/person/jd" showAs="J.D." />
+				<TLCPerson eId="az" href="/ontology/person/az" showAs="A.Z." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni, u vijeću sastavljenom od
+				<party id="rcupic" refersTo="#rcupic" as="#judge">
+					sudije Ratka Ćupića, kao predsjednika vijeća
+				</party>
+				i
+				<party id="vpean" refersTo="#vpean" as="#judge">
+					sudija Vesne Pean
+				</party>
+				i
+                <party id="ptabas" refersTo="#ptabas" as="#judge">
+                    Predraga Tabaša
+				</party>
+                kao članova vijeća, uz učešće
+                <party id="vkazic" refersTo="#vkazic" as="#clerk">
+					namještenika suda Vanje Kažić, kao zapisničara
+				</party>
+                u krivičnom predmetu protiv
+                <party id="jd" refersTo="#jd" as="#defendant">
+                    optuženog J. D.
+
+				</party>
+                z N., zbog krivičnog djela podstrekivanje na ubistvo iz
+				<ref href="/krivicni#art_143">
+					člana 143 Krivičnog zakonika
+				</ref>
+                u vezi
+                <ref href="/krivicni#art_24">
+					člana 24 stav 2 Krivičnog zakonika
+				</ref>
+                po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužilaštva
+				</organization>
+                Kt. 57/13 od 27.06.2013. godine, nakon glavnog javnog pretresa održanog dana 23.09.2013. godine, u prisustvu
+                <party id="sjovicevic" refersTo="#sjovicevic" as="#plaintiff">
+					zamjenika VDT-a u Podgorici Jovićević Sanje
+				</party>
+                <party id="jd" refersTo="#jd" as="#defendant">
+					optuženog: J. D.
+				</party>
+                i  njegovog
+                <party id="sbozovic" refersTo="#sbozovic" as="#attorney">
+					branioca Božović Slavomira, adv. iz Nikšića
+				</party>
+                donio je, a dana 04.10.2013. godine, javno objavio PRESUDU
+                <party id="jd" refersTo="#jd" as="#defendant">
+					Optuženi J. D., J. 0.
+				</party>
+                , od oca M. i majke ., rođene P., rođen 0..1..1.. godine u N., sa prebivalištem u N., M. N. B.., državljanin C. G., živi u vanbračnoj zajednici, otac dvoje malodobne djece, nezaposlen, bavi se privatno molerskim radovima, pismen, završio osnovnu školu, srednjeg imovnog stanja, osuđivan odlukom Višeg suda u P. Km. 24/00 od 17.09.2002. godine kaznom zatvora u trajanju od 3 godine zbog krivičnog djela iz
+                <ref href="/krivicni#art_30">
+                    čl. 30 st. 2 KZ RCG
+                </ref>
+                u vezi člana 19 KZ SRJ; presudom Osnovnog suda u N. Kž. 866/2005 od 08.07.2006. godine kaznom zatvora u trajanju od 4 mjeseca zbog krivičnog djela iz
+                <ref href="/krivicni#art_89">
+                    čl. 89 st. 3
+                </ref>
+                u vezi stava
+                <ref href="/krivicni#art_1">
+                    1
+                </ref>
+                i
+                <ref href="/krivicni#art_2">
+                    2 KZ RCG
+                </ref>
+                ; presudom
+                <organization id="vs" refersTo="#vs">
+                    Višeg suda
+                </organization>
+                u P. K. 128/2005 od 16.11.2005. godine kaznom zatvora u trajanju od 4 godine zbog krivičnog djela iz
+                <ref href="/krivicni#art_300">
+                    čl. 300 stav 1 KZCG
+                </ref>
+                ; presudom
+                <organization id="os" refersTo="#os">
+					Osnovnog suda u N. K.
+				</organization>
+                247/2006 od 03.02.2009. godine kaznom zatvora u trajanju od 4 mjeseca, odlukom
+                <organization id="os" refersTo="#os">
+					Osnovnog suda u N.
+				</organization>
+                <ref href="/krivicni#art_177">
+                    član 177 stav 1
+                </ref>
+                u vezi 
+                <ref href="/krivicni#art_172">
+                    člana 172 stav 1 KZ CG
+                </ref>
+                presudom 
+                <organization id="vs" refersTo="#vs">
+                    Višeg suda u P. 
+                </organization>
+                Kv. 613/2010 od 19.08.2010. godine
+                <ref href="/krivicni#art_399">
+                    čl. 399 st. 2 u vezi st. 1 KZ
+                </ref>
+                i
+                <ref href="/krivicni#art_300">
+                    čl. 300 st. 1 KZCG
+                </ref>
+                i
+                <ref href="/krivicni#art_375">
+                    čl. 375 st. 3
+                </ref>
+                u vezi 
+                <ref href="/krivicni#art_1">
+                    st. 1
+                </ref>
+                i
+                <ref href="/krivicni#art_2">
+                    2 KZ
+                </ref>
+                i
+                <ref href="/krivicni#art_348">
+                    čl. 348 st. 1 KZ
+                </ref>
+                izrečena mu je jedinstvena kazna zatvora u trajanju od 3 godine i 7 mjeseci. Nalazi se u pritvoru od 23.04.2013. godine od 13:30 časova. KRIV JE Zato što je: Dana 02.04.2013. godine na području Opštine N., sa umišljajem podstrekavao M. R. i J. M. na izvršenje krivičnog djela – ubistvo, koje djelo nije ni pokušano, na štetu A. S. i S. D. iako je bio svjestan zabranjenosti svojih radnji, pa je to i htio, na način što je putem telefona sa broja . pozvao M. R. i u telefonskom razgovoru sa istim saopštio mu da je J. M. prethodno toga dana imao fizički sukob sa oštećenima, te zahtijevao od M. da angažuje NN lice koje bi za novčanu nadoknadu koju bi okrivljeni platio, izvršilo ubistvo na štetu A. S., da bi potom u sledećem telefonskom razgovoru M. R. davao savjete kako da nabavi oružje – pištolje i da jedan od pištolja preda J. M., koji bi pucao u A. S. i to u grudi, noge i rame, a potom i u S. D., kojom prilikom M. R. ukazuje da je potrebno da se približe oštećenom A. S., ali da ih isti ne primijeti, nakon čega je u telefonskom razgovoru u kojem su zajedno učestvovali M. R. i J. M. navodio J. M. da sačeka pogodan trenutak, kako bioštećenom A. S. pucao u stomak, noge i rame, za koje vrijeme je M. R. trebao da bude u blizini J. M., kako bi ga zaštitio u slučaju reakcije A. S., koja uputstva i savjete su M. R. i J. M. prihvatili, te je M. R., radi nabavljanja oružja, pozvao Ž. F. zaposlenog u prodavnici lovačkog oružja „L. M“ u N., koju prodavnicu je kasnije istog dana posjetio, da bi u daljim radnjama bili spriječeni od strane ovlašćenih službenih lica Uprave policije – PJ N., -​ čime je izvšio krivičnog djelo ubistvo putem podstrekavanja iz
+                <ref href="/krivicni#art_143">
+                    člana 143 Krivičnog zakonika
+                </ref>
+                u vezi
+                <ref href="/krivicni#art_24">
+                    člana 24 Krivičnog zakonika
+                </ref>
+                ,
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						pa ga sud
+					</organization>
+                    , na osnovu citiranog zakonskog propisa
+                    <ref href="/krivicni#art_4">
+						čl. 4
+					</ref>
+                    ,
+					<ref href="/krivicni#art_32">
+						čl. 32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_45">
+						45
+					</ref>
+                    i
+                    <ref href="/krivicni#art_46">
+						46 KZ-a
+					</ref>
+                    , te
+                    <ref href="/postupak#art_227">
+						čl. 227
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						229
+					</ref>
+                    i
+                    <ref href="/postupak#art_374">
+						374 ZKP-a
+					</ref>
+                    OSUĐUJE Na kaznu zatvora u trajanju od 2 (dvije) godine, u koju kaznu mu se uračunava vrijeme provedeno u pritvoru od 23.04.2013. godine, pa na dalje. Obavezuje se optuženi da ovom sudu plati troškove krivičnog postupka –
+                    <organization id="vdt" refersTo="#vdt">
+                        paušala
+                    </organization>
+                    u iznosu od 100,00 eura, u roku od 15 dana od pravosnažnosti presude pod prijetnjom prinudne naplate.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

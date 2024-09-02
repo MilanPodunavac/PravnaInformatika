@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2017-03-15">
+						2017-03-15
+					</FRBRdate>
+					<FRBRtitle>
+						K 120/2016
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="vmostrokol" href="/ontology/person/vmostrokol" showAs="Vesna Mostrokol" />
+				<TLCPerson eId="sradosavovic" href="/ontology/person/sradosavovic" showAs="Sanja Radosavovic" />
+				<TLCPerson eId="tcolan" href="/ontology/person/tcolan" showAs="Tanja Colan Deretic" />
+				<TLCPerson eId="bs" href="/ontology/person/bs" showAs="B.S." />
+				<TLCPerson eId="vm" href="/ontology/person/vm" showAs="V.M." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični 
+				<party id="vmostrokol" refersTo="#vmostrokol" as="#judge">
+					po sudiji Vesni Moštrokol
+				</party>
+				, kao predsjedniku vijeća, uz učešće
+				<party id="sradosavovic" refersTo="#sradosavovic" as="#clerk">
+					namještenika Sanje Radosavović kao zapisničara
+				</party>
+				, u predmetu protiv
+                <party id="bs" refersTo="#bs" as="#defendant">
+                    optuženog B. S.A iz H. N.
+				</party>
+                koga brani
+                <party id="nk" refersTo="#nk" as="#attorney">
+					V. M. advokat iz Podgorice
+				</party>
+                , zbog krivičnog djela ubistvo u pokušaju iz
+				<ref href="/krivicni#art_143">
+					člana 143
+				</ref>
+                u vezi
+                <ref href="/krivicni#art_20">
+					čl. 20 Krivičnog zakonika Crne Gore
+				</ref>
+                u sticaju sa krivičnim djelom nedozvoljeno držanje oružja i eksplozivnih materija
+                <ref href="/krivicni#art_403">
+					člana 403 st.1. Krivičnog zakonika Crne Gore
+				</ref>
+                po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužioca u Podgorici
+				</organization>
+                Kt.br. 112/16 od 24.11.2016. godine, koju je na ročištu povodom odlučivanja o sporazumu o priznanju krivice zastupala
+                <party id="smilic" refersTo="#smilic" as="#plaintiff">
+					Tanja Čolan Deretić Državni tužilac
+				</party>
+                u 
+				<organization id="vdt" refersTo="#vdt">
+					VDT-a u Podgorici
+				</organization>
+                nakon donešenog rješenja o usvajanju sporazuma o priznanju krivice, dana 15.03.2017. godine, donio je PRESUDU
+                <party id="bs" refersTo="#bs" as="#defendant">
+					Optuženi: B. S.
+				</party>
+                B. S., zv. B., JMBG …., od oca R. i majke D.rodj.M., rodjen ...01.1965. godine u N., sa prebivalištem u H. N., ulica .., državljanin Crne Gore, oženjen, otac troje djece, od kojih je dvoje maloljetno, završio Višu ekonomsku školu, ekonomista, zaposlen kao direktor u svom preduzeću “F.M.”, srednjeg imovnog stanja, neosudjivan,u pritvoru od 27.08.2016. godine od 21,18 časova do 06.03.2017. godine, KRIV JE Zato što je:Dana 27.08.2016. godine oko 19,30 časova u M., opština H.N., sa umišljajem pokušao da liši života oštećenog L. L.u, na način što je, kada je oštećeni na motoru prošao pored njega i njegovog lokala “M.” i uputio se prema lokalu “B.”, pošao za njim, prijeteći mu da će ubiti njega i njegovog oca, a zatim se ispred lokala “B.” mašio vatrenog oružja – pištolja NN marke i fabričkog broja, kalibra 7,65 mm, kojeg je tokom jula i avgusta mjeseca 2016. godine, suprotno odredbama
+                <ref href="/oruzje#art_144">
+					člana 5 stav 2
+				</ref>
+                ,
+                <ref href="/oruzje#art_144">
+					člana 10 tačke 2 i 3
+				</ref>
+                ,
+                <ref href="/oruzje#art_144">
+                    člana 11
+				</ref>
+                i 
+                <ref href="/oruzje#art_144">
+                    člana 33 Zakona o oružju
+				</ref>
+                , neovlašćeno držao u svom stanu u ul. …, zajedno sa više komada municije raznog kalibra, a pištolj i neovlašćeno nosio na javnom mjestu iako je bio svjestan da na taj način postupa neovlašćeno i protivpravno, pa je to i htio, te u momentu kada je oštećeni pobjegao u unutrašnjost navedenog lokala u pravcu njegovog tijela ispalio najmanje tri metka, iako je bio svjestan da ga na taj način može pogoditi i lišiti života, pa je to i htio, od kojih metaka ga je jedan pogodio nanoseći mu strijelnu ranu-prostrelinu lijevog koljena, nakon čega je pobjegao sa lica, uputivši se u pravcu N.a, gdje je prilikom lišenja slobode istog dana u mjestu V. kod njega u motoru pronadjeno 5 metaka kalibra 7,65, a dana 28.08.2016. godine pretresom njegovog stanja još 102 komada municije, od kojih 51 metak kalibra 9mm, 22 metka kalibra .38 specijal, 23 metka kalibra 7,65 mm, 4 metaka kalibra .357 Magnum i 2 metka kalibra 7,62 mm, - čime je izvršio krivično djelo – ubistvo u pokušaju iz
+                <ref href="/krivicni#art_143">
+                    člana 143
+                </ref>
+                u vezi 
+                <ref href="/krivicni#art_20">
+                    člana 20 Krivičnog zakonika Crne Gore
+                </ref>
+                u sticaju sa krivičnim djelom nedozvoljeno držanje oružja i eksplozivnih materija iz
+                <ref href="/krivicni#art_403">
+                    člana 403 st.1. Krivičnog zakonika Crne Gore
+                </ref>
+                .
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Pa mu sud
+					</organization>
+                    , primjenom citiranih zakonskih odredbi, te odredbi
+                    <ref href="/krivicni#art_4">
+						čl. 4 st. 2
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_5">
+						5
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_13">
+						13
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_15">
+						15
+					</ref>
+                    ,
+					<ref href="/krivicni#art_32">
+						32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_45">
+						45
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_46">
+						46
+					</ref>
+                    i
+                    <ref href="/krivicni#art_48">
+						48 stav 1 Krivičnog zakonika Crne Gore
+					</ref>
+					, prethodno u t v r d j u j e: -za krivično djelo ubistvo u pokušaju iz
+                    <ref href="/krivicni#art_48">
+						člana 143
+					</ref>
+                    u vezi
+                    <ref href="/krivicni#art_20">
+						čl. 20 Krivičnog zakonika Crne Gore
+					</ref>
+                    kaznu zatvora u trajanju od 2 (dvije) godine i 3 mjeseca, -za krivično djelo nedozvoljeno držanje oružja i eksplozivnih materija iz
+                    <ref href="/krivicni#art_403">
+                        člana 403 st.1. Krivičnog zakonika Crne Gore
+                    </ref>
+                    kaznu zatvora u trajanju od 3 (tri) mjeseca.
+                    <organization id="vs" refersTo="#vs">
+						Pa ga sud
+					</organization>
+                    primjenom citiranih zakonskih odredbi, te odredbi 
+                    <ref href="/krivicni#art_48">
+						člana 48 stav 2 tačka 2
+					</ref>
+                    i
+                    <ref href="/krivicni#art_51">
+						51 Krivičnog zakonika Crne Gore
+					</ref>
+                    ,  te odredbi
+                    <ref href="/postupak#art_226">
+						čl.226
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						229
+					</ref>
+                    ,
+                    <ref href="/postupak#art_303">
+						303
+					</ref>
+                    i
+                    <ref href="/postupak#art_374">
+						374. Zakonika o krivičnom postupku.
+					</ref>
+                    OSUĐUJE Na jedinstvenu kaznu zatvora u trajanju od 2 (dvije) godine i 5 (pet) mjeseci, u koju kaznu mu se uračunava vrijeme provedeno u pritvoru, počev od 27.08.2016. godine od 21,18 časova do 06.03.2017. godine. Na osnovu
+                    <ref href="/krivicni#art_75">
+                        čl. 75.Krivičnog zakonika Crne Gore
+					</ref> 
+                    <party id="bs" refersTo="#bs" as="#defendant">
+                        optuženom
+                    </party>
+                    se i z r i č e MJERA BEZBJEDNOSTI ODUZIMANJE PREDMETA ODUZIMA SE 5 metaka kalibra 7,65 i 102 komada municije, od kojih je 51 metak kalibra 9mm, 22 metka kalibra .38 specijal, 23 metka kalibra 7,65 mm, 4 metaka kalibra .357 Magnum i 2 metka kalibra 7,62 mm. OBAVEZUJE SE optuženi da na ime troškova krivičnog postupka –
+                    <party id="bs" refersTo="#bg" as="#defendant">
+                        paušala
+                    </party>
+                    uplati novčani iznos od 100,00 (sto) eura, na račun Vrhovnog državnog tužilaštva Crne Gore, broj 832-1187-31, koji se vodi kod Societe Generale Group AD Podgorica, sve u roku od 15 dana popravosnažnosti presude pod prijetnjom prinudnog izvršenja.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						OSNOVNI SUD U ROŽAJAMA
+					</FRBRauthor>
+					<FRBRdate date="2016-06-20">
+						2016-06-20
+					</FRBRdate>
+					<FRBRtitle>
+						K 67/2016
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+                <TLCOrganization eId="os" href="/ontology/organization/OsnovniSud.ROŽAJI" showAs="Osnovni sud u Rožajama" />
+				<TLCOrganization eId="odt" href="/ontology/organization/OsnovniDrzavniTuzilac.Rožaji" showAs="Osnovni drzavni tuzilac u Rožajama" />
+				<TLCPerson eId="mzekic" href="/ontology/person/mzekic" showAs="Milosav Zekic" />
+				<TLCPerson eId="aluboder" href="/ontology/person/aluboder" showAs="Aida Luboder" />
+				<TLCPerson eId="aselmanovic" href="/ontology/person/aselmanovic" showAs="Armin Selmanovic" />
+				<TLCPerson eId="sb" href="/ontology/person/sb" showAs="S.B." />
+				<TLCPerson eId="hn" href="/ontology/person/hn" showAs="H.N." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+                Sudija
+                <party id="mzekic" refersTo="#mzekic" as="#judge">
+					Sudija
+				</party>
+				<organization id="os" refersTo="#os">
+					Osnovnog suda u Rožajama
+				</organization>
+                <party id="mzekic" refersTo="#mzekic" as="#judge">
+					Milosav Zekić
+				</party>
+				, uz učešće
+				<party id="aluboder" refersTo="#aluboder" as="#clerk">
+					zapisničara Aide Luboder
+				</party>
+				, rješavajući po optužnom predlogu
+                <organization id="odt" refersTo="#odt">
+					Osnovnog državnog tužilaštva iz Rožaja
+				</organization>
+                t.br. 38/16 od 24.05.2016.g. podnijet protiv
+                <party id="sb" refersTo="#sb" as="#defendant">
+                    okrivljene S. B.
+				</party>
+                zbog krivičnih djela ubistvo djeteta pri porođaju iz
+                <ref href="/krivicni#art_146">
+					čl. 146. Krivičnog zakonika Crne Gore
+				</ref>
+                i povreda leša
+                <ref href="/krivicni#art_410">
+					čl. 410. Krivičnog zakonika Crne Gore
+				</ref>
+                nakon održanog glavnog i javnog pretresa dana 17.06.2016.g., u prisustvu
+                <party id="aselmanovic" refersTo="#aselmanovic" as="#plaintiff">
+					Državnog tužioca Armina Selmanovića
+				</party>
+                <party id="sb" refersTo="#sb" as="#defendant">
+                    okrivljene
+				</party>
+                i njenog
+                <party id="hn" refersTo="#hn" as="#attorney">
+                    branioca adv.H. N
+				</party>
+                , donio je i dana 20.06.2016. javno objavio PRESUDU
+                <party id="sb" refersTo="#sb" as="#defendant">
+					Okrivljena S. B.
+				</party>
+                JMB ., od oca P. i majke S. rođene F., rođ. 04.10.1992.godine, u Rožajama, gdje i živi - naselje Ibarac – ul. Ibarčanska bb, državljanka Crne Gore, razumije crnogorski jezik koji je i njen jezik, neudata, pismena, student, siromašnog imovnog stanja, neosuđivana.KRIVAJE Što je: dana 06.03.2016.godine, oko 05,00 časova, u porodičnoj kući u naselju Ibarac – ul. Ibarčanska bb, Opština Rožaje, u uračunljivom stanju, svjesna da može učiniti djelo pa je na to pristala, kao majka, lišila života svoje dijete za vrijeme porođaja, dok kod nje traje poremećaj izazvan porođajem, na način što nakon dobijenih trudova i započetog porođaja nije pošla u zdravstvenu ustanovu, već je porođaj izvela sama u kući, gdje nije podvezala pupčanu vrpcu novorođenčetu, usljed čega je zbog nepodvezivanja pupčane vrpce i nepružanja pomoći i ljekarske njege nastupila smrt kod djeteta, -čime je izvršila krivično djelo ubistvo djeteta pri porođaju iz
+                <ref href="/krivicni#art_146">
+                    čl. 146. Krivičnog zakonika Crne Gore
+                </ref>
+                . dana 08.03.2016.godine, oko 06,15 časova, u naselju Ibarac, Opština Rožaje, u uračunljivom stanju, svjesna svog djela čije je izvršenje htjela, iako je znala da je njeno djelo zabranjeno, sakrila leš svog mrtvog djeteta, na način što je leš mrtvog novorođenčeta stavila u žensku torbu koju je zatim zajedno sa lešom bacila u nabujalu Ibarčansku rijeku, tako da se leš nije mogao pronaći, -čime je izvršila krivično djelo povreda leša iz - ugrožavanje opasnim oruđem pri tuči i svađi i osuđen na novčanu kaznu u iznosu od 400,00eura ,u pritvoru od 08.08.2017. godine od 01,30 časova, KRIV JE Zato što je: Dana 07.08.2017. godine, oko 23,00 časa, u naselju Jaz - Opština Budva, iza restorana "Firma" sa umišljajem pokušao da liši života oštećenu A. E., na način što je istu uboo nožem više puta i to u predjelu lica, vrata i ruke, nanoseći joj tom prilikom teške tjelesne povrede u vidu rezne rane u predjelu desne strane lica, nosa i lijeve polovine gornje usne, rezne rane u predjelu lijeve usne školjke i predušnog predjela, rezne rane u predjelu lijeve polovine donjoviličnog predjela, lijeve bočne strane vrata i podključnog predjela, sjekotina u predjelu lijevog dlana i II prsta lijeve šake, praćene presijecanjem mišićnih tetiva, grana središnjeg živca ruke i arterijskih krvnih sudova, praćene obilnim krvarenjem, pri čemu je bio svjestan svog djela i htio je njegovo izvršenje, - čime je izvršio krivično djelo – ubistvo u pokušaju iz
+                <ref href="/krivicni#art_410">
+                    čl. 410. Krivičnog zakonika Crne Gore
+                </ref>
+                .
+			</p>
+			<conclusions>
+				<p>
+					<organization id="os" refersTo="#os">
+						pa joj sud
+					</organization>
+                    , primenom pomenutih zakonskih propisa i 
+                    <ref href="/krivicni#art_4">
+						čl. 4
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_13">
+						13
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_15">
+						15
+					</ref>
+					<ref href="/krivicni#art_32">
+						čl. 32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    i
+                    <ref href="/krivicni#art_51">
+						48 Krivičnog zakonika Crne Gore
+					</ref>
+                    utvrđuje: za krivično djelo ubistvo djeteta pri porođaju iz
+                    <ref href="/krivicni#art_146 ">
+						čl. 146. Krivičnog zakonika Crne Gore
+					</ref>
+                    , kaznu zatvora u trajanju od šest mjeseci, - za krivično djelo povreda leša iz
+                    <ref href="/krivicni#art_410 ">
+						čl. 410. Krivičnog zakonika Crne Gore
+					</ref>
+                    , kaznu zatvora u trajanju od dva mjeseca, pa je sud primenom pomenutih zakonskih propisa i
+                    <ref href="/postupak#art_374">
+						čl. 374. Zakonika o krivičnom postupku
+					</ref>
+                    OSUĐUJE Na jedinstvenu KAZNU ZATVORA u trajanju od 7 (sedam) mjeseci u koju kaznu joj se ima uračunati vrijeme zadržavanja od 09.03.2016.g. do 11.03.2016.g. Da plati na ime troškova krivičnog postupka iznos od 482,00 eura i na ime
+                    <organization id="odt" refersTo="#odt">
+                        paušala
+                    </organization>
+                    iznos od 30,00 eura, u korist budžeta Crne Gore, u roku od 15 dana po pravosnažnosti presude.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

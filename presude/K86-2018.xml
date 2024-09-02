@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2018-11-19">
+						2018-11-19
+					</FRBRdate>
+					<FRBRtitle>
+						K 86/2018
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="vmostrokol" href="/ontology/person/vmostrokol" showAs="Vesna Mostrokol" />
+				<TLCPerson eId="arakovic" href="/ontology/person/arakovic" showAs="Anka Rakovic" />
+				<TLCPerson eId="zvucinic" href="/ontology/person/zvucinic" showAs="Zoran Vucinic" />
+				<TLCPerson eId="jb" href="/ontology/person/jb" showAs="J.B." />
+				<TLCPerson eId="az" href="/ontology/person/az" showAs="A.Z." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični po
+				<party id="vmostrokol" refersTo="#vmostrokol" as="#judge">
+					Vesni Moštrokol, kao predsjedniku vijeća
+				</party>
+				, uz učešće
+				<party id="arakovic" refersTo="#arakovic" as="#clerk">
+					namještenika Anke Raković, kao zapisničara
+				</party>
+				, u predmetu protiv
+                <party id="jb" refersTo="#jb" as="#defendant">
+                    optuženog J.B.
+				</party>
+                iz N., koga brani
+                <party id="di" refersTo="#di" as="#attorney">
+					A. Ž., advokat iz K.
+				</party>
+                , zbog krivičnog djela ubistvo u pokušaju iz
+				<ref href="/krivicni#art_143">
+					člana 143
+				</ref>
+                u vezi
+                <ref href="/krivicni#art_20">
+					čl. 20 Krivičnog zakonika Crne Gore
+				</ref>
+                po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužioca u Podgorici
+				</organization>
+                Kt.br.80/18 od 19.07.2018. godine, koju je na ročištu povodom odlučivanja o sporazumu o priznanju krivice zastupao
+                <party id="zvucinic" refersTo="#zvucinic" as="#plaintiff">
+					o Vučinić Zoran, Državni tužilac
+				</party>
+                u 
+				<organization id="vdt" refersTo="#vdt">
+					VDT-a u Podgorici
+				</organization>
+                ,
+                nakon pravosnažnosti donešenog rješenja o usvajanju sporazuma o priznanju krivice, dana 19.11.2018. godine, donio je PRESUDU
+                <party id="re" refersTo="#re" as="#defendant">
+					Optuženi: J. B., zvani "B."
+				</party>
+                JMB ..., od oca D. i majke S., rođene I., rođen ....godine u N., sa prebivalištem u N., ul. D. B. bb, stan br.42 (zgrada „D.“), državljanin Crne Gore, završio srednju elektrotehničku školu-smjer za računare, po zanimanju konobar, neoženjen, bez djece, nezaposlen, lošeg imovnog stanja, neosuđivan, u pritvoru od 28.04.2018.godine do 31.07.2018.godine, KRIV JE Zato što je: Dana ....godine oko 23,33 časova, u blizini prodavnice „M. T.“, na uglu ulice Ž. f. i ulice XVIII u B., sa umišljajem pokušao da liši života oštećenog K. R., na način što je oštećenom zadao jedan udarac nožem u predjelu lijeve strane vrata, nanoseći mu tešku tjelesnu povredu u vidu ubodno-rezne rane u predjelu lijeve bočne strane vrata, sa kanalom koji se pruža kroz meka tkiva, presijeca štitastu hrskavicu i završava se u zjapu grkljana, praćene prisustvom vazduha koji prožima meka tkiva vrata i sredogruđa i udisanjem krvi, pri čemu je okrivljeni bio svjestan da tako oštećenog može lišiti života, pa je to i htio, - čime je izvršio krivično djelo ubistvo u pokušaju iz
+                <ref href="/krivicni#art_143">
+                    člana 143
+                </ref>
+                u vezi 
+                <ref href="/krivicni#art_20">
+                    člana 20 Krivičnog zakonika Crne Gore
+                </ref>
+                .
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Pa ga sud
+					</organization>
+                    , primjenom citiranih zakonskih odredbi, te odredbi
+                    <ref href="/krivicni#art_4">
+						čl. 4 st. 2
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_5">
+						5
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_13">
+						13
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_15">
+						15
+					</ref>
+                    ,
+					<ref href="/krivicni#art_32">
+						čl. 32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_45">
+						45
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_46">
+						46
+					</ref>
+                    i
+                    <ref href="/krivicni#art_51">
+						čl. 51 Krivičnog zakonika Crne Gore
+					</ref>
+                    ,  te odredbi
+                    <ref href="/postupak#art_226">
+						čl.226
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						229
+					</ref>
+                    ,
+                    <ref href="/postupak#art_303">
+						303
+					</ref>
+                    i
+                    <ref href="/postupak#art_374">
+						374. Zakonika o krivičnom postupku.
+					</ref>
+                    Na kaznu zatvora u trajanju od 2 (dvije) godine, u koju kaznu će mu se uračunati vrijeme provedeno u pritvoru od 28.04.2018.godine do 31.07.2018.godine. OBAVEZUJE SE optuženi da na ime troškova krivičnog postupka, Budžetu CG, uplati iznos od 3.048,37 eura (trihiljadečetrdesetosam eura i tridesetdesam centi), a na ime
+                    <organization id="vdt" refersTo="#vdt">
+                        paušala
+                    </organization>
+                    , iznos od 100,00 (sto) eura na račun
+                    <organization id="vdt" refersTo="#vdt">
+                        Vrhovnog državnog tužilaštva Crne Gore
+                    </organization>
+                    , broj 832-1187-31, koji se vodi kod Societe Generale Group AD Podgorica, u roku od 15 dana po pravosnažnosti presude pod prijetnjom prinudnog izvršenja.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

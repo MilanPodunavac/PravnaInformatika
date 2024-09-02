@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2012-12-14">
+						2012-12-14
+					</FRBRdate>
+					<FRBRtitle>
+						K 123/2012
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="smugos" href="/ontology/person/smugos" showAs="Suzana Mugos" />
+				<TLCPerson eId="mbasovic" href="/ontology/person/mbasovic" showAs="Miroslav Basovic" />
+				<TLCPerson eId="ptabas" href="/ontology/person/ptabas" showAs="Predrag Tabas" />
+				<TLCPerson eId="brakocevic" href="/ontology/person/brakocevic" showAs="Biljana Rakocevic" />
+				<TLCPerson eId="bg" href="/ontology/person/bg" showAs="B.G." />
+				<TLCPerson eId="nk" href="/ontology/person/nk" showAs="N.K." />
+				<TLCPerson eId="ll" href="/ontology/person/ll" showAs="L.L." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični, u vijeću sastavljenom od
+				<party id="smugos" refersTo="#smugos" as="#judge">
+					sudije Mugoša Suzane, kao predsjednika vijeća
+				</party>
+				, i
+				<party id="mbasovic" refersTo="#mbasovic" as="#judge">
+					sudija Miroslava Bašovića
+				</party>
+				, i
+                <party id="ptabas" refersTo="#ptabas" as="#judge">
+					Predraga Tabaša kao članova vijeća
+				</party>
+                , uz učešće
+                <party id="brakocevic" refersTo="#brakocevic" as="#Clerk">
+					Rakočević Biljane kao zapisničara
+				</party>
+                u krivičnom predmetu protiv
+                <party id="bg" refersTo="#bg" as="#defendant">
+					B.G.
+				</party>
+                , iz D., kojeg brani 
+                <party id="nk" refersTo="#nk" as="#attorney">
+					dv. N. K.
+				</party>
+                , zbog krivičnog djela teško ubistvo iz
+				<ref href="/krivicni#art_144">
+					čl. 144 st.1 tač. 4 Krivičnog zakonika
+				</ref>
+                , odlučujući po optužnici
+				<organization id="vdt" refersTo="#vdt">
+					Višeg državnog tužilaštva u P.
+				</organization>
+                Kt.br.38/12 od 19.09.2012 godine, koju je na glavnom pretresu zastupala
+                <party id="smilic" refersTo="#smilic" as="#plaintiff">
+					L. L. zamjenik VDT-a u P.
+				</party>
+                , nakon održanog glavnog i javnog pretresa, dana 14.12.2012.godine, u prisustvu
+                <party id="smilic" refersTo="#smilic" as="#plaintiff">
+					zastupnika optužbe
+				</party>
+                ,
+                <party id="bg" refersTo="#bg" as="#defendant">
+					optuženog
+				</party>
+                i
+                <party id="nk" refersTo="#nk" as="#attorney">
+					njegovog branioca
+				</party>
+                , donio je i javno objavio dana 17.12.2012.godine, PRESUDU
+                <party id="bg" refersTo="#bg" as="#defendant">
+					Optuženi: B. G.
+				</party>
+                JMBG ......, od oca M. i majke G., rodjene R.., rodjen 09.10.1991 godine u Podgorici, sa prebivalištem u D., D. M. bb., državljanin C. G., elektotehničar energetike, srednjeg imovnog stanja, nezaposlen, neoženjen, neosudjivan, u pritvoru od 23.05.2012 godine od 08,10 časova. Krivje Zato što je: Dana 23.05.2012 godine, oko 07,45 časova, u naselju S. A., u ul. A. u P., iz niskih pobuda, sa umišljajem lišio života oštećenu- maloljetnu S. N., sa kojom je ranije bio u emotivnoj vezi, na način što je prethodno naoružan pištoljem došao ispred zgrade u kojoj stanuje oštećena i sačekao njen izlazak iz zgrade, i na putu ka školi zaustavio je, zahtijevajući od nje da se pomire, pa nakon rasprave sa oštećenom koja je odbila nastavak emotivne veze, zbog neuzvraćene ljubavi, iz pištolja marke "C. Z. " ... kalibra 7,65mm, fabričkog broja C-...., ispalio više metaka u pravcu oštećene iako je bio svjestan da će je tako lišiti života , pa je to i htio, od kojih metaka su je dva pogodila u predjelu glave i to jedan u predjelu ispod spoljašnjeg ugla lijevog oka i u predjelu spoljašnjeg desnog ugla usta, i jedan u predjelu grudnog koša u lijevom dojkinom predjelu, nanoseći joj tako teške tjelesne povrede u vidu tri strijelne rane-prostreline, usljed čega je došlo do iskrvavljenja iz raskidanih krvnih sudova duž kanala strijelnih rana-prostrelina, od kojih je kod oštećene nastupila smrt, a nakon čega je okrivljeni napustio lice mjesta, -čime je izvršio krivično djelo-teško ubistvo iz 
+                <ref href="/krivicni#art_144">
+					člana 144 stav 1 tačka 4 Krivičnog zakonika
+				</ref>
+                .
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Pa ga sud
+					</organization>
+                    , primjenom citiranih zakonskih propisa te
+                    <ref href="/krivicni#art_4">
+						čl. 4
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_5">
+						5
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_13">
+						13
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_15">
+						15
+					</ref>
+                    ,
+					<ref href="/krivicni#art_32">
+						32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    i
+                    <ref href="/krivicni#art_51">
+						51
+					</ref>
+					, Krivičnog zakonika Crne Gore, te 
+                    <ref href="/postupak#art_226">
+						čl.226
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						229
+					</ref>
+                    i
+                    <ref href="/postupak#art_374">
+						374. Zakonika o krivičnom postupku.
+					</ref>
+                    OSUĐUJE Na kaznu zatvora u trajanju od 20 (dvadeset) godina, u koju kaznu mu se uračunava vrijeme provedeno u pritvoru počev od 23.05.2012 godine, pa nadalje, a koji pritvor može trajati do pravosnažnosti presude, a najduže dok ne istekne vrijeme trajanja kazne izrečene u presudi.Optuženi je dužan da na ime troškova krivičnog postupka uplati u Budžet C.G. iznos od 1.221,50 eura, od čega 50,00€ e na ime sudskog paušala, a na ime troškova vještačenja iznos od 1.171,50€, a sve u roku od 15 dana od pravosnažnosti presude pod prijetnjom prinudnog izvršenja. Shodno
+                    <ref href="/krivicni#art_72">
+                        čl.75 KZ-a,
+					</ref> 
+                    <party id="bg" refersTo="#bg" as="#defendant">
+                        optuženom
+                    </party>
+                     se izriče : MJERA BEZBJEDNOSTI ODUZIMANJE PREDMETA Pa se od
+                    <party id="bg" refersTo="#bg" as="#defendant">
+                        optuženog B. G.
+                    </party>
+                    oduzima pištolj marke "C. Z." M 70 kalibra 7.65mm, fabričkog broja C 142581, kao sredstvo izvršenja predmetnog krivičnog djela.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Akoma_Ntoso document -->
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17 ../schemas/akomantoso30.xsd " xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/WD17" xmlns:mods="http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+	<judgment>
+		<meta>
+			<identification source="#court">
+				<FRBRWork>
+					<FRBRauthor>
+						Visi Sud u Podgorici
+					</FRBRauthor>
+					<FRBRdate date="2020-12-30">
+						2020-12-30
+					</FRBRdate>
+					<FRBRtitle>
+						K 63/2020
+					</FRBRtitle>
+					<FRBRcountry>
+						CG
+					</FRBRcountry>
+				</FRBRWork>
+			</identification>
+			<references>
+				<TLCOrganization eId="vs" href="/ontology/organization/VisiSud.Podgorica" showAs="Visi sud u Podgorici" />
+				<TLCOrganization eId="vdt" href="/ontology/organization/VisiDrzavniTuzilac.Podgorica" showAs="Visi drzavni tuzilac u Podgorici" />
+				<TLCPerson eId="vkovacevic" href="/ontology/person/vkovacevic" showAs="Vesna Kovacevic" />
+				<TLCPerson eId="ahasanovic" href="/ontology/person/ahasanovic" showAs="Anisa Hasanovic" />
+				<TLCPerson eId="astankovic" href="/ontology/person/astankovic" showAs="Ana Stankovic" />
+				<TLCPerson eId="kp" href="/ontology/person/kp" showAs="K.P." />
+				<TLCRole eId="plaintiff" href="/ontology/role/plaintiff" showAs="Plaintiff" />
+				<TLCRole eId="defendant" href="/ontology/role/defendant" showAs="Defendant" />
+				<TLCRole eId="judge" href="/ontology/role/judge" showAs="Judge" />
+				<TLCRole eId="clerk" href="/ontology/role/clerk" showAs="Clerk" />
+				<TLCRole eId="councilor" href="/ontology/role/councilor" showAs="Councilor" />
+				<TLCRole eId="advisor" href="/ontology/role/advisor" showAs="Advisor" />
+				<TLCRole eId="attorney" href="/ontology/role/attorney" showAs="Attorney" />
+			</references>
+		</meta>
+		<judgmentBody>
+			<p>
+				<organization id="vs" refersTo="#vs">
+					VIŠI SUD U PODGORICI
+				</organization>
+				, kao prvostepeni krivični,
+				<party id="vkovacevic" refersTo="#vkovacevic" as="#judge">
+					sudija Kovačević Vesna
+				</party>
+				, uz učešće
+				<party id="ahasanovic" refersTo="#ahasanovic" as="#clerk">
+					Hasanović Anise kao zapisničara
+				</party>
+				, u predmetu protiv
+                <party id="kp" refersTo="#kp" as="#defendant">
+                    optuženog K.P.
+				</party>
+                koga brani
+                <party id="astankovic" refersTo="#astankovic" as="#attorney">
+					Ana Stanković - Mugoša, advokat iz Podgorice
+				</party>
+                , zbog krivičnog djela teško ubistvo iz
+				<ref href="/krivicni#art_144">
+					čl. 144 st. 1 tač. 1 Krivičnog zakonika Crne Gore
+				</ref>
+                ,nakon donesenog rješenja o usvajanju sporazuma o priznanju krivice, dana 05.11.2020. godine, dana 30.12.2020. godine donio je PRESUDU
+                <party id="re" refersTo="#re" as="#defendant">
+					Optuženi: K.P.
+				</party>
+                JMB …., od oca B. i majke S., rođene K., rođen ……... godine u C., sa prebavilštem u Kotoru – P. bb, državljanin Crne Gore, neoženjen, bez djece, završio srednju mašinsku školu, lošeg imovnog stanja, ranije neosudjivan, u pritvoru od 17.12.2019.godine od 18,00 časova pa nadalje. KRIV JE Zato što je:                 Dana 17.12.2019.godine, oko 15,00 časova u selu K., Opština C., u bitno smanjenom uračunljivom stanju sa umišljajem, na svirep način, lišio života svoju majku - oštećenu K. S., na način što je istu odveo u šumu, u blizini njihove porodične kuće, gdje je više puta udarao podesnim sredstvom - kamenom u predjelu glave itijela, nakon čega je stavio metalnu kantu preko glave, nastavljajući da je udara, nanoseći joj tom prilikom teške i po život opasne povrede u vidu hematoma i preloma i to potpunih preloma, II, III, IV, V, VI, VII, VIII, IX i X rebra sa lijeve strane u unutrašnjoj lopatičnoj liniji, III, IV, V, VI, VII i VIII rebara sa desne strane u unutrašnjoj ključnjačinoj liniji, srednjeg članka trećeg prsta lijeve šake, kojom prilikom je oštećena trpjela bolove i strah jakog inteziteta, nakon čega je od zadobijenih povreda, a usljed oštećenja po život važnih moždanih centara, kod iste nastupila smrt, pri čemu je bio svjestan svog djela i htio je njegovo izvršenje čime je izvršio krivično djelo - teško ubistvo iz
+                <ref href="/krivicni#art_144">
+                    čl. 144 st. 1 tač. 1 Krivičnog zakonika Crne Gore
+                </ref>
+                .
+			</p>
+			<conclusions>
+				<p>
+					<organization id="vs" refersTo="#vs">
+						Pa sud
+					</organization>
+                    <party id="kp" refersTo="#kp" as="#defendant">
+                        optuženog
+                    </party>
+                    , primjenom citiranih zakonskih odredbi, te odredbi
+                    <ref href="/krivicni#art_4">
+						čl. 4 st. 2
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_5">
+						čl. 5
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_13">
+						čl. 13
+					</ref>
+                    <ref href="/krivicni#art_15">
+						čl. 15
+					</ref>
+					<ref href="/krivicni#art_32">
+						čl. 32
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_33">
+						33
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_35">
+						35
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_36">
+						36
+					</ref>
+                    , 
+					<ref href="/krivicni#art_42">
+						42
+					</ref>
+                    ,
+                    <ref href="/krivicni#art_51">
+						čl. 51 Krivičnog zakonika Crne Gore
+					</ref>
+                    ,  te odredbi
+                    <ref href="/postupak#art_226">
+						čl.226
+					</ref>
+                    ,
+                    <ref href="/postupak#art_229">
+						229
+					</ref>
+                    i
+                    <ref href="/postupak#art_303">
+						303 Zakonika o krivičnom postupku.
+					</ref>
+                    Na kaznu zatvora u trajanju od 20 (dvadeset) godina, koju kaznu je optuženi dužan izdržati po pravosnažnosti presude donijete na osnovu sporazuma o priznanju krivice, u koju kaznu mu se uračunava vrijeme provedeno u pritvoru počev od 17.12.2019.godine od 18,00 časova pa nadalje. OBAVEZUJE SE optuženi da na ime troškova krivičnog postupka plati iznos od po 50,00 eura na ime
+                    <organization id="vdt" refersTo="#vdt">
+                        paušala Višem državnom tužilaštvu u Podgorici
+                    </organization>
+                    i
+                    <organization id="vs" refersTo="#vs">
+                        Višem sudu u Podgorici
+                    </organization>
+                    , na ime troškova postupka iznos od 275,00 eura (dvestasedamdesetpet eura), na ime obdukcije 60,50 eura (šezdeset eura i pedeset centi) na ime psihijatrijskog vještačenja komisije vještaka 1.072,50 eura (hiljadusedamdesetdva eura i pedeset centi), te na ime odbrane advokata po službenoj dužnosti iznos od 9.863,05 eura (devethiljadaosamstošezdesettri eura i pet centi) uplati na račun budžeta Crne Gore, na žiro račun broj 832-7113-04, u roku od 15 dana od dana pravosnažnosti presude donijete na osnovu sporazuma o priznanju krivice.
+				</p>
+			</conclusions>
+		</judgmentBody>
+	</judgment>
+</akomaNtoso>
